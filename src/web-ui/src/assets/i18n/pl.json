@@ -1,6 +1,6 @@
 {
   "components": {
-    "authorization": {
+    "authentication": {
       "sign-in": {
         "login": {
           "label": "Login"
@@ -19,9 +19,23 @@
   },
   "app": {
     "top-nav": {
-      "sign-in-nav": {
-        "label": "Zaloguj się"
+      "sign-in-log-out-nav": {
+        "sign-in-label": "Zaloguj się",
+        "log-out-label": "Wyloguj się"
+      },
+      "lang-nav": {
+        "tooltip": "Zmień język"
       }
+    }
+  },
+  "services": {
+    "sign-in": {
+      "success": "Zalogowano pomyślnie",
+      "error": "Logowanie nie powiodło się"
+    },
+    "log-out": {
+      "success": "Wylogowano pomyślnie",
+      "error": "Wylogowanie nie powiodło się"
     }
   }
 }

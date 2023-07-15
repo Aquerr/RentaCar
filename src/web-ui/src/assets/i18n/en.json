@@ -1,6 +1,6 @@
 {
   "components": {
-    "authorization": {
+    "authentication": {
       "sign-in": {
         "login": {
           "label": "Login"
@@ -19,9 +19,23 @@
   },
   "app": {
     "top-nav": {
-      "sign-in-nav": {
-        "label": "Sign in"
+      "sign-in-log-out-nav": {
+        "sign-in-label": "Sign in",
+        "log-out-label": "Logout"
+      },
+      "lang-nav": {
+        "tooltip": "Change language"
       }
+    }
+  },
+  "services": {
+    "sign-in": {
+      "success": "Signed in succeed",
+      "error": "Error while signing in"
+    },
+    "log-out": {
+      "success": "Logged out succeed",
+      "error": "Error while logging out"
     }
   }
 }

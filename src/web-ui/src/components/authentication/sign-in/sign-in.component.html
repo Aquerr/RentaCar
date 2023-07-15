@@ -6,7 +6,7 @@
     type="text"
     formControlName="login"
     placeholder="{{
-      'components.authorization.sign-in.login.label' | translate
+      'components.authentication.sign-in.login.label' | translate
     }}"
     minlength="5"
   />
@@ -16,7 +16,7 @@
     type="password"
     formControlName="password"
     placeholder="{{
-      'components.authorization.sign-in.password.label' | translate
+      'components.authentication.sign-in.password.label' | translate
     }}"
     minlength="5"
   />
@@ -25,7 +25,7 @@
     formControlName="rememberMe"
     [binary]="true"
     label="{{
-      'components.authorization.sign-in.rememberMe.label' | translate
+      'components.authentication.sign-in.rememberMe.label' | translate
     }}"
   ></p-checkbox>
 
@@ -36,7 +36,7 @@
       (click)="signIn()"
       [disabled]="!formService.isFormValid()"
     >
-      {{ "components.authorization.sign-in.sign-in-button.label" | translate }}
+      {{ "components.authentication.sign-in.sign-in-button.label" | translate }}
     </button>
   </div>
 </form>

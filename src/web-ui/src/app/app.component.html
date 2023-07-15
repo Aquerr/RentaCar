@@ -5,11 +5,15 @@
   <div class="logo-nav" routerLink="">LOGO</div>
   <div class="right-nav">
     <div class="lang-nav">
-      <span class="{{ iconLang }}" (click)="changeLanguage()"></span>
+      <span class="{{ iconLang }}" (click)="changeLanguage()" pTooltip="{{'app.top-nav.lang-nav.tooltip' | translate }}"
+            tooltipPosition="bottom"></span>
     </div>
-    <div class="sign-in-nav">
-      <button pButton class="p-button" routerLink="sign-in">
-        {{ "app.top-nav.sign-in-nav.label" | translate }}
+    <div class="sign-in-log-out-nav">
+      <button *ngIf="!userLogged" pButton class="p-button" routerLink="sign-in">
+        {{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}
+      </button>
+      <button *ngIf="userLogged" pButton class="p-button" (click)="logout()">
+        {{ "app.top-nav.sign-in-log-out-nav.log-out-label" | translate }}
       </button>
     </div>
   </div>
