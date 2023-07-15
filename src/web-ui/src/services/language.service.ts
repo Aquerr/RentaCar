@@ -26,4 +26,14 @@ export class LanguageService {
   setLanguage(lang: string) {
     this.translateService.use(lang);
   }
+
+  public getMessage(key: string) {
+    let responseMessage = '';
+    this.translateService.get(key).subscribe({
+      next: (response) => {
+        responseMessage = response;
+      }
+    });
+    return responseMessage;
+  }
 }

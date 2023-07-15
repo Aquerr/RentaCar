@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignInComponent } from '../components/authorization/sign-in/sign-in.component';
+import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { InfoComponent } from '../components/info/info.component';
+import {AnonymousGuard} from "../components/authentication/anonymous.guard";
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'sign-in',
     component: SignInComponent,
+    canActivate: [AnonymousGuard]
   },
   {
     path: '**',

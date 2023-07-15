@@ -1,0 +1,73 @@
+import {Injectable} from '@angular/core';
+import {User, UserSignInRequest} from '../models/user.model';
+import {Router} from '@angular/router';
+import {ToastService} from './toast.service';
+import {LanguageService} from './language.service';
+import {CookieService} from "ngx-cookie-service";
+import {AuthenticationApiService} from "./api/authentication-api.service";
+import {Subject} from "rxjs";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
+  private user = new Subject<User>();
+
+  constructor(
+    private authenticationApiService: AuthenticationApiService,
+    private router: Router,
+    private toastService: ToastService,
+    private languageService: LanguageService,
+    private cookieService: CookieService
+  ) {
+  }
+
+  public signinUser(request: UserSignInRequest) {
+    this.authenticationApiService.signinUser(request).subscribe({
+      next: (jwt) => {
+        this.cookieService.set('jwt', jwt);
+        this.authenticationApiService.getUserLogged().subscribe({
+          next: (user) => {
+            this.updateUserObservable(user);
+            this.setLanguage(user);
+            this.router
+              .navigate([''])
+              .then(() =>
+                this.toastService.createSuccessToast(this.languageService.getMessage('services.sign-in.success')),
+              );
+          },
+          error: () => {
+            this.toastService.createErrorToast(this.languageService.getMessage('services.sign-in.error'));
+          },
+        });
+      },
+      error: () => {
+        this.toastService.createErrorToast(this.languageService.getMessage('services.sign-in.error'));
+      },
+    });
+  }
+
+  public logout() {
+    this.authenticationApiService.logout().subscribe({
+      next: () => {
+        this.updateUserObservable(null as unknown as User);
+        this.toastService.createSuccessToast(this.languageService.getMessage('services.log-out.success'));
+      },
+      error: () => {
+        this.toastService.createErrorToast(this.languageService.getMessage('services.log-out.error'));
+      }
+    });
+  }
+
+  getUserObservable() {
+    return this.user;
+  }
+
+  updateUserObservable(user: User) {
+    this.user.next(user);
+  }
+
+  private setLanguage(user: User) {
+    this.languageService.loadLanguage(user);
+  }
+}

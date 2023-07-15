@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../../services/authorization.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 import { SignInFormService } from './sign-in.form.service';
 import { FormGroup } from '@angular/forms';
 

@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
-import { LanguageService } from '../services/language.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {User} from '../models/user.model';
+import {LanguageService} from '../services/language.service';
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-root',
@@ -15,9 +15,10 @@ export class AppComponent implements OnInit, OnDestroy {
   userLogged: User | undefined;
 
   constructor(
-    private userService: UserService,
     private languageService: LanguageService,
-  ) {}
+    private authenticationService: AuthenticationService
+  ) {
+  }
 
   ngOnInit() {
     this.languageService.loadLanguage(this.userLogged);
@@ -29,18 +30,23 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   startUserSubscription() {
-    this.userSubscription = this.userService.getUserObservable().subscribe({
+    this.userSubscription = this.authenticationService.getUserObservable().subscribe({
       next: (user) => {
         if (user) {
           this.userLogged = user;
-          this.setLanguage(user);
+          this.setLanguageForUser(user);
         }
-      },
+      }
     });
   }
 
-  setLanguage(user: User | undefined) {
+  setLanguageForUser(user: User | undefined) {
     this.languageService.loadLanguage(user);
+    if (user?.lang === 'pl') {
+      this.iconLang = 'fi fi-pl';
+    } else {
+      this.iconLang = 'fi fi-us';
+    }
   }
 
   changeLanguage() {
@@ -51,5 +57,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iconLang = 'fi fi-us';
       this.languageService.setLanguage('en');
     }
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }
