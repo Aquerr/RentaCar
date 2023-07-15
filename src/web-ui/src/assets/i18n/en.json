@@ -1,0 +1,27 @@
+{
+  "components": {
+    "authorization": {
+      "sign-in": {
+        "login": {
+          "label": "Login"
+        },
+        "password": {
+          "label": "Password"
+        },
+        "rememberMe": {
+          "label": "Remember me"
+        },
+        "sign-in-button": {
+          "label": "Sign in"
+        }
+      }
+    }
+  },
+  "app": {
+    "top-nav": {
+      "sign-in-nav": {
+        "label": "Sign in"
+      }
+    }
+  }
+}

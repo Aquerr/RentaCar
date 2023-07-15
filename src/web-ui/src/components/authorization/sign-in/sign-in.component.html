@@ -1,0 +1,42 @@
+<h4>Zaloguj się</h4>
+
+<form [formGroup]="form" class="form">
+  <input
+    pInputText
+    type="text"
+    formControlName="login"
+    placeholder="{{
+      'components.authorization.sign-in.login.label' | translate
+    }}"
+    minlength="5"
+  />
+
+  <input
+    pInputText
+    type="password"
+    formControlName="password"
+    placeholder="{{
+      'components.authorization.sign-in.password.label' | translate
+    }}"
+    minlength="5"
+  />
+
+  <p-checkbox
+    formControlName="rememberMe"
+    [binary]="true"
+    label="{{
+      'components.authorization.sign-in.rememberMe.label' | translate
+    }}"
+  ></p-checkbox>
+
+  <div class="button-container">
+    <button
+      pButton
+      class="p-button"
+      (click)="signIn()"
+      [disabled]="!formService.isFormValid()"
+    >
+      {{ "components.authorization.sign-in.sign-in-button.label" | translate }}
+    </button>
+  </div>
+</form>
