@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {User} from '../models/user.model';
-import {LanguageService} from '../services/language.service';
-import {AuthenticationService} from "../services/authentication.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { User } from '../models/user.model';
+import { LanguageService } from '../services/language.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +17,12 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private languageService: LanguageService,
     private authenticationService: AuthenticationService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
+    this.authenticationService.trySetUserOnAppInit();
     this.languageService.loadLanguage(this.userLogged);
+    this.setIconFlag(this.languageService.getLanguage() as string);
     this.startUserSubscription();
   }
 
@@ -30,23 +31,21 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   startUserSubscription() {
-    this.userSubscription = this.authenticationService.getUserObservable().subscribe({
-      next: (user) => {
-        if (user) {
-          this.userLogged = user;
-          this.setLanguageForUser(user);
-        }
-      }
-    });
+    this.userSubscription = this.authenticationService
+      .getUserObservable()
+      .subscribe({
+        next: (user) => {
+          if (user) {
+            this.userLogged = user;
+            this.setLanguageForUser(user);
+          }
+        },
+      });
   }
 
-  setLanguageForUser(user: User | undefined) {
+  setLanguageForUser(user: User) {
     this.languageService.loadLanguage(user);
-    if (user?.lang === 'pl') {
-      this.iconLang = 'fi fi-pl';
-    } else {
-      this.iconLang = 'fi fi-us';
-    }
+    this.setIconFlag(user.lang);
   }
 
   changeLanguage() {
@@ -61,5 +60,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authenticationService.logout();
+  }
+
+  setIconFlag(lang: string) {
+    if (lang === 'pl') {
+      this.iconLang = 'fi fi-pl';
+    } else {
+      this.iconLang = 'fi fi-us';
+    }
   }
 }

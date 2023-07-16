@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { InfoComponent } from '../components/info/info.component';
-import {AnonymousGuard} from "../components/authentication/anonymous.guard";
+import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: InfoComponent,
+    component: InfoComponent
   },
   {
     path: 'sign-in',
@@ -17,12 +17,12 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    component: NotFoundComponent
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

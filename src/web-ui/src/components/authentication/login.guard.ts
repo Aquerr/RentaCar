@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {CookieService} from "ngx-cookie-service";
+import {TokenService} from "../../services/api/token.service";
 
 @Injectable()
 export class LoginGuard {
-  constructor(private cookieService: CookieService) {
+  constructor(private tokenService: TokenService) {
   }
 
   canActivate() {
-    const jwt = this.cookieService.get('jwt') as string;
+    const jwt = this.tokenService.getToken();
     return !!jwt;
   }
 }
