@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user.model';
+import {StorageService} from "./storage.service";
 
 @Injectable({
   providedIn: 'root',
@@ -9,22 +9,27 @@ import { User } from '../models/user.model';
 export class LanguageService {
   constructor(
     private translateService: TranslateService,
-    private cookieService: CookieService,
+    private storageService: StorageService
   ) {}
 
   loadLanguage(user: User | undefined) {
     if (user) {
       this.setLanguage(user.lang);
     } else {
-      const cookieLang = this.cookieService.get('COOKIELANG') as string;
+      const cookieLang = this.storageService.getItem('COOKIELANG');
       if (cookieLang) {
         this.setLanguage(cookieLang);
       }
     }
   }
 
+  getLanguage() {
+    return this.translateService.currentLang;
+  }
+
   setLanguage(lang: string) {
     this.translateService.use(lang);
+    this.storageService.saveItem('COOKIELANG', lang);
   }
 
   public getMessage(key: string) {
@@ -32,7 +37,7 @@ export class LanguageService {
     this.translateService.get(key).subscribe({
       next: (response) => {
         responseMessage = response;
-      }
+      },
     });
     return responseMessage;
   }

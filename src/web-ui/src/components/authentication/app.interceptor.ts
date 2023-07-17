@@ -1,21 +1,30 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/internal/Observable";
-import {CookieService} from "ngx-cookie-service";
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import {TokenService} from "../../services/api/token.service";
+import {StorageService} from "../../services/storage.service";
 @Injectable()
 export class AppInterceptor implements HttpInterceptor {
+  constructor(private storageService: StorageService, private tokenService: TokenService) {}
 
-  constructor(private cookieService: CookieService) { }
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
+    const jwt = this.tokenService.getToken();
+    const lang = this.storageService.getItem('COOKIELANG');
 
-  intercept(request: HttpRequest<any>,
-            next: HttpHandler): Observable<HttpEvent<any>> {
-    const jwt = this.cookieService.get("jwt");
-
-    if (!!jwt) {
+    if (jwt) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + jwt
-        }
+          Authorization: 'Bearer ' + jwt,
+          Lang: lang ? lang : 'en'
+        },
       });
     }
     return next.handle(request);

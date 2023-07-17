@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {User, UserSignInRequest} from '../models/user.model';
-import {Router} from '@angular/router';
-import {ToastService} from './toast.service';
-import {LanguageService} from './language.service';
-import {CookieService} from "ngx-cookie-service";
-import {AuthenticationApiService} from "./api/authentication-api.service";
-import {Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { User, UserSignInRequest } from '../models/user.model';
+import { Router } from '@angular/router';
+import { ToastService } from './toast.service';
+import { LanguageService } from './language.service';
+import { AuthenticationApiService } from './api/authentication-api.service';
+import { Subject } from 'rxjs';
+import {TokenService} from "./api/token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +18,13 @@ export class AuthenticationService {
     private router: Router,
     private toastService: ToastService,
     private languageService: LanguageService,
-    private cookieService: CookieService
-  ) {
-  }
+    private tokenService: TokenService,
+  ) {}
 
   public signinUser(request: UserSignInRequest) {
     this.authenticationApiService.signinUser(request).subscribe({
       next: (jwt) => {
-        this.cookieService.set('jwt', jwt);
+        this.tokenService.saveToken(jwt, request.rememberMe);
         this.authenticationApiService.getUserLogged().subscribe({
           next: (user) => {
             this.updateUserObservable(user);
@@ -33,16 +32,22 @@ export class AuthenticationService {
             this.router
               .navigate([''])
               .then(() =>
-                this.toastService.createSuccessToast(this.languageService.getMessage('services.sign-in.success')),
+                this.toastService.createSuccessToast(
+                  this.languageService.getMessage('services.sign-in.success'),
+                ),
               );
           },
           error: () => {
-            this.toastService.createErrorToast(this.languageService.getMessage('services.sign-in.error'));
+            this.toastService.createErrorToast(
+              this.languageService.getMessage('services.sign-in.error'),
+            );
           },
         });
       },
       error: () => {
-        this.toastService.createErrorToast(this.languageService.getMessage('services.sign-in.error'));
+        this.toastService.createErrorToast(
+          this.languageService.getMessage('services.sign-in.error'),
+        );
       },
     });
   }
@@ -51,12 +56,27 @@ export class AuthenticationService {
     this.authenticationApiService.logout().subscribe({
       next: () => {
         this.updateUserObservable(null as unknown as User);
-        this.toastService.createSuccessToast(this.languageService.getMessage('services.log-out.success'));
+        this.tokenService.removeToken();
+        this.toastService.createSuccessToast(
+          this.languageService.getMessage('services.log-out.success'),
+        );
       },
       error: () => {
-        this.toastService.createErrorToast(this.languageService.getMessage('services.log-out.error'));
-      }
+        this.toastService.createErrorToast(
+          this.languageService.getMessage('services.log-out.error'),
+        );
+      },
     });
+  }
+
+  public trySetUserOnAppInit() {
+    const jwt = this.tokenService.getToken();
+    if (jwt)
+      this.authenticationApiService.getUserLogged().subscribe({
+        next: (user) => {
+          this.updateUserObservable(user);
+        },
+      });
   }
 
   getUserObservable() {
