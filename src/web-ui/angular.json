@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "date-me-ui": {
+    "renta-car-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/date-me-ui",
+            "outputPath": "dist/renta-car-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "date-me-ui:build:production"
+              "browserTarget": "renta-car-ui:build:production"
             },
             "development": {
-              "browserTarget": "date-me-ui:build:development"
+              "browserTarget": "renta-car-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "date-me-ui:build"
+            "browserTarget": "renta-car-ui:build"
           }
         },
         "test": {
