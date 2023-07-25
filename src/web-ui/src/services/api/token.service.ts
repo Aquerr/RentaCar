@@ -27,8 +27,8 @@ export class TokenService {
   }
 
   removeToken() {
-    localStorage.removeItem('JWT');
-    localStorage.removeItem('JWT_expire');
+    this.storageService.deleteItem('JWT');
+    this.storageService.deleteItem('JWT_expire');
   }
 
   private isTokenValid(): boolean {
@@ -36,7 +36,7 @@ export class TokenService {
   }
 
   private getExpiration() {
-    const expiration = localStorage.getItem("JWT_expire");
+    const expiration = this.storageService.getItem("JWT_expire");
     if (expiration) {
       const expiresAt = JSON.parse(expiration);
       return moment(expiresAt);
