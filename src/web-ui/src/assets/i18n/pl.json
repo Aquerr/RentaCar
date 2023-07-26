@@ -42,5 +42,15 @@
       "success": "Wylogowano pomyślnie",
       "error": "Wylogowanie nie powiodło się"
     }
+  },
+  "primeng": {
+    "dayNames": ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+    "dayNamesShort": ["Nie", "Pon", "Wt", "Śr", "Czw", "Pi", "So"],
+    "dayNamesMin": ["N","P","W","Ś","C","P","S"],
+    "monthNames": ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"],
+    "monthNamesShort": ["Sty", "Lit", "Mar", "Kwi", "Maj", "Cze","Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"],
+    "today": "Dziś",
+    "weekHeader": "Week",
+    "firstDayOfWeek": 1
   }
 }
