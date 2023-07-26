@@ -12,7 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
   userSubscription = new Subscription();
-  userLogged: User | undefined;
+  userLogged: User | null = null;
   profilePanelVisible = false;
   isMobile = false;
 
@@ -37,9 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .getUserObservable()
       .subscribe({
         next: (user) => {
-          if (user) {
             this.userLogged = user;
-          }
         },
       });
   }
@@ -56,6 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authenticationService.logout();
+    this.profilePanelVisible = false;
   }
 
   setIconFlag(lang: string) {

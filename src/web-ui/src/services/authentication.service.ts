@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user = new Subject<User>();
+  private user = new Subject<User | null>();
 
   constructor(
     private authenticationApiService: AuthenticationApiService,
@@ -58,8 +58,9 @@ export class AuthenticationService {
   public logout() {
     this.authenticationApiService.logout().subscribe({
       next: () => {
-        this.updateUserObservable(null as unknown as User);
+        this.updateUserObservable(null);
         this.tokenService.removeToken();
+        this.deleteAuthorities();
         this.toastService.createSuccessToast(
           this.languageService.getMessage('services.log-out.success'),
         );
@@ -92,11 +93,15 @@ export class AuthenticationService {
     return this.user;
   }
 
-  updateUserObservable(user: User) {
+  updateUserObservable(user: User | null) {
     this.user.next(user);
   }
 
   saveAuthorities(authorities: string[]) {
     this.storageService.saveItem('authorities', JSON.stringify(authorities));
+  }
+
+  deleteAuthorities() {
+    this.storageService.deleteItem('authorities');
   }
 }

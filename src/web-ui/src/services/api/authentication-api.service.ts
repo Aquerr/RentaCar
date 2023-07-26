@@ -22,7 +22,7 @@ export class AuthenticationApiService {
 
   public logout() {
     const url = this.AUTH_URL + '/invalidate';
-    return this.http.get<void>(url);
+    return this.http.post<void>(url, {});
   }
 }
 
