@@ -41,7 +41,8 @@
     "log-out": {
       "success": "Wylogowano pomyślnie",
       "error": "Wylogowanie nie powiodło się"
-    }
+    },
+    "token-expire": "Token wygasł. Zaloguj się ponownie."
   },
   "primeng": {
     "dayNames": ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],

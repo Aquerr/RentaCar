@@ -12,7 +12,7 @@ export class AuthenticationApiService {
   constructor(private http: HttpClient) {}
 
   public signinUser(request: UserSignInRequest) {
-    return this.http.post<UserProfile>(this.AUTH_URL, request);
+    return this.http.post<JwtTokenResponse>(this.AUTH_URL, request);
   }
 
   public getMyself() {
@@ -22,11 +22,11 @@ export class AuthenticationApiService {
 
   public logout() {
     const url = this.AUTH_URL + '/invalidate';
-    return this.http.get<void>(url);
+    return this.http.post<void>(url, {});
   }
 }
 
-export interface UserProfile {
+export interface JwtTokenResponse {
   jwt: string;
   username: string;
   authorities: string[];

@@ -6,12 +6,14 @@ import { LanguageService } from './language.service';
 import { AuthenticationApiService } from './api/authentication-api.service';
 import { Subject } from 'rxjs';
 import {TokenService} from "./token.service";
+import { StorageService } from './storage.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user = new Subject<User>();
+  private user = new Subject<User | null>();
 
   constructor(
     private authenticationApiService: AuthenticationApiService,
@@ -19,16 +21,17 @@ export class AuthenticationService {
     private toastService: ToastService,
     private languageService: LanguageService,
     private tokenService: TokenService,
+    private storageService: StorageService
   ) {}
 
   public signinUser(request: UserSignInRequest) {
     this.authenticationApiService.signinUser(request).subscribe({
       next: (response) => {
         this.tokenService.saveToken(response.jwt, request.rememberMe);
+        this.saveAuthorities(response.authorities);
         this.authenticationApiService.getMyself().subscribe({
           next: (user) => {
             this.updateUserObservable(user);
-            this.setLanguage(user);
             this.router
               .navigate([''])
               .then(() =>
@@ -55,8 +58,9 @@ export class AuthenticationService {
   public logout() {
     this.authenticationApiService.logout().subscribe({
       next: () => {
-        this.updateUserObservable(null as unknown as User);
+        this.updateUserObservable(null);
         this.tokenService.removeToken();
+        this.deleteAuthorities();
         this.toastService.createSuccessToast(
           this.languageService.getMessage('services.log-out.success'),
         );
@@ -76,6 +80,12 @@ export class AuthenticationService {
         next: (user) => {
           this.updateUserObservable(user);
         },
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.tokenService.removeToken();
+            this.router.navigate(['']).then(() => this.toastService.createWarnToast(this.languageService.getMessage('services.token-expire')));
+          }
+        }
       });
   }
 
@@ -83,11 +93,15 @@ export class AuthenticationService {
     return this.user;
   }
 
-  updateUserObservable(user: User) {
+  updateUserObservable(user: User | null) {
     this.user.next(user);
   }
 
-  private setLanguage(user: User) {
-    this.languageService.loadLanguage(user);
+  saveAuthorities(authorities: string[]) {
+    this.storageService.saveItem('authorities', JSON.stringify(authorities));
+  }
+
+  deleteAuthorities() {
+    this.storageService.deleteItem('authorities');
   }
 }
