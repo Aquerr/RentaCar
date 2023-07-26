@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../models/user.model';
 import {StorageService} from "./storage.service";
+import { PrimeNGConfig } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LanguageService {
   constructor(
+    private config: PrimeNGConfig,
     private translateService: TranslateService,
     private storageService: StorageService
   ) {}
@@ -30,6 +32,7 @@ export class LanguageService {
   setLanguage(lang: string) {
     this.translateService.use(lang);
     this.storageService.saveItem('COOKIELANG', lang);
+    this.setPrimengLanguage();
   }
 
   public getMessage(key: string) {
@@ -40,5 +43,9 @@ export class LanguageService {
       },
     });
     return responseMessage;
+  }
+
+  setPrimengLanguage() {
+    this.translateService.get('primeng').subscribe((response) => this.config.setTranslation(response));
   }
 }

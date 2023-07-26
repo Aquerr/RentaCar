@@ -8,21 +8,26 @@ import { APP_BASE_URL } from '../../app/app.consts';
 })
 export class AuthenticationApiService {
   private AUTH_URL = APP_BASE_URL + '/api/v1/auth';
-  private USER_URL = APP_BASE_URL + '/api/v1/user';
 
   constructor(private http: HttpClient) {}
 
   public signinUser(request: UserSignInRequest) {
-    return this.http.post<string>(this.AUTH_URL, request);
+    return this.http.post<UserProfile>(this.AUTH_URL, request);
   }
 
-  public getUserLogged() {
-    const url = this.USER_URL + '/logged';
+  public getMyself() {
+    const url = this.AUTH_URL + '/myself';
     return this.http.get<User>(url);
   }
 
   public logout() {
-    const url = this.USER_URL + '/logout';
+    const url = this.AUTH_URL + '/invalidate';
     return this.http.get<void>(url);
   }
+}
+
+export interface UserProfile {
+  jwt: string;
+  username: string;
+  authorities: string[];
 }

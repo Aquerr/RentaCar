@@ -5,7 +5,7 @@ import { ToastService } from './toast.service';
 import { LanguageService } from './language.service';
 import { AuthenticationApiService } from './api/authentication-api.service';
 import { Subject } from 'rxjs';
-import {TokenService} from "./api/token.service";
+import {TokenService} from "./token.service";
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +23,9 @@ export class AuthenticationService {
 
   public signinUser(request: UserSignInRequest) {
     this.authenticationApiService.signinUser(request).subscribe({
-      next: (jwt) => {
-        this.tokenService.saveToken(jwt, request.rememberMe);
-        this.authenticationApiService.getUserLogged().subscribe({
+      next: (response) => {
+        this.tokenService.saveToken(response.jwt, request.rememberMe);
+        this.authenticationApiService.getMyself().subscribe({
           next: (user) => {
             this.updateUserObservable(user);
             this.setLanguage(user);
@@ -70,10 +70,9 @@ export class AuthenticationService {
   }
 
   public trySetUserOnAppInit() {
-    this.tokenService.saveToken('jwt', true);
     const jwt = this.tokenService.getToken();
     if (jwt)
-      this.authenticationApiService.getUserLogged().subscribe({
+      this.authenticationApiService.getMyself().subscribe({
         next: (user) => {
           this.updateUserObservable(user);
         },
