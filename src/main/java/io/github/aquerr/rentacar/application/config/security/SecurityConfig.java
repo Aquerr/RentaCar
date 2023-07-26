@@ -1,10 +1,12 @@
 package io.github.aquerr.rentacar.application.config.security;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,13 +36,20 @@ public class SecurityConfig {
     @EnableWebSecurity
     @EnableMethodSecurity
     @ConditionalOnProperty(value = "rentacar.security.enabled", havingValue = "true")
+    @Configuration
     public static class EnabledSecurityConfiguration {
+
+        @Autowired
+        private Environment environment;
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                        JwtAuthenticationFilter authenticationFilter) throws Exception {
 
             http.authorizeHttpRequests(requests -> {
-                requests.requestMatchers(PathRequest.toH2Console()).permitAll();
+                if (this.environment.matchesProfiles("dev")) {
+                    requests.requestMatchers(PathRequest.toH2Console()).permitAll();
+                }
                 requests.requestMatchers("/api/v1/auth").permitAll();
                 requests.requestMatchers("/api/v1/ws/**").permitAll();
                 requests.requestMatchers("/api/**").authenticated();
@@ -85,6 +94,7 @@ public class SecurityConfig {
 
     @EnableWebSecurity
     @ConditionalOnProperty(value = "rentacar.security.enabled", matchIfMissing = true, havingValue = "false")
+    @Configuration
     public static class DisabledSecurityConfiguration {
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

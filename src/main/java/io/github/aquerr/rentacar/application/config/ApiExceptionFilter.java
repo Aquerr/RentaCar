@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.application.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.aquerr.rentacar.domain.ApiException;
+import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.web.rest.RestErrorResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class ApiExceptionFilter extends OncePerRequestFilter
 {
     private final ObjectMapper objectMapper;
+    private final MessageService messageService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -34,8 +36,7 @@ public class ApiExceptionFilter extends OncePerRequestFilter
             {
                 ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
 
-                //TODO: Translate messageKey...
-                RestErrorResponse restErrorResponse = RestErrorResponse.of(apiException.status().value(), apiException.messageKey());
+                RestErrorResponse restErrorResponse = RestErrorResponse.of(apiException.status().value(), messageService.resolveMessage(apiException.messageKey()));
                 response.setStatus(restErrorResponse.getStatus());
                 response.getWriter().write(objectMapper.writeValueAsString(restErrorResponse));
             }
