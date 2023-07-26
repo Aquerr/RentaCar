@@ -70,6 +70,7 @@ export class AuthenticationService {
   }
 
   public trySetUserOnAppInit() {
+    this.tokenService.saveToken('jwt', true);
     const jwt = this.tokenService.getToken();
     if (jwt)
       this.authenticationApiService.getUserLogged().subscribe({

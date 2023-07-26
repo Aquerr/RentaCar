@@ -13,6 +13,8 @@ export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
   userSubscription = new Subscription();
   userLogged: User | undefined;
+  profilePanelVisible = false;
+  isMobile = false;
 
   constructor(
     private languageService: LanguageService,
@@ -20,6 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.userLogged = {} as User;
     this.authenticationService.trySetUserOnAppInit();
     this.languageService.loadLanguage(this.userLogged);
     this.setIconFlag(this.languageService.getLanguage() as string);
@@ -36,8 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (user) => {
           if (user) {
-            this.userLogged = user;
+            this.userLogged = {} as User;
             this.setLanguageForUser(user);
+          } else {
+            console.log('xd')
+            this.userLogged = {} as User;
           }
         },
       });
@@ -68,5 +74,9 @@ export class AppComponent implements OnInit, OnDestroy {
     } else {
       this.iconLang = 'fi fi-us';
     }
+  }
+
+  toggleProfilePanel() {
+    this.profilePanelVisible = !this.profilePanelVisible;
   }
 }

@@ -10,16 +10,9 @@ export class UserSignInRequest {
   }
 }
 
-export class User {
+export interface User {
   id: number;
   login: string;
   password: string;
   lang: string;
-
-  constructor(id: number, login: string, password: string, lang: string) {
-    this.id = id;
-    this.login = login;
-    this.password = password;
-    this.lang = lang;
-  }
 }

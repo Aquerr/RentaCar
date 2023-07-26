@@ -13,6 +13,12 @@ body {
   margin: 0;
 }
 
+/* App defined colors */
+:root {
+--main-color-icon: white;
+--top-nav-color: #363030;
+}
+
 body {
   font-family: Roboto, serif;
 }
@@ -30,4 +36,12 @@ h4 {
   display: grid;
   align-items: center;
   justify-content: center;
+}
+
+.icon-button {
+  color: var(--main-color-icon);
+}
+
+.icon-button:hover {
+  cursor: pointer;
 }

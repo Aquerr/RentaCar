@@ -16,6 +16,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { TitleStrategy } from '@angular/router';
 import { CustomPageTitleStrategy } from '../strategy/custom-page-title.strategy';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   exports: [
@@ -31,6 +33,8 @@ import { CustomPageTitleStrategy } from '../strategy/custom-page-title.strategy'
     CheckboxModule,
     TooltipModule,
     BrowserModule,
+    CalendarModule,
+    DropdownModule
   ],
   providers: [
     MessageService,
