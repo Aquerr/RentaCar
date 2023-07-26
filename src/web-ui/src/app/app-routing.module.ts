@@ -8,21 +8,25 @@ import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 const routes: Routes = [
   {
     path: '',
-    component: InfoComponent
+    component: InfoComponent,
+    title: 'title.main',
   },
   {
     path: 'sign-in',
     component: SignInComponent,
-    canActivate: [AnonymousGuard]
+    canActivate: [AnonymousGuard],
+    title: 'title.sign-in',
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: NotFoundComponent,
+    title: 'title.not-found',
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

@@ -1,4 +1,9 @@
 {
+  "title": {
+    "main": "Wypożyczalnia samochodowa",
+    "sign-in": "Zaloguj się",
+    "not-found": "Strona nie znaleziona"
+  },
   "components": {
     "authentication": {
       "sign-in": {
