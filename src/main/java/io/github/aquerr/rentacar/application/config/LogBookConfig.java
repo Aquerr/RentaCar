@@ -3,7 +3,6 @@ package io.github.aquerr.rentacar.application.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.zalando.logbook.Logbook;
-import org.zalando.logbook.core.BodyFilters;
 import org.zalando.logbook.core.DefaultCorrelationId;
 import org.zalando.logbook.core.DefaultHttpLogWriter;
 import org.zalando.logbook.core.DefaultSink;

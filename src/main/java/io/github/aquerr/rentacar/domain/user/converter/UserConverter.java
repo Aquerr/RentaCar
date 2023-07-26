@@ -1,13 +1,13 @@
 package io.github.aquerr.rentacar.domain.user.converter;
 
 import io.github.aquerr.rentacar.domain.user.dto.UserDto;
-import io.github.aquerr.rentacar.domain.user.model.RentaCarUser;
+import io.github.aquerr.rentacar.domain.user.model.RentaCarUserCredentials;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserConverter {
 
-    public UserDto convertToDto(RentaCarUser user) {
+    public UserDto convertToDto(RentaCarUserCredentials user) {
         if (user == null) {
             return null;
         }
@@ -19,12 +19,12 @@ public class UserConverter {
                 .build();
     }
 
-    public RentaCarUser convertToUser(UserDto userDto) {
+    public RentaCarUserCredentials convertToUser(UserDto userDto) {
         if (userDto == null) {
             return null;
         }
 
-        return RentaCarUser.builder()
+        return RentaCarUserCredentials.builder()
                 .id(userDto.getId())
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())
