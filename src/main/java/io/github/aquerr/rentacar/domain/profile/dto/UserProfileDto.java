@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Builder
 @Data
@@ -19,5 +18,4 @@ public class UserProfileDto
     private String city;
     private String zipCode;
     private String street;
-    private Set<String> authorities;
 }

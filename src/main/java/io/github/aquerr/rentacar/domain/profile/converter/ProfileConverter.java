@@ -13,8 +13,14 @@ public class ProfileConverter {
 
         return UserProfileDto.builder()
                 .id(profile.getId())
+                .firstName(profile.getFirstName())
+                .lastName(profile.getLastName())
+                .email(profile.getEmail())
                 .birthDate(profile.getBirthDate())
                 .city(profile.getCity())
+                .zipCode(profile.getZipCode())
+                .street(profile.getStreet())
+                .phoneNumber(profile.getPhoneNumber())
                 .build();
     }
 
@@ -25,8 +31,14 @@ public class ProfileConverter {
 
         return RentaCarUserProfile.builder()
                 .id(profileDto.getId())
+                .firstName(profileDto.getFirstName())
+                .lastName(profileDto.getLastName())
+                .email(profileDto.getEmail())
                 .birthDate(profileDto.getBirthDate())
                 .city(profileDto.getCity())
+                .zipCode(profileDto.getZipCode())
+                .street(profileDto.getStreet())
+                .phoneNumber(profileDto.getPhoneNumber())
                 .build();
     }
 }
