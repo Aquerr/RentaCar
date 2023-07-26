@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {TokenService} from "../../services/api/token.service";
+import {TokenService} from "../../services/token.service";
 
 @Injectable()
 export class LoginGuard {

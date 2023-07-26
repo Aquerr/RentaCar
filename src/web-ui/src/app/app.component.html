@@ -23,7 +23,7 @@
       <button *ngIf="!userLogged" pButton class="p-button" routerLink="sign-in">
         {{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}
       </button>
-    <i class='pi pi-user icon-button' (click)="toggleProfilePanel()"></i>
+    <i *ngIf='userLogged' class='pi pi-user icon-button' (click)="toggleProfilePanel()"></i>
       <profile-panel *ngIf='profilePanelVisible' (logoutEmitter)='logout()'></profile-panel>
     </div>
   </div>
