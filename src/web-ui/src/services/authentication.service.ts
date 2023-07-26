@@ -7,6 +7,7 @@ import { AuthenticationApiService } from './api/authentication-api.service';
 import { Subject } from 'rxjs';
 import {TokenService} from "./token.service";
 import { StorageService } from './storage.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,12 @@ export class AuthenticationService {
         next: (user) => {
           this.updateUserObservable(user);
         },
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.tokenService.removeToken();
+            this.router.navigate(['']).then(() => this.toastService.createWarnToast(this.languageService.getMessage('services.token-expire')));
+          }
+        }
       });
   }
 
