@@ -1,4 +1,9 @@
 {
+  "title": {
+    "main": "Rent a car",
+    "sign-in": "Sign in",
+    "not-found": "Page not found"
+  },
   "components": {
     "authentication": {
       "sign-in": {

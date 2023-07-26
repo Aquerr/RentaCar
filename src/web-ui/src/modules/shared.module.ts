@@ -14,6 +14,8 @@ import { LoginGuard } from '../components/authentication/login.guard';
 import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 import { TooltipModule } from 'primeng/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
+import { TitleStrategy } from '@angular/router';
+import { CustomPageTitleStrategy } from '../strategy/custom-page-title.strategy';
 
 @NgModule({
   exports: [
@@ -28,17 +30,20 @@ import { BrowserModule } from '@angular/platform-browser';
     MessagesModule,
     CheckboxModule,
     TooltipModule,
-    BrowserModule
+    BrowserModule,
   ],
   providers: [
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppInterceptor,
-      multi: true
+      multi: true,
     },
+    { provide: TitleStrategy,
+      useClass: CustomPageTitleStrategy },
     LoginGuard,
-    AnonymousGuard
+    AnonymousGuard,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}
