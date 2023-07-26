@@ -1,0 +1,19 @@
+.container {
+  z-index: 1;
+  position: fixed;
+  margin-top: 5px;
+  margin-right: auto;
+  background: var(--top-nav-color);
+  border-radius: 5px;
+}
+
+li {
+  color: white;
+  padding: 10px;
+  list-style-type: none;
+}
+
+li:hover {
+  color: #d7d2d2;
+  cursor: pointer;
+}

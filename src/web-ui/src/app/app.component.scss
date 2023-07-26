@@ -1,19 +1,47 @@
 .top-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
   align-items: center;
-  background-color: #3b3636;
+  background: var(--top-nav-color);
   height: 60px;
   width: 100%;
   padding: 10px;
+  margin: auto;
+}
+
+.top-nav > .logo-nav {
+  margin: 5%;
+}
+
+.top-nav > .right-nav {
+  margin: 70%;
+}
+
+.link-nav {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  gap: 10%;
+}
+
+.link-nav {
+  color: white;
 }
 
 .menu-nav {
 }
 
 .logo-nav {
+  height: inherit;
   display: inherit;
   justify-content: center;
+}
+
+.logo-nav > img {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: inherit;
+  width: auto;
 }
 
 .menu-nav > i:hover,
@@ -27,8 +55,17 @@
 }
 
 .right-nav {
+  height: inherit;
   display: flex;
   align-items: center;
   justify-content: right;
   gap: 20px;
+}
+
+li {
+  list-style-type: none;
+}
+
+li:hover {
+  cursor: pointer;
 }

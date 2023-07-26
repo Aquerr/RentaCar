@@ -1,8 +1,15 @@
 <div class="top-nav">
-  <div class="menu-nav">
+  <div class="menu-nav" *ngIf='isMobile'>
     <i class="pi pi-align-justify"></i>
   </div>
-  <div class="logo-nav" routerLink="">LOGO</div>
+  <div class="logo-nav" routerLink="">
+    <img src='assets/images/car-rental-logo.avif' alt=''/>
+  </div>
+  <div class="link-nav" *ngIf='!isMobile'>
+    <li>Flota</li>
+    <li>FAQ</li>
+    <li>Kontakt</li>
+  </div>
   <div class="right-nav">
     <div class="lang-nav">
       <span
@@ -16,9 +23,8 @@
       <button *ngIf="!userLogged" pButton class="p-button" routerLink="sign-in">
         {{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}
       </button>
-      <button *ngIf="userLogged" pButton class="p-button" (click)="logout()">
-        {{ "app.top-nav.sign-in-log-out-nav.log-out-label" | translate }}
-      </button>
+    <i class='pi pi-user icon-button' (click)="toggleProfilePanel()"></i>
+      <profile-panel *ngIf='profilePanelVisible' (logoutEmitter)='logout()'></profile-panel>
     </div>
   </div>
 </div>

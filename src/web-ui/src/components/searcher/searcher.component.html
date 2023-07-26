@@ -1,0 +1,24 @@
+<div class='container'>
+  <div class='search-box-container'>
+    <div class='searcher'>
+      <div class='input-calendar-container'>
+        <div class='input-container'>
+          <p-dropdown [options]='places' [(ngModel)]='selectedPlace' optionLabel='name'
+                      [style]="{'minWidth':'100%'}"
+                      placeholder='Podaj miasto, lotnisko lub adres'></p-dropdown>
+        </div>
+        <div class='calendars-container'>
+          <p-calendar [(ngModel)]='dateFrom' dateFormat='dd.mm.yy' [maxDate]='dateTo'></p-calendar>
+          <p-calendar [(ngModel)]='hourFrom' [timeOnly]='true' [stepMinute]='60'></p-calendar>
+          <p-calendar [(ngModel)]='dateTo' dateFormat='dd.mm.yy' [minDate]='dateFrom'></p-calendar>
+          <p-calendar [(ngModel)]='hourTo' [timeOnly]='true' [stepMinute]='60'></p-calendar>
+        </div>
+      </div>
+      <div class='button-container'>
+        <button pButton>Szukaj</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
