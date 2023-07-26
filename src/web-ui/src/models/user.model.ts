@@ -12,7 +12,12 @@ export class UserSignInRequest {
 
 export interface User {
   id: number;
-  login: string;
-  password: string;
-  lang: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  birthDate: string;
+  city: string;
+  zipCode: string;
+  street: string;
 }

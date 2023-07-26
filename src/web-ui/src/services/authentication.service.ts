@@ -28,7 +28,6 @@ export class AuthenticationService {
         this.authenticationApiService.getMyself().subscribe({
           next: (user) => {
             this.updateUserObservable(user);
-            this.setLanguage(user);
             this.router
               .navigate([''])
               .then(() =>
@@ -85,9 +84,5 @@ export class AuthenticationService {
 
   updateUserObservable(user: User) {
     this.user.next(user);
-  }
-
-  private setLanguage(user: User) {
-    this.languageService.loadLanguage(user);
   }
 }

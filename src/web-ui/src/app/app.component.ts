@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authenticationService.trySetUserOnAppInit();
-    this.languageService.loadLanguage(this.userLogged);
+    this.languageService.loadLanguage();
     this.setIconFlag(this.languageService.getLanguage() as string);
     this.startUserSubscription();
   }
@@ -39,15 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
         next: (user) => {
           if (user) {
             this.userLogged = user;
-            this.setLanguageForUser(user);
           }
         },
       });
-  }
-
-  setLanguageForUser(user: User) {
-    this.languageService.loadLanguage(user);
-    this.setIconFlag(user.lang);
   }
 
   changeLanguage() {

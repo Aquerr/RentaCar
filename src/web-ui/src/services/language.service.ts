@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from '../models/user.model';
-import {StorageService} from "./storage.service";
+import { StorageService } from './storage.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Injectable({
@@ -11,17 +10,14 @@ export class LanguageService {
   constructor(
     private config: PrimeNGConfig,
     private translateService: TranslateService,
-    private storageService: StorageService
-  ) {}
+    private storageService: StorageService,
+  ) {
+  }
 
-  loadLanguage(user: User | undefined) {
-    if (user) {
-      this.setLanguage(user.lang);
-    } else {
-      const cookieLang = this.storageService.getItem('COOKIELANG');
-      if (cookieLang) {
-        this.setLanguage(cookieLang);
-      }
+  loadLanguage() {
+    const cookieLang = this.storageService.getItem('COOKIELANG');
+    if (cookieLang) {
+      this.setLanguage(cookieLang);
     }
   }
 
