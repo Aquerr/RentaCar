@@ -56,8 +56,7 @@ public final class JwtService {
     @Value("${rentacar.security.jwt.expiration-time}")
     private Duration jwtExpirationTime;
 
-    public String createJwt(AuthenticatedUser authenticatedUser)
-    {
+    public String createJwt(AuthenticatedUser authenticatedUser) {
         Claims claims = Jwts.claims()
                 .setSubject(authenticatedUser.getUsername())
                 .setIssuer(jwtIssuer)
@@ -73,44 +72,37 @@ public final class JwtService {
                 .compact();
     }
 
-    public Jws<Claims> validateJwt(String jwt)
-    {
+    public Jws<Claims> validateJwt(String jwt) {
         if (BLACK_LISTED_JWTS.containsKey(jwt))
             throw new IllegalStateException();
 
-        try
-        {
+        try {
             return Jwts.parserBuilder()
                     .setSigningKey(KEY)
                     .requireIssuer(jwtIssuer)
                     .build()
                     .parseClaimsJws(jwt);
-        }
-        catch (Exception exception)
-        {
+        } catch (Exception exception) {
             log.error(exception.getMessage());
             throw exception;
         }
     }
 
-    public String getJwtToken(HttpServletRequest httpServletRequest)
-    {
+    public String getJwtToken(HttpServletRequest httpServletRequest) {
         return Optional.ofNullable(httpServletRequest.getHeader(AUTHORIZATION_HEADER))
                 .filter(header -> header.startsWith(BEARER))
                 .map(header -> header.substring(BEARER.length()))
                 .orElse(null);
     }
 
-    public void invalidate(String jwt)
-    {
+    public void invalidate(String jwt) {
         Jws<Claims> jws = validateJwt(jwt);
         Date exprationDate = jws.getBody().getExpiration();
         BLACK_LISTED_JWTS.put(jwt, BlackListedJwt.of(jwt, exprationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
     }
 
     @lombok.Value(staticConstructor = "of")
-    private static class BlackListedJwt
-    {
+    private static class BlackListedJwt {
         String jwt;
         LocalDateTime expirationTime;
     }

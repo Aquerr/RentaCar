@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
+import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
 import io.github.aquerr.rentacar.web.rest.request.UserCredentials;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import lombok.AllArgsConstructor;
@@ -33,14 +34,18 @@ public class RentaCarAuthenticationFacade implements AuthenticationFacade
 
     @Override
     public JwtTokenResponse authenticate(UserCredentials userCredentials) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userCredentials.username(), userCredentials.password()));
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userCredentials.username(), userCredentials.password()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
-        String jwt = jwtService.createJwt(authenticatedUser);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
+            String jwt = jwtService.createJwt(authenticatedUser);
 
-        return new JwtTokenResponse(jwt, authenticatedUser.getUsername(), authenticatedUser.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList());
+            return new JwtTokenResponse(jwt, authenticatedUser.getUsername(), authenticatedUser.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .toList());
+        } catch (Exception exception) {
+            throw new BadCredentialsException();
+        }
     }
 }
