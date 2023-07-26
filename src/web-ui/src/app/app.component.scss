@@ -1,19 +1,11 @@
 .top-nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   background: var(--top-nav-color);
   height: 60px;
   width: 100%;
-  padding: 10px;
   margin: auto;
-}
-
-.top-nav > .logo-nav {
-  margin: 5%;
-}
-
-.top-nav > .right-nav {
-  margin: 70%;
 }
 
 .link-nav {
@@ -33,7 +25,8 @@
 .logo-nav {
   height: inherit;
   display: inherit;
-  justify-content: center;
+  justify-content: left;
+  margin: 0 10px;
 }
 
 .logo-nav > img {
@@ -60,6 +53,7 @@
   align-items: center;
   justify-content: right;
   gap: 20px;
+  margin: 0 10px;
 }
 
 li {
@@ -67,5 +61,6 @@ li {
 }
 
 li:hover {
+  color: #d7d2d2;
   cursor: pointer;
 }
