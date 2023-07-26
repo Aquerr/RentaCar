@@ -31,11 +31,11 @@ import java.util.List;
 
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
-    @EnableWebSecurity
     @EnableMethodSecurity
-    @ConditionalOnProperty(value = "rentacar.security.enabled", havingValue = "true")
+    @ConditionalOnProperty(value = "rentacar.security.enabled", matchIfMissing = true, havingValue = "true")
     @Configuration
     public static class EnabledSecurityConfiguration {
 

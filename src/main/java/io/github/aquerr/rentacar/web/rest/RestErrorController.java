@@ -19,6 +19,7 @@ public class RestErrorController {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public RestErrorResponse handleException(RuntimeException exception) {
+        log.error(exception.getMessage(), exception);
         if (exception.getClass().isAnnotationPresent(ApiException.class)) {
             return convertApiExceptionToRestErrorResponse(exception);
         }

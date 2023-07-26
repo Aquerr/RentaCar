@@ -1,32 +1,30 @@
 package io.github.aquerr.rentacar.domain.profile.converter;
 
-import io.github.aquerr.rentacar.domain.profile.dto.ProfileDto;
-import io.github.aquerr.rentacar.domain.profile.model.UserProfile;
+import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
+import io.github.aquerr.rentacar.domain.profile.model.RentaCarUserProfile;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProfileConverter {
-    public ProfileDto toProfileDto(UserProfile profile) {
+    public UserProfileDto toProfileDto(RentaCarUserProfile profile) {
         if (profile == null) {
             return null;
         }
 
-        return ProfileDto.builder()
+        return UserProfileDto.builder()
                 .id(profile.getId())
-                .userId(profile.getUserId())
                 .birthDate(profile.getBirthDate())
                 .city(profile.getCity())
                 .build();
     }
 
-    public UserProfile toProfile(ProfileDto profileDto) {
+    public RentaCarUserProfile toProfile(UserProfileDto profileDto) {
         if (profileDto == null) {
             return null;
         }
 
-        return UserProfile.builder()
+        return RentaCarUserProfile.builder()
                 .id(profileDto.getId())
-                .userId(profileDto.getUserId())
                 .birthDate(profileDto.getBirthDate())
                 .city(profileDto.getCity())
                 .build();
