@@ -6,6 +6,7 @@ import { LanguageService } from './language.service';
 import { AuthenticationApiService } from './api/authentication-api.service';
 import { Subject } from 'rxjs';
 import {TokenService} from "./token.service";
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,14 @@ export class AuthenticationService {
     private toastService: ToastService,
     private languageService: LanguageService,
     private tokenService: TokenService,
+    private storageService: StorageService
   ) {}
 
   public signinUser(request: UserSignInRequest) {
     this.authenticationApiService.signinUser(request).subscribe({
       next: (response) => {
         this.tokenService.saveToken(response.jwt, request.rememberMe);
+        this.saveAuthorities(response.authorities);
         this.authenticationApiService.getMyself().subscribe({
           next: (user) => {
             this.updateUserObservable(user);
@@ -84,5 +87,9 @@ export class AuthenticationService {
 
   updateUserObservable(user: User) {
     this.user.next(user);
+  }
+
+  saveAuthorities(authorities: string[]) {
+    this.storageService.saveItem('authorities', JSON.stringify(authorities));
   }
 }
