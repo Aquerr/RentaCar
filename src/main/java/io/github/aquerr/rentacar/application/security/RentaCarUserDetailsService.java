@@ -24,7 +24,7 @@ public class RentaCarUserDetailsService implements UserDetailsService
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
+    public AuthenticatedUser loadUserByUsername(String username) throws UsernameNotFoundException
     {
         UserCredentials.UsernameOrEmail usernameOrEmail = new UserCredentials.UsernameOrEmail(username);
 
