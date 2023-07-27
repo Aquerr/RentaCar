@@ -2,7 +2,8 @@
   "title": {
     "main": "Rent a car",
     "sign-in": "Sign in",
-    "not-found": "Page not found"
+    "not-found": "Page not found",
+    "profile-edit": "Profile edit"
   },
   "components": {
     "authentication": {
@@ -19,6 +20,40 @@
         "sign-in-button": {
           "label": "Sign in"
         }
+      }
+    },
+    "profile-edit": {
+      "form": {
+        "title": "User profile edit",
+        "button": {
+          "label": "Update data"
+        },
+        "label": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "email": "Email",
+          "birthDate": "Birth date",
+          "city": "City",
+          "zipCode": "Zip code",
+          "street": "Street and house number",
+          "phoneNumber": "Phone number"
+        },
+        "errors": {
+          "email": {
+            "email": "Incorrect address email format"
+          },
+          "phoneNumber": {
+            "pattern": "Incorrect phone number"
+          },
+          "zipCode": {
+            "pattern": "Incorrect zip code format"
+          },
+          "required": "This field is required"
+        }
+      },
+      "update": {
+        "success": "User profile has been updated successfully",
+        "error": "User profile has not been updated successfully"
       }
     }
   },
@@ -45,11 +80,61 @@
     "token-expire": "Token expired. Sign in again."
   },
   "primeng": {
-    "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    "dayNamesMin": ["Su","Mo","Tu","We","Th","Fr","Sa"],
-    "monthNames": ["January","February","March","April","May","June","July","August","September","October","November","December"],
-    "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "dayNames": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "dayNamesShort": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "dayNamesMin": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ],
+    "monthNames": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "monthNamesShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
     "today": "Today",
     "weekHeader": "Week",
     "firstDayOfWeek": 1

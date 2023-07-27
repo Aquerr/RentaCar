@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { User } from '../../models/user.model';
+import { UserProfile } from '../../../models/user-profile.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile-panel',
@@ -8,11 +9,12 @@ import { User } from '../../models/user.model';
 })
 export class ProfilePanelComponent {
   panelVisible = false;
-  @Input() user: User | null = null;
+  @Input() user: UserProfile | null = null;
   @Output() logoutEmitter = new EventEmitter<void>;
 
-  constructor(private eRef: ElementRef) {
+  constructor(private eRef: ElementRef, private router: Router) {
   }
+
   @HostListener('document:click', ['$event'])
   clickOut(event: any) {
     if (this.eRef.nativeElement.contains(event.target)) {
@@ -21,13 +23,17 @@ export class ProfilePanelComponent {
     }
   }
 
-
   toggleProfilePanel() {
     this.panelVisible = !this.panelVisible;
   }
+
   emitLogoutRequest() {
     this.logoutEmitter.emit();
     this.panelVisible = false;
+  }
+
+  navigateToProfileUpdate() {
+    this.router.navigate(['profile-edit']).then(() => this.panelVisible = false);
   }
 
 }

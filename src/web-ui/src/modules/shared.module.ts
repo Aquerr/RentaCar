@@ -18,6 +18,7 @@ import { TitleStrategy } from '@angular/router';
 import { CustomPageTitleStrategy } from '../strategy/custom-page-title.strategy';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 @NgModule({
   exports: [
@@ -47,6 +48,7 @@ import { DropdownModule } from 'primeng/dropdown';
       useClass: CustomPageTitleStrategy },
     LoginGuard,
     AnonymousGuard,
+    provideEnvironmentNgxMask()
   ],
 })
 export class SharedModule {

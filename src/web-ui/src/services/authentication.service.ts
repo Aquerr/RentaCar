@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, UserSignInRequest } from '../models/user.model';
+import { UserProfile } from '../models/user-profile.model';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
 import { LanguageService } from './language.service';
@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user = new Subject<User | null>();
+  private user = new Subject<UserProfile | null>();
 
   constructor(
     private authenticationApiService: AuthenticationApiService,
@@ -24,12 +24,12 @@ export class AuthenticationService {
     private storageService: StorageService
   ) {}
 
-  public signinUser(request: UserSignInRequest) {
+  public signinUser(request: AuthenticationRequest) {
     this.authenticationApiService.signinUser(request).subscribe({
       next: (response) => {
         this.tokenService.saveToken(response.jwt, request.rememberMe);
         this.saveAuthorities(response.authorities);
-        this.authenticationApiService.getMyself().subscribe({
+        this.getMyself().subscribe({
           next: (user) => {
             this.updateUserObservable(user);
             this.router
@@ -76,7 +76,7 @@ export class AuthenticationService {
   public trySetUserOnAppInit() {
     const jwt = this.tokenService.getToken();
     if (jwt)
-      this.authenticationApiService.getMyself().subscribe({
+      this.getMyself().subscribe({
         next: (user) => {
           this.updateUserObservable(user);
         },
@@ -89,11 +89,15 @@ export class AuthenticationService {
       });
   }
 
+  getMyself() {
+    return this.authenticationApiService.getMyself();
+  }
+
   getUserObservable() {
     return this.user;
   }
 
-  updateUserObservable(user: User | null) {
+  updateUserObservable(user: UserProfile | null) {
     this.user.next(user);
   }
 
@@ -103,5 +107,16 @@ export class AuthenticationService {
 
   deleteAuthorities() {
     this.storageService.deleteItem('authorities');
+  }
+}
+export class AuthenticationRequest {
+  login: string;
+  password: string;
+  rememberMe: boolean;
+
+  constructor(login: string, password: string, rememberMe: boolean) {
+    this.login = login;
+    this.password = password;
+    this.rememberMe = rememberMe;
   }
 }

@@ -8,7 +8,9 @@ import { SharedModule } from '../modules/shared.module';
 import { SearcherComponent } from '../components/searcher/searcher.component';
 import { NgxTranslateModule } from '../modules/ngx-translate.module';
 import { NgOptimizedImage } from '@angular/common';
-import { ProfilePanelComponent } from '../components/profile-panel/profile-panel.component';
+import { ProfilePanelComponent } from '../components/profile/panel/profile-panel.component';
+import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { ProfilePanelComponent } from '../components/profile-panel/profile-panel
     SignInComponent,
     NotFoundComponent,
     SearcherComponent,
-    ProfilePanelComponent
+    ProfilePanelComponent,
+    ProfileEditComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, NgxTranslateModule, NgOptimizedImage],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, NgxTranslateModule, NgOptimizedImage, NgxMaskDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

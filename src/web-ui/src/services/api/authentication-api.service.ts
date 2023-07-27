@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User, UserSignInRequest } from '../../models/user.model';
-import { APP_BASE_URL } from '../../app/app.consts';
+import { UserProfile } from '../../models/user-profile.model';
+import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
+import { AuthenticationRequest } from '../authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationApiService {
-  private AUTH_URL = APP_BASE_URL + '/api/v1/auth';
+  private AUTH_URL = APP_BASE_URL + APP_V1_URL + '/auth';
 
   constructor(private http: HttpClient) {}
 
-  public signinUser(request: UserSignInRequest) {
+  public signinUser(request: AuthenticationRequest) {
     return this.http.post<JwtTokenResponse>(this.AUTH_URL, request);
   }
 
   public getMyself() {
     const url = this.AUTH_URL + '/myself';
-    return this.http.get<User>(url);
+    return this.http.get<UserProfile>(url);
   }
 
   public logout() {
