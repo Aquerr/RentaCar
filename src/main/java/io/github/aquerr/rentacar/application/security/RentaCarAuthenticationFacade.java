@@ -2,8 +2,6 @@ package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
-import io.github.aquerr.rentacar.domain.profile.ProfileService;
-import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -22,7 +20,6 @@ public class RentaCarAuthenticationFacade implements AuthenticationFacade
 {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final ProfileService profileService;
 
     @Override
     public AuthenticatedUser getCurrentUser()
@@ -49,11 +46,5 @@ public class RentaCarAuthenticationFacade implements AuthenticationFacade
         } catch (Exception exception) {
             throw new BadCredentialsException();
         }
-    }
-
-    @Override
-    public UserProfileDto getCurrentUserProfile()
-    {
-        return profileService.getProfileById(getCurrentUser().getProfileId());
     }
 }

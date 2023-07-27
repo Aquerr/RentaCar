@@ -23,9 +23,19 @@ public class AuthenticatedUser implements UserDetails
         return Collections.unmodifiableCollection(authorities);
     }
 
+    public Long getId()
+    {
+        return id;
+    }
+
     public Long getProfileId()
     {
         return profileId;
+    }
+
+    public String getRemoteIpAddress()
+    {
+        return remoteIpAddress;
     }
 
     @Override

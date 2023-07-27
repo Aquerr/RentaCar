@@ -42,7 +42,7 @@ public class RentaCarUserCredentials
     private String password;
 
     @ElementCollection
-    @CollectionTable(name = "rentacar_user_authority", joinColumns = @JoinColumn(name = "user_profile_id"))
+    @CollectionTable(name = "rentacar_user_authority", joinColumns = @JoinColumn(name = "credentials_id"))
     @Column(name = "authority")
     private Set<String> authorities;
 

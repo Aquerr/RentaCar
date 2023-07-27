@@ -5,7 +5,8 @@ import io.github.aquerr.rentacar.domain.user.model.RentaCarUserCredentials;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConverter {
+public class UserCredentialsConverter
+{
 
     public UserDto convertToDto(RentaCarUserCredentials user) {
         if (user == null) {
