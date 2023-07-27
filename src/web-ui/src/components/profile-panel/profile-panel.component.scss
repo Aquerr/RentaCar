@@ -1,10 +1,9 @@
 .container {
   z-index: 1;
   position: fixed;
-  margin-top: 5px;
-  margin-right: auto;
   background: var(--top-nav-color);
   border-radius: 5px;
+  left: 88%;
 }
 
 li {
@@ -16,4 +15,18 @@ li {
 li:hover {
   color: #d7d2d2;
   cursor: pointer;
+}
+
+.pi {
+  font-size: 14px!important;
+}
+
+.no-background-button, .no-background-button:hover, .no-background-button:focus {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.no-background-button:hover {
+  color: #d7d2d2;
 }

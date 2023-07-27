@@ -64,3 +64,13 @@ li:hover {
   color: #d7d2d2;
   cursor: pointer;
 }
+
+.no-background-button, .no-background-button:hover, .no-background-button:focus {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.no-background-button:hover {
+  color: #d7d2d2;
+}
