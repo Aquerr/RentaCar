@@ -1,36 +1,35 @@
-<div class="top-nav">
-  <div class="menu-nav" *ngIf='isMobile'>
-    <i class="pi pi-align-justify"></i>
+<div class='top-nav'>
+  <div class='menu-nav' *ngIf='isMobile'>
+    <i class='pi pi-align-justify'></i>
   </div>
-  <div class="logo-nav" routerLink="">
-    <img src='assets/images/car-rental-logo.avif' alt=''/>
+  <div class='logo-nav' routerLink=''>
+    <img src='assets/images/car-rental-logo.avif' alt='' />
   </div>
-  <div class="link-nav" *ngIf='!isMobile'>
+  <div class='link-nav' *ngIf='!isMobile'>
     <li>Flota</li>
     <li>FAQ</li>
     <li>Kontakt</li>
   </div>
-  <div class="right-nav">
-    <div class="lang-nav">
+  <div class='right-nav'>
+    <div class='lang-nav'>
       <span
-        class="{{ iconLang }}"
-        (click)="changeLanguage()"
+        class='{{ iconLang }}'
+        (click)='changeLanguage()'
         pTooltip="{{ 'app.top-nav.lang-nav.tooltip' | translate }}"
-        tooltipPosition="bottom"
+        tooltipPosition='bottom'
       ></span>
     </div>
-    <div class="sign-in-log-out-nav">
-      <button *ngIf="!userLogged" pButton class="p-button" routerLink="sign-in">
+    <div class='sign-in-log-out-nav'>
+      <button *ngIf='!userLogged' pButton class='p-button no-background-button' routerLink='sign-in'>
         {{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}
       </button>
-    <i *ngIf='userLogged' class='pi pi-user icon-button' (click)="toggleProfilePanel()"></i>
-      <profile-panel *ngIf='profilePanelVisible' (logoutEmitter)='logout()'></profile-panel>
+      <profile-panel *ngIf='userLogged' (logoutEmitter)='logout()' [user]='userLogged'></profile-panel>
     </div>
   </div>
 </div>
-<div class="router-section">
+<div class='router-section'>
   <router-outlet></router-outlet>
-  <p-toast key="success" />
-  <p-toast key="warn" />
-  <p-toast key="error" />
+  <p-toast key='success' />
+  <p-toast key='warn' />
+  <p-toast key='error' />
 </div>

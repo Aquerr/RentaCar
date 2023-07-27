@@ -13,13 +13,13 @@ export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
   userSubscription = new Subscription();
   userLogged: User | null = null;
-  profilePanelVisible = false;
   isMobile = false;
 
   constructor(
     private languageService: LanguageService,
-    private authenticationService: AuthenticationService
-  ) {}
+    private authenticationService: AuthenticationService,
+  ) {
+  }
 
   ngOnInit() {
     this.authenticationService.trySetUserOnAppInit();
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .getUserObservable()
       .subscribe({
         next: (user) => {
-            this.userLogged = user;
+          this.userLogged = user;
         },
       });
   }
@@ -55,7 +55,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authenticationService.logout();
-    this.profilePanelVisible = false;
   }
 
   setIconFlag(lang: string) {
@@ -64,10 +63,6 @@ export class AppComponent implements OnInit, OnDestroy {
     } else {
       this.iconLang = 'fi fi-us';
     }
-  }
-
-  toggleProfilePanel() {
-    this.profilePanelVisible = !this.profilePanelVisible;
   }
 
   @HostListener('window:resize', ['$event'])
