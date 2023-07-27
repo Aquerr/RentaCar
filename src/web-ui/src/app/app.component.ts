@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from '../models/user.model';
+import { UserProfile } from '../models/user-profile.model';
 import { LanguageService } from '../services/language.service';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -12,7 +12,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
   userSubscription = new Subscription();
-  userLogged: User | null = null;
+  userLogged: UserProfile | null = null;
   isMobile = false;
 
   constructor(

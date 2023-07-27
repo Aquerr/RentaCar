@@ -1,13 +1,11 @@
-import {Injectable} from '@angular/core';
-import {TokenService} from "../../services/token.service";
+import { Injectable } from '@angular/core';
+import { TokenService } from '../../services/token.service';
 
 @Injectable()
 export class LoginGuard {
-  constructor(private tokenService: TokenService) {
-  }
+  constructor(private tokenService: TokenService) {}
 
   canActivate() {
-    const jwt = this.tokenService.getToken();
-    return !!jwt;
+    return this.tokenService.getToken();
   }
 }

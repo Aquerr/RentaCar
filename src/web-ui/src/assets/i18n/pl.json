@@ -2,7 +2,8 @@
   "title": {
     "main": "Wypożyczalnia samochodowa",
     "sign-in": "Zaloguj się",
-    "not-found": "Strona nie znaleziona"
+    "not-found": "Strona nie znaleziona",
+    "profile-edit": "Edycja profilu"
   },
   "components": {
     "authentication": {
@@ -19,6 +20,40 @@
         "sign-in-button": {
           "label": "Zaloguj się"
         }
+      }
+    },
+    "profile-edit": {
+      "form": {
+        "title": "Edycja profilu użytkownika",
+        "button": {
+          "label": "Aktualizuj dane"
+        },
+        "label": {
+          "firstName": "Imię",
+          "lastName": "Nazwisko",
+          "email": "Email",
+          "birthDate": "Data urodzenia",
+          "city": "Miasto",
+          "zipCode": "Kod pocztowy",
+          "street": "Ulica i numer domu",
+          "phoneNumber": "Numer telefonu"
+        },
+        "errors": {
+          "email": {
+            "email": "Niepoprawny format adresu email"
+          },
+          "phoneNumber": {
+            "pattern": "Niepoprawny format telefonu"
+          },
+          "zipCode": {
+            "pattern": "Niepoprawny format kodu pocztowego"
+          },
+          "required": "To pole jest wymagane"
+        }
+      },
+      "update": {
+        "success": "Profil użytkownika zaaktualizowany pomyślnie",
+        "error": "Nie udało zaaktualizować się profilu użytkownika"
       }
     }
   },
@@ -45,11 +80,61 @@
     "token-expire": "Token wygasł. Zaloguj się ponownie."
   },
   "primeng": {
-    "dayNames": ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
-    "dayNamesShort": ["Nie", "Pon", "Wt", "Śr", "Czw", "Pi", "So"],
-    "dayNamesMin": ["N","P","W","Ś","C","P","S"],
-    "monthNames": ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"],
-    "monthNamesShort": ["Sty", "Lut", "Mar", "Kwi", "Maj", "Cze","Lip", "Sie", "Wrz", "Paź", "Lis", "Gru"],
+    "dayNames": [
+      "Niedziela",
+      "Poniedziałek",
+      "Wtorek",
+      "Środa",
+      "Czwartek",
+      "Piątek",
+      "Sobota"
+    ],
+    "dayNamesShort": [
+      "Nie",
+      "Pon",
+      "Wt",
+      "Śr",
+      "Czw",
+      "Pi",
+      "So"
+    ],
+    "dayNamesMin": [
+      "N",
+      "P",
+      "W",
+      "Ś",
+      "C",
+      "P",
+      "S"
+    ],
+    "monthNames": [
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień"
+    ],
+    "monthNamesShort": [
+      "Sty",
+      "Lut",
+      "Mar",
+      "Kwi",
+      "Maj",
+      "Cze",
+      "Lip",
+      "Sie",
+      "Wrz",
+      "Paź",
+      "Lis",
+      "Gru"
+    ],
     "today": "Dziś",
     "weekHeader": "Week",
     "firstDayOfWeek": 1

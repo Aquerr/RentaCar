@@ -4,6 +4,8 @@ import { SignInComponent } from '../components/authentication/sign-in/sign-in.co
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { SearcherComponent } from '../components/searcher/searcher.component';
 import { AnonymousGuard } from '../components/authentication/anonymous.guard';
+import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
+import { LoginGuard } from '../components/authentication/login.guard';
 
 const routes: Routes = [
   {
@@ -18,10 +20,16 @@ const routes: Routes = [
     title: 'title.sign-in',
   },
   {
+    path: 'profile-edit',
+    component: ProfileEditComponent,
+    canActivate: [LoginGuard],
+    title: 'title.profile-edit',
+  },
+  {
     path: '**',
     component: NotFoundComponent,
     title: 'title.not-found',
-  },
+  }
 ];
 
 @NgModule({

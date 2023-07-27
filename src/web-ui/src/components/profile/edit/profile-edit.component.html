@@ -1,0 +1,65 @@
+<form [formGroup]='form' *ngIf='userProfile'>
+
+  <h3>{{'components.profile-edit.form.title' | translate}}</h3>
+
+  <div class='input-container'>
+    <label for='firstName'>{{'components.profile-edit.form.label.firstName' | translate}}</label>
+    <input pInputText id='firstName' formControlName='firstName' maxlength='255' />
+    <small *ngIf="hasFormError('firstName', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='lastName'>{{'components.profile-edit.form.label.lastName' | translate}}</label>
+    <input pInputText id='lastName' formControlName='lastName' maxlength='255' />
+    <small *ngIf="hasFormError('lastName', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='email'>{{'components.profile-edit.form.label.email' | translate}}</label>
+    <input pInputText id='email' formControlName='email' />
+    <small *ngIf="hasFormError('email', 'email')"
+           class='p-error'>{{'components.profile-edit.form.errors.email.email' | translate}}</small>
+    <small *ngIf="hasFormError('email', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='birthDate'>{{'components.profile-edit.form.label.birthDate' | translate}}</label>
+    <p-calendar id='birthDate' formControlName='birthDate' dateFormat='dd.mm.yy' [readonlyInput]='true'
+                [maxDate]='todayDate'></p-calendar>
+    <small *ngIf="hasFormError('birthDate', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='city'>{{'components.profile-edit.form.label.city' | translate}}</label>
+    <input pInputText id='city' formControlName='city' maxlength='255' />
+    <small *ngIf="hasFormError('city', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='zipCode'>{{'components.profile-edit.form.label.zipCode' | translate}}</label>
+    <input pInputText id='zipCode' formControlName='zipCode' mask='00-000' />
+    <small *ngIf="hasFormError('zipCode', 'pattern')"
+           class='p-error'>{{'components.profile-edit.form.errors.zipCode.pattern' | translate}}</small>
+    <small *ngIf="hasFormError('zipCode', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='street'>{{'components.profile-edit.form.label.street' | translate}}</label>
+    <input pInputText id='street' formControlName='street' maxlength='255' />
+    <small *ngIf="hasFormError('street', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+  <div class='input-container'>
+    <label for='phoneNumber'>{{'components.profile-edit.form.label.phoneNumber' | translate}}</label>
+    <input pInputText id='phoneNumber' formControlName='phoneNumber' mask='000 000 000' />
+    <small *ngIf="hasFormError('phoneNumber', 'pattern')"
+           class='p-error'>{{'components.profile-edit.form.errors.phoneNumber.pattern' | translate}}</small>
+    <small *ngIf="hasFormError('phoneNumber', 'required')"
+           class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+  </div>
+
+  <div class='button-container'>
+    <button pButton class='p-button'
+            (click)='update()'>{{'components.profile-edit.form.button.label' | translate}}</button>
+  </div>
+</form>

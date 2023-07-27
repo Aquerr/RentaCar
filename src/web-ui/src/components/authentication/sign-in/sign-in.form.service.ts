@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserSignInRequest } from '../../../models/user.model';
+import { AuthenticationRequest } from '../../../services/authentication.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,8 @@ export class SignInFormService {
     return this.form;
   }
 
-  createUserSignInRequest(): UserSignInRequest {
-    return new UserSignInRequest(
+  createUserSignInRequest(): AuthenticationRequest {
+    return new AuthenticationRequest(
       this.getLogin(),
       this.getPassword(),
       this.getRememberMe(),
