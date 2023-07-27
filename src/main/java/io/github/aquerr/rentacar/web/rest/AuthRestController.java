@@ -4,7 +4,11 @@ import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
+import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
+import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
+import io.github.aquerr.rentacar.domain.user.UserService;
+import io.github.aquerr.rentacar.web.rest.request.ActivationTokenRequest;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -23,6 +27,8 @@ public class AuthRestController {
 
     private final JwtService jwtService;
     private final AuthenticationFacade authenticationFacade;
+    private final ProfileService profileService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<JwtTokenResponse> authenticate(@RequestBody UserCredentials userCredentials) {
@@ -37,7 +43,14 @@ public class AuthRestController {
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        return ResponseEntity.ok(authenticationFacade.getCurrentUserProfile());
+        return ResponseEntity.ok(this.profileService.getProfileById(authenticationFacade.getCurrentUser().getProfileId()));
+    }
+
+    @PostMapping("/activation")
+    public ResponseEntity<?> activateAccount(@RequestBody ActivationTokenRequest activationTokenRequest)
+    {
+        this.userService.activateAccount(new ActivationTokenParams(activationTokenRequest.getToken()));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/invalidate")
