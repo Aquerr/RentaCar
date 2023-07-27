@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { LanguageService } from '../services/language.service';
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.languageService.loadLanguage();
     this.setIconFlag(this.languageService.getLanguage() as string);
     this.startUserSubscription();
+    this.isMobileView();
   }
 
   ngOnDestroy() {
@@ -67,5 +68,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleProfilePanel() {
     this.profilePanelVisible = !this.profilePanelVisible;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  isMobileView() {
+    this.isMobile = window.innerWidth < 1200;
   }
 }
