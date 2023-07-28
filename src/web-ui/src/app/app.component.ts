@@ -7,40 +7,36 @@ import { AuthenticationService } from '../services/authentication.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
-  userSubscription = new Subscription();
+  subscription = new Subscription();
   userLogged: UserProfile | null = null;
   isMobile = false;
 
   constructor(
-    private languageService: LanguageService,
     private authenticationService: AuthenticationService,
+    private languageService: LanguageService
   ) {
   }
 
   ngOnInit() {
-    this.authenticationService.trySetUserOnAppInit();
     this.languageService.loadLanguage();
     this.setIconFlag(this.languageService.getLanguage() as string);
+    this.authenticationService.setUserOnAppInitDispatch();
     this.startUserSubscription();
     this.isMobileView();
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   startUserSubscription() {
-    this.userSubscription = this.authenticationService
-      .getUserObservable()
-      .subscribe({
-        next: (user) => {
-          this.userLogged = user;
-        },
-      });
+    this.subscription = this.authenticationService.getUser().subscribe((userState) =>
+      this.userLogged = userState
+    );
   }
 
   changeLanguage() {
@@ -54,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.authenticationService.logoutDispatch();
   }
 
   setIconFlag(lang: string) {

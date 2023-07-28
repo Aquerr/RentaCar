@@ -1,104 +1,51 @@
 import { Injectable } from '@angular/core';
-import { UserProfile } from '../models/user-profile.model';
-import { Router } from '@angular/router';
-import { ToastService } from './toast.service';
-import { LanguageService } from './language.service';
-import { AuthenticationApiService } from './api/authentication-api.service';
-import { Subject } from 'rxjs';
-import {TokenService} from "./token.service";
+import { JwtTokenResponse } from './api/authentication-api.service';
+import { TokenService } from './token.service';
 import { StorageService } from './storage.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { logout, setUserOnAppInit, signIn } from '../state/auth/auth.action';
+import { selectUser } from '../state/auth/auth.selector';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user = new Subject<UserProfile | null>();
 
   constructor(
-    private authenticationApiService: AuthenticationApiService,
-    private router: Router,
-    private toastService: ToastService,
-    private languageService: LanguageService,
+    private store: Store<AppState>,
     private tokenService: TokenService,
     private storageService: StorageService
   ) {}
 
-  public signinUser(request: AuthenticationRequest) {
-    this.authenticationApiService.signinUser(request).subscribe({
-      next: (response) => {
-        this.tokenService.saveToken(response.jwt, request.rememberMe);
-        this.saveAuthorities(response.authorities);
-        this.getMyself().subscribe({
-          next: (user) => {
-            this.updateUserObservable(user);
-            this.router
-              .navigate([''])
-              .then(() =>
-                this.toastService.createSuccessToast(
-                  this.languageService.getMessage('services.sign-in.success'),
-                ),
-              );
-          },
-          error: () => {
-            this.toastService.createErrorToast(
-              this.languageService.getMessage('services.sign-in.error'),
-            );
-          },
-        });
-      },
-      error: () => {
-        this.toastService.createErrorToast(
-          this.languageService.getMessage('services.sign-in.error'),
-        );
-      },
-    });
+  signInDispatch(request: AuthenticationRequest) {
+  this.store.dispatch(signIn(request));
   }
 
-  public logout() {
-    this.authenticationApiService.logout().subscribe({
-      next: () => {
-        this.updateUserObservable(null);
-        this.tokenService.removeToken();
-        this.deleteAuthorities();
-        this.toastService.createSuccessToast(
-          this.languageService.getMessage('services.log-out.success'),
-        );
-      },
-      error: () => {
-        this.toastService.createErrorToast(
-          this.languageService.getMessage('services.log-out.error'),
-        );
-      },
-    });
+  signInSaveData(response: JwtTokenResponse, rememberMe: boolean) {
+    this.tokenService.saveToken(response.jwt, rememberMe);
+    this.saveAuthorities(response.authorities);
   }
 
-  public trySetUserOnAppInit() {
-    const jwt = this.tokenService.getToken();
-    if (jwt)
-      this.getMyself().subscribe({
-        next: (user) => {
-          this.updateUserObservable(user);
-        },
-        error: (error: HttpErrorResponse) => {
-          if (error.status === 401) {
-            this.tokenService.removeToken();
-            this.router.navigate(['']).then(() => this.toastService.createWarnToast(this.languageService.getMessage('services.token-expire')));
-          }
-        }
-      });
+  setUserOnAppInitDispatch() {
+    const token = this.tokenService.getToken();
+    if (token) {
+      this.store.dispatch(setUserOnAppInit());
+    }
   }
 
-  getMyself() {
-    return this.authenticationApiService.getMyself();
+  getUser() {
+    return this.store.select(selectUser);
   }
 
-  getUserObservable() {
-    return this.user;
+  logoutDispatch() {
+    this.store.dispatch(logout());
+    this.logoutClearData();
   }
 
-  updateUserObservable(user: UserProfile | null) {
-    this.user.next(user);
+  logoutClearData() {
+    this.tokenService.removeToken();
+    this.deleteAuthorities();
   }
 
   saveAuthorities(authorities: string[]) {
@@ -109,6 +56,7 @@ export class AuthenticationService {
     this.storageService.deleteItem('authorities');
   }
 }
+
 export class AuthenticationRequest {
   login: string;
   password: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../../services/authentication.service';
 import { SignInFormService } from './sign-in.form.service';
 import { FormGroup } from '@angular/forms';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'sign-in',
@@ -12,8 +12,8 @@ export class SignInComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    public formService: SignInFormService,
     private authenticationService: AuthenticationService,
+    public formService: SignInFormService
   ) {}
 
   ngOnInit() {
@@ -22,6 +22,6 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     const request = this.formService.createUserSignInRequest();
-    this.authenticationService.signinUser(request);
+    this.authenticationService.signInDispatch(request);
   }
 }

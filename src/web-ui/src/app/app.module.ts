@@ -11,6 +11,11 @@ import { NgOptimizedImage } from '@angular/common';
 import { ProfilePanelComponent } from '../components/profile/panel/profile-panel.component';
 import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
 import { NgxMaskDirective } from 'ngx-mask';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from '../state/auth/auth.effects';
+import { metaReducers, reducers } from '../state/app.reducers';
+import { CommonEffects } from '../state/common/common.effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,20 @@ import { NgxMaskDirective } from 'ngx-mask';
     ProfilePanelComponent,
     ProfileEditComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, NgxTranslateModule, NgOptimizedImage, NgxMaskDirective],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    NgxTranslateModule,
+    NgOptimizedImage,
+    NgxMaskDirective,
+    BrowserModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    EffectsModule.forRoot([AuthEffects, CommonEffects])
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
