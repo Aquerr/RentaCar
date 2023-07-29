@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { JwtTokenResponse } from './api/authentication-api.service';
 import { TokenService } from './token.service';
-import { StorageService } from './storage.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { logout, setUserOnAppInit, signIn } from '../state/auth/auth.action';
-import { selectUser } from '../state/auth/auth.selector';
+import { selectAuthorities, selectUser } from '../state/auth/auth.selector';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +12,15 @@ export class AuthenticationService {
 
   constructor(
     private store: Store<AppState>,
-    private tokenService: TokenService,
-    private storageService: StorageService
+    private tokenService: TokenService
   ) {}
 
   signInDispatch(request: AuthenticationRequest) {
   this.store.dispatch(signIn(request));
   }
 
-  signInSaveData(response: JwtTokenResponse, rememberMe: boolean) {
-    this.tokenService.saveToken(response.jwt, rememberMe);
-    this.saveAuthorities(response.authorities);
+  saveToken(jwt: string, rememberMe: boolean) {
+    this.tokenService.saveToken(jwt, rememberMe);
   }
 
   setUserOnAppInitDispatch() {
@@ -38,22 +34,17 @@ export class AuthenticationService {
     return this.store.select(selectUser);
   }
 
+  getAuthorities() {
+    return this.store.select(selectAuthorities);
+  }
+
   logoutDispatch() {
     this.store.dispatch(logout());
-    this.logoutClearData();
+    this.removeToken();
   }
 
-  logoutClearData() {
+  removeToken() {
     this.tokenService.removeToken();
-    this.deleteAuthorities();
-  }
-
-  saveAuthorities(authorities: string[]) {
-    this.storageService.saveItem('authorities', JSON.stringify(authorities));
-  }
-
-  deleteAuthorities() {
-    this.storageService.deleteItem('authorities');
   }
 }
 

@@ -3,7 +3,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, of, switchMap, tap } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { AuthenticationApiService } from '../../services/api/authentication-api.service';
-import { getMyself, logout, logoutClearData, setUser, setUserOnAppInit, signIn, signInSaveData } from './auth.action';
+import {
+  getMyself,
+  logout,
+  removeToken,
+  setAuthorities,
+  setUser,
+  setUserOnAppInit,
+  signIn,
+  saveToken
+} from './auth.action';
 import { ToastService, ToastType } from '../../services/toast.service';
 import { AuthenticationRequest, AuthenticationService } from '../../services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,7 +27,8 @@ export class AuthEffects {
       mergeMap((request: AuthenticationRequest) => this.apiService.signinUser(request)
       .pipe(
         switchMap((response) => [
-          signInSaveData({ response: response, rememberMe: request.rememberMe }),
+          saveToken({ jwt: response.jwt, rememberMe: request.rememberMe }),
+          setAuthorities({ authorities: response.authorities }),
           getMyself()
         ]),
         catchError(() =>
@@ -54,7 +64,7 @@ export class AuthEffects {
         catchError((error: HttpErrorResponse) => {
           const actions = [];
           if (error.status === 401) {
-            actions.push(logoutClearData());
+            actions.push(removeToken());
             actions.push(goRoute({ routingLink: '' }));
             actions.push(showToast({
               messageKey: 'services.token-expire',
@@ -72,26 +82,27 @@ export class AuthEffects {
       .pipe(
         switchMap(() => [
           setUser({ user: null }),
+          setAuthorities({ authorities: [] }),
           showToast({ messageKey: 'services.log-out.success', toastType: ToastType.SUCCESS }),
           goRoute({ routingLink: '' }),
-          logoutClearData()
+          removeToken()
         ]),
         catchError(() => of(showToast({ messageKey: 'services.log-out.error', toastType: ToastType.ERROR })))
       ))
     ));
 
-  signInSaveData$ = createEffect(() =>
+  saveToken$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(signInSaveData),
-      tap(({ response: response, rememberMe: rememberMe }) =>
-        this.authenticationService.signInSaveData(response, rememberMe)
+      ofType(saveToken),
+      tap(({ jwt: jwt, rememberMe: rememberMe }) =>
+        this.authenticationService.saveToken(jwt, rememberMe)
       )), { dispatch: false });
 
-  logoutClearData$ = createEffect(() =>
+  removeToken$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(logoutClearData),
+      ofType(removeToken),
       tap(() =>
-        this.authenticationService.logoutClearData()
+        this.authenticationService.removeToken()
       )), { dispatch: false });
 
   constructor(
