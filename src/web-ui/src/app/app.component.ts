@@ -47,6 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iconLang = 'fi fi-us';
       this.languageService.setLanguage('en');
     }
+    window.location.reload();
   }
 
   logout() {
