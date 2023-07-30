@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '../state/auth/auth.effects';
 import { metaReducers, reducers } from '../state/app.reducers';
 import { CommonEffects } from '../state/common/common.effects';
+import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CommonEffects } from '../state/common/common.effects';
     NotFoundComponent,
     SearcherComponent,
     ProfilePanelComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

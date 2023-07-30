@@ -2,6 +2,7 @@
   "title": {
     "main": "Rent a car",
     "sign-in": "Sign in",
+    "sign-up": "Sign up",
     "not-found": "Page not found",
     "profile-edit": "Profile edit"
   },
@@ -17,8 +18,9 @@
         "rememberMe": {
           "label": "Remember me"
         },
-        "sign-in-button": {
-          "label": "Sign in"
+        "buttons": {
+          "sign-in": "Sign in",
+          "sign-up": "Sign up"
         }
       }
     },
@@ -54,6 +56,28 @@
       "update": {
         "success": "User profile has been updated successfully",
         "error": "User profile has not been updated successfully"
+      }
+    },
+    "sign-up": {
+      "labels": {
+        "title": "Sign up",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "password-confirm": "Confirm password",
+        "buttons": {
+          "sign-up": "Sign up"
+        }
+      },
+      "errors": {
+        "required": "This field is required",
+        "password-doesnt-match": "Both passwords must match",
+        "min-length": "Min length equals 5 chars",
+        "email": "Incorrect format of email address"
+      },
+      "toasts": {
+        "sign-up-success": "Registered successfully. A link to activate the account in the application has been sent to the e-mail address provided.",
+        "sign-up-error": "Registration failed. Try again."
       }
     }
   },

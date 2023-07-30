@@ -1,42 +1,51 @@
 <h4>Zaloguj się</h4>
 
-<form [formGroup]="form" class="form">
+<form [formGroup]='form' class='form'>
   <input
     pInputText
-    type="text"
-    formControlName="login"
+    type='text'
+    formControlName='login'
     placeholder="{{
       'components.authentication.sign-in.login.label' | translate
     }}"
-    minlength="5"
+    minlength='5'
   />
 
   <input
     pInputText
-    type="password"
-    formControlName="password"
+    type='password'
+    formControlName='password'
     placeholder="{{
       'components.authentication.sign-in.password.label' | translate
     }}"
-    minlength="5"
+    minlength='5'
   />
 
   <p-checkbox
-    formControlName="rememberMe"
-    [binary]="true"
+    formControlName='rememberMe'
+    [binary]='true'
     label="{{
       'components.authentication.sign-in.rememberMe.label' | translate
     }}"
   ></p-checkbox>
 
-  <div class="button-container">
+  <div class='button-container'>
     <button
       pButton
-      class="p-button"
-      (click)="signIn()"
-      [disabled]="!formService.isFormValid()"
+      class='p-button'
+      (click)='signIn()'
+      [disabled]='!formService.isFormValid()'
     >
-      {{ "components.authentication.sign-in.sign-in-button.label" | translate }}
+      {{ "components.authentication.sign-in.buttons.sign-in" | translate }}
     </button>
   </div>
 </form>
+
+<div class='bottom-container'>
+  <button
+    pButton
+    class='p-button'
+    routerLink='/sign-up'>
+    {{ "components.authentication.sign-in.buttons.sign-up" | translate }}
+  </button>
+</div>
