@@ -2,6 +2,7 @@
   "title": {
     "main": "Wypożyczalnia samochodowa",
     "sign-in": "Zaloguj się",
+    "sign-up": "Zarejestruj się",
     "not-found": "Strona nie znaleziona",
     "profile-edit": "Edycja profilu"
   },
@@ -17,8 +18,9 @@
         "rememberMe": {
           "label": "Pamiętaj mnie"
         },
-        "sign-in-button": {
-          "label": "Zaloguj się"
+        "buttons": {
+          "sign-in": "Zaloguj się",
+          "sign-up": "Zarejestruj się"
         }
       }
     },
@@ -54,6 +56,28 @@
       "update": {
         "success": "Profil użytkownika zaaktualizowany pomyślnie",
         "error": "Nie udało zaaktualizować się profilu użytkownika"
+      }
+    },
+    "sign-up": {
+      "labels": {
+        "title": "Zarejestruj się",
+        "username": "Nazwa użytkownika",
+        "email": "Email",
+        "password": "Hasło",
+        "password-confirm": "Potwierdź hasło",
+        "buttons": {
+          "sign-up": "Zarejestruj się"
+        }
+      },
+      "errors": {
+        "required": "To pole jest wymagane",
+        "password-doesnt-match": "Hasła muszą do siebie pasować",
+        "min-length": "Minimalna długość wynosi 5 znaków",
+        "email": "Niepoprawny format adresu email"
+      },
+      "toasts": {
+        "sign-up-success": "Zarejestrowano pomyślnie. Na wskazny email został wysłany link do aktywacji konta w aplikacji.",
+        "sign-up-error": "Rejestracja nie powiodła się. Spróbuj ponownie."
       }
     }
   },

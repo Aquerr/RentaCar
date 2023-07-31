@@ -6,35 +6,42 @@ import { SearcherComponent } from '../components/searcher/searcher.component';
 import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
 import { LoginGuard } from '../components/authentication/login.guard';
+import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SearcherComponent,
-    title: 'title.main',
+    title: 'title.main'
   },
   {
     path: 'sign-in',
     component: SignInComponent,
     canActivate: [AnonymousGuard],
-    title: 'title.sign-in',
+    title: 'title.sign-in'
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent,
+    canActivate: [AnonymousGuard],
+    title: 'title.sign-up'
   },
   {
     path: 'profile-edit',
     component: ProfileEditComponent,
     canActivate: [LoginGuard],
-    title: 'title.profile-edit',
+    title: 'title.profile-edit'
   },
   {
     path: '**',
     component: NotFoundComponent,
-    title: 'title.not-found',
+    title: 'title.not-found'
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

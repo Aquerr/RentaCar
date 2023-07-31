@@ -1,0 +1,21 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 5%;
+}
+
+.input-container {
+  width: 200px;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
+}
+
+label {
+  color: grey;
+  font-size: 12px;
+}

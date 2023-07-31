@@ -1,0 +1,82 @@
+<form [formGroup]='form' class='form'>
+
+  <h3>{{'components.sign-up.labels.title' | translate}}</h3>
+
+  <div class='input-container'>
+    <label for='username'>{{
+      'components.sign-up.labels.username' | translate
+      }}</label>
+    <input
+      pInputText
+      id='userName'
+      type='text'
+      formControlName='username'
+      minlength='5'
+    />
+    <small *ngIf="hasFormError('username', 'required')"
+           class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
+    <small *ngIf="hasFormError('username', 'minlength')"
+           class='p-error'>{{'components.sign-up.errors.min-length' | translate}}</small>
+  </div>
+
+  <div class='input-container'>
+    <label for='email'>{{
+      'components.sign-up.labels.email' | translate
+      }}</label>
+    <input
+      pInputText
+      id='email'
+      formControlName='email'
+    />
+    <small *ngIf="hasFormError('email', 'required')"
+           class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
+    <small *ngIf="hasFormError('email', 'email')"
+           class='p-error'>{{'components.sign-up.errors.email' | translate}}</small>
+  </div>
+
+  <div class='input-container'>
+    <label for='password'>{{
+      'components.sign-up.labels.password' | translate
+      }}</label>
+    <input
+      pInputText
+      id='password'
+      formControlName='password'
+      type='password'
+      minlength='5'
+    />
+    <small *ngIf="hasFormError('password', 'required')"
+           class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
+    <small *ngIf="hasFormError('password', 'minlength')"
+           class='p-error'>{{'components.sign-up.errors.min-length' | translate}}</small>
+  </div>
+
+  <div class='input-container'>
+    <label for='password2'>{{
+      'components.sign-up.labels.password-confirm' | translate
+      }}</label>
+    <input
+      pInputText
+      id='password2'
+      formControlName='password2'
+      type='password'
+      minlength='5'
+    />
+    <small *ngIf="hasFormError('password2', 'required')"
+           class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
+    <small *ngIf="hasFormError('password2', 'passwordDoesntMatch')"
+           class='p-error'>{{'components.sign-up.errors.password-doesnt-match' | translate}}</small>
+    <small *ngIf="hasFormError('password2', 'minlength')"
+           class='p-error'>{{'components.sign-up.errors.min-length' | translate}}</small>
+  </div>
+
+  <div class='button-container'>
+    <button
+      pButton
+      class='p-button'
+      (click)='signUp()'
+    >
+      {{ "components.sign-up.labels.buttons.sign-up" | translate }}
+    </button>
+  </div>
+</form>
