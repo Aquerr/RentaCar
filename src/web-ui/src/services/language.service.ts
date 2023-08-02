@@ -4,13 +4,13 @@ import { StorageService } from './storage.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class LanguageService {
   constructor(
     private config: PrimeNGConfig,
     private translateService: TranslateService,
-    private storageService: StorageService,
+    private storageService: StorageService
   ) {
   }
 
@@ -36,12 +36,16 @@ export class LanguageService {
     this.translateService.get(key).subscribe({
       next: (response) => {
         responseMessage = response;
-      },
+      }
     });
     return responseMessage;
   }
 
   setPrimengLanguage() {
-    this.translateService.get('primeng').subscribe((response) => this.config.setTranslation(response));
+    this.translateService.get('primeng').subscribe((response) => {
+      this.config.setTranslation(response);
+      const acceptedLangs = this.translateService.getLangs();
+      this.storageService.saveItem('ACCEPTED_LANGS', JSON.stringify(acceptedLangs));
+    });
   }
 }
