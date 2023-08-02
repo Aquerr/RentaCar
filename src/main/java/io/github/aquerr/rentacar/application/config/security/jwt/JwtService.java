@@ -55,14 +55,19 @@ public final class JwtService {
     private String jwtIssuer;
     @Value("${rentacar.security.jwt.expiration-time}")
     private Duration jwtExpirationTime;
+    @Value("${rentacar.security.jwt.longer-expiration-time}")
+    private Duration jwtLongerExpirationTime;
 
-    public String createJwt(AuthenticatedUser authenticatedUser) {
+    public String createJwt(AuthenticatedUser authenticatedUser, boolean rememberMe) {
         Claims claims = Jwts.claims()
                 .setSubject(authenticatedUser.getUsername())
                 .setIssuer(jwtIssuer)
                 .setNotBefore(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plus(jwtExpirationTime)))
                 .setIssuedAt(Date.from(Instant.now()));
+
+        setExpirationTime(claims, rememberMe);
+
         claims.put("authorities", authenticatedUser.getAuthorities());
 
         return Jwts.builder()
@@ -70,6 +75,15 @@ public final class JwtService {
                 .signWith(KEY)
                 .setClaims(claims)
                 .compact();
+    }
+
+    private void setExpirationTime(Claims claims, boolean rememberMe)
+    {
+        if (rememberMe) {
+            claims.setExpiration(Date.from(Instant.now().plus(jwtLongerExpirationTime)));
+        } else {
+            claims.setExpiration(Date.from(Instant.now().plus(jwtExpirationTime)));
+        }
     }
 
     public Jws<Claims> validateJwt(String jwt) {
