@@ -4,11 +4,7 @@ import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RequestMapping("/api/v1/profiles")
@@ -23,5 +19,11 @@ public class ProfilesRestController
         userProfileDto.setId(profileId);
         profileService.saveProfile(userProfileDto);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserProfileDto> getProfile(@PathVariable("id") long profileId)
+    {
+        return ResponseEntity.ok(profileService.getProfileById(profileId));
     }
 }
