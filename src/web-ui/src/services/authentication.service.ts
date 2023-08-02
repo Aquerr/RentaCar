@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { logout, setUserOnAppInit, signIn } from '../state/auth/auth.action';
+import { logout, setUser, setUserOnAppInit, signIn } from '../state/auth/auth.action';
 import { selectAuthorities, selectUser } from '../state/auth/auth.selector';
+import { UserProfile } from '../models/user-profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthenticationService {
   ) {}
 
   signInDispatch(request: AuthenticationRequest) {
-  this.store.dispatch(signIn(request));
+    this.store.dispatch(signIn(request));
   }
 
   saveToken(jwt: string, rememberMe: boolean) {
@@ -28,6 +29,10 @@ export class AuthenticationService {
     if (token) {
       this.store.dispatch(setUserOnAppInit());
     }
+  }
+
+  updateUser(user: UserProfile) {
+    return this.store.dispatch(setUser({ user: user }));
   }
 
   getUser() {

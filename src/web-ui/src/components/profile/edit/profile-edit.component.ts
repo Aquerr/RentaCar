@@ -54,11 +54,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       const request = this.formService.convertFormTouserProfile(this.form);
       this.userProfileApiService.saveProfile(request).subscribe({
         next: () => {
-          this.toastService.createToast(this.languageService.getMessage('components.profile-edit.update.success'), ToastType.SUCCESS);
+          this.userProfileApiService.getProfile(request.id).subscribe({
+            next: (userProfile) => {
+              this.autheticationService.updateUser(userProfile);
+              this.toastService.createToast(this.languageService.getMessage('components.profile-edit.update.success'), ToastType.SUCCESS);
+            },
+            error: () => this.toastService.createToast(this.languageService.getMessage('components.profile-edit.update.error'), ToastType.ERROR)
+          });
         },
-        error: () => {
-          this.toastService.createToast(this.languageService.getMessage('components.profile-edit.update.error'), ToastType.ERROR);
-        }
+        error: () => this.toastService.createToast(this.languageService.getMessage('components.profile-edit.update.error'), ToastType.ERROR)
       });
     }
   }
