@@ -38,7 +38,7 @@ public class RentaCarAuthenticationFacade implements AuthenticationFacade
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             AuthenticatedUser authenticatedUser = (AuthenticatedUser) authentication.getPrincipal();
-            String jwt = jwtService.createJwt(authenticatedUser);
+            String jwt = jwtService.createJwt(authenticatedUser, userCredentials.isRememberMe());
 
             return new JwtTokenResponse(jwt, authenticatedUser.getUsername(), authenticatedUser.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
