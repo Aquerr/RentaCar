@@ -79,6 +79,14 @@
         "sign-up-success": "Registered successfully. A link to activate the account in the application has been sent to the e-mail address provided.",
         "sign-up-error": "Registration failed. Try again."
       }
+    },
+    "searcher": {
+      "labels": {
+        "pickup-locations": "Enter a city, airport or address"
+      },
+      "buttons": {
+        "search": "Search"
+      }
     }
   },
   "app": {
