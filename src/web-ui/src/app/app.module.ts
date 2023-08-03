@@ -21,6 +21,8 @@ import { VehicleCardComponent } from '../components/vehicles/vehicle-card/vehicl
 import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { ContactComponent } from '../components/contact/contact.component';
+import { ReservationComponent } from '../components/reservation/reservation.component';
+import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ContactComponent } from '../components/contact/contact.component';
     VehicleCardComponent,
     VehicleListComponent,
     ContactComponent,
-    FooterComponent
+    FooterComponent,
+    ReservationComponent,
+    VehicleDetailsComponent
   ],
   imports: [
     BrowserModule,

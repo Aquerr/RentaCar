@@ -20,6 +20,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogModule } from 'primeng/dialog';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   exports: [
@@ -37,7 +39,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserModule,
     CalendarModule,
     DropdownModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DialogModule
   ],
   providers: [
     MessageService,
@@ -53,6 +56,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginGuard,
     AnonymousGuard,
     DatePipe,
+    DialogService,
     provideEnvironmentNgxMask()
   ]
 })

@@ -13,7 +13,7 @@ export class UserApiService {
   }
 
   public register(request: UserRegistrationRequest) {
-    return this.http.post<void>(this.URL, request);
+    return this.http.post<void>(`${this.URL}/register`, request);
   }
 
 }

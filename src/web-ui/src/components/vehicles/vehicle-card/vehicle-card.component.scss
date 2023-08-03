@@ -1,9 +1,10 @@
 .vehicle-card {
   max-width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+  box-shadow: rgba(222, 217, 217, 0.16) 0 3px 6px, rgba(227, 225, 225, 0.23) 0 3px 6px;
   margin: auto;
   padding: 10px;
   border-radius: 5px;
+  background-color: white;
 }
 
 .title-row {
@@ -14,6 +15,10 @@
   padding: 10px;
   border-bottom: 1px solid #d2d0d0;
   margin: auto;
+}
+
+.title-row span:hover {
+  color: var(--gold);
 }
 
 .title-row span:hover {
@@ -65,7 +70,13 @@
   margin-bottom: 10px;
 }
 
-button {
+.btn {
+  color: var(--main-color-icon);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
   text-align: center;
   margin: auto;
+}
+
+.btn:hover {
+  background: linear-gradient(rgba(23, 22, 22, 0.6), rgba(65, 62, 62, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
 }

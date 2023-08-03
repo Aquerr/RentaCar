@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
           this.commonService.showToast('components.sign-up.toasts.sign-up-success', ToastType.SUCCESS);
           this.form.reset();
         },
-        error: () => this.commonService.showToast('components.sign-up.sign-up-error', ToastType.ERROR)
+        error: () => this.commonService.showToast('components.sign-up.toasts.sign-up-error', ToastType.ERROR)
       });
     }
   }
