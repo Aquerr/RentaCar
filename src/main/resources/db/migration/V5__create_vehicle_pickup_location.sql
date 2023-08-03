@@ -4,10 +4,10 @@ CREATE TABLE vehicle_pickup_location (
     city VARCHAR(255) NOT NULL,
     lang_code VARCHAR(2) NOT NULL,
     latitude REAL NOT NULL,
-    longtitude REAL NOT NULL
+    longitude REAL NOT NULL
 );
 
-INSERT INTO vehicle_pickup_location (id, name, city, lang_code, latitude, longtitude) VALUES
+INSERT INTO vehicle_pickup_location (id, name, city, lang_code, latitude, longitude) VALUES
 (1, 'Palace of Culture and Science', 'Warsaw', 'en', 52.23183, 21.00598),
 (2, 'Warsaw Uprising Museum', 'Warsaw', 'en', 52.23283, 20.98086),
 (3, 'Copernicus Science Centre', 'Warsaw', 'en', 52.24184, 21.02872),
