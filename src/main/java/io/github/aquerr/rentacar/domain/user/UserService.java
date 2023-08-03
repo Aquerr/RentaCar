@@ -6,9 +6,9 @@ import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.CreateProfileParameters;
 import io.github.aquerr.rentacar.domain.user.converter.UserCredentialsConverter;
-import io.github.aquerr.rentacar.domain.user.dto.UserDto;
+import io.github.aquerr.rentacar.domain.user.dto.UserCredentials;
 import io.github.aquerr.rentacar.domain.user.exception.UsernameOrEmailAlreadyUsedException;
-import io.github.aquerr.rentacar.domain.user.model.RentaCarUserCredentials;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserRegistration;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import lombok.AllArgsConstructor;
@@ -30,29 +30,29 @@ public class UserService {
     @Transactional
     public ActivationTokenDto register(UserRegistration userRegistration)
     {
-        RentaCarUserCredentials userCredentials = this.userCredentialsRepository.findByUsernameOrEmail(userRegistration.getUsername(), userRegistration.getEmail());
-        if (userCredentials != null)
+        UserCredentialsEntity userCredentialsEntity = this.userCredentialsRepository.findByUsernameOrEmail(userRegistration.getUsername(), userRegistration.getEmail());
+        if (userCredentialsEntity != null)
             throw new UsernameOrEmailAlreadyUsedException();
 
-        RentaCarUserCredentials rentaCarUserCredentials = RentaCarUserCredentials.builder()
+        UserCredentialsEntity rentaCarUserCredentialsEntity = UserCredentialsEntity.builder()
                 .username(userRegistration.getUsername())
                 .email(userRegistration.getEmail())
                 .password(passwordEncoder.encode(userRegistration.getPassword()))
                 .locked(false)
                 .verified(false)
                 .build();
-        rentaCarUserCredentials = this.userCredentialsRepository.save(rentaCarUserCredentials);
-        return accountActivationService.requestActivationToken(rentaCarUserCredentials);
+        rentaCarUserCredentialsEntity = this.userCredentialsRepository.save(rentaCarUserCredentialsEntity);
+        return accountActivationService.requestActivationToken(rentaCarUserCredentialsEntity);
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-    public UserDto findByUsername(String username)
+    public UserCredentials findByUsername(String username)
     {
         return userCredentialsConverter.convertToDto(userCredentialsRepository.findByUsername(username));
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-    public UserDto findById(Long id)
+    public UserCredentials findById(Long id)
     {
         return userCredentialsRepository.findById(id)
                 .map(this.userCredentialsConverter::convertToDto)
@@ -66,7 +66,7 @@ public class UserService {
         ActivationTokenDto activationTokenDto = this.accountActivationService.getActivationToken(token);
         this.accountActivationService.activateToken(activationTokenDto);
 
-        RentaCarUserCredentials credentials = userCredentialsRepository.findById(activationTokenDto.getCredentialsId())
+        UserCredentialsEntity credentials = userCredentialsRepository.findById(activationTokenDto.getCredentialsId())
                 .orElse(null);
         if (credentials != null)
         {

@@ -4,7 +4,6 @@ import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticati
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
-import io.github.aquerr.rentacar.domain.user.model.RentaCarUserCredentials;
 import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.util.TestResourceUtils;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
@@ -18,12 +17,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

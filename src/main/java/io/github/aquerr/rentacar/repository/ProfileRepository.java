@@ -1,8 +1,8 @@
 package io.github.aquerr.rentacar.repository;
 
-import io.github.aquerr.rentacar.domain.profile.model.RentaCarUserProfile;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProfileRepository extends JpaRepository<RentaCarUserProfile, Long> {
-    RentaCarUserProfile findByCredentialsId(Long credentialsId);
+public interface ProfileRepository extends JpaRepository<UserProfileEntity, Long> {
+    UserProfileEntity findByCredentialsId(Long credentialsId);
 }

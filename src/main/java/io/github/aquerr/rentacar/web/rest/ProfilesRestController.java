@@ -1,7 +1,7 @@
 package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
-import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
+import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +14,15 @@ public class ProfilesRestController
     private final ProfileService profileService;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> saveProfile(@PathVariable("id") long profileId, @RequestBody UserProfileDto userProfileDto)
+    public ResponseEntity<?> saveProfile(@PathVariable("id") long profileId, @RequestBody UserProfile userProfile)
     {
-        userProfileDto.setId(profileId);
-        profileService.saveProfile(userProfileDto);
+        userProfile.setId(profileId);
+        profileService.saveProfile(userProfile);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserProfileDto> getProfile(@PathVariable("id") long profileId)
+    public ResponseEntity<UserProfile> getProfile(@PathVariable("id") long profileId)
     {
         return ResponseEntity.ok(profileService.getProfileById(profileId));
     }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Builder
 @Data
-public class UserProfileDto
+public class UserProfile
 {
     private Long id;
     private String firstName;

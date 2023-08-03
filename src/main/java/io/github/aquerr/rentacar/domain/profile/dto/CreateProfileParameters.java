@@ -7,6 +7,6 @@ import lombok.Value;
 @Value
 public class CreateProfileParameters
 {
-    private Long credentialsId;
-    private String email;
+    Long credentialsId;
+    String email;
 }
