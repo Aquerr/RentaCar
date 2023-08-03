@@ -11,5 +11,5 @@ public class VehiclePickupLocation
     String name;
     String city;
     float latitude;
-    float longtitude;
+    float longitude;
 }

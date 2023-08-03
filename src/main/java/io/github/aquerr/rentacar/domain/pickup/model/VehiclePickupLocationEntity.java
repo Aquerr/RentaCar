@@ -30,6 +30,6 @@ public class VehiclePickupLocationEntity
     @Column(name = "latitude", unique = false, nullable = false, length = 7)
     private float latitude;
 
-    @Column(name = "longtitude", unique = false, nullable = false, length = 7)
-    private float longtitude;
+    @Column(name = "longitude", unique = false, nullable = false, length = 7)
+    private float longitude;
 }
