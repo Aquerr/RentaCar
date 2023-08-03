@@ -116,6 +116,11 @@
     },
     "vehicle-list": {
       "no-vehicles": "No vehicles in selected term"
+    },
+    "vehicle-details": {
+      "buttons": {
+        "close": "Close"
+      }
     }
   },
   "app": {

@@ -1,0 +1,9 @@
+<div class='container' *ngIf='vehicle'>
+  <h3>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</h3>
+  <div class='img'>
+    <img alt='' src='assets/images/{{vehicle.photoUrl}}' />
+  </div>
+
+  <button class='btn'
+          (click)='close()'>{{ 'components.vehicle-details.buttons.close' | translate}}</button>
+</div>

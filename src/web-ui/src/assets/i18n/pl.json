@@ -116,6 +116,11 @@
     },
     "vehicle-list": {
       "no-vehicles": "Brak pojazdów w wybranym terminie"
+    },
+    "vehicle-details": {
+      "buttons": {
+        "close": "Zamknij"
+      }
     }
   },
   "app": {

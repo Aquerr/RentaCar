@@ -3,6 +3,12 @@
   user-select: none;
   color: var(--main-font);
 }
+
+.logo:hover {
+  cursor: pointer;
+  color: var(--gold);
+}
+
 .header {
   z-index: 10;
   position: fixed;
@@ -15,14 +21,15 @@
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
-  background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
   background-size: cover;
   background-position-y: 72%;
 }
+
 .nav {
   a {
     position: relative;
-    font-size: 1 rem;
+    font-size: 1rem;
     color: var(--main-font);
     text-decoration: none;
     margin-left: 30px;
@@ -55,11 +62,12 @@
     outline: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1 rem;
+    font-size: 1rem;
     color: var(--main-font);
     margin-left: 30px;
     transition: 0.3s;
   }
+
   .btn:hover {
     background: var(--main-font);
     color: var(--third-color);

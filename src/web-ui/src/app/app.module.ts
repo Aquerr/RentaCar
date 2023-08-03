@@ -22,6 +22,7 @@ import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicl
 import { FooterComponent } from '../components/footer/footer.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ReservationComponent } from '../components/reservation/reservation.component';
+import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
     VehicleListComponent,
     ContactComponent,
     FooterComponent,
-    ReservationComponent
+    ReservationComponent,
+    VehicleDetailsComponent
   ],
   imports: [
     BrowserModule,
