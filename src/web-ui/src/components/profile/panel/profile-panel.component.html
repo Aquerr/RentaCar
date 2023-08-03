@@ -1,4 +1,4 @@
-<button pButton class='p-button no-background-button' (click)='toggleProfilePanel()'><i
+<button class='btn-nav' (click)='toggleProfilePanel()'><i
   class='pi pi-user icon-button'></i>{{user?.firstName}} {{user?.lastName}}</button>
 <div *ngIf='panelVisible' class='container'>
   <li (click)='navigateToProfileUpdate()'><i class='pi pi-user-edit'></i>Profil</li>

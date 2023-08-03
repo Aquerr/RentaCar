@@ -1,4 +1,4 @@
-input {
+.form_input {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -20,4 +20,43 @@ p-checkbox {
   text-align: center;
   justify-content: center;
   margin-top: 10px;
+}
+
+.wrapper {
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--main-font);
+  background: transparent;
+  height: 350px;
+  width: 400px;
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(25px);
+  text-align: center;
+  justify-content: center;
+}
+.btn {
+  margin: 10px;
+}
+
+a {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--main-font);
+}
+a:hover {
+  text-decoration: underline;
+  color: var(--second-color);
+}
+
+.header4 {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+.checkbox {
+  margin-top: 20px;
 }

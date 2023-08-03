@@ -19,6 +19,8 @@ import { CommonEffects } from '../state/common/common.effects';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 import { VehicleCardComponent } from '../components/vehicles/vehicle-card/vehicle-card.component';
 import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
+import { FooterComponent } from '../components/footer/footer.component';
+import { ContactComponent } from '../components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicl
     ProfileEditComponent,
     SignUpComponent,
     VehicleCardComponent,
-    VehicleListComponent
+    VehicleListComponent,
+    ContactComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

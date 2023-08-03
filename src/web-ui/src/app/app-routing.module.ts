@@ -8,6 +8,7 @@ import { ProfileEditComponent } from '../components/profile/edit/profile-edit.co
 import { LoginGuard } from '../components/authentication/login.guard';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
+import { ContactComponent } from '../components/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
     path: 'vehicle-list/:dates',
     component: VehicleListComponent,
     title: 'title.vehicle-list'
+  },
+    {
+    path: 'contact',
+    component: ContactComponent,
+    title: 'title.contact'
   },
   {
     path: '**',
