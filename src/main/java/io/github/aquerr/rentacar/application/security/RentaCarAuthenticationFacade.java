@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
+import io.github.aquerr.rentacar.domain.ApiException;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -44,6 +45,9 @@ public class RentaCarAuthenticationFacade implements AuthenticationFacade
                     .map(GrantedAuthority::getAuthority)
                     .toList());
         } catch (Exception exception) {
+            Throwable cause = exception.getCause();
+            if (cause.getClass().isAnnotationPresent(ApiException.class))
+                throw (RuntimeException)cause;
             throw new BadCredentialsException();
         }
     }
