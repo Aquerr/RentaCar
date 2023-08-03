@@ -4,5 +4,5 @@ CREATE TABLE account_activation_token (
     token VARCHAR(64) UNIQUE NOT NULL,
     expiration_date_time TIMESTAMP WITH TIME ZONE NOT NULL,
     used TINYINT DEFAULT 1,
-    FOREIGN KEY (credentials_id) REFERENCES rentacar_user_credentials (id)
+    FOREIGN KEY (credentials_id) REFERENCES user_credentials (id)
 );

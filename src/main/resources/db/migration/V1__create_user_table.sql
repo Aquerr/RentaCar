@@ -1,4 +1,4 @@
-CREATE TABLE rentacar_user_credentials (
+CREATE TABLE user_credentials (
       id IDENTITY NOT NULL PRIMARY KEY,
       username VARCHAR(36) UNIQUE NOT NULL,
       email VARCHAR(64) UNIQUE NOT NULL,
@@ -7,4 +7,4 @@ CREATE TABLE rentacar_user_credentials (
       locked TINYINT DEFAULT 0
 );
 
-CREATE SEQUENCE rentacar_user_credentials_seq AS BIGINT START WITH 1 INCREMENT BY 5;
+CREATE SEQUENCE user_credentials_seq AS BIGINT START WITH 1 INCREMENT BY 5;

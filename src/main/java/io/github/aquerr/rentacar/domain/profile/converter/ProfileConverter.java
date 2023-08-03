@@ -1,17 +1,17 @@
 package io.github.aquerr.rentacar.domain.profile.converter;
 
-import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
-import io.github.aquerr.rentacar.domain.profile.model.RentaCarUserProfile;
+import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProfileConverter {
-    public UserProfileDto toProfileDto(RentaCarUserProfile profile) {
+    public UserProfile toProfileDto(UserProfileEntity profile) {
         if (profile == null) {
             return null;
         }
 
-        return UserProfileDto.builder()
+        return UserProfile.builder()
                 .id(profile.getId())
                 .firstName(profile.getFirstName())
                 .lastName(profile.getLastName())
@@ -24,12 +24,12 @@ public class ProfileConverter {
                 .build();
     }
 
-    public RentaCarUserProfile toProfile(UserProfileDto profileDto) {
+    public UserProfileEntity toProfile(UserProfile profileDto) {
         if (profileDto == null) {
             return null;
         }
 
-        return RentaCarUserProfile.builder()
+        return UserProfileEntity.builder()
                 .id(profileDto.getId())
                 .firstName(profileDto.getFirstName())
                 .lastName(profileDto.getLastName())

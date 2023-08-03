@@ -1,4 +1,4 @@
-CREATE TABLE rentacar_user_profile (
+CREATE TABLE user_profile (
    id IDENTITY NOT NULL PRIMARY KEY,
    credentials_id BIGINT NOT NULL UNIQUE,
    first_name VARCHAR(100),
@@ -10,7 +10,7 @@ CREATE TABLE rentacar_user_profile (
    zip_code VARCHAR(5),
    street VARCHAR(64),
    country VARCHAR(64),
-   FOREIGN KEY (credentials_id) REFERENCES rentacar_user_credentials (id)
+   FOREIGN KEY (credentials_id) REFERENCES user_credentials (id)
 );
 
-CREATE SEQUENCE rentacar_user_profile_seq AS BIGINT START WITH 1 INCREMENT BY 5;
+CREATE SEQUENCE user_profile_seq AS BIGINT START WITH 1 INCREMENT BY 5;

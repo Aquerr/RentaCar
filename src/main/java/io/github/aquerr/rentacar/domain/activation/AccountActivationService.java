@@ -7,7 +7,7 @@ import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenAlre
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenExpiredException;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenNotFoundException;
 import io.github.aquerr.rentacar.domain.activation.model.ActivationToken;
-import io.github.aquerr.rentacar.domain.user.model.RentaCarUserCredentials;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,7 @@ public class AccountActivationService
     private Duration activationTokenExpirationTime;
 
     @Transactional
-    public ActivationTokenDto requestActivationToken(RentaCarUserCredentials credentials)
+    public ActivationTokenDto requestActivationToken(UserCredentialsEntity credentials)
     {
         ActivationToken activationToken = new ActivationToken();
         activationToken.setCredentialsId(credentials.getId());

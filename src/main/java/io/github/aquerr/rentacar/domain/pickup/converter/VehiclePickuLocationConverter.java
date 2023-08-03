@@ -19,7 +19,7 @@ public class VehiclePickuLocationConverter
                 .name(vehiclePickupLocationEntity.getName())
                 .city(vehiclePickupLocationEntity.getCity())
                 .latitude(vehiclePickupLocationEntity.getLatitude())
-                .longtitude(vehiclePickupLocationEntity.getLongtitude())
+                .longitude(vehiclePickupLocationEntity.getLongitude())
                 .build();
     }
 
@@ -35,7 +35,7 @@ public class VehiclePickuLocationConverter
         vehiclePickupLocationEntity.setName(vehiclePickupLocation.getName());
         vehiclePickupLocationEntity.setCity(vehiclePickupLocation.getCity());
         vehiclePickupLocationEntity.setLatitude(vehiclePickupLocation.getLatitude());
-        vehiclePickupLocationEntity.setLongtitude(vehiclePickupLocation.getLongtitude());
+        vehiclePickupLocationEntity.setLongitude(vehiclePickupLocation.getLongitude());
         return vehiclePickupLocationEntity;
     }
 }

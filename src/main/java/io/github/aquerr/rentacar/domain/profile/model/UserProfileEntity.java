@@ -21,12 +21,12 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@Table(name = "rentacar_user_profile")
-public class RentaCarUserProfile
+@Table(name = "user_profile")
+public class UserProfileEntity
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rentacar_user_profile_generator")
-    @SequenceGenerator(name = "rentacar_user_profile_generator", sequenceName = "rentacar_user_profile_seq", allocationSize = 5)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_profile_generator")
+    @SequenceGenerator(name = "user_profile_generator", sequenceName = "user_profile_seq", allocationSize = 5)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 

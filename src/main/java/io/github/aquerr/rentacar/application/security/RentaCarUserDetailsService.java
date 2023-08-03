@@ -2,8 +2,8 @@ package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.exception.UserLockedException;
 import io.github.aquerr.rentacar.application.exception.UserNotVerifiedException;
-import io.github.aquerr.rentacar.domain.profile.model.RentaCarUserProfile;
-import io.github.aquerr.rentacar.domain.user.model.RentaCarUserCredentials;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.repository.ProfileRepository;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,39 +27,39 @@ public class RentaCarUserDetailsService implements UserDetailsService
     @Transactional
     public AuthenticatedUser loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        UserCredentials.UsernameOrEmail usernameOrEmail = new UserCredentials.UsernameOrEmail(username);
+        io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail usernameOrEmail = new io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail(username);
 
-        RentaCarUserCredentials rentacarUserCredentials = null;
+        UserCredentialsEntity userCredentialsEntity = null;
         if (usernameOrEmail.isEmail())
         {
-            rentacarUserCredentials = userCredentialsRepository.findByEmail(usernameOrEmail.getValue());
+            userCredentialsEntity = userCredentialsRepository.findByEmail(usernameOrEmail.getValue());
         }
         else
         {
-            rentacarUserCredentials = userCredentialsRepository.findByUsername(usernameOrEmail.getValue());
+            userCredentialsEntity = userCredentialsRepository.findByUsername(usernameOrEmail.getValue());
         }
 
-        if (rentacarUserCredentials == null)
+        if (userCredentialsEntity == null)
         {
             throw new UsernameNotFoundException("User does not exist!");
         }
-        if (rentacarUserCredentials.isLocked())
+        if (userCredentialsEntity.isLocked())
         {
             throw new UserLockedException();
         }
-        if (!rentacarUserCredentials.isVerified())
+        if (!userCredentialsEntity.isVerified())
         {
             throw new UserNotVerifiedException();
         }
 
-        RentaCarUserProfile rentaCarUserProfile = profileRepository.findByCredentialsId(rentacarUserCredentials.getId());
+        UserProfileEntity userProfileEntity = profileRepository.findByCredentialsId(userCredentialsEntity.getId());
         HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        return new AuthenticatedUser(rentacarUserCredentials.getId(),
-                rentacarUserCredentials.getUsername(),
-                rentacarUserCredentials.getPassword(),
-                rentaCarUserProfile.getId(),
+        return new AuthenticatedUser(userCredentialsEntity.getId(),
+                userCredentialsEntity.getUsername(),
+                userCredentialsEntity.getPassword(),
+                userProfileEntity.getId(),
                 getClientIp(httpServletRequest),
-                rentacarUserCredentials.getAuthorities().stream()
+                userCredentialsEntity.getAuthorities().stream()
                     .map(SimpleGrantedAuthority::new)
                     .toList());
     }

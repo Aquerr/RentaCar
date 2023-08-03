@@ -20,18 +20,18 @@ import lombok.ToString;
 import java.util.Set;
 
 @Entity
-@Table(name = "rentacar_user_credentials")
+@Table(name = "user_credentials")
 @Builder
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-public class RentaCarUserCredentials
+public class UserCredentialsEntity
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rentacar_user_credentials_generator")
-    @SequenceGenerator(name = "rentacar_user_credentials_generator", sequenceName = "rentacar_user_credentials_seq", allocationSize = 5)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_credentials_generator")
+    @SequenceGenerator(name = "user_credentials_generator", sequenceName = "user_credentials_seq", allocationSize = 5)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
     @Column(name = "username", unique = true, nullable = false)
@@ -42,7 +42,7 @@ public class RentaCarUserCredentials
     private String password;
 
     @ElementCollection
-    @CollectionTable(name = "rentacar_user_authority", joinColumns = @JoinColumn(name = "credentials_id"))
+    @CollectionTable(name = "user_authority", joinColumns = @JoinColumn(name = "credentials_id"))
     @Column(name = "authority")
     private Set<String> authorities;
 
@@ -52,12 +52,12 @@ public class RentaCarUserCredentials
     @Column(name = "locked", nullable = false, columnDefinition = "tinyint(1) default 0")
     private boolean locked;
 
-    public RentaCarUserCredentials()
+    public UserCredentialsEntity()
     {
 
     }
 
-    public RentaCarUserCredentials(Long id, String username, String email, String password, Set<String> authorities)
+    public UserCredentialsEntity(Long id, String username, String email, String password, Set<String> authorities)
     {
         this.id = id;
         this.email = email;

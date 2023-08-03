@@ -6,7 +6,7 @@ import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
-import io.github.aquerr.rentacar.domain.profile.dto.UserProfileDto;
+import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.web.rest.request.ActivationTokenRequest;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
@@ -36,7 +36,7 @@ public class AuthRestController {
     }
 
     @GetMapping("/myself")
-    public ResponseEntity<UserProfileDto> getCurrentUser()
+    public ResponseEntity<UserProfile> getCurrentUser()
     {
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
         if (authenticatedUser == null)
