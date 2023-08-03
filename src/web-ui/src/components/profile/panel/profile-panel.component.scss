@@ -1,27 +1,32 @@
 .container {
-  z-index: 1;
   position: fixed;
-  background: var(--top-nav-color);
+  top: 60px;
+  left: 75%;
+  background: black;
+  width: 170px;
+  color:var(--main-font);
   border-radius: 5px;
-  left: 88%;
+  border: 2px solid var(--main-font);
 }
 
 li {
-  color: white;
   padding: 5px;
   list-style-type: none;
 }
 
 li:hover {
-  color: #d7d2d2;
+  color: black;
+  background-color: var(--main-font);
   cursor: pointer;
 }
 
 .pi {
-  font-size: 14px!important;
+  font-size: 14px !important;
 }
 
-.no-background-button, .no-background-button:hover, .no-background-button:focus {
+.no-background-button,
+.no-background-button:hover,
+.no-background-button:focus {
   background: none;
   border: none;
   box-shadow: none;
@@ -30,3 +35,32 @@ li:hover {
 .no-background-button:hover {
   color: #d7d2d2;
 }
+.btn-nav {
+  background: transparent;
+  width: 170px;
+  height: 45px;
+  position: relative;
+  font-size: 1 rem;
+  color: var(--main-font);
+  text-decoration: none;
+  margin-left: 30px;
+  text-transform: uppercase;
+  border: 2px solid var(--main-font);
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1 rem;
+  color: var(--main-font);
+  margin-left: 30px;
+  transition: 0.3s;
+}
+
+.btn-nav:hover {
+  background: var(--main-font);
+  color: var(--third-color);
+}
+
+.pi {
+  margin-right: 5px;
+}
+

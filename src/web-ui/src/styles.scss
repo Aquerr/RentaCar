@@ -7,25 +7,28 @@
 /* Overall */
 html,
 body {
-  width: 100%;
-  height: 100%;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+  background-image: url(./assets/images/Fotolia_94386317_Subscription_Monthly_M.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200vh;
 }
 
 /* App defined colors */
 :root {
 --main-color-icon: white;
---top-nav-color: #363030;
+--top-nav-color: #222831;
+--main-font: #eeeeee;
+--second-color: #0092ca;
+--third-color: #393e46;
+--gold: #d6c78e;
 }
 
 body {
   font-family: Roboto, serif;
-}
-
-.pi {
-  padding: 10px;
-  font-size: 24px !important;
+  position: relative;
 }
 
 h4 {
@@ -36,4 +39,22 @@ h4 {
   display: grid;
   align-items: center;
   justify-content: center;
+}
+.btn {
+  width: 120px;
+  height: 45px;
+  background: transparent;
+  text-transform: uppercase;
+  border: 2px solid var(--main-font);
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1 rem;
+  color: var(--main-font);
+  margin-left: 30px;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: var(--main-font);
+  color: var(--third-color);
 }

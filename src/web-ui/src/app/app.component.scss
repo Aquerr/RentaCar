@@ -1,74 +1,71 @@
-.top-nav {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  background: var(--top-nav-color);
-  height: 60px;
+.logo {
+  font-size: 1.4em;
+  user-select: none;
+  color: var(--main-font);
+}
+.header {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin: auto;
-}
-
-.link-nav {
+  padding: 20px 100px;
+  height: 65px;
   display: flex;
-  flex-direction: row;
-  margin: auto;
-  gap: 40%;
-  color: white;
-}
-
-i {
-  color: white;
-}
-
-.logo-nav {
-  height: inherit;
-  display: inherit;
-  justify-content: left;
-  margin: 0 10px;
-}
-
-.logo-nav > img {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  height: inherit;
-  width: auto;
-}
-
-.menu-nav > i:hover,
-.logo-nav:hover {
-  color: white;
-  cursor: pointer;
-}
-
-.lang-nav > span:hover {
-  cursor: pointer;
-}
-
-.right-nav {
-  height: inherit;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: right;
-  gap: 20px;
-  margin: 0 10px;
+  text-transform: uppercase;
+  background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
+  background-size: cover;
+  background-position-y: 72%;
 }
+.nav {
+  a {
+    position: relative;
+    font-size: 1 rem;
+    color: var(--main-font);
+    text-decoration: none;
+    margin-left: 30px;
+  }
 
-li {
-  list-style-type: none;
-}
+  a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 2px;
+    background: var(--main-font);
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
 
-li:hover {
-  color: #d7d2d2;
-  cursor: pointer;
-}
+  a:hover::after {
+    transform: scaleX(1);
+  }
 
-.no-background-button, .no-background-button:hover, .no-background-button:focus {
-  background: none;
-  border: none;
-  box-shadow: none;
-}
+  .btn {
+    width: 110px;
+    height: 45px;
+    background: transparent;
+    text-transform: uppercase;
+    border: 2px solid var(--main-font);
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1 rem;
+    color: var(--main-font);
+    margin-left: 30px;
+    transition: 0.3s;
+  }
+  .btn:hover {
+    background: var(--main-font);
+    color: var(--third-color);
+  }
 
-.no-background-button:hover {
-  color: #d7d2d2;
+  .lang-nav {
+    margin-left: 30px;
+  }
 }

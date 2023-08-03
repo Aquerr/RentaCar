@@ -10,6 +10,7 @@
   "components": {
     "authentication": {
       "sign-in": {
+        "sign-in-header": "Sign In",
         "login": {
           "label": "Login"
         },
@@ -21,7 +22,8 @@
         },
         "buttons": {
           "sign-in": "Sign in",
-          "sign-up": "Sign up"
+          "sign-up": "Sign up",
+          "reset-password": "Don't remember password?"
         }
       }
     },

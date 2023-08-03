@@ -1,7 +1,11 @@
-<h4>Zaloguj się</h4>
+<div class="wrapper">
+<h4 class="header4" >{{
+  'components.authentication.sign-in.sign-in-header' | translate
+}}</h4>
 
 <form [formGroup]='form' class='form'>
-  <input
+
+  <input class="form_input"
     pInputText
     type='text'
     formControlName='login'
@@ -11,7 +15,8 @@
     minlength='5'
   />
 
-  <input
+
+  <input class="form_input"
     pInputText
     type='password'
     formControlName='password'
@@ -21,7 +26,7 @@
     minlength='5'
   />
 
-  <p-checkbox
+  <p-checkbox class="checkbox"
     formControlName='rememberMe'
     [binary]='true'
     label="{{
@@ -29,23 +34,22 @@
     }}"
   ></p-checkbox>
 
-  <div class='button-container'>
-    <button
-      pButton
-      class='p-button'
-      (click)='signIn()'
-      [disabled]='!formService.isFormValid()'
+  
+    <button class="btn" (click)='signIn()' [disabled]='!formService.isFormValid()'
     >
       {{ "components.authentication.sign-in.buttons.sign-in" | translate }}
     </button>
-  </div>
-</form>
+ 
 
-<div class='bottom-container'>
-  <button
-    pButton
-    class='p-button'
-    routerLink='/sign-up'>
+
+
+  <button class="btn" routerLink='/sign-up'>
     {{ "components.authentication.sign-in.buttons.sign-up" | translate }}
   </button>
+
+<a routerLink='/reset-password'>
+
+  {{ "components.authentication.sign-in.buttons.reset-password" | translate }}
+</a>
+</form>
 </div>
