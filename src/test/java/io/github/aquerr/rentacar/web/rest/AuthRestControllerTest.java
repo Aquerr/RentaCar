@@ -4,6 +4,8 @@ import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticati
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
+import io.github.aquerr.rentacar.domain.profile.ProfileService;
+import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.util.TestResourceUtils;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
@@ -33,6 +35,10 @@ class AuthRestControllerTest
     private JwtService jwtService;
     @MockBean
     private MessageService messageService;
+    @MockBean
+    private ProfileService profileService;
+    @MockBean
+    private UserService userService;
     @MockBean
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 

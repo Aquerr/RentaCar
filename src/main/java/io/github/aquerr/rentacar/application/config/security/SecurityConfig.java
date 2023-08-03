@@ -50,6 +50,7 @@ public class SecurityConfig {
                 if (this.environment.matchesProfiles("dev")) {
                     requests.requestMatchers(PathRequest.toH2Console()).permitAll();
                 }
+                requests.requestMatchers("/api/v1/users/register").permitAll();
                 requests.requestMatchers("/api/v1/pickup-locations").permitAll();
                 requests.requestMatchers("/api/v1/auth").permitAll();
                 requests.requestMatchers("/api/v1/ws/**").permitAll();
