@@ -7,6 +7,7 @@ import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
 import { LoginGuard } from '../components/authentication/login.guard';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
+import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     component: ProfileEditComponent,
     canActivate: [LoginGuard],
     title: 'title.profile-edit'
+  },
+  {
+    path: 'vehicle-list/:dates',
+    component: VehicleListComponent,
+    title: 'title.vehicle-list'
   },
   {
     path: '**',

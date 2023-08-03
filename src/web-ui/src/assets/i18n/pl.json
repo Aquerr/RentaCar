@@ -4,7 +4,8 @@
     "sign-in": "Zaloguj się",
     "sign-up": "Zarejestruj się",
     "not-found": "Strona nie znaleziona",
-    "profile-edit": "Edycja profilu"
+    "profile-edit": "Edycja profilu",
+    "vehicle-list": "Wyszukiwanie pojazdów"
   },
   "components": {
     "authentication": {
@@ -87,6 +88,31 @@
       "buttons": {
         "search": "Szukaj"
       }
+    },
+    "vehicle-card": {
+      "labels": {
+        "show-details": "Pokaż szczegóły samochodu",
+        "ac": "Klimatyzacja",
+        "insurance": "Serwis, Opony, Ubezpieczenie w cenie",
+        "flexible": "Elastyczność każdego dnia",
+        "no-extra-payment": "Bez ukrytych kosztów",
+        "assistance": "Wsparcie 24/7",
+        "full-led": "Pełne oświetlenie led",
+        "leather": "Skórzane fotele",
+        "multi-steering-wheel": "Multifunkcyjna kierownica",
+        "bluetooth": "Bluetooth",
+        "gas": "Benzyna",
+        "diesel": "Diesel",
+        "hybrid": "Hybryda",
+        "electric": "Elektryk",
+        "avg-fuel-consumption": "l/100km średnie spalanie"
+      },
+      "buttons": {
+        "reserve": "Rezerwuj pojazd"
+      }
+    },
+    "vehicle-list": {
+      "no-vehicles": "Brak pojazdów w wybranym terminie"
     }
   },
   "app": {

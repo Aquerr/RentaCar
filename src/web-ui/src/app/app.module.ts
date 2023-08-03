@@ -17,6 +17,8 @@ import { AuthEffects } from '../state/auth/auth.effects';
 import { metaReducers, reducers } from '../state/app.reducers';
 import { CommonEffects } from '../state/common/common.effects';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
+import { VehicleCardComponent } from '../components/vehicles/vehicle-card/vehicle-card.component';
+import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { SignUpComponent } from '../components/authentication/sign-up/sign-up.co
     SearcherComponent,
     ProfilePanelComponent,
     ProfileEditComponent,
-    SignUpComponent
+    SignUpComponent,
+    VehicleCardComponent,
+    VehicleListComponent
   ],
   imports: [
     BrowserModule,
