@@ -2,8 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { VehicleApiService } from '../../../services/api/vehicle-api.service';
 import { Category, EngineType, Transmission, Vehicle } from '../../../models/vehicle.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
+import { ReservationApiService } from '../../../services/api/reservation-api.service';
+import { ReservationRequest, ReservationStatus } from '../../../models/reservation.model.ts';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { UserProfile } from '../../../models/user-profile.model';
+import { ReservationService } from '../../../services/reservation.service';
 
 @Component({
   selector: 'vehicle-list',
@@ -11,11 +16,18 @@ import { LanguageService } from '../../../services/language.service';
   styleUrls: ['./vehicle-list.component.scss']
 })
 export class VehicleListComponent implements OnInit, OnDestroy {
-  subscription = new Subscription();
+  subscriptions = new Subscription();
   vehicles: Vehicle[] = [];
+  user: UserProfile | null = null;
+  dateFrom = '';
+  dateTo = '';
   lang = 'us';
 
-  constructor(private apiService: VehicleApiService,
+  constructor(private vehicleApiService: VehicleApiService,
+              private reservationApiService: ReservationApiService,
+              private authenticationService: AuthenticationService,
+              private reservationService: ReservationService,
+              private router: Router,
               private activatedRoute: ActivatedRoute,
               private languageService: LanguageService) {
   }
@@ -25,18 +37,19 @@ export class VehicleListComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe({
       next: (routes) => {
         const routeDates = routes['dates'] as string;
-        const dateFrom = routeDates.substring(6, routeDates.indexOf('&'));
-        const dateTo = routeDates.substring(routeDates.indexOf('&') + 1, routeDates.length - 1);
-        this.getVehiclesAvailable(dateFrom, dateTo);
+        this.dateFrom = routeDates.substring(6, routeDates.indexOf('&'));
+        this.dateTo = routeDates.substring(routeDates.indexOf('&') + 1, routeDates.length - 1);
+        this.getVehiclesAvailable();
       }
     });
+    this.getUser();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
-  getVehiclesAvailable(dateFrom: string, dateTo: string) {
+  getVehiclesAvailable() {
     // TODO do usunięcia gdy powstanie logika backendowa z dummy-data
     this.vehicles = [
       {
@@ -105,15 +118,39 @@ export class VehicleListComponent implements OnInit, OnDestroy {
         transmission: Transmission.AUTOMATIC
       } as Vehicle
     ];
-    // this.subscription = this.apiService.getVehiclesAvailable(dateFrom, dateTo).subscribe({
-    //   next: (response) => {
-    //     this.vehicles = response.vehicles.sort((a, b) => a.brand.localeCompare(b.brand));
-    //   }
-    // });
+    this.subscriptions.add(this.vehicleApiService.getVehiclesAvailable(this.dateFrom, this.dateTo).subscribe({
+      next: (response) => {
+        this.vehicles = response.vehicles.sort((a, b) => a.brand.localeCompare(b.brand));
+      }
+    }));
   }
 
-  reserveVehicle(vehicle: Vehicle) {
-    // TODO rezerwacja pojazdow
+  getUser() {
+    this.subscriptions.add(this.authenticationService.getUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      }
+    }));
+  }
+
+  reserveVehicle(vehicleId: number) {
+    const request = this.prepareReservationRequest(vehicleId);
+    this.reservationApiService.saveReservationRequest(request).subscribe({
+      next: (response) => {
+        this.reservationService.updateReservation(response.reservation);
+        this.router.navigate(['/reservation', response.reservation.id]);
+      }
+    });
+  }
+
+  prepareReservationRequest(vehicleId: number) {
+    return {
+      vehicleId: vehicleId,
+      userId: this.user?.id,
+      dateFrom: this.dateFrom,
+      dateTo: this.dateTo,
+      status: ReservationStatus.DRAFT
+    } as ReservationRequest;
   }
 
 }

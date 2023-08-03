@@ -9,7 +9,7 @@ import { EngineType, Vehicle } from '../../../models/vehicle.model';
 export class VehicleCardComponent {
   @Input() vehicle: Vehicle | null = null;
   @Input() lang = 'us';
-  @Output() reserveVehicleEvent = new EventEmitter<Vehicle>;
+  @Output() reserveVehicleEvent = new EventEmitter<number>;
 
   constructor() {}
 
@@ -18,7 +18,7 @@ export class VehicleCardComponent {
   }
 
   reserveVehicle(vehicle: Vehicle) {
-    this.reserveVehicleEvent.emit(vehicle);
+    this.reserveVehicleEvent.emit(vehicle.id);
   }
 
   calculateCurrency(price: number) {

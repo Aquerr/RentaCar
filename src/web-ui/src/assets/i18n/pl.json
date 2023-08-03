@@ -5,7 +5,8 @@
     "sign-up": "Zarejestruj się",
     "not-found": "Strona nie znaleziona",
     "profile-edit": "Edycja profilu",
-    "vehicle-list": "Wyszukiwanie pojazdów"
+    "vehicle-list": "Wyszukiwanie pojazdów",
+    "reservation": "Rezerwacja"
   },
   "components": {
     "authentication": {

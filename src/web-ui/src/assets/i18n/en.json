@@ -5,7 +5,8 @@
     "sign-up": "Sign up",
     "not-found": "Page not found",
     "profile-edit": "Profile edit",
-    "vehicle-list": "Searching vehicles"
+    "vehicle-list": "Searching vehicles",
+    "reservation": "Reservation"
   },
   "components": {
     "authentication": {

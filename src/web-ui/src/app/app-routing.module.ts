@@ -9,6 +9,7 @@ import { LoginGuard } from '../components/authentication/login.guard';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
 import { ContactComponent } from '../components/contact/contact.component';
+import { ReservationComponent } from '../components/reservation/reservation.component';
 
 const routes: Routes = [
   {
@@ -39,10 +40,15 @@ const routes: Routes = [
     component: VehicleListComponent,
     title: 'title.vehicle-list'
   },
-    {
+  {
     path: 'contact',
     component: ContactComponent,
     title: 'title.contact'
+  },
+  {
+    path: 'reservation/:id',
+    component: ReservationComponent,
+    title: 'title.reservation'
   },
   {
     path: '**',
