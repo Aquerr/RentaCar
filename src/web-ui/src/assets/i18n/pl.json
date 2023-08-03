@@ -79,6 +79,14 @@
         "sign-up-success": "Zarejestrowano pomyślnie. Na wskazny email został wysłany link do aktywacji konta w aplikacji.",
         "sign-up-error": "Rejestracja nie powiodła się. Spróbuj ponownie."
       }
+    },
+    "searcher": {
+      "labels": {
+        "pickup-locations": "Podaj miasto, lotnisko lub adres"
+      },
+      "buttons": {
+        "search": "Szukaj"
+      }
     }
   },
   "app": {

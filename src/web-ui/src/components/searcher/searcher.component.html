@@ -3,9 +3,9 @@
     <div class='searcher'>
       <div class='input-calendar-container'>
         <div class='input-container'>
-          <p-dropdown [options]='places' [(ngModel)]='selectedPlace' optionLabel='name'
+          <p-dropdown [options]='pickupLocations' [(ngModel)]='selectedPickupLocation' optionLabel='displayName'
                       [style]="{'minWidth':'100%'}"
-                      placeholder='Podaj miasto, lotnisko lub adres'></p-dropdown>
+                      placeholder="{{ 'components.searcher.labels.pickup-locations' | translate}}"></p-dropdown>
         </div>
         <div class='calendars-container'>
           <p-calendar [(ngModel)]='dateFrom' dateFormat='dd.mm.yy' [maxDate]='dateTo'></p-calendar>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class='button-container'>
-        <button pButton>Szukaj</button>
+        <button pButton>{{ 'components.searcher.buttons.search' | translate}}</button>
       </div>
     </div>
   </div>
