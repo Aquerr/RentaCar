@@ -1,0 +1,71 @@
+.vehicle-card {
+  max-width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.title-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 1px solid #d2d0d0;
+  margin: auto;
+}
+
+.title-row span:hover {
+  cursor: pointer;
+}
+
+.car-name {
+  display: inherit;
+  justify-content: left;
+  font-weight: bold;
+}
+
+.price {
+  display: inherit;
+  justify-content: right;
+}
+
+.car-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.car-row-column-first, .car-row-column-second {
+  border-right: 1px solid #d2d0d0;
+}
+
+.car-row-column-first, .car-row-column-second, .car-row-column-third {
+  width: 100%;
+  height: 95%;
+  display: inherit;
+  margin: auto;
+  padding: 10px;
+}
+
+.equipment-element {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  margin: auto;
+}
+
+.equipment-element fa-icon {
+  width: 20px;
+}
+
+.list {
+  margin-bottom: 10px;
+}
+
+button {
+  text-align: center;
+  margin: auto;
+}

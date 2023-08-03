@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PickupLocationApiService } from '../../services/api/pickup-location-api.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { DateService } from '../../services/date.service';
 
 @Component({
   selector: 'searcher',
@@ -16,7 +18,9 @@ export class SearcherComponent implements OnInit, OnDestroy {
   pickupLocations: PickupLocationDropdown[] = [];
   selectedPickupLocation: PickupLocationDropdown | null = null;
 
-  constructor(private apiService: PickupLocationApiService) {
+  constructor(private apiService: PickupLocationApiService,
+              private router: Router,
+              private dateService: DateService) {
   }
 
   ngOnInit() {
@@ -42,12 +46,23 @@ export class SearcherComponent implements OnInit, OnDestroy {
     });
   }
 
+  searchVehicles() {
+    const dateParam = this.prepareDateParam();
+    this.router.navigate(['vehicle-list', dateParam]);
+  }
+
   setStartDates() {
     this.dateTo.setDate(this.dateTo.getDate() + 7);
     this.dateFrom.setMinutes(0);
     this.hourFrom.setMinutes(0);
     this.dateTo.setMinutes(0);
     this.hourTo.setMinutes(0);
+  }
+
+  prepareDateParam() {
+    const dateFrom = this.dateService.convertDateToLocalDate(this.dateFrom);
+    const dateTo = this.dateService.convertDateToLocalDate(this.dateTo);
+    return 'dates?' + dateFrom + '&' + dateTo;
   }
 }
 

@@ -4,7 +4,8 @@
     "sign-in": "Sign in",
     "sign-up": "Sign up",
     "not-found": "Page not found",
-    "profile-edit": "Profile edit"
+    "profile-edit": "Profile edit",
+    "vehicle-list": "Searching vehicles"
   },
   "components": {
     "authentication": {
@@ -87,6 +88,31 @@
       "buttons": {
         "search": "Search"
       }
+    },
+    "vehicle-card": {
+      "labels": {
+        "show-details": "Show vehicle details",
+        "ac": "Air conditioning",
+        "insurance": "Service, Tires, Insurance in price",
+        "flexible": "Flexible everyday",
+        "no-extra-payment": "No extra payments",
+        "assistance": "Assistance 24/7",
+        "full-led": "Full led lights",
+        "leather": "Leather seats",
+        "multi-steering-wheel": "Multifunctional steering wheel",
+        "bluetooth": "Bluetooth",
+        "gas": "Gas",
+        "diesel": "Diesel",
+        "hybrid": "Hybrid",
+        "electric": "Electric",
+        "avg-fuel-consumption": "l/100km average consumption"
+      },
+      "buttons": {
+        "reserve": "Reserve vehicle"
+      }
+    },
+    "vehicle-list": {
+      "no-vehicles": "No vehicles in selected term"
     }
   },
   "app": {

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { UserProfile } from '../models/user-profile.model';
 import { LanguageService } from '../services/language.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { FontAwesomeLibraryService } from '../services/font-awesome-library.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private fontAwesomeLibrary: FontAwesomeLibraryService
   ) {
   }
 
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authenticationService.setUserOnAppInitDispatch();
     this.startUserSubscription();
     this.isMobileView();
+    this.fontAwesomeLibrary.setIcons();
   }
 
   ngOnDestroy() {

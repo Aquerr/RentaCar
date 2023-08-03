@@ -1,0 +1,11 @@
+<div class='container' *ngIf='vehicles.length > 0; else noVehicles'>
+  <ng-container *ngFor='let vehicle of vehicles'>
+    <vehicle-card [vehicle]='vehicle' [lang]='lang' (reserveVehicleEvent)='reserveVehicle($event)'></vehicle-card>
+  </ng-container>
+</div>
+
+<ng-template #noVehicles>
+  <div class='container'>
+    {{ 'components.vehicle-list.no-vehicles' | translate}}
+  </div>
+</ng-template>

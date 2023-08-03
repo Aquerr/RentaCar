@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
@@ -19,6 +19,7 @@ import { CustomPageTitleStrategy } from '../strategy/custom-page-title.strategy'
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   exports: [
@@ -35,21 +36,25 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
     TooltipModule,
     BrowserModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    FontAwesomeModule
   ],
   providers: [
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppInterceptor,
-      multi: true,
+      multi: true
     },
-    { provide: TitleStrategy,
-      useClass: CustomPageTitleStrategy },
+    {
+      provide: TitleStrategy,
+      useClass: CustomPageTitleStrategy
+    },
     LoginGuard,
     AnonymousGuard,
+    DatePipe,
     provideEnvironmentNgxMask()
-  ],
+  ]
 })
 export class SharedModule {
 }

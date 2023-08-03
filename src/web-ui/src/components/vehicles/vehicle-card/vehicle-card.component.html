@@ -1,0 +1,77 @@
+<div class='vehicle-card' *ngIf='vehicle'>
+  <div class='title-row'>
+    <div class='car-name'>
+      <span pTooltip="{{ 'components.vehicle-card.labels.show-details' | translate}}"
+            (click)='showDetails()'>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</span>
+    </div>
+
+    <div class='price'>
+      {{calculateCurrency(vehicle.pricePerDay)}} {{lang === 'pl' ? 'ZŁ' : 'USD'}}
+    </div>
+  </div>
+
+  <div class='car-row'>
+    <div class='car-row-column-first'>
+      <img alt='' src='assets/images/{{vehicle.photoUrl}}' />
+    </div>
+
+    <div class='car-row-column-second'>
+      <div class='equipment-element' *ngIf='vehicle.engine.type'>
+        <fa-icon icon='oil-can'></fa-icon>
+        <ng-container *ngIf='vehicle.engine.type === EngineType.GAS'>
+          <span> {{ 'components.vehicle-card.labels.gas' | translate}}</span>
+        </ng-container>
+        <ng-container *ngIf='vehicle.engine.type === EngineType.DIESEL'>
+          <span>{{ 'components.vehicle-card.labels.diesel' | translate}}</span>
+        </ng-container>
+        <ng-container *ngIf='vehicle.engine.type === EngineType.HYBRID'>
+          <span>{{ 'components.vehicle-card.labels.hybrid' | translate}}</span>
+        </ng-container>
+        <ng-container *ngIf='vehicle.engine.type === EngineType.ELECTRIC'>
+          <span>{{ 'components.vehicle-card.labels.electric' | translate}}</span>
+        </ng-container>
+      </div>
+      <div class='equipment-element' *ngIf='vehicle.engine.avgFuelConsumption'>
+        <fa-icon icon='gas-pump'></fa-icon>
+        <span>{{vehicle.engine.avgFuelConsumption}} {{ 'components.vehicle-card.labels.avg-fuel-consumption' | translate}}</span>
+      </div>
+      <div class='equipment-element' *ngIf='vehicle.equipment.ac'>
+        <fa-icon icon='fan'></fa-icon>
+        <span>{{ 'components.vehicle-card.labels.ac' | translate}}</span>
+      </div>
+      <div class='equipment-element' *ngIf='vehicle.equipment.ledFrontLights && vehicle.equipment.ledRearLights'>
+        <fa-icon icon='lightbulb'></fa-icon>
+        <span>{{ 'components.vehicle-card.labels.full-led' | translate}}</span>
+      </div>
+      <div class='equipment-element' *ngIf='vehicle.equipment.leatherSeats'>
+        <fa-icon icon='chair'></fa-icon>
+        <span>{{ 'components.vehicle-card.labels.leather' | translate}}</span>
+      </div>
+      <div class='equipment-element' *ngIf='vehicle.equipment.multifunctionalSteeringWheel'>
+        <fa-icon icon='dharmachakra'></fa-icon>
+        <span>{{ 'components.vehicle-card.labels.multi-steering-wheel' | translate}}</span>
+      </div>
+    </div>
+
+    <div class='car-row-column-third'>
+      <div class='list'>
+        <li>
+          {{ 'components.vehicle-card.labels.insurance' | translate}}
+        </li>
+        <li>
+          {{ 'components.vehicle-card.labels.flexible' | translate}}
+        </li>
+        <li>
+          {{ 'components.vehicle-card.labels.no-extra-payment' | translate}}
+        </li>
+        <li>
+          {{ 'components.vehicle-card.labels.assistance' | translate}}
+        </li>
+      </div>
+      <button pButton
+              (click)='reserveVehicle(vehicle)'>{{ 'components.vehicle-card.buttons.reserve' | translate}}</button>
+    </div>
+  </div>
+
+
+</div>
