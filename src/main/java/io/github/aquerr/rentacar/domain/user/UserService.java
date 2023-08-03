@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.domain.user;
 
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
+import io.github.aquerr.rentacar.domain.activation.AccountActivationTokenRequester;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
@@ -26,23 +27,24 @@ public class UserService {
     private final UserCredentialsConverter userCredentialsConverter;
     private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
+    private final AccountActivationTokenRequester accountActivationTokenRequester;
 
     @Transactional
-    public ActivationTokenDto register(UserRegistration userRegistration)
+    public void register(UserRegistration userRegistration)
     {
-        UserCredentialsEntity userCredentialsEntity = this.userCredentialsRepository.findByUsernameOrEmail(userRegistration.getUsername(), userRegistration.getEmail());
-        if (userCredentialsEntity != null)
+        UserCredentialsEntity existingUserCreds = this.userCredentialsRepository.findByUsernameOrEmail(userRegistration.getUsername(), userRegistration.getEmail());
+        if (existingUserCreds != null)
             throw new UsernameOrEmailAlreadyUsedException();
 
-        UserCredentialsEntity rentaCarUserCredentialsEntity = UserCredentialsEntity.builder()
+        UserCredentialsEntity userCredentialsEntity = UserCredentialsEntity.builder()
                 .username(userRegistration.getUsername())
                 .email(userRegistration.getEmail())
                 .password(passwordEncoder.encode(userRegistration.getPassword()))
                 .locked(false)
                 .verified(false)
                 .build();
-        rentaCarUserCredentialsEntity = this.userCredentialsRepository.save(rentaCarUserCredentialsEntity);
-        return accountActivationService.requestActivationToken(rentaCarUserCredentialsEntity);
+        userCredentialsEntity = this.userCredentialsRepository.save(userCredentialsEntity);
+        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(), userCredentialsEntity.getEmail());
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)

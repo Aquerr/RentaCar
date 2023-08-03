@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: rabbitmq:3.12.2-management-alpine
+    container_name: 'rentacar-rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./.docker-runtime-data/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./.docker-runtime-data/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rentacar
+      - RABBITMQ_DEFAULT_PASS=rentacar_pass
+
+networks:
+  rabbitmq:
+    driver: bridge

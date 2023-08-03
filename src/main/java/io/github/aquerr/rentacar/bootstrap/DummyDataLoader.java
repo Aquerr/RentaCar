@@ -1,6 +1,5 @@
 package io.github.aquerr.rentacar.bootstrap;
 
-import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
@@ -59,8 +58,7 @@ public class DummyDataLoader implements CommandLineRunner
         profileRepository.save(userProfileEntity1);
         log.info("Created dummy verified profile: {}", userCredentialsEntity1);
 
-        UserRegistration userRegistration = new UserRegistration("tester2", "testujemy@omg.com", "testujemy");
-        ActivationTokenDto activationTokenDto = userService.register(userRegistration);
-        log.info("Created dummy not-verified profile: {}, activation-token: {}", userRegistration, activationTokenDto);
+        UserRegistration userRegistration = new UserRegistration("tester2", "nerdianin@gmail.com", "testujemy");
+        userService.register(userRegistration);
     }
 }
