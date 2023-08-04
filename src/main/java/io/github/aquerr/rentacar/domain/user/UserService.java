@@ -1,6 +1,6 @@
 package io.github.aquerr.rentacar.domain.user;
 
-import io.github.aquerr.rentacar.application.lang.LangCode;
+import io.github.aquerr.rentacar.application.lang.RequestLocaleExtractor;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationTokenRequester;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
@@ -29,6 +29,7 @@ public class UserService {
     private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
     private final AccountActivationTokenRequester accountActivationTokenRequester;
+    private final RequestLocaleExtractor requestLocaleExtractor;
 
     @Transactional
     public void register(UserRegistration userRegistration)
@@ -45,7 +46,11 @@ public class UserService {
                 .verified(false)
                 .build();
         userCredentialsEntity = this.userCredentialsRepository.save(userCredentialsEntity);
-        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(), userCredentialsEntity.getEmail(), LangCode.POLISH);
+
+        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(),
+                userCredentialsEntity.getEmail(),
+                requestLocaleExtractor.getPreferredLangCode()
+        );
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
