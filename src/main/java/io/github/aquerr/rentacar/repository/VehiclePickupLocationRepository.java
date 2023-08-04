@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Set;
 
-public interface VehiclePickupLocationRepository extends JpaRepository<VehiclePickupLocationEntity, Long>
+public interface VehiclePickupLocationRepository extends JpaRepository<VehiclePickupLocationEntity, Integer>
 {
     List<VehiclePickupLocationEntity> findAllByLangCodeIn(Set<String> langCodes);
 }

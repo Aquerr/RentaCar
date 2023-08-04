@@ -1,5 +1,7 @@
+CREATE SEQUENCE user_profile_seq AS BIGINT START WITH 1 INCREMENT BY 5;
+
 CREATE TABLE user_profile (
-   id IDENTITY NOT NULL PRIMARY KEY,
+   id BIGSERIAL PRIMARY KEY,
    credentials_id BIGINT NOT NULL UNIQUE,
    first_name VARCHAR(100),
    last_name VARCHAR(100),
@@ -12,5 +14,3 @@ CREATE TABLE user_profile (
    country VARCHAR(64),
    FOREIGN KEY (credentials_id) REFERENCES user_credentials (id)
 );
-
-CREATE SEQUENCE user_profile_seq AS BIGINT START WITH 1 INCREMENT BY 5;
