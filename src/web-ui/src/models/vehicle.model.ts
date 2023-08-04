@@ -8,7 +8,6 @@ export interface Vehicle {
   engine: Engine;
   equipment: Equipment;
   category: Category;
-  transmission: Transmission;
   pricePerDay: number;
   photoUrl: string;
 }
@@ -21,7 +20,10 @@ export interface Body {
 export interface Engine {
   capacity: number;
   type: EngineType;
+  power: number;
+  torque: number;
   avgFuelConsumption: number;
+  transmission: Transmission;
 }
 
 export interface Equipment {

@@ -67,7 +67,10 @@ export class VehicleListComponent implements OnInit, OnDestroy {
         engine: {
           capacity: 1899,
           type: EngineType.GAS,
-          avgFuelConsumption: 5.7
+          avgFuelConsumption: 5.7,
+          power: 223,
+          torque: 554,
+          transmission: Transmission.MANUAL
         },
         equipment: {
           ac: true,
@@ -81,8 +84,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
           leatherSeats: true,
           multifunctionalSteeringWheel: true
         },
-        category: Category.A,
-        transmission: Transmission.MANUAL
+        category: Category.A
 
       } as Vehicle,
       {
@@ -100,7 +102,10 @@ export class VehicleListComponent implements OnInit, OnDestroy {
         engine: {
           capacity: 1899,
           type: EngineType.HYBRID,
-          avgFuelConsumption: 5.7
+          avgFuelConsumption: 5.7,
+          power: 211,
+          torque: 500,
+          transmission: Transmission.AUTOMATIC
         },
         equipment: {
           ac: false,
@@ -114,8 +119,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
           leatherSeats: true,
           multifunctionalSteeringWheel: true
         },
-        category: Category.B,
-        transmission: Transmission.AUTOMATIC
+        category: Category.B
       } as Vehicle
     ];
     this.subscriptions.add(this.vehicleApiService.getVehiclesAvailable(this.dateFrom, this.dateTo).subscribe({
