@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.domain.user;
 
+import io.github.aquerr.rentacar.application.lang.LangCode;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationTokenRequester;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
@@ -44,7 +45,7 @@ public class UserService {
                 .verified(false)
                 .build();
         userCredentialsEntity = this.userCredentialsRepository.save(userCredentialsEntity);
-        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(), userCredentialsEntity.getEmail());
+        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(), userCredentialsEntity.getEmail(), LangCode.POLISH);
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
