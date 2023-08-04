@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.application.config;
 
+import io.github.aquerr.rentacar.application.exception.MessageSendException;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.amqp.core.MessageProperties;
@@ -15,9 +16,16 @@ public class RabbitMessageSender
 
     private String exchange = "";
 
-    public void send(String routingKey, Object object)
+    public void send(String routingKey, Object object) throws MessageSendException
     {
-        this.rabbitTemplate.send(exchange, routingKey, jackson2JsonMessageConverter.toMessage(object, prepareMessageProperties()));
+        try
+        {
+            this.rabbitTemplate.send(exchange, routingKey, jackson2JsonMessageConverter.toMessage(object, prepareMessageProperties()));
+        }
+        catch (Exception exception)
+        {
+            throw new MessageSendException(exception);
+        }
     }
 
     private MessageProperties prepareMessageProperties()

@@ -27,7 +27,7 @@ public class RentaCarUserDetailsService implements UserDetailsService
     @Transactional
     public AuthenticatedUser loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail usernameOrEmail = new io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail(username);
+        UserCredentials.UsernameOrEmail usernameOrEmail = new UserCredentials.UsernameOrEmail(username);
 
         UserCredentialsEntity userCredentialsEntity = null;
         if (usernameOrEmail.isEmail())

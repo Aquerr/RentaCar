@@ -23,16 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @AllArgsConstructor
-public class AuthRestController {
-
+public class AuthRestController
+{
     private final JwtService jwtService;
     private final AuthenticationFacade authenticationFacade;
     private final ProfileService profileService;
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<JwtTokenResponse> authenticate(@RequestBody UserCredentials userCredentials) {
-        return ResponseEntity.ok(authenticationFacade.authenticate(userCredentials));
+    public ResponseEntity<JwtTokenResponse> authenticate(@RequestBody UserCredentials userCredentials)
+    {
+        return ResponseEntity.ok(JwtTokenResponse.of(authenticationFacade.authenticate(userCredentials)));
     }
 
     @GetMapping("/myself")

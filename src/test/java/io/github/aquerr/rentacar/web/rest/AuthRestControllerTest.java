@@ -3,12 +3,12 @@ package io.github.aquerr.rentacar.web.rest;
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticationFilter;
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
+import io.github.aquerr.rentacar.application.security.JwtToken;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.util.TestResourceUtils;
-import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
@@ -59,7 +59,7 @@ class AuthRestControllerTest
     {
         // given
         UserCredentials userCredentials = new UserCredentials(new UserCredentials.UsernameOrEmail("rentac.testar@tst.pl"), "rentacar", false);
-        JwtTokenResponse expectedResponse = new JwtTokenResponse("dasiemi23io12iadiomicmaicmaoisme21m39adkacmiozmdoiasm", "admin", List.of("EDIT_CARS"));
+        JwtToken expectedResponse = JwtToken.of("dasiemi23io12iadiomicmaicmaoisme21m39adkacmiozmdoiasm", "admin", Set.of("EDIT_CARS"));
         given(authenticationFacade.authenticate(userCredentials)).willReturn(expectedResponse);
 
 
