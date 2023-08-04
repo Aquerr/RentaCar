@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.application.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.aquerr.rentacar.application.lang.AcceptedLanguageLocaleMapper;
 import io.github.aquerr.rentacar.domain.ApiException;
 import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.web.rest.RestErrorResponse;
@@ -10,11 +11,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 @AllArgsConstructor
 @Order(1)
@@ -22,10 +26,11 @@ import java.io.IOException;
 public class ApiExceptionFilter extends OncePerRequestFilter
 {
     private final ObjectMapper objectMapper;
+    private final AcceptedLanguageLocaleMapper acceptedLanguageLocaleMapper;
     private final MessageService messageService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException {
         try
         {
             filterChain.doFilter(request, response);
@@ -36,7 +41,8 @@ public class ApiExceptionFilter extends OncePerRequestFilter
             {
                 ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
 
-                RestErrorResponse restErrorResponse = RestErrorResponse.of(apiException.status().value(), messageService.resolveMessage(apiException.messageKey()));
+                List<Locale> locales = acceptedLanguageLocaleMapper.toLocales(getAcceptedLanguageHeader(request));
+                RestErrorResponse restErrorResponse = RestErrorResponse.of(apiException.status().value(), messageService.resolveMessage(apiException.messageKey(), locales));
                 response.setStatus(restErrorResponse.getStatus());
                 response.getWriter().write(objectMapper.writeValueAsString(restErrorResponse));
             }
@@ -46,5 +52,10 @@ public class ApiExceptionFilter extends OncePerRequestFilter
                 response.getWriter().write(exception.getMessage());
             }
         }
+    }
+
+    private String getAcceptedLanguageHeader(HttpServletRequest httpServletRequest)
+    {
+        return httpServletRequest.getHeader(HttpHeaders.ACCEPT_LANGUAGE);
     }
 }
