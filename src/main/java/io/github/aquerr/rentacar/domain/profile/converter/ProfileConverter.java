@@ -21,6 +21,7 @@ public class ProfileConverter {
                 .zipCode(profile.getZipCode())
                 .street(profile.getStreet())
                 .phoneNumber(profile.getPhoneNumber())
+                .iconUrl(profile.getIconUrl())
                 .build();
     }
 
@@ -39,6 +40,7 @@ public class ProfileConverter {
                 .zipCode(profileDto.getZipCode())
                 .street(profileDto.getStreet())
                 .phoneNumber(profileDto.getPhoneNumber())
+                .iconUrl(profileDto.getIconUrl())
                 .build();
     }
 }

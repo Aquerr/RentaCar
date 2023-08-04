@@ -57,4 +57,7 @@ public class UserProfileEntity
 
     @Column(name = "street", nullable = true)
     private String street;
+
+    @Column(name = "icon_url", nullable = true)
+    private String iconUrl;
 }

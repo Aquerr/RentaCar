@@ -18,4 +18,5 @@ public class UserProfile
     private String city;
     private String zipCode;
     private String street;
+    private String iconUrl;
 }

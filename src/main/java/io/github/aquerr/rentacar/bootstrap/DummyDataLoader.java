@@ -2,8 +2,8 @@ package io.github.aquerr.rentacar.bootstrap;
 
 import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.UserService;
-import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.Authority;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserRegistration;
 import io.github.aquerr.rentacar.repository.ProfileRepository;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
@@ -54,7 +54,8 @@ public class DummyDataLoader implements CommandLineRunner
                 LocalDate.of(1999, 6, 15),
                 "Testów",
                 "15551",
-                "Wymyślna 42");
+                "Wymyślna 42",
+                "user/1/photo.jpg");
         profileRepository.save(userProfileEntity1);
         log.info("Created dummy verified profile: {}", userCredentialsEntity1);
 
