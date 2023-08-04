@@ -21,7 +21,7 @@ import java.util.Set;
  * Populates database with some dummy data.
  */
 @Component
-@Profile({"dummy-data", "!prod"})
+@Profile({"dummy-data"})
 @AllArgsConstructor
 @Slf4j
 public class DummyDataLoader implements CommandLineRunner
@@ -58,7 +58,7 @@ public class DummyDataLoader implements CommandLineRunner
         profileRepository.save(userProfileEntity1);
         log.info("Created dummy verified profile: {}", userCredentialsEntity1);
 
-        UserRegistration userRegistration = new UserRegistration("tester2", "nerdianin@gmail.com", "testujemy");
+        UserRegistration userRegistration = new UserRegistration("tester2", "testing@test.com", "testujemy");
         userService.register(userRegistration);
     }
 }

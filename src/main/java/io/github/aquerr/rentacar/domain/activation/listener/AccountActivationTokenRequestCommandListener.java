@@ -28,9 +28,12 @@ public class AccountActivationTokenRequestCommandListener
 
         ActivationToken activationToken = accountActivationService.generateActivationToken(command.getCredentialsId());
 
-        this.activationLinkMailSender.send(new MailMessage(command.getEmail(),
-                "Account Activation",
-                MailType.ACCOUNT_ACTIVATION,
-                Map.of("activation_token", activationToken.getToken())));
+        this.activationLinkMailSender.send(MailMessage.builder()
+                        .to(command.getEmailTo())
+                        .subject("Account Activation")
+                        .type(MailType.ACCOUNT_ACTIVATION)
+                        .langCode(command.getLangCode())
+                        .properties(Map.of("activation_token", activationToken.getToken()))
+                .build());
     }
 }
