@@ -12,8 +12,13 @@ export class CommonEffects {
   showToast$ = createEffect(() =>
     this.actions$.pipe(
       ofType(showToast),
-      tap(({ messageKey: messageKey, toastType: toastType }) =>
-        this.toastService.createToast(this.getMessage(messageKey), toastType)
+      tap(({ messageKey: messageKey, message: message, toastType: toastType }) => {
+          if (messageKey) {
+            this.toastService.createToast(this.getMessage(messageKey), toastType);
+          } else {
+            this.toastService.createToast(message as string, toastType);
+          }
+        }
       )), { dispatch: false });
 
   goRoute$ = createEffect(() =>

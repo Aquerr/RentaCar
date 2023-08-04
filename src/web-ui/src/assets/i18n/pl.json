@@ -165,8 +165,7 @@
   "services": {
     "sign-in": {
       "success": "Zalogowano pomyślnie",
-      "error": "Logowanie nie powiodło się",
-      "authoritiesError": "Konto nie jest aktywne. Aktywuj konto poprzez wiadomość e-mail, który został do Ciebie wysłany przy rejestracji konta."
+      "error": "Logowanie nie powiodło się"
     },
     "log-out": {
       "success": "Wylogowano pomyślnie",
