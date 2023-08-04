@@ -6,7 +6,18 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px auto;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin: auto;
+  gap: 5px;
+}
+
+.title {
+  font-weight: bold;
 }
 
 .btn {
@@ -21,4 +32,11 @@ h3 {
 
 .btn:hover {
   background: linear-gradient(rgba(23, 22, 22, 0.6), rgba(65, 62, 62, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
+}
+
+::ng-deep {
+  .p-checkbox .p-checkbox-box.p-highlight {
+    border-color: rgba(23, 22, 22, 0.6);
+    background: rgba(23, 22, 22, 0.6);
+  }
 }

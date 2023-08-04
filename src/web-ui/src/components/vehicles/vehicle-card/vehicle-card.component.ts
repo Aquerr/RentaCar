@@ -17,8 +17,7 @@ export class VehicleCardComponent {
 
   showDetails() {
     this.dialogService.open(VehicleDetailsComponent, {
-      data: Object.assign({}, this.vehicle),
-      width: '600px'
+      data: Object.assign({}, this.vehicle)
     });
   }
 
