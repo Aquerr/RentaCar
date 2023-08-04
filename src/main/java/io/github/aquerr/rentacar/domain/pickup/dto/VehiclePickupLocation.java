@@ -7,7 +7,7 @@ import lombok.Value;
 @Builder
 public class VehiclePickupLocation
 {
-    Long id;
+    Integer id;
     String name;
     String city;
     float latitude;
