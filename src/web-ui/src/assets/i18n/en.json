@@ -118,6 +118,27 @@
       "no-vehicles": "No vehicles in selected term"
     },
     "vehicle-details": {
+      "labels": {
+        "production-year": "Production year:",
+        "amount-of-seats": "Amount of seats:",
+        "category": "Category:",
+        "color": "Color:",
+        "rims-inch": "Rims inch:",
+        "engine-type": "Engine type:",
+        "avg-fuel-consumption": "Avg fuel consumption l/100km:",
+        "engine-power": "Engine power:",
+        "engine-capacity": "Engine capacity:",
+        "engine-transmission": "Transmission:",
+        "ac": "AC",
+        "pdc-front": "Front PDC:",
+        "pdc-rear": "Rear PDC:",
+        "bluetooth": "Bluetooth:",
+        "led-front": "Front LED lights:",
+        "led-rear": "Rear LED lights:",
+        "xenon-front": "Front XENON lights:",
+        "leather": "Leather seats:",
+        "multi-steering-wheel": "Multifunctional steering wheel:"
+      },
       "buttons": {
         "close": "Close"
       }
@@ -205,5 +226,25 @@
     "today": "Today",
     "weekHeader": "Week",
     "firstDayOfWeek": 1
+  },
+  "additional": {
+    "engine-type": {
+      "gas": "Gas",
+      "diesel": "Diesel",
+      "hybrid": "Hybrid",
+      "electirc": "Electric"
+    },
+    "transmission": {
+      "manual": "Manual",
+      "automatic": "Automatic"
+    },
+    "colors": {
+      "white": "White",
+      "red": "Red",
+      "blue": "Blue",
+      "green": "Green",
+      "yellow": "Yellow",
+      "black": "Black"
+    }
   }
 }

@@ -17,6 +17,10 @@ export class VehicleDetailsComponent implements OnInit {
     this.vehicle = this.config.data;
   }
 
+  getTranslation(value: string, category: string) {
+    return 'additional' + '.' + category + '.' + value.toLowerCase();
+  }
+
   close() {
     this.ref.close();
   }

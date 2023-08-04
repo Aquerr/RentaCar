@@ -118,6 +118,27 @@
       "no-vehicles": "Brak pojazdów w wybranym terminie"
     },
     "vehicle-details": {
+      "labels": {
+        "production-year": "Rok produkcji:",
+        "amount-of-seats": "Liczba miejsc:",
+        "category": "Kategoria:",
+        "color": "Kolor:",
+        "rims-inch": "Rozmiar felg:",
+        "engine-type": "Rodzaj silnika:",
+        "avg-fuel-consumption": "Średnie spalanie l/100km:",
+        "engine-power": "Moc silnika:",
+        "engine-capacity": "Pojemnośc silnika:",
+        "engine-transmission": "Skrzynia biegów:",
+        "ac": "Klimatyzacja",
+        "pdc-front": "Czujniki parkowania przód:",
+        "pdc-rear": "Czujniki parkowania tył:",
+        "bluetooth": "Bluetooth:",
+        "led-front": "Światła LED przód:",
+        "led-rear": "Światła LED tył:",
+        "xenon-front": "Światła XENON przód:",
+        "leather": "Skórzane fotele:",
+        "multi-steering-wheel": "Kierownica multifunkcyjna:"
+      },
       "buttons": {
         "close": "Zamknij"
       }
@@ -205,5 +226,25 @@
     "today": "Dziś",
     "weekHeader": "Week",
     "firstDayOfWeek": 1
+  },
+  "additional": {
+    "engine-type": {
+      "gas": "Benzyna",
+      "diesel": "Diesel",
+      "hybrid": "Hybryda",
+      "electirc": "Elektryk"
+    },
+    "transmission": {
+      "manual": "Ręczna",
+      "automatic": "Automatyczna"
+    },
+    "colors": {
+      "white": "Biały",
+      "red": "Czerwony",
+      "blue": "Niebieski",
+      "green": "Zielony",
+      "yellow": "Żołty",
+      "black": "Czarny"
+    }
   }
 }
