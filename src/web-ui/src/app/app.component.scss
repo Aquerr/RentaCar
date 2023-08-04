@@ -27,6 +27,9 @@
 }
 
 .nav {
+  display: flex;
+  align-items: center;
+
   a {
     position: relative;
     font-size: 1rem;
@@ -54,7 +57,7 @@
   }
 
   .btn {
-    width: 110px;
+    width: auto;
     height: 45px;
     background: transparent;
     text-transform: uppercase;
