@@ -18,12 +18,12 @@ body {
 
 /* App defined colors */
 :root {
---main-color-icon: white;
---top-nav-color: #222831;
---main-font: #eeeeee;
---second-color: #0092ca;
---third-color: #393e46;
---gold: #d6c78e;
+  --main-color-icon: white;
+  --top-nav-color: #222831;
+  --main-font: #eeeeee;
+  --second-color: #0092ca;
+  --third-color: #393e46;
+  --gold: #d6c78e;
 }
 
 body {
@@ -40,6 +40,7 @@ h4 {
   align-items: center;
   justify-content: center;
 }
+
 .btn {
   width: 120px;
   height: 45px;
@@ -49,12 +50,22 @@ h4 {
   outline: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1 rem;
+  font-size: 1rem;
   color: var(--main-font);
   margin-left: 30px;
   transition: 0.3s;
 }
+
 .btn:hover {
   background: var(--main-font);
   color: var(--third-color);
+}
+
+.p-dialog .p-dialog-header {
+  display: none !important;
+}
+
+.p-dialog-content {
+  padding: 30px !important;
+  border-radius: 5px;
 }
