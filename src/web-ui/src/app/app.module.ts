@@ -23,6 +23,9 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ReservationComponent } from '../components/reservation/reservation.component';
 import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
+import {
+  ActivationAccountComponent
+} from '../components/authentication/activation-account/activation-account.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/
     ContactComponent,
     FooterComponent,
     ReservationComponent,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
+    ActivationAccountComponent
   ],
   imports: [
     BrowserModule,

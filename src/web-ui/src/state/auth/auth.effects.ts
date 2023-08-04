@@ -17,7 +17,6 @@ import { ToastService, ToastType } from '../../services/toast.service';
 import { AuthenticationRequest, AuthenticationService } from '../../services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { goRoute, showToast } from '../common/common.action';
-import * as _ from 'lodash';
 
 @Injectable()
 export class AuthEffects {
@@ -27,19 +26,18 @@ export class AuthEffects {
       ofType(signIn),
       mergeMap((request: AuthenticationRequest) => this.apiService.signinUser(request)
       .pipe(
-        mergeMap((response) => {
-          const actions = [];
-          if (_.isEmpty(response.authorities)) {
-            actions.push(showToast({ messageKey: 'services.sign-in.authoritiesError', toastType: ToastType.WARN }));
-          } else {
-            actions.push(saveToken({ jwt: response.jwt, rememberMe: request.rememberMe }));
-            actions.push(setAuthorities({ authorities: response.authorities }));
-            actions.push(getMyself());
+        mergeMap((response) => [
+          saveToken({ jwt: response.jwt, rememberMe: request.rememberMe }),
+          setAuthorities({ authorities: response.authorities }),
+          getMyself()
+        ]),
+        catchError((response: any) => {
+            if (response.error.status === 403) {
+              return of(showToast({ messageKey: null, message: response.error.message, toastType: ToastType.ERROR }));
+            } else {
+              return of(showToast({ messageKey: 'services.sign-in.error', toastType: ToastType.ERROR }));
+            }
           }
-          return actions;
-        }),
-        catchError(() =>
-          of(showToast({ messageKey: 'services.sign-in.error', toastType: ToastType.ERROR }))
         )
       ))
     ));

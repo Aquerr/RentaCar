@@ -6,7 +6,8 @@
     "not-found": "Page not found",
     "profile-edit": "Profile edit",
     "vehicle-list": "Searching vehicles",
-    "reservation": "Reservation"
+    "reservation": "Reservation",
+    "activation": "Account activation"
   },
   "components": {
     "authentication": {
@@ -142,6 +143,12 @@
       "buttons": {
         "close": "Close"
       }
+    },
+    "activation-account": {
+      "toasts": {
+        "success": "The account has been activated. You can log in.",
+        "error": "The token has expired. Please contact the application administrator to activate your account."
+      }
     }
   },
   "app": {
@@ -158,8 +165,7 @@
   "services": {
     "sign-in": {
       "success": "Signed in succeed",
-      "error": "Error while signing in",
-      "authoritiesError": "The account is not active. Activate your account via the e-mail that was sent to you when you registered your account."
+      "error": "Error while signing in"
     },
     "log-out": {
       "success": "Logged out succeed",
