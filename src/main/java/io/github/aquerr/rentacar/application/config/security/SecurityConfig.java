@@ -51,7 +51,7 @@ public class SecurityConfig {
                 requests.requestMatchers("/api/v1/users/register").permitAll();
                 requests.requestMatchers("/api/v1/pickup-locations").permitAll();
                 requests.requestMatchers("/api/v1/auth").permitAll();
-                requests.requestMatchers("/api/v1/ws/**").permitAll();
+                requests.requestMatchers("/api/v1/auth/activation").permitAll();
                 requests.requestMatchers("/api/**").authenticated();
                 requests.requestMatchers("/static/**").permitAll();
                 requests.requestMatchers("/public/**").permitAll();
