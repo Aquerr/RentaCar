@@ -6,7 +6,8 @@
     "not-found": "Page not found",
     "profile-edit": "Profile edit",
     "vehicle-list": "Searching vehicles",
-    "reservation": "Reservation"
+    "reservation": "Reservation",
+    "activation": "Account activation"
   },
   "components": {
     "authentication": {
@@ -141,6 +142,12 @@
       },
       "buttons": {
         "close": "Close"
+      }
+    },
+    "activation-account": {
+      "toasts": {
+        "success": "The account has been activated. You can log in.",
+        "error": "The token has expired. Please contact the application administrator to activate your account."
       }
     }
   },

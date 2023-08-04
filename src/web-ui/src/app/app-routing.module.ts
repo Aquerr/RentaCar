@@ -10,6 +10,9 @@ import { SignUpComponent } from '../components/authentication/sign-up/sign-up.co
 import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ReservationComponent } from '../components/reservation/reservation.component';
+import {
+  ActivationAccountComponent
+} from '../components/authentication/activation-account/activation-account.component';
 
 const routes: Routes = [
   {
@@ -49,6 +52,11 @@ const routes: Routes = [
     path: 'reservation/:id',
     component: ReservationComponent,
     title: 'title.reservation'
+  },
+  {
+    path: 'activation-account',
+    component: ActivationAccountComponent,
+    title: 'title.activation'
   },
   {
     path: '**',

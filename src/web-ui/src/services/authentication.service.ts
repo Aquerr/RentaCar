@@ -64,3 +64,11 @@ export class AuthenticationRequest {
     this.rememberMe = rememberMe;
   }
 }
+
+export class ActivationRequest {
+  token: string;
+
+  constructor(token: string) {
+    this.token = token;
+  }
+}

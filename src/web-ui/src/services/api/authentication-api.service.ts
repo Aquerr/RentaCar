@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserProfile } from '../../models/user-profile.model';
 import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
-import { AuthenticationRequest } from '../authentication.service';
+import { ActivationRequest, AuthenticationRequest } from '../authentication.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthenticationApiService {
   private AUTH_URL = APP_BASE_URL + APP_V1_URL + '/auth';
@@ -14,6 +14,10 @@ export class AuthenticationApiService {
 
   public signinUser(request: AuthenticationRequest) {
     return this.http.post<JwtTokenResponse>(this.AUTH_URL, request);
+  }
+
+  public activate(request: ActivationRequest) {
+    return this.http.post<JwtTokenResponse>(`${this.AUTH_URL}/activation`, request);
   }
 
   public getMyself() {
