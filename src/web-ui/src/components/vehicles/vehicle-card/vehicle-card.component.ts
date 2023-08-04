@@ -17,7 +17,8 @@ export class VehicleCardComponent {
 
   showDetails() {
     this.dialogService.open(VehicleDetailsComponent, {
-      data: Object.assign({}, this.vehicle)
+      data: Object.assign({}, this.vehicle),
+      dismissableMask: true
     });
   }
 
