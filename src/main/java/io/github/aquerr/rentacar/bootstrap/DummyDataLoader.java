@@ -55,7 +55,7 @@ public class DummyDataLoader implements CommandLineRunner
                 "Testów",
                 "15551",
                 "Wymyślna 42",
-                "user/1/photo.jpg");
+                "1/photo.jpg");
         profileRepository.save(userProfileEntity1);
         log.info("Created dummy verified profile: {}", userCredentialsEntity1);
 

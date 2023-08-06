@@ -2,6 +2,19 @@
 
   <h3>{{'components.profile-edit.form.title' | translate}}</h3>
 
+  <div class='image-upload'>
+    <img alt=''
+         [src]='iconUrl'
+         pTooltip="{{'components.profile-edit.form.tooltips.icon-upload' | translate}}"
+         tooltipPosition='bottom'
+         (click)='openFileBrowser()' />
+    <input id='file-input' type='file'
+           accept='image/jpeg,image/png'
+           (change)='uploadFile($event)' />
+    <small *ngIf='iconUploaded'
+           class='p-error'>{{'components.profile-edit.form.errors.icon-not-saved' | translate}}</small>
+  </div>
+
   <div class='input-container'>
     <label for='firstName'>{{'components.profile-edit.form.label.firstName' | translate}}</label>
     <input pInputText id='firstName' formControlName='firstName' maxlength='255' />

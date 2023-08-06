@@ -8,4 +8,5 @@ export interface UserProfile {
   city: string;
   zipCode: string;
   street: string;
+  iconUrl: string;
 }

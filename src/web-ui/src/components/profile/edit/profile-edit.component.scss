@@ -19,3 +19,22 @@ label {
   color: grey;
   font-size: 12px;
 }
+
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-upload > input {
+  display: none;
+}
+
+.image-upload img {
+  height: 150px;
+  width: 150px;
+  cursor: pointer;
+  border-radius: 75px;
+}
