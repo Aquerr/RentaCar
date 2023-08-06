@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { UserProfile } from '../../../models/user-profile.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProfileEditFormService {
 
@@ -21,6 +21,7 @@ export class ProfileEditFormService {
       zipCode: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{2}[0-9]{3}')]),
       street: new FormControl(null, [Validators.required]),
       phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[0-9]{9}')]),
+      iconUrl: new FormControl(null, [])
     });
   }
 
@@ -34,9 +35,10 @@ export class ProfileEditFormService {
     this.getZipCodeControl(form).setValue(userProfile.zipCode);
     this.getStreetControl(form).setValue(userProfile.street);
     this.getPhoneNumberControl(form).setValue(userProfile.phoneNumber);
+    this.getIconUrlControl(form).setValue(userProfile.iconUrl);
   }
 
-  convertFormTouserProfile(form: FormGroup) {
+  convertFormToUserProfile(form: FormGroup) {
     return {
       id: this.getIdControl(form).value,
       firstName: this.getFirstNameControl(form).value,
@@ -47,6 +49,7 @@ export class ProfileEditFormService {
       zipCode: this.getZipCodeControl(form).value,
       street: this.getStreetControl(form).value,
       phoneNumber: this.getPhoneNumberControl(form).value,
+      iconUrl: this.getIconUrlControl(form).value
     } as UserProfile;
   }
 
@@ -84,5 +87,9 @@ export class ProfileEditFormService {
 
   getStreetControl(form: FormGroup): AbstractControl {
     return form.get('street') as AbstractControl;
+  }
+
+  getIconUrlControl(form: FormGroup): AbstractControl {
+    return form.get('iconUrl') as AbstractControl;
   }
 }

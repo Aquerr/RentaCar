@@ -55,12 +55,22 @@
           "zipCode": {
             "pattern": "Incorrect zip code format"
           },
-          "required": "This field is required"
+          "required": "This field is required",
+          "icon-not-saved": "The icon has not been saved. Please update your profile to save changes."
+        },
+        "tooltips": {
+          "icon-upload": "Click the upload icon below to upload a file."
         }
       },
-      "update": {
-        "success": "User profile has been updated successfully",
-        "error": "User profile has not been updated successfully"
+      "toasts": {
+        "update": {
+          "success": "User profile has been updated successfully",
+          "error": "User profile has not been updated successfully"
+        },
+        "image-update": {
+          "success": "Photo has been updated successfully",
+          "error": "Photo has not been updated successfully"
+        }
       }
     },
     "sign-up": {

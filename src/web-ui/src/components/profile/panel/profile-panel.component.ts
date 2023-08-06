@@ -1,18 +1,45 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { UserProfile } from '../../../models/user-profile.model';
 import { Router } from '@angular/router';
+import { ImageService, ImageType } from '../../../services/image.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'profile-panel',
   templateUrl: './profile-panel.component.html',
-  styleUrls: ['./profile-panel.component.scss'],
+  styleUrls: ['./profile-panel.component.scss']
 })
-export class ProfilePanelComponent {
+export class ProfilePanelComponent implements OnChanges, OnDestroy {
+  iconUrl = '';
   panelVisible = false;
+  subscription: Subscription = new Subscription();
   @Input() user: UserProfile | null = null;
   @Output() logoutEmitter = new EventEmitter<void>;
 
-  constructor(private eRef: ElementRef, private router: Router) {
+  constructor(private eRef: ElementRef,
+              private router: Router,
+              private imageService: ImageService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['user'].currentValue) {
+      this.getImage();
+    }
+  }
+
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   @HostListener('document:click', ['$event'])
@@ -36,4 +63,10 @@ export class ProfilePanelComponent {
     this.router.navigate(['profile-edit']).then(() => this.panelVisible = false);
   }
 
+  getImage() {
+    const iconUrl = this.user?.iconUrl;
+    this.subscription = this.imageService.getImagePath(iconUrl, ImageType.USER).subscribe({
+      next: (path) => this.iconUrl = path
+    });
+  }
 }

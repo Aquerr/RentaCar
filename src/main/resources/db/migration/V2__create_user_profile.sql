@@ -12,5 +12,6 @@ CREATE TABLE user_profile (
    zip_code VARCHAR(5),
    street VARCHAR(64),
    country VARCHAR(64),
+   icon_url VARCHAR(255),
    FOREIGN KEY (credentials_id) REFERENCES user_credentials (id)
 );

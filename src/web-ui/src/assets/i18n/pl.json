@@ -55,12 +55,22 @@
           "zipCode": {
             "pattern": "Niepoprawny format kodu pocztowego"
           },
-          "required": "To pole jest wymagane"
+          "required": "To pole jest wymagane",
+          "icon-not-saved": "Ikona nie została zapisana. Zaaktualizuj profil by zachować zmiany."
+        },
+        "tooltips": {
+          "icon-upload": "Kliknij ikonę żeby wgrać nowe zdjęcie."
         }
       },
-      "update": {
-        "success": "Profil użytkownika zaaktualizowany pomyślnie",
-        "error": "Nie udało zaaktualizować się profilu użytkownika"
+      "toasts": {
+        "update": {
+          "success": "Profil użytkownika zaaktualizowany pomyślnie",
+          "error": "Nie udało zaaktualizować się profilu użytkownika"
+        },
+        "image-update": {
+          "success": "Zdjęcie zaaktualizowany pomyślnie",
+          "error": "Nie udało zaaktualizować się zdjęcia"
+        }
       }
     },
     "sign-up": {

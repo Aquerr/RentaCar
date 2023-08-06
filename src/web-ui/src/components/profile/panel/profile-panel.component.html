@@ -1,5 +1,8 @@
-<button class='btn-nav' (click)='toggleProfilePanel()'><i
-  class='pi pi-user icon-button'></i>{{user?.firstName}} {{user?.lastName}}</button>
+<img alt=''
+     [src]='iconUrl'
+     (click)='toggleProfilePanel()'
+     [pTooltip]="user?.firstName + ' ' + user?.lastName"
+     tooltipPosition='left' />
 <div *ngIf='panelVisible' class='container'>
   <li (click)='navigateToProfileUpdate()'><i class='pi pi-user-edit'></i>Profil</li>
   <li (click)='emitLogoutRequest()'>
