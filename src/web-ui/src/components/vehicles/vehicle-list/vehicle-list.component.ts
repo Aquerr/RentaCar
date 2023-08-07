@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { VehicleApiService } from '../../../services/api/vehicle-api.service';
-import { Category, EngineType, Transmission, Vehicle } from '../../../models/vehicle.model';
+import { VehicleBasicData } from '../../../models/vehicle.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ReservationApiService } from '../../../services/api/reservation-api.service';
@@ -17,7 +17,7 @@ import { ReservationService } from '../../../services/reservation.service';
 })
 export class VehicleListComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
-  vehicles: Vehicle[] = [];
+  vehicles: VehicleBasicData[] = [];
   user: UserProfile | null = null;
   dateFrom = '';
   dateTo = '';
@@ -50,82 +50,11 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   }
 
   getVehiclesAvailable() {
-    // TODO do usunięcia gdy powstanie logika backendowa z dummy-data
-    this.vehicles = [
-      {
-        id: 1,
-        brand: 'brand',
-        model: 'model',
-        photoUrl: 'vehicles/1/photo.webp',
-        productionYear: new Date(),
-        amountOfSeats: 5,
-        pricePerDay: 250.99,
-        body: {
-          color: 'red',
-          rimsInch: 21
-        },
-        engine: {
-          capacity: 1899,
-          type: EngineType.GAS,
-          avgFuelConsumption: 5.7,
-          power: 223,
-          torque: 554,
-          transmission: Transmission.MANUAL
-        },
-        equipment: {
-          ac: true,
-          frontPDC: false,
-          rearPDC: true,
-          steeringAssist: true,
-          bluetooth: true,
-          ledFrontLights: true,
-          xenonFrontLights: false,
-          ledRearLights: true,
-          leatherSeats: true,
-          multifunctionalSteeringWheel: true
-        },
-        category: Category.A
-
-      } as Vehicle,
-      {
-        id: 2,
-        brand: 'brand1',
-        model: 'model1',
-        photoUrl: 'vehicles/2/photo.webp',
-        productionYear: new Date(),
-        amountOfSeats: 5,
-        pricePerDay: 650.99,
-        body: {
-          color: 'blue',
-          rimsInch: 21
-        },
-        engine: {
-          capacity: 1899,
-          type: EngineType.HYBRID,
-          avgFuelConsumption: 5.7,
-          power: 211,
-          torque: 500,
-          transmission: Transmission.AUTOMATIC
-        },
-        equipment: {
-          ac: false,
-          frontPDC: true,
-          rearPDC: true,
-          steeringAssist: true,
-          bluetooth: true,
-          ledFrontLights: true,
-          xenonFrontLights: true,
-          ledRearLights: true,
-          leatherSeats: true,
-          multifunctionalSteeringWheel: true
-        },
-        category: Category.B
-      } as Vehicle
-    ];
     this.subscriptions.add(this.vehicleApiService.getVehiclesAvailable(this.dateFrom, this.dateTo).subscribe({
       next: (response) => {
         this.vehicles = response.vehicles.sort((a, b) => a.brand.localeCompare(b.brand));
-      }
+      },
+      error: () => this.vehicles = []
     }));
   }
 

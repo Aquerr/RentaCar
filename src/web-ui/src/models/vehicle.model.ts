@@ -1,15 +1,25 @@
-export interface Vehicle {
+export interface VehicleFullData {
   id: number;
   brand: string;
   model: string;
   productionYear: Date;
-  amountOfSeats: number;
+  seatsAmount: number;
   body: Body;
   engine: Engine;
   equipment: Equipment;
   category: Category;
-  pricePerDay: number;
-  photoUrl: string;
+  basicPrice: number;
+  photos: any[];
+}
+
+export interface VehicleBasicData {
+  id: number;
+  brand: string;
+  model: string;
+  engine: Engine;
+  equipment: Equipment;
+  basicPrice: number;
+  photo: any[];
 }
 
 export interface Body {

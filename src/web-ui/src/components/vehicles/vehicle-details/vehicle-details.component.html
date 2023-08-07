@@ -1,14 +1,14 @@
 <div class='container' *ngIf='vehicle'>
   <h3>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</h3>
   <div class='img'>
-    <img alt='' src='assets/images/{{vehicle.photoUrl}}' />
+    <img alt='' src='assets/images/{{vehicle.photos}}' />
   </div>
 
   <div class='section'>
     <span
       class='title'>{{ 'components.vehicle-details.labels.production-year' | translate}}</span><span>{{vehicle.productionYear | date: 'yyyy-MM-dd'}}</span>
     <span
-      class='title'>{{ 'components.vehicle-details.labels.amount-of-seats' | translate}}</span><span>{{vehicle.amountOfSeats}}</span>
+      class='title'>{{ 'components.vehicle-details.labels.amount-of-seats' | translate}}</span><span>{{vehicle.seatsAmount}}</span>
     <span
       class='title'>{{ 'components.vehicle-details.labels.category' | translate}}</span><span>{{vehicle.category}}</span>
   </div>
