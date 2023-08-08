@@ -42,7 +42,7 @@ import {
     FooterComponent,
     ReservationComponent,
     VehicleDetailsComponent,
-    ActivationAccountComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
