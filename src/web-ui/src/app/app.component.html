@@ -1,5 +1,16 @@
-<div class='menu-nav' *ngIf='isMobile'>
-  <i class='pi pi-align-justify'></i>
+<div class='' *ngIf='isMobile'>
+  <button class="hamburger hamburger--spin" type="button" (click)="toggleSideMenu()">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+    <nav class="nav-mobile--active" *ngIf="sideMenuExpanded">
+      <a class="nav__link" href="#">Flota</a>
+      <a class="nav__link" href="#">FAQ</a>
+      <a class="nav__link" routerLink='contact'>Kontakt</a>
+    </nav>
+
 </div>
 
 

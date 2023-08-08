@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   userLogged: UserProfile | null = null;
   isMobile = false;
+sideMenuExpanded = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -69,4 +70,16 @@ export class AppComponent implements OnInit, OnDestroy {
   isMobileView() {
     this.isMobile = window.innerWidth < 1200;
   }
+
+
+toggleSideMenu() {
+
+  this.sideMenuExpanded = !this.sideMenuExpanded;
+  
+  const navMobile = document.querySelector('.nav-mobile') as any;
+  const navBtn = document.querySelector('.hamburger') as any;
+
+  navBtn.classList.toggle('is-active')
+  navMobile.classList.toggle('nav-mobile--active')
+}
 }

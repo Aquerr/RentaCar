@@ -50,12 +50,15 @@ h4 {
   outline: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--main-font);
   margin-left: 30px;
   transition: 0.3s;
 }
 
+.btn:focus{
+  color: var(--gold);
+}
 .btn:hover {
   background: var(--main-font);
   color: var(--third-color);
@@ -69,3 +72,15 @@ h4 {
   padding: 30px !important;
   border-radius: 5px;
 }
+
+
+// Media
+
+@media (max-width: 1200px) {
+  .searcher {
+   display: none;
+  } 
+  .footer {
+    display: none;
+  }
+ }
