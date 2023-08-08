@@ -5,7 +5,7 @@ import io.github.aquerr.rentacar.application.mail.MailType;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.ActivationLinkMailSender;
 import io.github.aquerr.rentacar.domain.activation.command.AccountActivationTokenRequestCommand;
-import io.github.aquerr.rentacar.domain.activation.model.ActivationToken;
+import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -26,14 +26,14 @@ public class AccountActivationTokenRequestCommandListener
     {
         log.info("Processing command: {}", command);
 
-        ActivationToken activationToken = accountActivationService.generateActivationToken(command.getCredentialsId());
+        ActivationTokenEntity activationTokenEntity = accountActivationService.generateActivationToken(command.getCredentialsId());
 
         this.activationLinkMailSender.send(MailMessage.builder()
                         .to(command.getEmailTo())
                         .subject("Account Activation")
                         .type(MailType.ACCOUNT_ACTIVATION)
                         .langCode(command.getLangCode())
-                        .properties(Map.of("activation_token", activationToken.getToken()))
+                        .properties(Map.of("activation_token", activationTokenEntity.getToken()))
                 .build());
     }
 }

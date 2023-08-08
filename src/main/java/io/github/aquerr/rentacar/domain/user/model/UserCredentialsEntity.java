@@ -16,7 +16,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 @Entity
@@ -46,11 +48,18 @@ public class UserCredentialsEntity
     @Column(name = "authority")
     private Set<String> authorities;
 
-    @Column(name = "verified", nullable = false, columnDefinition = "tinyint(1) default 0")
-    private boolean verified;
+    @Column(name = "activated", nullable = false, columnDefinition = "tinyint(1) default 0")
+    private boolean activated;
 
     @Column(name = "locked", nullable = false, columnDefinition = "tinyint(1) default 0")
     private boolean locked;
+
+    @CreationTimestamp
+    @Column(name = "created_date_time", nullable = false)
+    private ZonedDateTime createdDateTime;
+
+    @Column(name = "activated_date_time", nullable = true)
+    private ZonedDateTime activatedDateTime;
 
     public UserCredentialsEntity()
     {

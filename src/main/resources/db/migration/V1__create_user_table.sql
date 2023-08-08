@@ -5,6 +5,8 @@ CREATE TABLE user_credentials (
       username VARCHAR(36) UNIQUE NOT NULL,
       email VARCHAR(64) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
-      verified BOOLEAN DEFAULT 0,
-      locked BOOLEAN DEFAULT 0
+      activated BOOLEAN DEFAULT 0 NOT NULL,
+      locked BOOLEAN DEFAULT 0 NOT NULL,
+      created_date_time TIMESTAMP WITH TIME ZONE NOT NULL,
+      activated_date_time TIMESTAMP WITH TIME ZONE
 );

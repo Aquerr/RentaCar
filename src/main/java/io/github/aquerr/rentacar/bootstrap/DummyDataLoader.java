@@ -4,7 +4,7 @@ import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.domain.user.model.Authority;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.domain.user.model.UserRegistration;
+import io.github.aquerr.rentacar.domain.user.dto.UserRegistration;
 import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
 import io.github.aquerr.rentacar.repository.ProfileRepository;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
@@ -40,25 +40,28 @@ public class DummyDataLoader implements CommandLineRunner {
         userCredentialsRepository.deleteAll();
         vehicleRepository.deleteAll();
 
-        UserCredentialsEntity userCredentialsEntity1 = new UserCredentialsEntity(1L,
-                "test_user",
-                "test_email@test.com",
-                passwordEncoder.encode("test_pass"),
-                Set.of(Authority.EDIT_CARS.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority()),
-                true,
-                false);
-        userCredentialsRepository.save(userCredentialsEntity1);
-        UserProfileEntity userProfileEntity1 = new UserProfileEntity(1L,
-                userCredentialsEntity1.getId(),
-                "Tester",
-                "Testowski",
-                "999999999",
-                userCredentialsEntity1.getEmail(),
-                LocalDate.of(1999, 6, 15),
-                "Testów",
-                "15551",
-                "Wymyślna 42",
-                "1/photo.jpg");
+        UserCredentialsEntity userCredentialsEntity1 = UserCredentialsEntity.builder()
+                .username("test_user")
+                .email("test_email@test.com")
+                .password(passwordEncoder.encode("test_pass"))
+                .authorities(Set.of(Authority.EDIT_CARS.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority()))
+                .activated(true)
+                .locked(false)
+                .build();
+        userCredentialsEntity1 = userCredentialsRepository.save(userCredentialsEntity1);
+
+        UserProfileEntity userProfileEntity1 = UserProfileEntity.builder()
+                .credentialsId(userCredentialsEntity1.getId())
+                .firstName("Tester")
+                .lastName("Testowski")
+                .phoneNumber("999999999")
+                .email(userCredentialsEntity1.getEmail())
+                .birthDate(LocalDate.of(1999, 6, 15))
+                .city("Testów")
+                .zipCode("15551")
+                .street("Wymyślna 42")
+                .iconUrl("1/photo.jpg")
+                .build();
         profileRepository.save(userProfileEntity1);
         log.info("Created dummy verified profile: {}", userCredentialsEntity1);
 

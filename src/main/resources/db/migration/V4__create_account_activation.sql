@@ -3,6 +3,7 @@ CREATE TABLE account_activation_token (
     credentials_id BIGINT NOT NULL,
     token VARCHAR(64) UNIQUE NOT NULL,
     expiration_date_time TIMESTAMP WITH TIME ZONE NOT NULL,
-    used BOOLEAN DEFAULT 1,
+    used BOOLEAN DEFAULT 1 NOT NULL,
+    valid BOOLEAN DEFAULT 1 NOT NULL,
     FOREIGN KEY (credentials_id) REFERENCES user_credentials (id)
 );

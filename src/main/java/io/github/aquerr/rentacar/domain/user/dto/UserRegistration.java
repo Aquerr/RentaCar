@@ -1,4 +1,4 @@
-package io.github.aquerr.rentacar.domain.user.model;
+package io.github.aquerr.rentacar.domain.user.dto;
 
 import lombok.Value;
 
