@@ -11,7 +11,7 @@ import io.github.aquerr.rentacar.domain.user.converter.UserCredentialsConverter;
 import io.github.aquerr.rentacar.domain.user.dto.UserCredentials;
 import io.github.aquerr.rentacar.domain.user.exception.UsernameOrEmailAlreadyUsedException;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.domain.user.model.UserRegistration;
+import io.github.aquerr.rentacar.domain.user.dto.UserRegistration;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,7 +43,7 @@ public class UserService {
                 .email(userRegistration.getEmail())
                 .password(passwordEncoder.encode(userRegistration.getPassword()))
                 .locked(false)
-                .verified(false)
+                .activated(false)
                 .build();
         userCredentialsEntity = this.userCredentialsRepository.save(userCredentialsEntity);
 
@@ -78,7 +78,7 @@ public class UserService {
                 .orElse(null);
         if (credentials != null)
         {
-            credentials.setVerified(true);
+            credentials.setActivated(true);
             userCredentialsRepository.save(credentials);
             this.profileService.createNewProfile(CreateProfileParameters.builder()
                     .credentialsId(credentials.getId())

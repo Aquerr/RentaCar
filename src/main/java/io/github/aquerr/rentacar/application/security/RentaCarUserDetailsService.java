@@ -1,7 +1,7 @@
 package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.exception.UserLockedException;
-import io.github.aquerr.rentacar.application.exception.UserNotVerifiedException;
+import io.github.aquerr.rentacar.application.exception.UserNotActivatedException;
 import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.repository.ProfileRepository;
@@ -47,9 +47,9 @@ public class RentaCarUserDetailsService implements UserDetailsService
         {
             throw new UserLockedException();
         }
-        if (!userCredentialsEntity.isVerified())
+        if (!userCredentialsEntity.isActivated())
         {
-            throw new UserNotVerifiedException();
+            throw new UserNotActivatedException();
         }
 
         UserProfileEntity userProfileEntity = profileRepository.findByCredentialsId(userCredentialsEntity.getId());

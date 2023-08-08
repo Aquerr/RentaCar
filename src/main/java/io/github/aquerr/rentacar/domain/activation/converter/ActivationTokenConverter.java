@@ -1,25 +1,25 @@
 package io.github.aquerr.rentacar.domain.activation.converter;
 
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
-import io.github.aquerr.rentacar.domain.activation.model.ActivationToken;
+import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ActivationTokenConverter
 {
-    public ActivationTokenDto toDto(ActivationToken activationToken)
+    public ActivationTokenDto toDto(ActivationTokenEntity activationTokenEntity)
     {
-        if (activationToken == null)
+        if (activationTokenEntity == null)
         {
             return null;
         }
 
         return ActivationTokenDto.builder()
-                .id(activationToken.getId())
-                .credentialsId(activationToken.getCredentialsId())
-                .token(activationToken.getToken())
-                .used(activationToken.isUsed())
-                .expirationDate(activationToken.getExpirationDate())
+                .id(activationTokenEntity.getId())
+                .credentialsId(activationTokenEntity.getCredentialsId())
+                .token(activationTokenEntity.getToken())
+                .used(activationTokenEntity.isUsed())
+                .expirationDate(activationTokenEntity.getExpirationDate())
                 .build();
     }
 }

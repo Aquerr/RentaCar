@@ -6,7 +6,7 @@ import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenAlreadyUsedException;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenExpiredException;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenNotFoundException;
-import io.github.aquerr.rentacar.domain.activation.model.ActivationToken;
+import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,16 +29,16 @@ public class AccountActivationService
     private Duration activationTokenExpirationTime;
 
     @Transactional
-    public ActivationToken generateActivationToken(long credentialsId)
+    public ActivationTokenEntity generateActivationToken(long credentialsId)
     {
-        ActivationToken activationToken = new ActivationToken();
-        activationToken.setCredentialsId(credentialsId);
-        activationToken.setExpirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime));
-        activationToken.setToken(this.accessTokenGenerator.generate());
-        activationToken.setUsed(false);
-        this.activationTokenRepository.save(activationToken);
+        ActivationTokenEntity activationTokenEntity = new ActivationTokenEntity();
+        activationTokenEntity.setCredentialsId(credentialsId);
+        activationTokenEntity.setExpirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime));
+        activationTokenEntity.setToken(this.accessTokenGenerator.generate());
+        activationTokenEntity.setUsed(false);
+        this.activationTokenRepository.save(activationTokenEntity);
 
-        return activationToken;
+        return activationTokenEntity;
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -56,9 +56,9 @@ public class AccountActivationService
         if (activationTokenDto.getExpirationDate().isBefore(ZonedDateTime.now()))
             throw new ActivationTokenExpiredException();
 
-        ActivationToken activationToken = this.activationTokenRepository.findById(activationTokenDto.getId())
+        ActivationTokenEntity activationTokenEntity = this.activationTokenRepository.findById(activationTokenDto.getId())
                 .orElseThrow(ActivationTokenNotFoundException::new);
-        activationToken.setUsed(true);
-        this.activationTokenRepository.save(activationToken);
+        activationTokenEntity.setUsed(true);
+        this.activationTokenRepository.save(activationTokenEntity);
     }
 }

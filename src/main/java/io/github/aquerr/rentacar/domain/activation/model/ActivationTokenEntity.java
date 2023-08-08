@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 @Data
 @Entity
 @Table(name = "account_activation_token")
-public class ActivationToken
+public class ActivationTokenEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +32,7 @@ public class ActivationToken
 
     @Column(name = "used", nullable = false, unique = false, columnDefinition = "tinyint(1) default 0")
     private boolean used;
+
+    @Column(name = "valid", nullable = false, unique = false)
+    private boolean valid;
 }
