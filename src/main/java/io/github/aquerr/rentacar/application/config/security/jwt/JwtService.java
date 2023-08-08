@@ -1,12 +1,17 @@
 package io.github.aquerr.rentacar.application.config.security.jwt;
 
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
+import io.github.aquerr.rentacar.application.security.InvalidJwtTokenEntity;
+import io.github.aquerr.rentacar.repository.InvalidJwtTokenRepository;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,42 +19,43 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public final class JwtService {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER = "Bearer ";
     private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    //TODO: We should store them in DB also for jwtExpirationTime time and load them when application restarts.
     private static final Map<String, BlackListedJwt> BLACK_LISTED_JWTS = new HashMap<>();
     private static ScheduledExecutorService BLACK_LISTED_JWTS_CLEARER_EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
 
-    private static Future<?> BLACK_LISTED_JWTS_CLEARER_FUTURE = BLACK_LISTED_JWTS_CLEARER_EXECUTOR_SERVICE
-            .scheduleAtFixedRate(JwtService::clearBlacklistedJwts, 1, 10, TimeUnit.SECONDS);
-
+    static {
+        BLACK_LISTED_JWTS_CLEARER_EXECUTOR_SERVICE.scheduleAtFixedRate(JwtService::clearBlacklistedJwts, 1, 1, TimeUnit.HOURS);
+    }
     private static void clearBlacklistedJwts()
     {
         for (final BlackListedJwt blackListedJwt : List.copyOf(BLACK_LISTED_JWTS.values()))
         {
-            if (LocalDateTime.now().isAfter(blackListedJwt.getExpirationTime()))
+            if (ZonedDateTime.now().isAfter(blackListedJwt.getExpirationTime()))
             {
                 BLACK_LISTED_JWTS.remove(blackListedJwt.getJwt());
             }
         }
     }
+
+    private final InvalidJwtTokenRepository invalidJwtTokenRepository;
 
     @Value("${rentacar.security.jwt.issuer}")
     private String jwtIssuer;
@@ -57,6 +63,14 @@ public final class JwtService {
     private Duration jwtExpirationTime;
     @Value("${rentacar.security.jwt.longer-expiration-time}")
     private Duration jwtLongerExpirationTime;
+
+    @PostConstruct
+    void initBlacklistedJwts()
+    {
+        invalidJwtTokenRepository.findAll().stream()
+                .map(invalidJwtTokenEntity -> BlackListedJwt.of(invalidJwtTokenEntity.getJwt(), invalidJwtTokenEntity.getExpirationDateTime()))
+                .forEach(blackListedJwt -> BLACK_LISTED_JWTS.put(blackListedJwt.getJwt(), blackListedJwt));
+    }
 
     public String createJwt(AuthenticatedUser authenticatedUser, boolean rememberMe) {
         Claims claims = Jwts.claims()
@@ -73,6 +87,7 @@ public final class JwtService {
         return Jwts.builder()
                 .setSubject(authenticatedUser.getUsername())
                 .signWith(KEY)
+                .compressWith(CompressionCodecs.DEFLATE)
                 .setClaims(claims)
                 .compact();
     }
@@ -112,12 +127,26 @@ public final class JwtService {
     public void invalidate(String jwt) {
         Jws<Claims> jws = validateJwt(jwt);
         Date exprationDate = jws.getBody().getExpiration();
-        BLACK_LISTED_JWTS.put(jwt, BlackListedJwt.of(jwt, exprationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+        ZonedDateTime expirationDateTime = exprationDate.toInstant().atZone(ZoneId.systemDefault());
+        BLACK_LISTED_JWTS.put(jwt, BlackListedJwt.of(jwt, expirationDateTime));
+
+        InvalidJwtTokenEntity invalidJwtTokenEntity = new InvalidJwtTokenEntity();
+        try
+        {
+            invalidJwtTokenEntity.setJwt(jwt);
+            invalidJwtTokenEntity.setInvalidatedDateTime(ZonedDateTime.now());
+            invalidJwtTokenEntity.setExpirationDateTime(expirationDateTime);
+            invalidJwtTokenRepository.save(invalidJwtTokenEntity);
+        }
+        catch (Exception exception)
+        {
+            log.error("Could not save invalid jwt token entity = " + invalidJwtTokenEntity, exception);
+        }
     }
 
     @lombok.Value(staticConstructor = "of")
     private static class BlackListedJwt {
         String jwt;
-        LocalDateTime expirationTime;
+        ZonedDateTime expirationTime;
     }
 }
