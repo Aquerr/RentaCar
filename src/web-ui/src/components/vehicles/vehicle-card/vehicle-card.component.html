@@ -2,17 +2,17 @@
   <div class='title-row'>
     <div class='car-name'>
       <span pTooltip="{{ 'components.vehicle-card.labels.show-details' | translate}}"
-            (click)='showDetails()'>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</span>
+            (click)='showDetails(vehicle.id)'>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</span>
     </div>
 
     <div class='price'>
-      {{calculateCurrency(vehicle.pricePerDay)}} {{lang === 'pl' ? 'ZŁ' : 'USD'}}
+      {{calculateCurrency(vehicle.basicPrice)}} {{lang === 'pl' ? 'ZŁ' : 'USD'}}
     </div>
   </div>
 
   <div class='car-row'>
     <div class='car-row-column-first'>
-      <img alt='' src='assets/images/{{vehicle.photoUrl}}' />
+      <img alt='' src='assets/images/{{vehicle.photo}}' />
     </div>
 
     <div class='car-row-column-second'>

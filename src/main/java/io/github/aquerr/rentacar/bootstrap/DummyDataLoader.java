@@ -5,8 +5,10 @@ import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.domain.user.model.Authority;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserRegistration;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
 import io.github.aquerr.rentacar.repository.ProfileRepository;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
+import io.github.aquerr.rentacar.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -24,18 +27,18 @@ import java.util.Set;
 @Profile({"dummy-data"})
 @AllArgsConstructor
 @Slf4j
-public class DummyDataLoader implements CommandLineRunner
-{
+public class DummyDataLoader implements CommandLineRunner {
     private final UserService userService;
     private final UserCredentialsRepository userCredentialsRepository;
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
+    private final VehicleRepository vehicleRepository;
 
     @Override
-    public void run(String... args) throws Exception
-    {
+    public void run(String... args) throws Exception {
         profileRepository.deleteAll();
         userCredentialsRepository.deleteAll();
+        vehicleRepository.deleteAll();
 
         UserCredentialsEntity userCredentialsEntity1 = new UserCredentialsEntity(1L,
                 "test_user",
@@ -61,5 +64,34 @@ public class DummyDataLoader implements CommandLineRunner
 
         UserRegistration userRegistration = new UserRegistration("tester2", "testing@test.com", "testujemy");
         userService.register(userRegistration);
+
+        VehicleEntity vehicle = VehicleEntity.builder()
+                .id(1)
+                .brand("BRAND")
+                .model("MODEL")
+                .productionYear(LocalDate.now())
+                .seatsAmount(5)
+                .color("red")
+                .rimsInch(21)
+                .capacity(1988)
+                .engineType("GAS")
+                .power(211)
+                .torque(422)
+                .avgFuelConsumption(6.5F)
+                .transmission("MANUAL")
+                .ac(true)
+                .frontPDC(true)
+                .rearPDC(true)
+                .bluetooth(true)
+                .ledFrontLights(true)
+                .ledRearLights(false)
+                .xenonFrontLights(true)
+                .leatherSeats(true)
+                .multifunctionalSteeringWheel(true)
+                .category("A")
+                .basicPrice(new BigDecimal(245))
+                .photoNames("1/photo.jpg")
+                .build();
+        vehicleRepository.save(vehicle);
     }
 }
