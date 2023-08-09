@@ -33,4 +33,5 @@ build/
 .vscode/
 
 *.db
-**/.docker-runtime-data/**
+.docker-runtime-data
+/assets

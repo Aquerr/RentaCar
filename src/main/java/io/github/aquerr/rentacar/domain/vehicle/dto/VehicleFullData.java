@@ -23,7 +23,7 @@ public class VehicleFullData {
     Equipment equipment;
     BigDecimal basicPrice;
     VehicleCategory category;
-    List<byte[]> photos;
+    List<String> photosUrls;
 
     @Value
     @Builder

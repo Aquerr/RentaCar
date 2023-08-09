@@ -1,22 +1,29 @@
 package io.github.aquerr.rentacar.domain.vehicle.converter;
 
 import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleImagePopulator;
 import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleBasicData;
 import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleFullData;
 import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleCategory;
 import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleEngine;
 import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleTransmission;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
+@AllArgsConstructor
 public class VehicleConverter {
+
+    private final VehicleImagePopulator vehicleImagePopulator;
 
     public VehicleBasicData toBasicData(VehicleEntity vehicleEntity) {
         if (vehicleEntity == null) {
             return null;
         }
 
-        return VehicleBasicData.builder()
+        VehicleBasicData.VehicleBasicDataBuilder builder = VehicleBasicData.builder()
                 .id(vehicleEntity.getId())
                 .brand(vehicleEntity.getBrand())
                 .model(vehicleEntity.getModel())
@@ -31,9 +38,11 @@ public class VehicleConverter {
                         .leatherSeats(vehicleEntity.isLeatherSeats())
                         .multifunctionalSteeringWheel(vehicleEntity.isMultifunctionalSteeringWheel())
                         .build())
-                .basicPrice(vehicleEntity.getBasicPrice())
-                .photo(null)
-                .build();
+                .basicPrice(vehicleEntity.getBasicPrice());
+
+        vehicleImagePopulator.populate(builder, vehicleEntity.getPhotoNames());
+
+        return builder.build();
     }
 
     public VehicleFullData toFullData(VehicleEntity vehicleEntity) {
@@ -41,7 +50,7 @@ public class VehicleConverter {
             return null;
         }
 
-        return VehicleFullData.builder()
+        VehicleFullData.VehicleFullDataBuilder builder = VehicleFullData.builder()
                 .id(vehicleEntity.getId())
                 .brand(vehicleEntity.getBrand())
                 .model(vehicleEntity.getModel())
@@ -71,8 +80,10 @@ public class VehicleConverter {
                         .multifunctionalSteeringWheel(vehicleEntity.isMultifunctionalSteeringWheel())
                         .build())
                 .basicPrice(vehicleEntity.getBasicPrice())
-                .category(VehicleCategory.valueOf(vehicleEntity.getCategory()))
-                .photos(null)
-                .build();
+                .category(VehicleCategory.valueOf(vehicleEntity.getCategory()));
+
+        vehicleImagePopulator.populate(builder, vehicleEntity.getPhotoNames());
+
+        return builder.build();
     }
 }

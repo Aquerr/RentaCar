@@ -6,7 +6,6 @@ import io.github.aquerr.rentacar.domain.ApiException;
 import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.web.rest.RestErrorResponse;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;

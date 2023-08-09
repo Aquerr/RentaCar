@@ -1,6 +1,8 @@
 package io.github.aquerr.rentacar.domain.vehicle;
 
+import io.github.aquerr.rentacar.application.persistance.converter.SemicolonSeparatedStringListConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +16,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -98,7 +101,8 @@ public class VehicleEntity
     @Column(name = "basic_price", unique = false, nullable = false)
     private BigDecimal basicPrice;
 
+    @Convert(converter = SemicolonSeparatedStringListConverter.class)
     @Column(name = "photo_names", unique = false, nullable = false)
-    private String photoNames;
+    private List<String> photoNames;
 
 }
