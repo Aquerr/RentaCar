@@ -5,7 +5,7 @@ import { VehicleBasicData } from '../../../models/vehicle.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ReservationApiService } from '../../../services/api/reservation-api.service';
-import { ReservationRequest, ReservationStatus } from '../../../models/reservation.model.ts';
+import { Reservation, ReservationStatus } from '../../../models/reservation.model.ts';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserProfile } from '../../../models/user-profile.model';
 import { ReservationService } from '../../../services/reservation.service';
@@ -38,7 +38,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
       next: (routes) => {
         const routeDates = routes['dates'] as string;
         this.dateFrom = routeDates.substring(6, routeDates.indexOf('&'));
-        this.dateTo = routeDates.substring(routeDates.indexOf('&') + 1, routeDates.length - 1);
+        this.dateTo = routeDates.substring(routeDates.indexOf('&') + 1, routeDates.length);
         this.getVehiclesAvailable();
       }
     });
@@ -68,7 +68,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
 
   reserveVehicle(vehicleId: number) {
     const request = this.prepareReservationRequest(vehicleId);
-    this.reservationApiService.saveReservationRequest(request).subscribe({
+    this.reservationApiService.createNewReservation(request).subscribe({
       next: (response) => {
         this.reservationService.updateReservation(response.reservation);
         this.router.navigate(['/reservation', response.reservation.id]);
@@ -83,7 +83,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
       dateFrom: this.dateFrom,
       dateTo: this.dateTo,
       status: ReservationStatus.DRAFT
-    } as ReservationRequest;
+    } as Reservation;
   }
 
 }

@@ -122,7 +122,8 @@
         "avg-fuel-consumption": "l/100km średnie spalanie"
       },
       "buttons": {
-        "reserve": "Rezerwuj pojazd"
+        "reserve": "Rezerwuj pojazd",
+        "disabled": "Zaloguj się, żeby zarezerwować pojazd"
       }
     },
     "vehicle-list": {

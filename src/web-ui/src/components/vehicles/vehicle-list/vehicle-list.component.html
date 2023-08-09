@@ -1,6 +1,9 @@
 <div class='container' *ngIf='vehicles.length > 0; else noVehicles'>
   <ng-container *ngFor='let vehicle of vehicles'>
-    <vehicle-card [vehicle]='vehicle' [lang]='lang' (reserveVehicleEvent)='reserveVehicle($event)'></vehicle-card>
+    <vehicle-card [vehicle]='vehicle'
+                  [lang]='lang'
+                  [userId]='user?.id'
+                  (reserveVehicleEvent)='reserveVehicle($event)'></vehicle-card>
   </ng-container>
 </div>
 

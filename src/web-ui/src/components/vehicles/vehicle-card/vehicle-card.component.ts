@@ -11,6 +11,7 @@ import { VehicleDetailsComponent } from '../vehicle-details/vehicle-details.comp
 export class VehicleCardComponent {
   @Input() vehicle: VehicleBasicData | null = null;
   @Input() lang = 'us';
+  @Input() userId: number | undefined;
   @Output() reserveVehicleEvent = new EventEmitter<number>;
 
   constructor(private dialogService: DialogService) {}

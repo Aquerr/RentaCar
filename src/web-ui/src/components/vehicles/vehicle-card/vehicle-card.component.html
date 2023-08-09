@@ -69,7 +69,9 @@
         </li>
       </div>
       <button class='btn'
-              (click)='reserveVehicle(vehicle)'>{{ 'components.vehicle-card.buttons.reserve' | translate}}</button>
+              (click)='reserveVehicle(vehicle)'
+              [disabled]='!userId'
+              [pTooltip]="!userId ? ('components.vehicle-card.buttons.disabled' | translate) : ''">{{ 'components.vehicle-card.buttons.reserve' | translate}}</button>
     </div>
   </div>
 
