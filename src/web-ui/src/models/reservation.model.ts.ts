@@ -1,13 +1,5 @@
 export interface Reservation {
-  id: number;
-  vehicleId: number;
-  userId: number;
-  dateFrom: string;
-  dateTo: string;
-  status: ReservationStatus;
-}
-
-export interface ReservationRequest {
+  id?: number;
   vehicleId: number;
   userId: number;
   dateFrom: string;

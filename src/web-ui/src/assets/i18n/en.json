@@ -122,7 +122,8 @@
         "avg-fuel-consumption": "l/100km average consumption"
       },
       "buttons": {
-        "reserve": "Reserve vehicle"
+        "reserve": "Reserve vehicle",
+        "disabled": "Sign in, to reserve a vehicle"
       }
     },
     "vehicle-list": {
