@@ -9,6 +9,7 @@ import { Reservation, ReservationStatus } from '../../../models/reservation.mode
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserProfile } from '../../../models/user-profile.model';
 import { ReservationService } from '../../../services/reservation.service';
+import { DateService } from '../../../services/date.service';
 
 @Component({
   selector: 'vehicle-list',
@@ -19,8 +20,8 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   vehicles: VehicleBasicData[] = [];
   user: UserProfile | null = null;
-  dateFrom = '';
-  dateTo = '';
+  dateFrom = new Date();
+  dateTo = new Date();
   lang = 'us';
 
   constructor(private vehicleApiService: VehicleApiService,
@@ -29,19 +30,13 @@ export class VehicleListComponent implements OnInit, OnDestroy {
               private reservationService: ReservationService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private dateService: DateService) {
   }
 
   ngOnInit() {
     this.lang = this.languageService.getLanguage();
-    this.activatedRoute.params.subscribe({
-      next: (routes) => {
-        const routeDates = routes['dates'] as string;
-        this.dateFrom = routeDates.substring(6, routeDates.indexOf('&'));
-        this.dateTo = routeDates.substring(routeDates.indexOf('&') + 1, routeDates.length);
-        this.getVehiclesAvailable();
-      }
-    });
+    this.getVehiclesAvailable();
     this.getUser();
   }
 
@@ -50,7 +45,9 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   }
 
   getVehiclesAvailable() {
-    this.subscriptions.add(this.vehicleApiService.getVehiclesAvailable(this.dateFrom, this.dateTo).subscribe({
+    const dateFrom = this.dateService.convertDateToLocalDate(this.dateFrom);
+    const dateTo = this.dateService.convertDateToLocalDate(this.dateTo);
+    this.subscriptions.add(this.vehicleApiService.getVehiclesAvailable(dateFrom, dateTo).subscribe({
       next: (response) => {
         this.vehicles = response.vehicles.sort((a, b) => a.brand.localeCompare(b.brand));
       },
@@ -80,8 +77,8 @@ export class VehicleListComponent implements OnInit, OnDestroy {
     return {
       vehicleId: vehicleId,
       userId: this.user?.id,
-      dateFrom: this.dateFrom,
-      dateTo: this.dateTo,
+      dateFrom: this.dateService.convertDateToLocalDate(this.dateFrom),
+      dateTo: this.dateService.convertDateToLocalDate(this.dateTo),
       status: ReservationStatus.DRAFT
     } as Reservation;
   }

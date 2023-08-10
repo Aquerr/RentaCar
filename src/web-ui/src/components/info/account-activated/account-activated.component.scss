@@ -1,0 +1,18 @@
+h3 {
+  color: white;
+  margin-top: 70px;
+  text-align: center;
+}
+
+a {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--main-font);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--second-color);
+}

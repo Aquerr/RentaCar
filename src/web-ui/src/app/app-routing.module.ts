@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
-import { SearcherComponent } from '../components/searcher/searcher.component';
 import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
 import { LoginGuard } from '../components/authentication/login.guard';
@@ -13,15 +12,16 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
 import {
   ActivationAccountComponent
 } from '../components/authentication/activation-account/activation-account.component';
-import { AccountActivatedComponent } from '../components/info/account-activated.component';
+import { AccountActivatedComponent } from '../components/info/account-activated/account-activated.component';
 import {
   ReactivationAccountComponent
 } from '../components/authentication/reactivation-account/reactivation-account.component';
+import { MainComponent } from '../components/info/main/main.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearcherComponent,
+    component: MainComponent,
     title: 'title.main'
   },
   {
@@ -43,7 +43,7 @@ const routes: Routes = [
     title: 'title.profile-edit'
   },
   {
-    path: 'vehicle-list/:dates',
+    path: 'vehicle-list',
     component: VehicleListComponent,
     title: 'title.vehicle-list'
   },
@@ -55,21 +55,25 @@ const routes: Routes = [
   {
     path: 'reservation/:id',
     component: ReservationComponent,
+    canActivate: [LoginGuard],
     title: 'title.reservation'
   },
   {
     path: 'activation-account',
     component: ActivationAccountComponent,
+    canActivate: [AnonymousGuard],
     title: 'title.activation'
   },
   {
     path: 'account-activated',
     component: AccountActivatedComponent,
+    canActivate: [AnonymousGuard],
     title: 'title.account-activated'
   },
   {
     path: 'reactivation-account/:id',
     component: ReactivationAccountComponent,
+    canActivate: [AnonymousGuard],
     title: 'title.reactivation-account'
   },
   {

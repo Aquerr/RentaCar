@@ -80,6 +80,10 @@
   .lang-nav {
     margin-left: 30px;
   }
+
+  .lang-nav:hover {
+    cursor: pointer;
+  }
 }
 
 //Phone BTN
@@ -237,4 +241,8 @@
   bottom: 0;
   transform: rotate(-90deg);
   transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.router-section {
+  margin-top: 65px;
 }

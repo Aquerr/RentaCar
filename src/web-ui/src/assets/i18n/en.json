@@ -125,7 +125,12 @@
       }
     },
     "vehicle-list": {
-      "no-vehicles": "No vehicles in selected term"
+      "labels": {
+        "no-vehicles": "No vehicles in selected term"
+      },
+      "buttons": {
+        "search": "Search"
+      }
     },
     "vehicle-details": {
       "labels": {
@@ -158,7 +163,12 @@
         "error": "The token has expired. Please contact the application administrator to activate your account."
       }
     },
-    "account-activated": "Account has been activated.",
+    "account-activated": {
+      "labels": {
+        "title": "Account has been activated.",
+        "sign-in": "Sign in"
+      }
+    },
     "reactivation-account": {
       "labels": {
         "title": "Activation link",
@@ -170,6 +180,15 @@
       "toasts": {
         "success": "Activation link has been send successfully to email below",
         "error": "Activation link has not been send successfully"
+      }
+    },
+    "main": {
+      "labels": {
+        "title": "Test\nspeed on\nYour own skin",
+        "text": "Familiarize yourself with the wide range of sports cars (and not only) and choose the one that suits you best."
+      },
+      "buttons": {
+        "reserve": "Reserve"
       }
     }
   },

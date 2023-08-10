@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { SharedModule } from '../modules/shared.module';
-import { SearcherComponent } from '../components/searcher/searcher.component';
 import { NgxTranslateModule } from '../modules/ngx-translate.module';
 import { NgOptimizedImage } from '@angular/common';
 import { ProfilePanelComponent } from '../components/profile/panel/profile-panel.component';
@@ -23,20 +22,20 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ReservationComponent } from '../components/reservation/reservation.component';
 import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
-import { AccountActivatedComponent } from '../components/info/account-activated.component';
+import { AccountActivatedComponent } from '../components/info/account-activated/account-activated.component';
 import {
   ActivationAccountComponent
 } from '../components/authentication/activation-account/activation-account.component';
 import {
   ReactivationAccountComponent
 } from '../components/authentication/reactivation-account/reactivation-account.component';
+import { MainComponent } from '../components/info/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     NotFoundComponent,
-    SearcherComponent,
     ProfilePanelComponent,
     ProfileEditComponent,
     SignUpComponent,
@@ -49,7 +48,8 @@ import {
     FooterComponent,
     ActivationAccountComponent,
     AccountActivatedComponent,
-    ReactivationAccountComponent
+    ReactivationAccountComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
