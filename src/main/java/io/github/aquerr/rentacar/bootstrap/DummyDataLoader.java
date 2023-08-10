@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -41,15 +42,45 @@ public class DummyDataLoader implements CommandLineRunner {
         userCredentialsRepository.deleteAll();
         vehicleRepository.deleteAll();
 
+        createDummyUsers();
+        createDummyVehicles();
+    }
+
+    private void createDummyUsers()
+    {
         UserCredentialsEntity userCredentialsEntity1 = UserCredentialsEntity.builder()
                 .username("test_user")
                 .email("test_email@test.com")
                 .password(passwordEncoder.encode("test_pass"))
-                .authorities(Set.of(Authority.EDIT_CARS.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority()))
+                .authorities(Collections.emptySet())
                 .activated(true)
                 .locked(false)
                 .build();
         userCredentialsEntity1 = userCredentialsRepository.save(userCredentialsEntity1);
+
+        UserCredentialsEntity adminCredentials = UserCredentialsEntity.builder()
+                .username("test_admin")
+                .email("admin_email@test.com")
+                .password(passwordEncoder.encode("test_admin"))
+                .authorities(Set.of(Authority.EDIT_CARS.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority(), Authority.VIEW_ADMIN_PANEL.getAuthority()))
+                .activated(true)
+                .locked(false)
+                .build();
+        adminCredentials = userCredentialsRepository.save(adminCredentials);
+        UserProfileEntity adminUserProfile = UserProfileEntity.builder()
+                .credentialsId(adminCredentials.getId())
+                .firstName("Admin")
+                .lastName("Testowski")
+                .phoneNumber("111222333")
+                .email(adminCredentials.getEmail())
+                .birthDate(LocalDate.of(1986, 2, 5))
+                .city("Testów")
+                .zipCode("14239")
+                .street("Wymyślna 92")
+                .iconName("photo.jpg")
+                .build();
+        profileRepository.save(adminUserProfile);
+        log.info("Created dummy verified admin profile: {}", adminUserProfile);
 
         UserProfileEntity userProfileEntity1 = UserProfileEntity.builder()
                 .credentialsId(userCredentialsEntity1.getId())
@@ -68,7 +99,10 @@ public class DummyDataLoader implements CommandLineRunner {
 
         UserRegistration userRegistration = new UserRegistration("tester2", "testing@test.com", "testujemy");
         userService.register(userRegistration);
+    }
 
+    private void createDummyVehicles()
+    {
         VehicleEntity vehicle = VehicleEntity.builder()
                 .id(1)
                 .brand("BRAND")
