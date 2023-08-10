@@ -1,7 +1,8 @@
 <div class='container' *ngIf='vehicle'>
   <h3>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</h3>
   <div class='img'>
-    <img alt='' src='assets/images/{{vehicle.photos}}' />
+    <!--TODO slider zdjęć-->
+    <img alt='' [src]='vehicle.photosUrls[0]' />
   </div>
 
   <div class='section'>

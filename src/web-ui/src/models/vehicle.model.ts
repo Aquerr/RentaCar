@@ -9,7 +9,7 @@ export interface VehicleFullData {
   equipment: Equipment;
   category: Category;
   basicPrice: number;
-  photos: any[];
+  photosUrls: string[];
 }
 
 export interface VehicleBasicData {
@@ -19,7 +19,7 @@ export interface VehicleBasicData {
   engine: Engine;
   equipment: Equipment;
   basicPrice: number;
-  photo: any[];
+  photoUrl: string;
 }
 
 export interface Body {
