@@ -26,7 +26,7 @@ public class AccountActivationTokenRequestCommandListener
     {
         log.info("Processing command: {}", command);
 
-        ActivationTokenEntity activationTokenEntity = accountActivationService.generateActivationToken(command.getCredentialsId());
+        ActivationTokenEntity activationTokenEntity = accountActivationService.invalidateOldActivationTokensAndGenerateNew(command.getCredentialsId());
 
         this.activationLinkMailSender.send(MailMessage.builder()
                         .to(command.getEmailTo())
