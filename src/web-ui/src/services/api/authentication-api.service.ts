@@ -20,6 +20,10 @@ export class AuthenticationApiService {
     return this.http.post<JwtTokenResponse>(`${this.AUTH_URL}/activation`, request);
   }
 
+  public resendActivationEmail(login: string) {
+    return this.http.post<JwtTokenResponse>(`${this.AUTH_URL}/resend-activation-email`, login);
+  }
+
   public getMyself() {
     const url = this.AUTH_URL + '/myself';
     return this.http.get<UserProfile>(url);

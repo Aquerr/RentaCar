@@ -23,9 +23,13 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ReservationComponent } from '../components/reservation/reservation.component';
 import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
+import { AccountActivatedComponent } from '../components/info/account-activated.component';
 import {
   ActivationAccountComponent
 } from '../components/authentication/activation-account/activation-account.component';
+import {
+  ReactivationAccountComponent
+} from '../components/authentication/reactivation-account/reactivation-account.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,10 @@ import {
     FooterComponent,
     ReservationComponent,
     VehicleDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    ActivationAccountComponent,
+    AccountActivatedComponent,
+    ReactivationAccountComponent
   ],
   imports: [
     BrowserModule,

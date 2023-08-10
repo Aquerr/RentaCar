@@ -22,7 +22,7 @@ export class ActivationAccountComponent implements OnInit {
     const token = url.substring(url.indexOf('=') + 1, url.length);
     const request = new ActivationRequest(token);
     this.apiService.activate(request).subscribe({
-      next: () => this.router.navigate(['']).then(() => this.toastService.createToast(this.languageService.getMessage('components.activation-account.toasts.success'), ToastType.SUCCESS)),
+      next: () => this.router.navigate(['account-activated']),
       error: () => this.router.navigate(['']).then(() => this.toastService.createToast(this.languageService.getMessage('components.activation-account.toasts.error'), ToastType.ERROR))
     });
   }

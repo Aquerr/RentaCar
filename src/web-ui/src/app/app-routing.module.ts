@@ -13,6 +13,10 @@ import { ReservationComponent } from '../components/reservation/reservation.comp
 import {
   ActivationAccountComponent
 } from '../components/authentication/activation-account/activation-account.component';
+import { AccountActivatedComponent } from '../components/info/account-activated.component';
+import {
+  ReactivationAccountComponent
+} from '../components/authentication/reactivation-account/reactivation-account.component';
 
 const routes: Routes = [
   {
@@ -57,6 +61,16 @@ const routes: Routes = [
     path: 'activation-account',
     component: ActivationAccountComponent,
     title: 'title.activation'
+  },
+  {
+    path: 'account-activated',
+    component: AccountActivatedComponent,
+    title: 'title.account-activated'
+  },
+  {
+    path: 'reactivation-account/:id',
+    component: ReactivationAccountComponent,
+    title: 'title.reactivation-account'
   },
   {
     path: '**',

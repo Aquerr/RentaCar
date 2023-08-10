@@ -7,7 +7,9 @@
     "profile-edit": "Profile edit",
     "vehicle-list": "Searching vehicles",
     "reservation": "Reservation",
-    "activation": "Account activation"
+    "activation": "Account activation",
+    "account-activated": "Account activated",
+    "reactivation-account": "Account reactivation"
   },
   "components": {
     "authentication": {
@@ -153,8 +155,21 @@
     },
     "activation-account": {
       "toasts": {
-        "success": "The account has been activated. You can log in.",
         "error": "The token has expired. Please contact the application administrator to activate your account."
+      }
+    },
+    "account-activated": "Account has been activated.",
+    "reactivation-account": {
+      "labels": {
+        "title": "Activation link",
+        "login": "Login"
+      },
+      "buttons": {
+        "resend": "Resend"
+      },
+      "toasts": {
+        "success": "Activation link has been send successfully to email below",
+        "error": "Activation link has not been send successfully"
       }
     }
   },

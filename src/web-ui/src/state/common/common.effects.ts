@@ -24,8 +24,13 @@ export class CommonEffects {
   goRoute$ = createEffect(() =>
     this.actions$.pipe(
       ofType(goRoute),
-      tap((routerLink) =>
-        this.router.navigate([routerLink.routingLink])
+      tap(({ routingLink: routingLink, param: param }) => {
+          if (param) {
+            this.router.navigate([routingLink, param]);
+          } else {
+            this.router.navigate([routingLink]);
+          }
+        }
       )), { dispatch: false });
 
   constructor(

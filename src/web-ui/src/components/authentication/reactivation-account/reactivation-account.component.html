@@ -1,0 +1,22 @@
+<div class='wrapper'>
+  <h4 class='header4'>{{
+    'components.reactivation-account.labels.title' | translate
+    }}</h4>
+
+  <form [formGroup]='form' class='form'>
+
+    <input class='form_input'
+           pInputText
+           type='text'
+           formControlName='login'
+           placeholder="{{
+      'components.reactivation-account.labels.login' | translate
+    }}"
+           minlength='5'
+    />
+
+    <button class='btn' (click)='resendEmail()'>
+      {{ "components.reactivation-account.buttons.resend" | translate }}
+    </button>
+  </form>
+</div>
