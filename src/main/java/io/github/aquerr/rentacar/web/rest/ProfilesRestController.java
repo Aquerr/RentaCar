@@ -27,7 +27,7 @@ public class ProfilesRestController
     public ResponseEntity<?> saveProfile(@PathVariable("id") long profileId,
                                          @RequestPart(value = "image", required = false) MultipartFile image,
                                          @RequestParam(value = "imageKind", required = false) ImageKind imageKind,
-                                         @RequestParam(value = "profile") UserProfile userProfile)
+                                         @RequestPart(value = "profile") UserProfile userProfile)
     {
         userProfile.setId(profileId);
 
@@ -37,7 +37,7 @@ public class ProfilesRestController
         }
 
         profileService.saveProfile(userProfile);
-        return ResponseEntity.noContent().build();
+        return getProfile(profileId);
     }
 
     @GetMapping("/{id}")

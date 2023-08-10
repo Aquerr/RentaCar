@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
 import { HttpClient } from '@angular/common/http';
-import { JwtTokenResponse } from './authentication-api.service';
 import { UserProfile } from '../../models/user-profile.model';
+import { ImageKind } from '../../enums/image.kind.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,15 @@ export class UserProfileApiService {
   constructor(private http: HttpClient) {
   }
 
-  public saveProfile(request: UserProfile) {
-    return this.http.patch<JwtTokenResponse>(`${this.URL}/${request.id}`, request);
+  public saveProfile(user: UserProfile, image: File, imageKind: ImageKind) {
+    const formData = new FormData();
+    console.log('image', image);
+    if (image && imageKind) {
+      formData.append('image', image);
+      formData.append('imageKind', imageKind);
+    }
+    formData.append('profile', new Blob([JSON.stringify(user)], { type: 'application/json' }));
+    return this.http.patch<UserProfile>(`${this.URL}/${user.id}`, formData);
   }
 
   public getProfile(profileId: number) {

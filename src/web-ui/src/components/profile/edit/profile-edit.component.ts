@@ -7,7 +7,7 @@ import { UserProfileApiService } from '../../../services/api/user-profile-api.se
 import { ToastService, ToastType } from '../../../services/toast.service';
 import { LanguageService } from '../../../services/language.service';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { ImageService, ImageType } from '../../../services/image.service';
+import { ImageKind } from '../../../enums/image.kind.enum';
 
 @Component({
   selector: 'profile-edit',
@@ -19,15 +19,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   form: FormGroup;
   todayDate = new Date();
   subscriptions: Subscription = new Subscription();
-  iconUrl = '';
   iconUploaded: File | null = null;
+  iconUrl = '';
 
   constructor(private formService: ProfileEditFormService,
               private authenticationService: AuthenticationService,
               private userProfileApiService: UserProfileApiService,
               private toastService: ToastService,
-              private languageService: LanguageService,
-              private imageService: ImageService) {
+              private languageService: LanguageService) {
     this.form = this.formService.getForm();
   }
 
@@ -55,38 +54,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   update() {
     const request = this.formService.convertFormToUserProfile(this.form);
-    if (this.iconUploaded) {
-      this.saveIcon(request);
-    } else {
-      this.saveProfile(request);
-    }
-  }
-
-  saveIcon(request: UserProfile) {
-    this.subscriptions.add(this.imageService.saveImage(this.iconUploaded as File, ImageType.USER).subscribe({
-      next: (imageUrl) => {
-        console.log(imageUrl);
-        this.iconUrl = imageUrl.url;
-        request.iconUrl = imageUrl.url;
-        this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.image-update.success'), ToastType.SUCCESS);
+    this.subscriptions.add(this.userProfileApiService.saveProfile(request, this.iconUploaded as File, ImageKind.USER).subscribe({
+      next: (userProfile) => {
+        this.authenticationService.updateUser(userProfile);
+        this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.update.success'), ToastType.SUCCESS);
+        this.loadFormData(userProfile);
         this.iconUploaded = null;
-        this.saveProfile(request);
-      },
-      error: () => this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.image-update.error'), ToastType.ERROR)
-    }));
-  }
-
-  saveProfile(request: UserProfile) {
-    this.subscriptions.add(this.userProfileApiService.saveProfile(request).subscribe({
-      next: () => {
-        this.userProfileApiService.getProfile(request.id).subscribe({
-          next: (userProfile) => {
-            this.authenticationService.updateUser(userProfile);
-            this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.update.success'), ToastType.SUCCESS);
-            this.loadFormData(userProfile);
-          },
-          error: () => this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.update.error'), ToastType.ERROR)
-        });
       },
       error: () => this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.update.error'), ToastType.ERROR)
     }));
