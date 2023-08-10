@@ -33,7 +33,7 @@ export class AuthEffects {
         ]),
         catchError((response: any) => {
             if (response.error.status === 403) {
-              return of(showToast({ messageKey: null, message: response.error.message, toastType: ToastType.ERROR }));
+              return of(goRoute({ routingLink: 'reactivation-account', param: request.login }));
             } else {
               return of(showToast({ messageKey: 'services.sign-in.error', toastType: ToastType.ERROR }));
             }

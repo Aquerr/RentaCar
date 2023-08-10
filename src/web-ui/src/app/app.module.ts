@@ -27,6 +27,9 @@ import { AccountActivatedComponent } from '../components/info/account-activated.
 import {
   ActivationAccountComponent
 } from '../components/authentication/activation-account/activation-account.component';
+import {
+  ReactivationAccountComponent
+} from '../components/authentication/reactivation-account/reactivation-account.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import {
     VehicleDetailsComponent,
     FooterComponent,
     ActivationAccountComponent,
-    AccountActivatedComponent
+    AccountActivatedComponent,
+    ReactivationAccountComponent
   ],
   imports: [
     BrowserModule,

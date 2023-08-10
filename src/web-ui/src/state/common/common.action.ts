@@ -6,4 +6,4 @@ export const showToast = createAction('Show toast', props<{
   message?: string | null,
   toastType: ToastType
 }>());
-export const goRoute = createAction('Go route', props<{ routingLink: string }>());
+export const goRoute = createAction('Go route', props<{ routingLink: string, param?: string }>());

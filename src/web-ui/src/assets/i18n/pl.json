@@ -8,7 +8,8 @@
     "vehicle-list": "Wyszukiwanie pojazdów",
     "reservation": "Rezerwacja",
     "activation": "Aktywacja konta",
-    "account-activated": "Konto aktywowane"
+    "account-activated": "Konto aktywowane",
+    "reactivation-account": "Reaktywacja konta"
   },
   "components": {
     "authentication": {
@@ -157,7 +158,20 @@
         "error": "Token stracił swoją ważność. Skontaktuj się z administratorem aplikacji w celu aktywacji konta."
       }
     },
-    "account-activated": "Konto zostało zaaktywowane."
+    "account-activated": "Konto zostało zaaktywowane.",
+    "reactivation-account": {
+      "labels": {
+        "title": "Link aktywacyjny",
+        "login": "Login"
+      },
+      "buttons": {
+        "resend": "Wyślij ponownie"
+      },
+      "toasts": {
+        "success": "Link aktywacyjny wysłany na wskazany email",
+        "error": "Próba wysłania linu nie powiodła się"
+      }
+    }
   },
   "app": {
     "top-nav": {
