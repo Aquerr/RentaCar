@@ -32,7 +32,4 @@ public class ActivationTokenEntity
 
     @Column(name = "used", nullable = false, unique = false, columnDefinition = "tinyint(1) default 0")
     private boolean used;
-
-    @Column(name = "valid", nullable = false, unique = false)
-    private boolean valid;
 }

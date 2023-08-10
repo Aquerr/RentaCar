@@ -29,8 +29,10 @@ public class AccountActivationService
     private Duration activationTokenExpirationTime;
 
     @Transactional
-    public ActivationTokenEntity generateActivationToken(long credentialsId)
+    public ActivationTokenEntity invalidateOldActivationTokensAndGenerateNew(long credentialsId)
     {
+        this.activationTokenRepository.invalidateOldActivationTokens(credentialsId);
+
         ActivationTokenEntity activationTokenEntity = new ActivationTokenEntity();
         activationTokenEntity.setCredentialsId(credentialsId);
         activationTokenEntity.setExpirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime));

@@ -51,7 +51,7 @@ public class UserCredentials
         }
 
         @Component
-        public static class UsernameOrEmailConveter implements Converter<String, UsernameOrEmail>
+        public static class UsernameOrEmailConverter implements Converter<String, UsernameOrEmail>
         {
             @Override
             public UsernameOrEmail convert(String source)

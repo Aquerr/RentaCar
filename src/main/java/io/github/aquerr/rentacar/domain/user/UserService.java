@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.domain.user;
 
 import io.github.aquerr.rentacar.application.lang.RequestLocaleExtractor;
+import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationTokenRequester;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
@@ -14,6 +15,7 @@ import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.dto.UserRegistration;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -85,5 +87,24 @@ public class UserService {
                     .email(credentials.getEmail())
                     .build());
         }
+    }
+
+    public void resendActivationEmail(io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail login)
+    {
+        UserCredentialsEntity userCredentialsEntity = this.userCredentialsRepository.findByUsernameOrEmail(login.getLogin(), login.getLogin());
+        if (userCredentialsEntity == null)
+        {
+            throw new UsernameNotFoundException("User does not exist!");
+        }
+        else if (userCredentialsEntity.isActivated())
+        {
+            // Better not to inform the client about activated account.
+            throw new AccessDeniedException();
+        }
+
+        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(),
+                userCredentialsEntity.getEmail(),
+                requestLocaleExtractor.getPreferredLangCode()
+        );
     }
 }
