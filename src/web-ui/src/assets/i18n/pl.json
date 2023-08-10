@@ -158,7 +158,12 @@
         "error": "Token stracił swoją ważność. Skontaktuj się z administratorem aplikacji w celu aktywacji konta."
       }
     },
-    "account-activated": "Konto zostało zaaktywowane.",
+    "account-activated": {
+      "labels": {
+        "title": "Konto zostało zaaktywowane.",
+        "sign-in": "Zaloguj się"
+      }
+    },
     "reactivation-account": {
       "labels": {
         "title": "Link aktywacyjny",
