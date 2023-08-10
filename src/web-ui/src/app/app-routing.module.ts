@@ -55,21 +55,25 @@ const routes: Routes = [
   {
     path: 'reservation/:id',
     component: ReservationComponent,
+    canActivate: [LoginGuard],
     title: 'title.reservation'
   },
   {
     path: 'activation-account',
     component: ActivationAccountComponent,
+    canActivate: [AnonymousGuard],
     title: 'title.activation'
   },
   {
     path: 'account-activated',
     component: AccountActivatedComponent,
+    canActivate: [AnonymousGuard],
     title: 'title.account-activated'
   },
   {
     path: 'reactivation-account/:id',
     component: ReactivationAccountComponent,
+    canActivate: [AnonymousGuard],
     title: 'title.reactivation-account'
   },
   {
