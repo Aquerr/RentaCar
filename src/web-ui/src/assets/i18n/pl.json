@@ -66,10 +66,6 @@
         "update": {
           "success": "Profil użytkownika zaaktualizowany pomyślnie",
           "error": "Nie udało zaaktualizować się profilu użytkownika"
-        },
-        "image-update": {
-          "success": "Zdjęcie zaaktualizowany pomyślnie",
-          "error": "Nie udało zaaktualizować się zdjęcia"
         }
       }
     },

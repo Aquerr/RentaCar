@@ -66,10 +66,6 @@
         "update": {
           "success": "User profile has been updated successfully",
           "error": "User profile has not been updated successfully"
-        },
-        "image-update": {
-          "success": "Photo has been updated successfully",
-          "error": "Photo has not been updated successfully"
         }
       }
     },

@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { UserProfile } from '../../../models/user-profile.model';
 import { Router } from '@angular/router';
-import { ImageService, ImageType } from '../../../services/image.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -27,8 +26,7 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
   @Output() logoutEmitter = new EventEmitter<void>;
 
   constructor(private eRef: ElementRef,
-              private router: Router,
-              private imageService: ImageService) {
+              private router: Router) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {

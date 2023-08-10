@@ -28,7 +28,7 @@ export class VehicleCardComponent {
   }
 
   calculateCurrency(price: number) {
-    // TODO pobieranie wartości walutowych na dany dzień, a może job na backend i raz dziennie odpalać quartz i rekalkulować cene w zależności od waluty?
+    //TODO pobieranie wartości walutowych na dany dzień, a może job na backend i raz dziennie odpalać quartz i rekalkulować cene w zależności od waluty?
     if (this.lang === 'en') {
       return (price / 4).toFixed(2);
     }
