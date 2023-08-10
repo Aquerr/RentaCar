@@ -7,7 +7,8 @@
     "profile-edit": "Edycja profilu",
     "vehicle-list": "Wyszukiwanie pojazdów",
     "reservation": "Rezerwacja",
-    "activation": "Aktywacja konta"
+    "activation": "Aktywacja konta",
+    "account-activated": "Konto aktywowane"
   },
   "components": {
     "authentication": {
@@ -153,10 +154,10 @@
     },
     "activation-account": {
       "toasts": {
-        "success": "Konto zostało aktywowane. Możesz się zalogować.",
         "error": "Token stracił swoją ważność. Skontaktuj się z administratorem aplikacji w celu aktywacji konta."
       }
-    }
+    },
+    "account-activated": "Konto zostało zaaktywowane."
   },
   "app": {
     "top-nav": {
