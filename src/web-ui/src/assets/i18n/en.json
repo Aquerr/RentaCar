@@ -117,11 +117,13 @@
         "diesel": "Diesel",
         "hybrid": "Hybrid",
         "electric": "Electric",
-        "avg-fuel-consumption": "l/100km average consumption"
+        "avg-fuel-consumption": "l/100km average consumption",
+        "price": "Lease price from"
       },
       "buttons": {
         "reserve": "Reserve vehicle",
-        "disabled": "Sign in, to reserve a vehicle"
+        "disabled": "Sign in, to reserve a vehicle",
+        "details": "Vehicle details"
       }
     },
     "vehicle-list": {
