@@ -117,11 +117,13 @@
         "diesel": "Diesel",
         "hybrid": "Hybryda",
         "electric": "Elektryk",
-        "avg-fuel-consumption": "l/100km średnie spalanie"
+        "avg-fuel-consumption": "l/100km średnie spalanie",
+        "price": "Cena wynajmu od"
       },
       "buttons": {
         "reserve": "Rezerwuj pojazd",
-        "disabled": "Zaloguj się, żeby zarezerwować pojazd"
+        "disabled": "Zaloguj się, żeby zarezerwować pojazd",
+        "details": "Szczegóły pojazdu"
       }
     },
     "vehicle-list": {

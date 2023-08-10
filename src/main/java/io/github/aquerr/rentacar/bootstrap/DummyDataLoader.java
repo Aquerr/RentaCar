@@ -105,8 +105,8 @@ public class DummyDataLoader implements CommandLineRunner {
     {
         VehicleEntity vehicle = VehicleEntity.builder()
                 .id(1)
-                .brand("BRAND")
-                .model("MODEL")
+                .brand("TOYOTA")
+                .model("YARIS")
                 .productionYear(LocalDate.now())
                 .seatsAmount(5)
                 .color("red")
@@ -132,8 +132,8 @@ public class DummyDataLoader implements CommandLineRunner {
                 .build();
         VehicleEntity vehicle2 = VehicleEntity.builder()
                 .id(2)
-                .brand("BRAND")
-                .model("MODEL")
+                .brand("TOYOTA")
+                .model("AVENSIS")
                 .productionYear(LocalDate.now())
                 .seatsAmount(5)
                 .color("red")
