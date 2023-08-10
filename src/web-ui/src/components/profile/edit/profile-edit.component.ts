@@ -44,19 +44,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       this.userProfile = userProfile;
       if (userProfile) {
         this.loadFormData(userProfile);
-        this.getImage(userProfile.iconUrl);
+        this.iconUrl = userProfile.iconUrl;
       }
     }));
   }
 
   loadFormData(user: UserProfile) {
     this.formService.setForm(this.form, user);
-  }
-
-  getImage(iconUrl: string | undefined) {
-    this.subscriptions.add(this.imageService.getImagePath(iconUrl, ImageType.USER).subscribe({
-      next: (path) => this.iconUrl = path
-    }));
   }
 
   update() {
@@ -69,15 +63,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   saveIcon(request: UserProfile) {
-    const oldIconPath = this.userProfile?.iconUrl;
-    const iconPath = this.userProfile?.id + '/' + this.iconUploaded?.name;
-    this.subscriptions.add(this.imageService.saveImage(this.iconUploaded as File, iconPath, ImageType.USER).subscribe({
-      next: () => {
-        request.iconUrl = iconPath;
+    this.subscriptions.add(this.imageService.saveImage(this.iconUploaded as File, ImageType.USER).subscribe({
+      next: (imageUrl) => {
+        console.log(imageUrl);
+        this.iconUrl = imageUrl.url;
+        request.iconUrl = imageUrl.url;
         this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.image-update.success'), ToastType.SUCCESS);
         this.iconUploaded = null;
         this.saveProfile(request);
-        this.imageService.deleteImage(oldIconPath as string, ImageType.USER).subscribe();
       },
       error: () => this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.image-update.error'), ToastType.ERROR)
     }));

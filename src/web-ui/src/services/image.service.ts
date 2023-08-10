@@ -8,7 +8,7 @@ import { catchError, of } from 'rxjs';
   providedIn: 'root'
 })
 export class ImageService {
-  private URL = APP_BASE_URL + APP_V1_URL + '/images';
+  private URL = APP_BASE_URL + APP_V1_URL + '/assets/images';
   private IMAGE_PATH_PREFIX = 'assets/images/';
   private DEFAULT_ICON_NAME = 'not-found.jpg';
 
@@ -25,11 +25,11 @@ export class ImageService {
       ));
   }
 
-  saveImage(image: File, imagePath: string, imageType: ImageType) {
+  saveImage(image: File, imageType: ImageType) {
     const formData = new FormData();
     formData.append('image', image);
-    formData.append('path', imageType + imagePath);
-    return this.http.post<void>(this.URL, formData);
+    formData.append('imageKind', imageType);
+    return this.http.post<ImageSaveResponse>(this.URL, formData);
   }
 
   deleteImage(imagePath: string, imageType: ImageType) {
@@ -40,7 +40,11 @@ export class ImageService {
 
 }
 
+export interface ImageSaveResponse {
+  url: string;
+}
+
 export enum ImageType {
-  VEHICLES = 'vehicles/',
-  USER = 'user/'
+  VEHICLE = 'VEHICLE',
+  USER = 'USER'
 }

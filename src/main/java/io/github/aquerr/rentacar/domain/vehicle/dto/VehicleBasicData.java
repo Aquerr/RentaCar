@@ -16,7 +16,7 @@ public class VehicleBasicData
     Engine engine;
     Equipment equipment;
     BigDecimal basicPrice;
-    byte[] photo;
+    String photoUrl;
 
     @Value
     @Builder

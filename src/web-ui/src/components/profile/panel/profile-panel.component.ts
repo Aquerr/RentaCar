@@ -64,9 +64,6 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
   }
 
   getImage() {
-    const iconUrl = this.user?.iconUrl;
-    this.subscription = this.imageService.getImagePath(iconUrl, ImageType.USER).subscribe({
-      next: (path) => this.iconUrl = path
-    });
+    this.iconUrl = this.user?.iconUrl as string;
   }
 }

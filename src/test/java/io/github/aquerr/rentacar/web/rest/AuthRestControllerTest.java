@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticationFilter;
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
+import io.github.aquerr.rentacar.application.lang.AcceptedLanguageLocaleMapper;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.JwtToken;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
@@ -41,6 +42,8 @@ class AuthRestControllerTest
     private UserService userService;
     @MockBean
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @MockBean
+    private AcceptedLanguageLocaleMapper acceptedLanguageLocaleMapper;
 
     @Autowired
     private AuthRestController authRestController;

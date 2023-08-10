@@ -48,6 +48,7 @@ public class SecurityConfig {
                 if (this.environment.matchesProfiles("dev")) {
                     requests.requestMatchers(PathRequest.toH2Console()).permitAll();
                 }
+                requests.requestMatchers(HttpMethod.GET, "/api/v1/assets/images/{kind}/{name}").permitAll();
                 requests.requestMatchers("/api/v1/vehicles/**").permitAll();
                 requests.requestMatchers("/api/v1/users/register").permitAll();
                 requests.requestMatchers("/api/v1/pickup-locations").permitAll();

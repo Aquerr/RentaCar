@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -60,7 +61,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .city("Testów")
                 .zipCode("15551")
                 .street("Wymyślna 42")
-                .iconUrl("1/photo.jpg")
+                .iconName("photo.jpg")
                 .build();
         profileRepository.save(userProfileEntity1);
         log.info("Created dummy verified profile: {}", userCredentialsEntity1);
@@ -93,7 +94,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .multifunctionalSteeringWheel(true)
                 .category("A")
                 .basicPrice(new BigDecimal(245))
-                .photoNames("1/photo.jpg")
+                .photoNames(List.of("car1.webp"))
                 .build();
         vehicleRepository.save(vehicle);
     }
