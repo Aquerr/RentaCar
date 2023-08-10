@@ -125,7 +125,12 @@
       }
     },
     "vehicle-list": {
-      "no-vehicles": "Brak pojazdów w wybranym terminie"
+      "labels": {
+        "no-vehicles": "Brak pojazdów w wybranym terminie"
+      },
+      "buttons": {
+        "search": "Szukaj"
+      }
     },
     "vehicle-details": {
       "labels": {
@@ -175,6 +180,15 @@
       "toasts": {
         "success": "Link aktywacyjny wysłany na wskazany email",
         "error": "Próba wysłania linu nie powiodła się"
+      }
+    },
+    "main": {
+      "labels": {
+        "title": "Przetestuj\nprędkość na\nwłasnej skórze",
+        "text": "Zapoznaj się z szeroką ofertą aut sportowych (i nie tylko) i wybierz to, które najbardziej do Ciebie pasuje."
+      },
+      "buttons": {
+        "reserve": "Rezerwuj"
       }
     }
   },

@@ -10,6 +10,6 @@ export class DateService {
   }
 
   public convertDateToLocalDate(date: Date) {
-    return this.datePipe.transform(date, 'yyyy-MM-dd');
+    return this.datePipe.transform(date, 'yyyy-MM-dd') as string;
   }
 }

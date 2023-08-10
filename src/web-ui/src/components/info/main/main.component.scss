@@ -1,0 +1,41 @@
+.container {
+  background: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 600px;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-right: 1px solid grey;
+}
+
+.text-container {
+  width: 50%;
+}
+
+.btn {
+  margin: 20px auto;
+  background: black;
+  padding: 10px;
+}
+
+.btn:hover {
+  color: var(--gold);
+}
+
+.right {
+  height: inherit;
+}
+
+img {
+  width: 100%;
+  height: inherit;
+}
