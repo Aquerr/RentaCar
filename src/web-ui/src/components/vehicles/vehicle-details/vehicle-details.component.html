@@ -1,8 +1,14 @@
 <div class='container' *ngIf='vehicle'>
   <h3>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</h3>
-  <div class='img'>
-    <!--TODO slider zdjęć-->
-    <img alt='' [src]='vehicle.photosUrls[0]' />
+  <div class='img-container'>
+    <p-carousel [value]='vehicle.photosUrls' [numVisible]='1' [numScroll]='1'
+                [autoplayInterval]='7000' [circular]='true'>
+      <ng-template let-photo pTemplate='item'>
+        <div>
+          <img [src]='photo' alt=''>
+        </div>
+      </ng-template>
+    </p-carousel>
   </div>
 
   <div class='section'>

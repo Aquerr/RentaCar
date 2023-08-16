@@ -22,6 +22,7 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   exports: [
@@ -40,7 +41,8 @@ import { DialogService } from 'primeng/dynamicdialog';
     CalendarModule,
     DropdownModule,
     FontAwesomeModule,
-    DialogModule
+    DialogModule,
+    CarouselModule
   ],
   providers: [
     MessageService,
