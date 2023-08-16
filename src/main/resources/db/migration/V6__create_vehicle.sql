@@ -22,6 +22,7 @@ CREATE TABLE vehicle
     led_rear_lights                BOOLEAN      NOT NULL,
     leather_seats                  BOOLEAN      NOT NULL,
     multifunctional_steering_wheel BOOLEAN      NOT NULL,
+    cruise_control                 BOOLEAN      NOT NULL,
     category                       VARCHAR(1)   NOT NULL,
     basic_price                    DECIMAL      NOT NULL,
     photo_names                    VARCHAR(255) NOT NULL

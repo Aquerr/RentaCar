@@ -46,6 +46,7 @@ export interface Equipment {
   ledRearLights: boolean;
   leatherSeats: boolean;
   multifunctionalSteeringWheel: boolean;
+  cruiseControl: boolean;
 }
 
 export enum EngineType {

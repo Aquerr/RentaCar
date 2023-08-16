@@ -10,8 +10,6 @@ import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleTransmission;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @AllArgsConstructor
 public class VehicleConverter {
@@ -78,6 +76,7 @@ public class VehicleConverter {
                         .bluetooth(vehicleEntity.isBluetooth())
                         .leatherSeats(vehicleEntity.isLeatherSeats())
                         .multifunctionalSteeringWheel(vehicleEntity.isMultifunctionalSteeringWheel())
+                        .cruiseControl(vehicleEntity.isCruiseControl())
                         .build())
                 .basicPrice(vehicleEntity.getBasicPrice())
                 .category(VehicleCategory.valueOf(vehicleEntity.getCategory()));
