@@ -2,39 +2,52 @@ package io.github.aquerr.rentacar.bootstrap;
 
 import io.github.aquerr.rentacar.domain.image.ImageService;
 import io.github.aquerr.rentacar.domain.image.model.ImageKindFolder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.event.EventListener;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
-import org.springframework.util.FileSystemUtils;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 @Component
-public class DefaultExternalAssetsPreparator implements ResourceLoaderAware
+@Slf4j
+public class DefaultExternalAssetsPreparator
 {
-    private ResourceLoader resourceLoader;
-
     @EventListener(ApplicationStartedEvent.class)
     public void prepareExternalAssets()
     {
         try
         {
-            File defaultAssetsResourceFolder = resourceLoader.getResource("classpath:default-assets").getFile();
-            FileSystemUtils.copyRecursively(defaultAssetsResourceFolder.toPath().resolve("users"), ImageService.IMAGE_DIR_PATH.resolve(ImageKindFolder.USERS_PATH.getFolderName()));
-            FileSystemUtils.copyRecursively(defaultAssetsResourceFolder.toPath().resolve("vehicles"), ImageService.IMAGE_DIR_PATH.resolve(ImageKindFolder.VEHICLES_PATH.getFolderName()));
+            prepareDefaultImages();
         }
-        catch (IOException e)
+        catch (IOException | URISyntaxException e)
         {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public void setResourceLoader(ResourceLoader resourceLoader)
+    private void prepareDefaultImages() throws IOException, URISyntaxException
     {
-        this.resourceLoader = resourceLoader;
+        moveResources("classpath:default-assets/users/*.*", ImageService.IMAGE_DIR_PATH.resolve(ImageKindFolder.USERS_PATH.getFolderName()));
+        moveResources("classpath:default-assets/vehicles/*.*", ImageService.IMAGE_DIR_PATH.resolve(ImageKindFolder.VEHICLES_PATH.getFolderName()));
+    }
+
+    private void moveResources(String sourceResourceDirectory, Path destinationDirectory) throws IOException
+    {
+        Files.createDirectories(destinationDirectory);
+        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resourcePatternResolver.getResources(sourceResourceDirectory);
+        log.info("Copying default resources {} to {}", resources, destinationDirectory);
+        for (final Resource resource : resources)
+        {
+            Files.copy(resource.getInputStream(), destinationDirectory.resolve(resource.getFilename()), StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 }
