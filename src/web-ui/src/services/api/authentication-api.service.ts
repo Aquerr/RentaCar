@@ -26,7 +26,7 @@ export class AuthenticationApiService {
 
   public getMyself() {
     const url = this.AUTH_URL + '/myself';
-    return this.http.get<UserProfile>(url);
+    return this.http.get<MyselfResponse>(url);
   }
 
   public logout() {
@@ -38,5 +38,10 @@ export class AuthenticationApiService {
 export interface JwtTokenResponse {
   jwt: string;
   username: string;
+  authorities: string[];
+}
+
+export interface MyselfResponse {
+  userProfile: UserProfile;
   authorities: string[];
 }
