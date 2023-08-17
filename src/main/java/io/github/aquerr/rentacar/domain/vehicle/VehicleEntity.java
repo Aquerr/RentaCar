@@ -95,6 +95,9 @@ public class VehicleEntity
     @Column(name = "multifunctional_steering_wheel", unique = false, nullable = false)
     private boolean multifunctionalSteeringWheel;
 
+    @Column(name = "cruise_control", unique = false, nullable = false)
+    private boolean cruiseControl;
+
     @Column(name = "category", unique = false, nullable = false)
     private String category;
 

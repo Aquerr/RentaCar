@@ -55,5 +55,6 @@ public class VehicleFullData {
         boolean ledRearLights;
         boolean leatherSeats;
         boolean multifunctionalSteeringWheel;
+        boolean cruiseControl;
     }
 }
