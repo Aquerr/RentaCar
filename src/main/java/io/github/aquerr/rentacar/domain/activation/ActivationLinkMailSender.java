@@ -20,7 +20,7 @@ public class ActivationLinkMailSender
         {
             rabbitMessageSender.send("mail.send", message);
         }
-        catch (MessageSendException e)
+        catch (Exception e)
         {
             //TODO: We should retry...
             log.error("Could not send message {}", message, e);

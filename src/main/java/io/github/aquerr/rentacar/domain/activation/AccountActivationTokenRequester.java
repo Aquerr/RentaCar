@@ -21,7 +21,7 @@ public class AccountActivationTokenRequester
         {
             rabbitMessageSender.send("account.activation.request", new AccountActivationTokenRequestCommand(credentialsId, email, langCode));
         }
-        catch (MessageSendException e)
+        catch (Exception e)
         {
             //TODO: We should retry...
             log.error(String.format("Could not send message: credentialsId: %s, email: %s", credentialsId, email), e);
