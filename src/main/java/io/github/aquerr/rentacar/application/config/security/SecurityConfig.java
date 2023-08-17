@@ -60,6 +60,7 @@ public class SecurityConfig {
                 requests.requestMatchers("/public/**").permitAll();
                 requests.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                 requests.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll();
+                requests.requestMatchers("/assets/**").permitAll();
                 requests.requestMatchers("/*").permitAll();
             })
             .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
