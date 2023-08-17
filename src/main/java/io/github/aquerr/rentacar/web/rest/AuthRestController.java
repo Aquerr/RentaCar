@@ -10,16 +10,21 @@ import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.web.rest.request.ActivationTokenRequest;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
+import io.github.aquerr.rentacar.web.rest.response.MyselfResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -38,14 +43,18 @@ public class AuthRestController
     }
 
     @GetMapping("/myself")
-    public ResponseEntity<UserProfile> getCurrentUser()
+    public ResponseEntity<MyselfResponse> getMyself()
     {
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
         if (authenticatedUser == null)
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        return ResponseEntity.ok(this.profileService.getProfileById(authenticationFacade.getCurrentUser().getProfileId()));
+        UserProfile userProfile = this.profileService.getProfileById(authenticationFacade.getCurrentUser().getProfileId());
+        Set<String> authorities = this.authenticationFacade.getCurrentUser().getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(MyselfResponse.of(userProfile, authorities));
     }
 
     @PostMapping("/activation")
