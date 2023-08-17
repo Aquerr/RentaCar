@@ -6,6 +6,7 @@
     "not-found": "Page not found",
     "profile-edit": "Profile edit",
     "vehicle-list": "Searching vehicles",
+    "vehicle-details": "Vehicle details",
     "reservation": "Reservation",
     "activation": "Account activation",
     "account-activated": "Account activated",
@@ -154,10 +155,11 @@
         "led-rear": "Rear LED lights:",
         "xenon-front": "Front XENON lights:",
         "leather": "Leather seats:",
-        "multi-steering-wheel": "Multifunctional steering wheel:"
+        "multi-steering-wheel": "Multifunctional steering wheel:",
+        "cruise-control": "Cruise control:"
       },
       "buttons": {
-        "close": "Close"
+        "reserve": "Reserve"
       }
     },
     "activation-account": {

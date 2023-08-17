@@ -6,6 +6,7 @@
     "not-found": "Strona nie znaleziona",
     "profile-edit": "Edycja profilu",
     "vehicle-list": "Wyszukiwanie pojazdów",
+    "vehicle-details": "Szczegóły pojazdu",
     "reservation": "Rezerwacja",
     "activation": "Aktywacja konta",
     "account-activated": "Konto aktywowane",
@@ -154,10 +155,11 @@
         "led-rear": "Światła LED tył:",
         "xenon-front": "Światła XENON przód:",
         "leather": "Skórzane fotele:",
-        "multi-steering-wheel": "Kierownica multifunkcyjna:"
+        "multi-steering-wheel": "Kierownica multifunkcyjna:",
+        "cruise-control": "Tempomat:"
       },
       "buttons": {
-        "close": "Zamknij"
+        "reserve": "Rezerwuj"
       }
     },
     "activation-account": {

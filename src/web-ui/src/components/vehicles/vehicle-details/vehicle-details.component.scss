@@ -1,3 +1,27 @@
+.wrapper {
+  background-color: white;
+  padding: 40px;
+}
+
+.top-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
 h3 {
   text-align: center;
 }
@@ -7,7 +31,7 @@ h3 {
   justify-content: center;
   align-items: center;
   margin: 10px auto;
-  width: 400px;
+  width: 800px;
 }
 
 img {
@@ -15,15 +39,23 @@ img {
   height: auto;
 }
 
+.equipment-container {
+  display: flex;
+}
+
 .section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   margin: auto;
   gap: 5px;
 }
 
 .title {
   font-weight: bold;
+}
+
+.description {
+  padding: 50px;
 }
 
 .btn {
@@ -34,6 +66,10 @@ img {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
   text-align: center;
   margin: 20px auto;
+}
+
+.btn:disabled, .btn[disabled=disabled] {
+  background: grey;
 }
 
 .btn:hover {

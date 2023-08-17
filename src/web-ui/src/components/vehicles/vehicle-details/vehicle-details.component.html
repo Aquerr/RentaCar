@@ -1,73 +1,126 @@
-<div class='container' *ngIf='vehicle'>
-  <h3>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</h3>
-  <div class='img-container'>
-    <p-carousel [value]='vehicle.photosUrls' [numVisible]='1' [numScroll]='1'
-                [autoplayInterval]='7000' [circular]='true'>
-      <ng-template let-photo pTemplate='item'>
-        <div>
-          <img [src]='photo' alt=''>
-        </div>
-      </ng-template>
-    </p-carousel>
+<div class='wrapper' *ngIf='vehicle'>
+  <div class='top-container'>
+    <div class='img-container'>
+      <h1>{{vehicle.brand | uppercase}} {{vehicle.model | uppercase}}</h1>
+      <p-carousel [value]='vehicle.photosUrls' [numVisible]='1' [numScroll]='1'
+                  [autoplayInterval]='7000' [circular]='true'>
+        <ng-template let-photo pTemplate='item'>
+          <div>
+            <img [src]='photo' alt=''>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <div class='reserve-container'>
+      <h3>Rezerwuj</h3>
+      <div class='date-container'>
+        <h3>{{'Dostępność' | uppercase}}</h3>
+        <p-calendar id='dateFrom' [(ngModel)]='dateFrom'
+                    dateFormat='dd.mm.yy'
+                    [minDate]='today'
+                    [maxDate]='dateTo'
+                    [touchUI]='true'
+                    [readonlyInput]='true'
+                    (ngModelChange)='onDateChange()'></p-calendar>
+        <p-calendar id='dateTo' [(ngModel)]='dateTo'
+                    dateFormat='dd.mm.yy'
+                    [minDate]='dateFrom'
+                    [touchUI]='true'
+                    [readonlyInput]='true'
+                    (ngModelChange)='onDateChange()'
+        ></p-calendar>
+      </div>
+
+      <div class='reservation-info-container'>
+        <h3>{{'Warunki ogólne' | uppercase}}</h3>
+        <ul>
+          <li>Kaucja w wysokości 1500 zł płatna gotówką</li>
+          <li>Limit km na dobę: 300km</li>
+        </ul>
+      </div>
+
+      <h3>Koszt najmu {{totalPrice}} PLN</h3>
+      <button class='btn'
+              [disabled]='!vehicleAvailable && !user'
+              (click)='reserve()'>{{ 'components.vehicle-details.buttons.reserve' | translate}}</button>
+    </div>
+
   </div>
 
-  <div class='section'>
+  <div class='bottom-container'>
+    <div class='equipment-container'>
+      <div class='section'>
     <span
       class='title'>{{ 'components.vehicle-details.labels.production-year' | translate}}</span><span>{{vehicle.productionYear | date: 'yyyy-MM-dd'}}</span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.amount-of-seats' | translate}}</span><span>{{vehicle.seatsAmount}}</span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.category' | translate}}</span><span>{{vehicle.category}}</span>
-  </div>
-  <div class='section'>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.color' | translate}}</span><span>{{ getTranslation(vehicle.body.color, 'colors') | translate }} </span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.rims-inch' | translate}}</span><span>{{vehicle.body.rimsInch}}</span>
-  </div>
-  <div class='section'>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.amount-of-seats' | translate}}</span><span>{{vehicle.seatsAmount}}</span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.category' | translate}}</span><span>{{vehicle.category}}</span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.color' | translate}}</span><span>{{ getTranslation(vehicle.body.color, 'colors') | translate }} </span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.rims-inch' | translate}}</span><span>{{vehicle.body.rimsInch}}</span>
+      </div>
+      <div class='section'>
     <span
       class='title'>{{ 'components.vehicle-details.labels.engine-type' | translate}}</span><span>{{ getTranslation(vehicle.engine.type, 'engine-type') | translate }}</span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.avg-fuel-consumption' | translate}}</span><span>{{vehicle.engine.avgFuelConsumption}}</span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.engine-power' | translate}}</span><span>{{vehicle.engine.power}}
-    KM ({{vehicle.engine.torque}}Nm)</span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.engine-capacity' | translate}}</span><span>{{vehicle.engine.capacity}}
-    cm3</span>
-    <span
-      class='title'>{{ 'components.vehicle-details.labels.engine-transmission' | translate}}</span><span>{{ getTranslation(vehicle.engine.transmission, 'transmission') | translate }}</span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.avg-fuel-consumption' | translate}}</span><span>{{vehicle.engine.avgFuelConsumption}}</span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.engine-power' | translate}}</span><span>{{vehicle.engine.power}}
+        KM ({{vehicle.engine.torque}}Nm)</span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.engine-capacity' | translate}}</span><span>{{vehicle.engine.capacity}}
+        cm3</span>
+        <span
+          class='title'>{{ 'components.vehicle-details.labels.engine-transmission' | translate}}</span><span>{{ getTranslation(vehicle.engine.transmission, 'transmission') | translate }}</span>
+      </div>
+      <div class='section'>
+        <span class='title'>{{ 'components.vehicle-details.labels.ac' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.ac' [disabled]='true'
+        [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.pdc-front' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.frontPDC'
+        [disabled]='true'
+        [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.pdc-rear' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.rearPDC' [disabled]='true'
+        [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.bluetooth' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.bluetooth' [disabled]='true'
+        [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.led-front' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.ledFrontLights' [disabled]='true' [binary]='true' /></span>
+      </div>
+      <div class='section'>
+        <span class='title'>{{ 'components.vehicle-details.labels.led-rear' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.ledRearLights'
+        [disabled]='true'
+        [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.xenon-front' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.xenonFrontLights' [disabled]='true' [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.leather' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.leatherSeats'
+        [disabled]='true' [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.multi-steering-wheel' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.multifunctionalSteeringWheel'
+        [disabled]='true' [binary]='true' /></span>
+        <span class='title'>{{ 'components.vehicle-details.labels.cruise-control' | translate}}</span><span><p-checkbox
+        [(ngModel)]='vehicle.equipment.cruiseControl'
+        [disabled]='true' [binary]='true' /></span>
+      </div>
+    </div>
+    <div class='description'>
+      "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by
+      the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are
+      bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the
+      same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In
+      a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like
+      best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the
+      claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and
+      annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he
+      rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+    </div>
   </div>
-  <div class='section'>
-    <span class='title'>{{ 'components.vehicle-details.labels.ac' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.ac' [disabled]='true'
-    [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.pdc-front' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.frontPDC'
-    [disabled]='true'
-    [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.pdc-rear' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.rearPDC' [disabled]='true'
-    [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.bluetooth' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.bluetooth' [disabled]='true'
-    [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.led-front' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.ledFrontLights' [disabled]='true' [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.led-rear' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.ledRearLights'
-    [disabled]='true'
-    [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.xenon-front' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.xenonFrontLights' [disabled]='true' [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.leather' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.leatherSeats'
-    [disabled]='true' [binary]='true' /></span>
-    <span class='title'>{{ 'components.vehicle-details.labels.multi-steering-wheel' | translate}}</span><span><p-checkbox
-    [(ngModel)]='vehicle.equipment.multifunctionalSteeringWheel'
-    [disabled]='true' [binary]='true' /></span>
-  </div>
-  <button class='btn'
-          (click)='close()'>{{ 'components.vehicle-details.buttons.close' | translate}}</button>
 </div>

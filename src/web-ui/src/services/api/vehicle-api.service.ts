@@ -16,6 +16,13 @@ export class VehicleApiService {
     return this.http.get<VehicleFullDataResponse>(`${this.URL}/full-data/${vehicleId}`);
   }
 
+  public isVehicleAvailable(vehicleId: number, dateFrom: string, dateTo: string) {
+    const httpParams = new HttpParams()
+    .set('dateFrom', dateFrom)
+    .set('dateTo', dateTo);
+    return this.http.get<boolean>(`${this.URL}/${vehicleId}/available`, { params: httpParams });
+  }
+
   public getVehiclesAvailable(dateFrom: string, dateTo: string) {
     const httpParams = new HttpParams()
     .set('dateFrom', dateFrom)

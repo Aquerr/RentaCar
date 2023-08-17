@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EngineType, VehicleBasicData } from '../../../models/vehicle.model';
-import { DialogService } from 'primeng/dynamicdialog';
-import { VehicleDetailsComponent } from '../vehicle-details/vehicle-details.component';
 
 @Component({
   selector: 'vehicle-card',
@@ -14,14 +12,7 @@ export class VehicleCardComponent {
   @Input() userId: number | undefined;
   @Output() reserveVehicleEvent = new EventEmitter<number>;
 
-  constructor(private dialogService: DialogService) {}
-
-  showDetails(vehicleId: number) {
-    this.dialogService.open(VehicleDetailsComponent, {
-      data: vehicleId,
-      dismissableMask: true
-    });
-  }
+  constructor() {}
 
   reserveVehicle(vehicle: VehicleBasicData) {
     this.reserveVehicleEvent.emit(vehicle.id);

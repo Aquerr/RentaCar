@@ -17,6 +17,7 @@ import {
   ReactivationAccountComponent
 } from '../components/authentication/reactivation-account/reactivation-account.component';
 import { MainComponent } from '../components/info/main/main.component';
+import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
     path: 'vehicle-list',
     component: VehicleListComponent,
     title: 'title.vehicle-list'
+  },
+  {
+    path: 'vehicle-details/:id',
+    component: VehicleDetailsComponent,
+    title: 'title.vehicle-details'
   },
   {
     path: 'contact',
