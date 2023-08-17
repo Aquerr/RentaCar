@@ -131,6 +131,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .basicPrice(new BigDecimal(245))
                 .photoNames(List.of("car1.webp"))
                 .build();
+        log.info("Created dummy vehicle: {}", vehicle);
         VehicleEntity vehicle2 = VehicleEntity.builder()
                 .id(2)
                 .brand("TOYOTA")
@@ -159,6 +160,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .basicPrice(new BigDecimal(145))
                 .photoNames(List.of("car2.webp"))
                 .build();
+        log.info("Created dummy vehicle: {}", vehicle2);
         VehicleEntity vehicle3 = VehicleEntity.builder()
                 .id(3)
                 .brand("LEXUS")
@@ -187,6 +189,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .basicPrice(new BigDecimal(545))
                 .photoNames(List.of("car3.webp"))
                 .build();
+        log.info("Created dummy vehicle: {}", vehicle3);
         VehicleEntity vehicle4 = VehicleEntity.builder()
                 .id(4)
                 .brand("AUDI")
@@ -215,6 +218,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .basicPrice(new BigDecimal(245))
                 .photoNames(List.of("car4.webp"))
                 .build();
+        log.info("Created dummy vehicle: {}", vehicle4);
         VehicleEntity vehicle5 = VehicleEntity.builder()
                 .id(5)
                 .brand("AUDI")
@@ -243,6 +247,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .basicPrice(new BigDecimal(685))
                 .photoNames(List.of("car5.webp"))
                 .build();
+        log.info("Created dummy vehicle: {}", vehicle5);
         VehicleEntity vehicle6 = VehicleEntity.builder()
                 .id(6)
                 .brand("BMW")
@@ -271,6 +276,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .basicPrice(new BigDecimal(642))
                 .photoNames(List.of("car6.webp"))
                 .build();
+        log.info("Created dummy vehicle: {}", vehicle6);
         vehicleRepository.save(vehicle);
         vehicleRepository.save(vehicle2);
         vehicleRepository.save(vehicle3);
