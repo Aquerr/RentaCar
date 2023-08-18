@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, of, switchMap, tap } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { AuthenticationApiService } from '../../services/api/authentication-api.service';
 import {
   getMyself,
   logout,
+  removeAuthorities,
   removeToken,
   saveToken,
   setAuthorities,
@@ -28,7 +29,6 @@ export class AuthEffects {
       .pipe(
         mergeMap((response) => [
           saveToken({ jwt: response.jwt, rememberMe: request.rememberMe }),
-          setAuthorities({ authorities: response.authorities }),
           getMyself()
         ]),
         catchError((response: any) => {
@@ -48,7 +48,8 @@ export class AuthEffects {
       mergeMap(() => this.apiService.getMyself()
       .pipe(
         mergeMap((response) => [
-          setUser({ user: response }),
+          setUser({ user: response.userProfile }),
+          setAuthorities({ authorities: response.authorities }),
           goRoute({ routingLink: '' }),
           showToast({
             messageKey: 'services.sign-in.success',
@@ -65,11 +66,15 @@ export class AuthEffects {
       ofType(setUserOnAppInit),
       mergeMap(() => this.apiService.getMyself()
       .pipe(
-        map((response) => setUser({ user: response })),
+        mergeMap((response) => [
+          setUser({ user: response.userProfile }),
+          setAuthorities({ authorities: response.authorities })
+        ]),
         catchError((error: HttpErrorResponse) => {
           const actions = [];
           if (error.status === 401) {
             actions.push(removeToken());
+            actions.push(removeAuthorities());
             actions.push(goRoute({ routingLink: '' }));
             actions.push(showToast({
               messageKey: 'services.token-expire',
@@ -87,10 +92,10 @@ export class AuthEffects {
       .pipe(
         switchMap(() => [
           setUser({ user: null }),
-          setAuthorities({ authorities: [] }),
           showToast({ messageKey: 'services.log-out.success', toastType: ToastType.SUCCESS }),
           goRoute({ routingLink: '' }),
-          removeToken()
+          removeToken(),
+          removeAuthorities()
         ]),
         catchError(() => of(showToast({ messageKey: 'services.log-out.error', toastType: ToastType.ERROR })))
       ))
@@ -108,6 +113,20 @@ export class AuthEffects {
       ofType(removeToken),
       tap(() =>
         this.authenticationService.removeToken()
+      )), { dispatch: false });
+
+  setAuthorities$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setAuthorities),
+      tap(({ authorities: authorities }) =>
+        this.authenticationService.saveAuthorities(authorities)
+      )), { dispatch: false });
+
+  removeAuthorities$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(removeAuthorities),
+      tap(() =>
+        this.authenticationService.removeAuthorities()
       )), { dispatch: false });
 
   constructor(

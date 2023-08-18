@@ -10,8 +10,6 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AppInterceptor } from '../components/authentication/app.interceptor';
-import { LoginGuard } from '../components/authentication/login.guard';
-import { AnonymousGuard } from '../components/authentication/anonymous.guard';
 import { TooltipModule } from 'primeng/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { TitleStrategy } from '@angular/router';
@@ -23,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CarouselModule } from 'primeng/carousel';
+import { AppGuard } from '../components/authentication/app.guard';
 
 @NgModule({
   exports: [
@@ -55,8 +54,7 @@ import { CarouselModule } from 'primeng/carousel';
       provide: TitleStrategy,
       useClass: CustomPageTitleStrategy
     },
-    LoginGuard,
-    AnonymousGuard,
+    AppGuard,
     DatePipe,
     DialogService,
     provideEnvironmentNgxMask()

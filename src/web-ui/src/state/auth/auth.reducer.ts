@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { setAuthorities, setUser } from './auth.action';
+import { setUser } from './auth.action';
 import { initialState } from './auth.state';
 
 export const authReducer = createReducer(
@@ -8,12 +8,6 @@ export const authReducer = createReducer(
     return {
       ...state,
       user: user
-    };
-  }),
-  on(setAuthorities, (state, { authorities }) => {
-    return {
-      ...state,
-      authorities: authorities
     };
   })
 );

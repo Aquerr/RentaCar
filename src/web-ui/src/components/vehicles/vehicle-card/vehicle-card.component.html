@@ -48,12 +48,12 @@
       <div class='price-container'>
         <span>{{ 'components.vehicle-card.labels.price' | translate}}</span>
         <div class='price'>
-          {{ calculateCurrency(vehicle.basicPrice)}} {{lang === 'pl' ? 'zł' : 'usd'}}
+          {{vehicle.basicPrice}} PLN
         </div>
       </div>
       <div class='button-container'>
         <button class='btn'
-                (click)='showDetails(vehicle.id)'>{{ 'components.vehicle-card.buttons.details' | translate}}
+                routerLink='/vehicle-details/{{vehicle.id}}'>{{ 'components.vehicle-card.buttons.details' | translate}}
         </button>
 
         <button class='btn'
