@@ -28,22 +28,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = AuthRestController.class)
-class AuthRestControllerTest
+class AuthRestControllerTest extends BaseRestIntegrationTest
 {
     @MockBean
-    private AuthenticationFacade authenticationFacade;
-    @MockBean
-    private JwtService jwtService;
-    @MockBean
-    private MessageService messageService;
-    @MockBean
-    private ProfileService profileService;
-    @MockBean
-    private UserService userService;
-    @MockBean
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
-    @MockBean
-    private AcceptedLanguageLocaleMapper acceptedLanguageLocaleMapper;
+    protected AuthenticationFacade authenticationFacade;
 
     @Autowired
     private AuthRestController authRestController;

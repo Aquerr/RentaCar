@@ -1,0 +1,37 @@
+{
+  "vehicle": {
+    "id": 2,
+    "brand": "TOYOTA",
+    "model": "AVENSIS",
+    "productionYear": "2023-08-18",
+    "seatsAmount": 5,
+    "body": {
+      "color": "red",
+      "rimsInch": 21
+    },
+    "engine": {
+      "type": "GAS",
+      "power": 211,
+      "torque": 422,
+      "avgFuelConsumption": 4.5,
+      "transmission": "MANUAL"
+    },
+    "equipment": {
+      "ac": true,
+      "frontPDC": true,
+      "rearPDC": true,
+      "bluetooth": true,
+      "ledFrontLights": true,
+      "xenonFrontLights": true,
+      "ledRearLights": false,
+      "leatherSeats": true,
+      "multifunctionalSteeringWheel": true,
+      "cruiseControl": false
+    },
+    "basicPrice": 145,
+    "category": "B",
+    "photosUrls": [
+      "http://localhost:8086/api/v1/assets/images/VEHICLE/car2.webp"
+    ]
+  }
+}

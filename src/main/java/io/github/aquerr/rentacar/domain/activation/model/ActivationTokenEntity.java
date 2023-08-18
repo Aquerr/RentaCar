@@ -30,6 +30,6 @@ public class ActivationTokenEntity
     @Column(name = "expiration_date_time", nullable = false)
     private ZonedDateTime expirationDate;
 
-    @Column(name = "used", nullable = false, unique = false, columnDefinition = "tinyint(1) default 0")
+    @Column(name = "used", nullable = false, unique = false, columnDefinition = "BOOLEAN default 0")
     private boolean used;
 }

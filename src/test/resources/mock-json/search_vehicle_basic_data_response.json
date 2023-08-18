@@ -1,0 +1,63 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "brand": "TOYOTA",
+      "model": "AVENSIS",
+      "engine": {
+        "type": "GAS",
+        "avgFuelConsumption": 4.5
+      },
+      "equipment": {
+        "ac": true,
+        "ledFrontLights": true,
+        "ledRearLights": false,
+        "leatherSeats": true,
+        "multifunctionalSteeringWheel": true
+      },
+      "basicPrice": 145,
+      "photoUrl": "http://localhost:8086/api/v1/assets/images/VEHICLE/car2.webp"
+    },
+    {
+      "id": 2,
+      "brand": "AUDI",
+      "model": "A6",
+      "engine": {
+        "type": "GAS",
+        "avgFuelConsumption": 8.5
+      },
+      "equipment": {
+        "ac": true,
+        "ledFrontLights": true,
+        "ledRearLights": false,
+        "leatherSeats": true,
+        "multifunctionalSteeringWheel": true
+      },
+      "basicPrice": 145,
+      "photoUrl": "http://localhost:8086/api/v1/assets/images/VEHICLE/car3.webp"
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3,
+      "brand": "LEXUS",
+      "model": "MODEL",
+      "engine": {
+        "type": "DIESEL",
+        "avgFuelConsumption": 6.8
+      },
+      "equipment": {
+        "ac": true,
+        "ledFrontLights": true,
+        "ledRearLights": false,
+        "leatherSeats": true,
+        "multifunctionalSteeringWheel": true
+      },
+      "basicPrice": 145,
+      "photoUrl": "http://localhost:8086/api/v1/assets/images/VEHICLE/car1.webp"
+    }
+  ],
+  "totalElements": 3,
+  "totalPages": 1
+}

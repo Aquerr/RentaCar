@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Builder
 @Data
 public class Reservation {
-    private Integer id;
+    private Long id;
     private Integer vehicleId;
     private Long userId;
     private LocalDate dateFrom;
