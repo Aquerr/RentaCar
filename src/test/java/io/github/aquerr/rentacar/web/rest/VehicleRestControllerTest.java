@@ -53,7 +53,7 @@ class VehicleRestControllerTest extends BaseRestIntegrationTest
                 .id(2)
                 .brand("TOYOTA")
                 .model("AVENSIS")
-                .productionYear(LocalDate.now())
+                .productionYear(LocalDate.of(2023, 8, 18))
                 .seatsAmount(5)
                 .engine(VehicleFullData.Engine.builder()
                         .type(VehicleEngine.GAS)
@@ -82,8 +82,6 @@ class VehicleRestControllerTest extends BaseRestIntegrationTest
                 .basicPrice(new BigDecimal(145))
                 .photosUrls(List.of("http://localhost:8086/api/v1/assets/images/VEHICLE/car2.webp"))
                 .build());
-
-        String json = TestResourceUtils.loadMockJson("mock-json/get_vehicle_full_data.json");
 
         // when
         // then

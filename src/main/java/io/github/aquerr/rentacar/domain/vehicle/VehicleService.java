@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,5 +50,10 @@ public class VehicleService
         List<VehicleBasicData> vehicles = page.stream().map(this.vehicleConverter::toBasicData)
                 .toList();
         return AvailableVehiclesSearchResult.of(vehicles, totalElements, totalPages);
+    }
+
+    public boolean isVehicleAvailable(int vehicleId, LocalDate dateFrom, LocalDate dateTo)
+    {
+        return reservationRepository.findReservationByVehicleIdAndDateBetween(vehicleId, dateFrom, dateTo).isEmpty();
     }
 }
