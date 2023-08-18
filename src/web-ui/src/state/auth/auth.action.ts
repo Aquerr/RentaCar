@@ -10,3 +10,4 @@ export const setUserOnAppInit = createAction('Set user on app init');
 export const logout = createAction('Log out');
 export const removeToken = createAction('Remove token');
 export const setAuthorities = createAction('Set authorities', props<{ authorities: string[] }>());
+export const removeAuthorities = createAction('Remove authorities');

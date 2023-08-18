@@ -6,6 +6,7 @@ import { AuthenticationApiService } from '../../services/api/authentication-api.
 import {
   getMyself,
   logout,
+  removeAuthorities,
   removeToken,
   saveToken,
   setAuthorities,
@@ -73,6 +74,7 @@ export class AuthEffects {
           const actions = [];
           if (error.status === 401) {
             actions.push(removeToken());
+            actions.push(removeAuthorities());
             actions.push(goRoute({ routingLink: '' }));
             actions.push(showToast({
               messageKey: 'services.token-expire',
@@ -90,10 +92,10 @@ export class AuthEffects {
       .pipe(
         switchMap(() => [
           setUser({ user: null }),
-          setAuthorities({ authorities: [] }),
           showToast({ messageKey: 'services.log-out.success', toastType: ToastType.SUCCESS }),
           goRoute({ routingLink: '' }),
-          removeToken()
+          removeToken(),
+          removeAuthorities()
         ]),
         catchError(() => of(showToast({ messageKey: 'services.log-out.error', toastType: ToastType.ERROR })))
       ))
@@ -111,6 +113,20 @@ export class AuthEffects {
       ofType(removeToken),
       tap(() =>
         this.authenticationService.removeToken()
+      )), { dispatch: false });
+
+  setAuthorities$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setAuthorities),
+      tap(({ authorities: authorities }) =>
+        this.authenticationService.saveAuthorities(authorities)
+      )), { dispatch: false });
+
+  removeAuthorities$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(removeAuthorities),
+      tap(() =>
+        this.authenticationService.removeAuthorities()
       )), { dispatch: false });
 
   constructor(

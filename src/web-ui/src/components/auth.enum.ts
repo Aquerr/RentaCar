@@ -1,0 +1,4 @@
+export enum Auth {
+  DEFUALT_ROLE = 'DEFAULT_ROLE',
+  VIEW_ADMIN_PANEL = 'VIEW_ADMIN_PANEL'
+}

@@ -45,9 +45,7 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
   }
 
   getAuthorities() {
-    this.subscription.add(this.authenticationService.getAuthorities().subscribe({
-      next: (authorities) => this.authorities = authorities
-    }));
+    this.authorities = this.authenticationService.getAuthorities();
   }
 
   @HostListener('document:click', ['$event'])

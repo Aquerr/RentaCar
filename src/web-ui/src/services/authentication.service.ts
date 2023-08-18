@@ -3,8 +3,9 @@ import { TokenService } from './token.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { logout, setUser, setUserOnAppInit, signIn } from '../state/auth/auth.action';
-import { selectAuthorities, selectUser } from '../state/auth/auth.selector';
+import { selectUser } from '../state/auth/auth.selector';
 import { UserProfile } from '../models/user-profile.model';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AuthenticationService {
 
   constructor(
     private store: Store<AppState>,
+    private storageService: StorageService,
     private tokenService: TokenService
   ) {}
 
@@ -40,12 +42,21 @@ export class AuthenticationService {
   }
 
   getAuthorities() {
-    return this.store.select(selectAuthorities);
+    return this.storageService.getItem('authorities') as unknown as string[];
   }
 
   logoutDispatch() {
     this.store.dispatch(logout());
     this.removeToken();
+    this.removeAuthorities();
+  }
+
+  saveAuthorities(authorities: string[]) {
+    this.storageService.saveItem('authorities', authorities);
+  }
+
+  removeAuthorities() {
+    this.storageService.deleteItem('authorities');
   }
 
   removeToken() {
