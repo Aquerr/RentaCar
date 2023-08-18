@@ -10,7 +10,8 @@
     "reservation": "Reservation",
     "activation": "Account activation",
     "account-activated": "Account activated",
-    "reactivation-account": "Account reactivation"
+    "reactivation-account": "Account reactivation",
+    "admin-panel": "Admin panel"
   },
   "components": {
     "authentication": {

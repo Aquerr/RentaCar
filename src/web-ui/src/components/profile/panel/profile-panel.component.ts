@@ -12,6 +12,7 @@ import {
 import { UserProfile } from '../../../models/user-profile.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'profile-panel',
@@ -24,20 +25,29 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
   subscription: Subscription = new Subscription();
   @Input() user: UserProfile | null = null;
   @Output() logoutEmitter = new EventEmitter<void>;
+  authorities: string[] = [];
 
   constructor(private eRef: ElementRef,
-              private router: Router) {
+              private router: Router,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user'].currentValue) {
       this.getImage();
+      this.getAuthorities();
     }
   }
 
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getAuthorities() {
+    this.subscription.add(this.authenticationService.getAuthorities().subscribe({
+      next: (authorities) => this.authorities = authorities
+    }));
   }
 
   @HostListener('document:click', ['$event'])
@@ -61,7 +71,15 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
     this.router.navigate(['profile-edit']).then(() => this.panelVisible = false);
   }
 
+  navigateToAdminPanel() {
+    this.router.navigate(['admin-panel']).then(() => this.panelVisible = false);
+  }
+
   getImage() {
     this.iconUrl = this.user?.iconUrl as string;
+  }
+
+  hasUserAuthority(authorityName: string) {
+    return this.authorities.includes(authorityName);
   }
 }

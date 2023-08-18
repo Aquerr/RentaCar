@@ -10,7 +10,8 @@
     "reservation": "Rezerwacja",
     "activation": "Aktywacja konta",
     "account-activated": "Konto aktywowane",
-    "reactivation-account": "Reaktywacja konta"
+    "reactivation-account": "Reaktywacja konta",
+    "admin-panel": "Panel admina"
   },
   "components": {
     "authentication": {

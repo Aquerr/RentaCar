@@ -18,6 +18,8 @@ import {
 } from '../components/authentication/reactivation-account/reactivation-account.component';
 import { MainComponent } from '../components/info/main/main.component';
 import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
+import { AdminPanelComponent } from '../components/admin/admin-panel/admin-panel.component';
+import { PermissionGuard } from '../components/authentication/permission.guard';
 
 const routes: Routes = [
   {
@@ -81,6 +83,13 @@ const routes: Routes = [
     component: ReactivationAccountComponent,
     canActivate: [AnonymousGuard],
     title: 'title.reactivation-account'
+  },
+  {
+    path: 'admin-panel',
+    component: AdminPanelComponent,
+    canActivate: [LoginGuard, PermissionGuard],
+    title: 'title.admin-panel',
+    data: { permission: 'VIEW_ADMIN_PANEL' }
   },
   {
     path: '**',

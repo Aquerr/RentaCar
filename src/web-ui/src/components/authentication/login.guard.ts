@@ -6,6 +6,6 @@ export class LoginGuard {
   constructor(private tokenService: TokenService) {}
 
   canActivate() {
-    return this.tokenService.getToken();
+    return this.tokenService.getToken() !== null;
   }
 }

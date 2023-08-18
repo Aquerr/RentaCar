@@ -30,6 +30,7 @@ import {
   ReactivationAccountComponent
 } from '../components/authentication/reactivation-account/reactivation-account.component';
 import { MainComponent } from '../components/info/main/main.component';
+import { AdminPanelComponent } from '../components/admin/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MainComponent } from '../components/info/main/main.component';
     ActivationAccountComponent,
     AccountActivatedComponent,
     ReactivationAccountComponent,
-    MainComponent
+    MainComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

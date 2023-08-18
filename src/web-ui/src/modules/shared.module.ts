@@ -23,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CarouselModule } from 'primeng/carousel';
+import { PermissionGuard } from '../components/authentication/permission.guard';
 
 @NgModule({
   exports: [
@@ -57,6 +58,7 @@ import { CarouselModule } from 'primeng/carousel';
     },
     LoginGuard,
     AnonymousGuard,
+    PermissionGuard,
     DatePipe,
     DialogService,
     provideEnvironmentNgxMask()
