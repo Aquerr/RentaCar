@@ -1,20 +1,27 @@
 package io.github.aquerr.rentacar.domain.vehicle;
 
 import io.github.aquerr.rentacar.domain.vehicle.converter.VehicleConverter;
+import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
+import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchResult;
 import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleBasicData;
 import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleFullData;
+import io.github.aquerr.rentacar.repository.ReservationRepository;
 import io.github.aquerr.rentacar.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class VehicleService
 {
+    private final ReservationRepository reservationRepository;
     private final VehicleRepository vehicleRepository;
     private final VehicleConverter vehicleConverter;
 
@@ -27,11 +34,20 @@ public class VehicleService
     }
 
     @Transactional(readOnly = true)
-    public List<VehicleBasicData> getVehiclesAvailable(String dateFrom, String dateTo)
+    public AvailableVehiclesSearchResult getVehiclesAvailable(AvailableVehiclesSearchParams params)
     {
-        // TODO logika pobierania pojazdów nie zarezerwowanych
-        return vehicleRepository.findAll().stream()
-                .map(this.vehicleConverter::toBasicData)
-                .collect(Collectors.toList());
+        List<Integer> vehiclesIds = new ArrayList<>(vehicleRepository.findAllIds());
+        List<Integer> notAvailableVehicleIds = reservationRepository.findAllNotAvailableVehiclesBetweenDates(params.getFrom(), params.getTo());
+        vehiclesIds.removeAll(notAvailableVehicleIds);
+
+        Pageable pageable = PageRequest.of(params.getPage(), params.getSize());
+
+        Page<VehicleEntity> page = vehicleRepository.findAllByIdIn(vehiclesIds, pageable);
+
+        int totalPages = page.getTotalPages();
+        long totalElements = page.getTotalElements();
+        List<VehicleBasicData> vehicles = page.stream().map(this.vehicleConverter::toBasicData)
+                .toList();
+        return AvailableVehiclesSearchResult.of(vehicles, totalElements, totalPages);
     }
 }

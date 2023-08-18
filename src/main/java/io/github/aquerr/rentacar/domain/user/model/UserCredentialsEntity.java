@@ -48,10 +48,10 @@ public class UserCredentialsEntity
     @Column(name = "authority")
     private Set<String> authorities;
 
-    @Column(name = "activated", nullable = false, columnDefinition = "tinyint(1) default 0")
+    @Column(name = "activated", nullable = false, columnDefinition = "BOOLEAN default 0")
     private boolean activated;
 
-    @Column(name = "locked", nullable = false, columnDefinition = "tinyint(1) default 0")
+    @Column(name = "locked", nullable = false, columnDefinition = "BOOLEAN default 0")
     private boolean locked;
 
     @CreationTimestamp

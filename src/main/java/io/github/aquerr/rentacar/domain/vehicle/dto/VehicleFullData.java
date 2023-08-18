@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.domain.vehicle.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleCategory;
 import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleEngine;
 import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleTransmission;
@@ -16,6 +17,7 @@ public class VehicleFullData {
     Integer id;
     String brand;
     String model;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDate productionYear;
     Integer seatsAmount;
     Body body;

@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -27,13 +28,13 @@ public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private Integer id;
+    private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "vehicle_id", nullable = false)
     private VehicleEntity vehicle;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_profile_id", nullable = false)
     private UserProfileEntity userProfile;
 
