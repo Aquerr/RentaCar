@@ -29,7 +29,7 @@ public class VehicleRestController {
     @GetMapping("/available")
     public ResponseEntity<SearchVehicleBasicDataResponse> getVehiclesAvailable(@RequestParam("dateFrom") LocalDate dateFrom,
                                                                                @RequestParam("dateTo") LocalDate dateTo,
-                                                                               @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                                                               @RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                                                                @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         return ResponseEntity.ok(SearchVehicleBasicDataResponse.of(this.vehicleService.getVehiclesAvailable(AvailableVehiclesSearchParams.of(dateFrom, dateTo, page, size))));
     }

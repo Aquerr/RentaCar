@@ -171,4 +171,82 @@ class VehicleRestControllerTest extends BaseRestIntegrationTest
                 .andExpect(status().isOk())
                 .andExpect(content().json(TestResourceUtils.loadMockJson("mock-json/search_vehicle_basic_data_response.json")));
     }
+
+    @Test
+    void shouldGetVehiclesAvailableIncludeDefaultParamsAndReturnSearchVehicleBasicDataResponse() throws Exception
+    {
+        // given
+        LocalDate from = LocalDate.of(2023, 8, 4);
+        LocalDate to = LocalDate.of(2023, 8, 14);
+        int page = 0;
+        int size = 10;
+        AvailableVehiclesSearchParams availableVehiclesSearchParams = AvailableVehiclesSearchParams.of(from, to, page, size);
+        given(vehicleService.getVehiclesAvailable(availableVehiclesSearchParams)).willReturn(AvailableVehiclesSearchResult.of(
+                List.of(VehicleBasicData.builder()
+                                .id(1)
+                                .brand("TOYOTA")
+                                .model("AVENSIS")
+                                .engine(VehicleBasicData.Engine.builder()
+                                        .type(VehicleEngine.GAS)
+                                        .avgFuelConsumption(4.5F)
+                                        .build())
+                                .equipment(VehicleBasicData.Equipment.builder()
+                                        .ac(true)
+                                        .ledFrontLights(true)
+                                        .ledRearLights(false)
+                                        .leatherSeats(true)
+                                        .multifunctionalSteeringWheel(true)
+                                        .build())
+                                .basicPrice(new BigDecimal(145))
+                                .photoUrl("http://localhost:8086/api/v1/assets/images/VEHICLE/car2.webp")
+                                .build(),
+                        VehicleBasicData.builder()
+                                .id(2)
+                                .brand("AUDI")
+                                .model("A6")
+                                .engine(VehicleBasicData.Engine.builder()
+                                        .type(VehicleEngine.GAS)
+                                        .avgFuelConsumption(8.5F)
+                                        .build())
+                                .equipment(VehicleBasicData.Equipment.builder()
+                                        .ac(true)
+                                        .ledFrontLights(true)
+                                        .ledRearLights(false)
+                                        .leatherSeats(true)
+                                        .multifunctionalSteeringWheel(true)
+                                        .build())
+                                .basicPrice(new BigDecimal(145))
+                                .photoUrl("http://localhost:8086/api/v1/assets/images/VEHICLE/car3.webp")
+                                .build(),
+                        VehicleBasicData.builder().id(3).build(),
+                        VehicleBasicData.builder()
+                                .id(3)
+                                .brand("LEXUS")
+                                .model("MODEL")
+                                .engine(VehicleBasicData.Engine.builder()
+                                        .type(VehicleEngine.DIESEL)
+                                        .avgFuelConsumption(6.8F)
+                                        .build())
+                                .equipment(VehicleBasicData.Equipment.builder()
+                                        .ac(true)
+                                        .ledFrontLights(true)
+                                        .ledRearLights(false)
+                                        .leatherSeats(true)
+                                        .multifunctionalSteeringWheel(true)
+                                        .build())
+                                .basicPrice(new BigDecimal(145))
+                                .photoUrl("http://localhost:8086/api/v1/assets/images/VEHICLE/car1.webp")
+                                .build()),
+                3,
+                1
+        ));
+
+        // when
+        // then
+        mockMvc.perform(request(HttpMethod.GET, "/api/v1/vehicles/available")
+                        .queryParam("dateFrom", "2023-08-04")
+                        .queryParam("dateTo", "2023-08-14"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(TestResourceUtils.loadMockJson("mock-json/search_vehicle_basic_data_response.json")));
+    }
 }
