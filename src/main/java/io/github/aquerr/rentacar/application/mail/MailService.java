@@ -30,8 +30,11 @@ public class MailService
         {
             log.info("Generating mail for: {}", message);
             MimeMessage mimeMessage = this.mailCreator.create(message);
-            log.info("Sending mail with subject: {}, to: {}", message.getSubject(), message.getTo());
-            mailSender.send(mimeMessage);
+            if (mimeMessage != null)
+            {
+                log.info("Sending mail with subject: {}, to: {}", message.getSubject(), message.getTo());
+                mailSender.send(mimeMessage);
+            }
         }
         catch (Exception exception)
         {
