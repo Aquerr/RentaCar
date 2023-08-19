@@ -3,6 +3,7 @@ package io.github.aquerr.rentacar.web.rest;
 import io.github.aquerr.rentacar.domain.vehicle.VehicleService;
 import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
 import io.github.aquerr.rentacar.web.rest.response.SearchVehicleBasicDataResponse;
+import io.github.aquerr.rentacar.web.rest.response.VehicleAvailabilityResponse;
 import io.github.aquerr.rentacar.web.rest.response.VehicleFullDataResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,13 @@ public class VehicleRestController {
                                                                                @RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                                                                @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         return ResponseEntity.ok(SearchVehicleBasicDataResponse.of(this.vehicleService.getVehiclesAvailable(AvailableVehiclesSearchParams.of(dateFrom, dateTo, page, size))));
+    }
+
+    @GetMapping("/{vehicleId}/available")
+    public ResponseEntity<VehicleAvailabilityResponse> isVehicleAvailable(@RequestParam("dateFrom") LocalDate dateFrom,
+                                                                          @RequestParam("dateTo") LocalDate dateTo,
+                                                                          @PathVariable("vehicleId") int vehicleId)
+    {
+        return ResponseEntity.ok(VehicleAvailabilityResponse.of(this.vehicleService.isVehicleAvailable(vehicleId, dateFrom, dateTo)));
     }
 }
