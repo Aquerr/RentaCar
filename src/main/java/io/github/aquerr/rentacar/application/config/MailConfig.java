@@ -1,5 +1,7 @@
 package io.github.aquerr.rentacar.application.config;
 
+import io.github.aquerr.rentacar.application.mail.MailCreator;
+import io.github.aquerr.rentacar.application.mail.MailCreatorImpl;
 import io.github.aquerr.rentacar.application.mail.MailSender;
 import io.github.aquerr.rentacar.application.mail.RentaCarMailSender;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,7 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 public class MailConfig
 {
     @Bean
-    @ConditionalOnProperty(value = "rentacar.mail-sender.enabled", matchIfMissing = true, havingValue = "true")
+    @ConditionalOnProperty(value = "rentacar.mail-sender.enabled", havingValue = "true")
     public MailSender rentaCarMailSender(JavaMailSender javaMailSender)
     {
         return new RentaCarMailSender(javaMailSender);
@@ -22,5 +24,19 @@ public class MailConfig
     public MailSender noOpMailSender()
     {
         return new MailSender.NoOpMailSender();
+    }
+
+    @Bean
+    @ConditionalOnProperty(value = "rentacar.mail-sender.enabled", havingValue = "true")
+    public MailCreator rentacarMailCreator(JavaMailSender javaMailSender)
+    {
+        return new MailCreatorImpl(javaMailSender);
+    }
+
+    @Bean
+    @ConditionalOnProperty(value = "rentacar.mail-sender.enabled", matchIfMissing = true, havingValue = "false")
+    public MailCreator noOpMailCreator()
+    {
+        return new MailCreator.NoOpMailCreator();
     }
 }
