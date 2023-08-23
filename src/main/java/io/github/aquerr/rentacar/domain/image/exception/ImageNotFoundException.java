@@ -8,4 +8,8 @@ import org.springframework.http.HttpStatus;
 public class ImageNotFoundException extends RuntimeException
 {
 
+    public ImageNotFoundException(String fileName)
+    {
+        super("Image does not exist: " + fileName);
+    }
 }

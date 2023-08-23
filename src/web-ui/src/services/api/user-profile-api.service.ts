@@ -13,12 +13,11 @@ export class UserProfileApiService {
   constructor(private http: HttpClient) {
   }
 
-  public saveProfile(user: UserProfile, image: File, imageKind: ImageKind) {
+  public saveProfile(user: UserProfile, image: File) {
     const formData = new FormData();
     console.log('image', image);
-    if (image && imageKind) {
+    if (image) {
       formData.append('image', image);
-      formData.append('imageKind', imageKind);
     }
     formData.append('profile', new Blob([JSON.stringify(user)], { type: 'application/json' }));
     return this.http.patch<UserProfile>(`${this.URL}/${user.id}`, formData);

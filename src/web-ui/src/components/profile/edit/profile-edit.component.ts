@@ -54,7 +54,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   update() {
     const request = this.formService.convertFormToUserProfile(this.form);
-    this.subscriptions.add(this.userProfileApiService.saveProfile(request, this.iconUploaded as File, ImageKind.USER).subscribe({
+    this.subscriptions.add(this.userProfileApiService.saveProfile(request, this.iconUploaded as File).subscribe({
       next: (userProfile) => {
         this.authenticationService.updateUser(userProfile);
         this.toastService.createToast(this.languageService.getMessage('components.profile-edit.toasts.update.success'), ToastType.SUCCESS);

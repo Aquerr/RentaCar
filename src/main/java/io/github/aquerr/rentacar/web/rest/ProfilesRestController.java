@@ -26,17 +26,19 @@ public class ProfilesRestController
     @PatchMapping("/{id}")
     public ResponseEntity<?> saveProfile(@PathVariable("id") long profileId,
                                          @RequestPart(value = "image", required = false) MultipartFile image,
-                                         @RequestParam(value = "imageKind", required = false) ImageKind imageKind,
                                          @RequestPart(value = "profile") UserProfile userProfile)
     {
         userProfile.setId(profileId);
 
-        if (image != null && imageKind != null)
+        if (image != null)
         {
-            userProfile.setIconUrl(imageService.saveImage(image, imageKind).getUri().toString());
+            profileService.saveProfileWithImage(userProfile, image);
+        }
+        else
+        {
+            profileService.saveProfile(userProfile);
         }
 
-        profileService.saveProfile(userProfile);
         return getProfile(profileId);
     }
 
