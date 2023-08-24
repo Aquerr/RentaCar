@@ -23,13 +23,19 @@ public class RentaCarUserDetailsService implements UserDetailsService
     private final UserCredentialsRepository userCredentialsRepository;
     private final ProfileRepository profileRepository;
 
+    public AuthenticatedUser loadById(Long id) throws UsernameNotFoundException
+    {
+        UserCredentialsEntity userCredentialsEntity = userCredentialsRepository.findById(id).orElse(null);
+        return toAuthenticatedUser(userCredentialsEntity);
+    }
+
     @Override
     @Transactional
     public AuthenticatedUser loadUserByUsername(String username) throws UsernameNotFoundException
     {
         UserCredentials.UsernameOrEmail usernameOrEmail = new UserCredentials.UsernameOrEmail(username);
 
-        UserCredentialsEntity userCredentialsEntity = null;
+        UserCredentialsEntity userCredentialsEntity;
         if (usernameOrEmail.isEmail())
         {
             userCredentialsEntity = userCredentialsRepository.findByEmail(usernameOrEmail.getValue());
@@ -39,6 +45,11 @@ public class RentaCarUserDetailsService implements UserDetailsService
             userCredentialsEntity = userCredentialsRepository.findByUsername(usernameOrEmail.getValue());
         }
 
+        return toAuthenticatedUser(userCredentialsEntity);
+    }
+
+    private AuthenticatedUser toAuthenticatedUser(UserCredentialsEntity userCredentialsEntity)
+    {
         if (userCredentialsEntity == null)
         {
             throw new UsernameNotFoundException("User does not exist!");
@@ -60,8 +71,8 @@ public class RentaCarUserDetailsService implements UserDetailsService
                 userProfileEntity.getId(),
                 getClientIp(httpServletRequest),
                 userCredentialsEntity.getAuthorities().stream()
-                    .map(SimpleGrantedAuthority::new)
-                    .toList());
+                        .map(SimpleGrantedAuthority::new)
+                        .toList());
     }
 
     private String getClientIp(HttpServletRequest request)

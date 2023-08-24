@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 		<jjwt.version>0.11.5</jjwt.version>
 		<logbook.version>3.2.0</logbook.version>
+		<totp.version>1.7.1</totp.version>
 
 		<!-- Front -->
 		<node.version>v18.16.1</node.version>
@@ -85,6 +86,11 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>${jjwt.version}</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>dev.samstevens.totp</groupId>
+			<artifactId>totp</artifactId>
+			<version>${totp.version}</version>
 		</dependency>
 
 		<dependency>

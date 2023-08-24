@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.domain.user;
 
 import io.github.aquerr.rentacar.application.lang.RequestLocaleExtractor;
+import io.github.aquerr.rentacar.application.security.mfa.MfaAuthenticationService;
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationTokenRequester;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -32,6 +35,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AccountActivationTokenRequester accountActivationTokenRequester;
     private final RequestLocaleExtractor requestLocaleExtractor;
+    private final MfaAuthenticationService mfaAuthenticationService;
 
     @Transactional
     public void register(UserRegistration userRegistration)
@@ -106,5 +110,10 @@ public class UserService {
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );
+    }
+
+    public List<String> getAvailableMfaAuthenticationTypes()
+    {
+        return this.mfaAuthenticationService.getAvailableAuthTypes();
     }
 }
