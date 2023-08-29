@@ -4,6 +4,6 @@ import lombok.Value;
 
 @Value(staticConstructor = "of")
 public class RestErrorResponse {
-    int status;
+    String code;
     String message;
 }

@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.domain.image;
 
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
+import io.github.aquerr.rentacar.domain.image.exception.CouldNotDeleteImageException;
 import io.github.aquerr.rentacar.domain.image.exception.CouldNotSaveImageException;
 import io.github.aquerr.rentacar.domain.image.model.ImageKind;
 import io.github.aquerr.rentacar.domain.image.model.ImageKindFolder;
@@ -89,11 +90,16 @@ public class ImageService
                 throw new AccessDeniedException();
             }
 
-            Files.deleteIfExists(imagePath);
+            if (Files.notExists(imagePath))
+            {
+                throw new ImageNotFoundException(fileName);
+            }
+
+            Files.delete(imagePath);
         }
         catch (IOException e)
         {
-            throw new ImageNotFoundException();
+            throw new CouldNotDeleteImageException();
         }
     }
 
@@ -108,7 +114,7 @@ public class ImageService
         }
         else if (Files.notExists(imagePath))
         {
-            throw new ImageNotFoundException();
+            throw new ImageNotFoundException(fileName);
         }
 
         try

@@ -8,8 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
@@ -24,20 +24,21 @@ public class RestErrorController {
     private final MessageService messageService;
 
     @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    public RestErrorResponse handleException(HttpServletRequest httpServletRequest, RuntimeException exception) {
+    public ResponseEntity<RestErrorResponse> handleException(HttpServletRequest httpServletRequest, RuntimeException exception) {
         log.error(exception.getMessage(), exception);
 
         List<Locale> locales = acceptedLanguageLocaleMapper.toLocales(getAcceptedLanguageHeader(httpServletRequest));
         if (exception.getClass().isAnnotationPresent(ApiException.class)) {
             return convertApiExceptionToRestErrorResponse(exception, locales);
         }
-        return RestErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR.value(), messageService.resolveMessage("error.internal-server-error", locales));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(RestErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), messageService.resolveMessage("error.internal-server-error", locales)));
     }
 
-    private RestErrorResponse convertApiExceptionToRestErrorResponse(RuntimeException exception, List<Locale> locales) {
+    private ResponseEntity<RestErrorResponse> convertApiExceptionToRestErrorResponse(RuntimeException exception, List<Locale> locales) {
         ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
-        return RestErrorResponse.of(apiException.status().value(), messageService.resolveMessage(apiException.messageKey(), locales));
+        return ResponseEntity.status(apiException.status())
+                .body(RestErrorResponse.of(apiException.code().name(), messageService.resolveMessage(apiException.messageKey(), locales)));
     }
 
     private String getAcceptedLanguageHeader(HttpServletRequest httpServletRequest)

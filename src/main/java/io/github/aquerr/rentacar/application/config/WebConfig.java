@@ -22,6 +22,17 @@ public class WebConfig implements WebMvcConfigurer
                     @Override
                     protected Resource getResource(String resourcePath, Resource location) throws IOException
                     {
+                        // Alternatywa dla pobierania obrazków.
+                        // Dzięki temu nie musimy sami tworzyć RESTa do pobierania byte[] obrazków
+                        // z zewnętrznego folderu.
+                        //
+                        // Komentarz dla potomnych. :)
+
+//                        if (resourcePath.startsWith("images"))
+//                        {
+//                            return new FileUrlResource("assets/").createRelative(resourcePath);
+//                        }
+
                         Resource requestedResource = location.createRelative(resourcePath);
                         return requestedResource.exists() && requestedResource.isReadable() ? requestedResource : new ClassPathResource("/static/index.html");
                     }

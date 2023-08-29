@@ -41,8 +41,8 @@ public class ApiExceptionFilter extends OncePerRequestFilter
                 ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
 
                 List<Locale> locales = acceptedLanguageLocaleMapper.toLocales(getAcceptedLanguageHeader(request));
-                RestErrorResponse restErrorResponse = RestErrorResponse.of(apiException.status().value(), messageService.resolveMessage(apiException.messageKey(), locales));
-                response.setStatus(restErrorResponse.getStatus());
+                RestErrorResponse restErrorResponse = RestErrorResponse.of(apiException.code().name(), messageService.resolveMessage(apiException.messageKey(), locales));
+                response.setStatus(apiException.status().value());
                 response.getWriter().write(objectMapper.writeValueAsString(restErrorResponse));
             }
             else
