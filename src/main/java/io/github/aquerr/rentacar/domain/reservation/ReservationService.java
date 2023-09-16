@@ -18,4 +18,8 @@ public class ReservationService {
         ReservationEntity reservationEntity = reservationConverter.toReservationEntity(reservation);
         return reservationConverter.toReservationDto(this.reservationRepository.save(reservationEntity));
     }
+
+    public Reservation getReservation(Long reservationId) {
+        return reservationConverter.toReservationDto(this.reservationRepository.findById(reservationId).orElse(null));
+    }
 }

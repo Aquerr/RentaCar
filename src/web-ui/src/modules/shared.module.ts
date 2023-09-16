@@ -7,7 +7,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AppInterceptor } from '../components/authentication/app.interceptor';
 import { TooltipModule } from 'primeng/tooltip';
@@ -22,6 +22,8 @@ import { DialogModule } from 'primeng/dialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CarouselModule } from 'primeng/carousel';
 import { AppGuard } from '../components/authentication/app.guard';
+import { StepsModule } from 'primeng/steps';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   exports: [
@@ -41,7 +43,9 @@ import { AppGuard } from '../components/authentication/app.guard';
     DropdownModule,
     FontAwesomeModule,
     DialogModule,
-    CarouselModule
+    CarouselModule,
+    StepsModule,
+    ConfirmDialogModule
   ],
   providers: [
     MessageService,
@@ -57,6 +61,7 @@ import { AppGuard } from '../components/authentication/app.guard';
     AppGuard,
     DatePipe,
     DialogService,
+    ConfirmationService,
     provideEnvironmentNgxMask()
   ]
 })

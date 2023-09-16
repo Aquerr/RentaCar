@@ -7,7 +7,6 @@ import { UserProfileApiService } from '../../../services/api/user-profile-api.se
 import { ToastService, ToastType } from '../../../services/toast.service';
 import { LanguageService } from '../../../services/language.service';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { ImageKind } from '../../../enums/image.kind.enum';
 
 @Component({
   selector: 'profile-edit',
