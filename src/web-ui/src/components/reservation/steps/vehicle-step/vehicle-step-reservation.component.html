@@ -1,0 +1,69 @@
+<!--TODO DLA NASZEGO UX/UI-->
+<div class='container' *ngIf='vehicle'>
+  <div class='img-container'>
+    <img alt='' [src]='getImage()'>
+  </div>
+
+  <div class='equipment-container'>
+    <div class='section'>
+    <span
+      class='title'>{{ 'components.vehicle-details.labels.production-year' | translate}}</span><span>{{vehicle.productionYear | date: 'yyyy-MM-dd'}}</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.amount-of-seats' | translate}}</span><span>{{vehicle.seatsAmount}}</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.category' | translate}}</span><span>{{vehicle.category}}</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.color' | translate}}</span><span>{{ getTranslation(vehicle.body.color, 'colors') | translate }} </span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.rims-inch' | translate}}</span><span>{{vehicle.body.rimsInch}}</span>
+    </div>
+    <div class='section'>
+    <span
+      class='title'>{{ 'components.vehicle-details.labels.engine-type' | translate}}</span><span>{{ getTranslation(vehicle.engine.type, 'engine-type') | translate }}</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.avg-fuel-consumption' | translate}}</span><span>{{vehicle.engine.avgFuelConsumption}}</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.engine-power' | translate}}</span><span>{{vehicle.engine.power}}
+      KM ({{vehicle.engine.torque}}Nm)</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.engine-capacity' | translate}}</span><span>{{vehicle.engine.capacity}}
+      cm3</span>
+      <span
+        class='title'>{{ 'components.vehicle-details.labels.engine-transmission' | translate}}</span><span>{{ getTranslation(vehicle.engine.transmission, 'transmission') | translate }}</span>
+    </div>
+    <div class='section'>
+      <span class='title'>{{ 'components.vehicle-details.labels.ac' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.ac' [disabled]='true'
+      [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.pdc-front' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.frontPDC'
+      [disabled]='true'
+      [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.pdc-rear' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.rearPDC' [disabled]='true'
+      [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.bluetooth' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.bluetooth' [disabled]='true'
+      [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.led-front' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.ledFrontLights' [disabled]='true' [binary]='true' /></span>
+    </div>
+    <div class='section'>
+      <span class='title'>{{ 'components.vehicle-details.labels.led-rear' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.ledRearLights'
+      [disabled]='true'
+      [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.xenon-front' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.xenonFrontLights' [disabled]='true' [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.leather' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.leatherSeats'
+      [disabled]='true' [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.multi-steering-wheel' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.multifunctionalSteeringWheel'
+      [disabled]='true' [binary]='true' /></span>
+      <span class='title'>{{ 'components.vehicle-details.labels.cruise-control' | translate}}</span><span><p-checkbox
+      [(ngModel)]='vehicle.equipment.cruiseControl'
+      [disabled]='true' [binary]='true' /></span>
+    </div>
+  </div>
+</div>

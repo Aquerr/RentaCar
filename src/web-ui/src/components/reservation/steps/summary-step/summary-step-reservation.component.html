@@ -1,0 +1,8 @@
+<!--TODO DLA NASZEGO UX/UI-->
+<div class='container' *ngIf='reservation && vehicle && userProfile'>
+  <span>Data rozpoczęcia{{reservation.dateFrom}}</span>
+  <span>Data zakończenia{{reservation.dateTo}}</span>
+  <span>Cena łączna{{calculatePrice()}}</span>
+  <span>Imię wynajmującego{{userProfile.firstName}}</span>
+  <span>Nazwisko wynajmującego{{userProfile.lastName}}</span>
+</div>
