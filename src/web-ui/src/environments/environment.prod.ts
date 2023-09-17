@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  appBaseUrl: 'http://localhost:8086',
+  appBaseUrl: 'https://rentacar.bartlomiejstepien.pl',
 };
