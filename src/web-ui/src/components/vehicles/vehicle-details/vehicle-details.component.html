@@ -43,6 +43,7 @@
       <h3>Koszt najmu {{totalPrice}} PLN</h3>
       <button class='btn'
               [disabled]='!vehicleAvailable && !user'
+              [pTooltip]="!user ? ('components.vehicle-details.buttons.disabled' | translate) : '' || !vehicleAvailable ? ('components.vehicle-details.buttons.notAvailable' | translate) : ''"
               (click)='reserve()'>{{ 'components.vehicle-details.buttons.reserve' | translate}}</button>
     </div>
 

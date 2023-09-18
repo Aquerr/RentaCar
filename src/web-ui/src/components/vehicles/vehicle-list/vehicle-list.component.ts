@@ -5,7 +5,6 @@ import { VehicleBasicData } from '../../../models/vehicle.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
 import { ReservationApiService } from '../../../services/api/reservation-api.service';
-import { Reservation, ReservationStatus } from '../../../models/reservation.model.ts';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserProfile } from '../../../models/user-profile.model';
 import { ReservationService } from '../../../services/reservation.service';
@@ -61,26 +60,6 @@ export class VehicleListComponent implements OnInit, OnDestroy {
         this.user = user;
       }
     }));
-  }
-
-  reserveVehicle(vehicleId: number) {
-    const request = this.prepareReservationRequest(vehicleId);
-    this.reservationApiService.createNewReservation(request).subscribe({
-      next: (response) => {
-        this.reservationService.updateReservation(response.reservation);
-        this.router.navigate(['/reservation', response.reservation.id]);
-      }
-    });
-  }
-
-  prepareReservationRequest(vehicleId: number) {
-    return {
-      vehicleId: vehicleId,
-      userId: this.user?.id,
-      dateFrom: this.dateService.convertDateToLocalDate(this.dateFrom),
-      dateTo: this.dateService.convertDateToLocalDate(this.dateTo),
-      status: ReservationStatus.DRAFT
-    } as Reservation;
   }
 
 }

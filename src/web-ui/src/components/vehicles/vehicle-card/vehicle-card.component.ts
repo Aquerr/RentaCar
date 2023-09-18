@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EngineType, VehicleBasicData } from '../../../models/vehicle.model';
 
 @Component({
@@ -9,14 +9,8 @@ import { EngineType, VehicleBasicData } from '../../../models/vehicle.model';
 export class VehicleCardComponent {
   @Input() vehicle: VehicleBasicData | null = null;
   @Input() lang = 'us';
-  @Input() userId: number | undefined;
-  @Output() reserveVehicleEvent = new EventEmitter<number>;
 
   constructor() {}
-
-  reserveVehicle(vehicle: VehicleBasicData) {
-    this.reserveVehicleEvent.emit(vehicle.id);
-  }
 
   protected readonly EngineType = EngineType;
 }

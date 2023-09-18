@@ -102,10 +102,6 @@ li {
   background: linear-gradient(rgba(23, 22, 22, 0.6), rgba(65, 62, 62, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
 }
 
-.btn:disabled, .btn[disabled=disabled] {
-  background: grey;
-}
-
 .button-container {
   display: flex;
   gap: 10px;

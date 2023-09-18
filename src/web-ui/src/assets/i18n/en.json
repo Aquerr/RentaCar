@@ -124,16 +124,12 @@
       },
       "buttons": {
         "reserve": "Reserve vehicle",
-        "disabled": "Sign in, to reserve a vehicle",
         "details": "Vehicle details"
       }
     },
     "vehicle-list": {
       "labels": {
         "no-vehicles": "No vehicles in selected term"
-      },
-      "buttons": {
-        "search": "Search"
       }
     },
     "vehicle-details": {
@@ -160,7 +156,9 @@
         "cruise-control": "Cruise control:"
       },
       "buttons": {
-        "reserve": "Reserve"
+        "reserve": "Reserve",
+        "disabled": "Sign in, to reserve a vehicle",
+        "notAvailable": "Vehicle not available in selected term"
       }
     },
     "activation-account": {
