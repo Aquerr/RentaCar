@@ -124,16 +124,12 @@
       },
       "buttons": {
         "reserve": "Rezerwuj pojazd",
-        "disabled": "Zaloguj się, żeby zarezerwować pojazd",
         "details": "Szczegóły pojazdu"
       }
     },
     "vehicle-list": {
       "labels": {
         "no-vehicles": "Brak pojazdów w wybranym terminie"
-      },
-      "buttons": {
-        "search": "Szukaj"
       }
     },
     "vehicle-details": {
@@ -160,7 +156,9 @@
         "cruise-control": "Tempomat:"
       },
       "buttons": {
-        "reserve": "Rezerwuj"
+        "reserve": "Rezerwuj",
+        "disabled": "Zaloguj się, żeby zarezerwować pojazd",
+        "notAvailable": "Pojazd niedostępny w wybranym terminie"
       }
     },
     "activation-account": {

@@ -4,21 +4,21 @@
                 dateFormat='dd.mm.yy'
                 [maxDate]='dateTo'
                 [touchUI]='true'
-                [readonlyInput]='true'></p-calendar>
+                [readonlyInput]='true'
+                (ngModelChange)='getVehiclesAvailable()'
+    ></p-calendar>
     <p-calendar [(ngModel)]='dateTo'
                 dateFormat='dd.mm.yy'
                 [minDate]='dateFrom'
                 [touchUI]='true'
-                [readonlyInput]='true'></p-calendar>
-    <button class='btn'
-            (click)='getVehiclesAvailable()'>{{ 'components.vehicle-list.buttons.search' | translate}}</button>
+                [readonlyInput]='true'
+                (ngModelChange)='getVehiclesAvailable()'
+    ></p-calendar>
   </div>
   <div class='container' *ngIf='vehicles.length > 0; else noVehicles'>
     <ng-container *ngFor='let vehicle of vehicles'>
       <vehicle-card [vehicle]='vehicle'
-                    [lang]='lang'
-                    [userId]='user?.id'
-                    (reserveVehicleEvent)='reserveVehicle($event)'></vehicle-card>
+                    [lang]='lang'></vehicle-card>
     </ng-container>
   </div>
 
