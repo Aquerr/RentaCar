@@ -6,6 +6,9 @@ import io.github.aquerr.rentacar.domain.reservation.model.ReservationEntity;
 import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ReservationConverter {
     public Reservation toReservationDto(ReservationEntity reservationEntity) {
@@ -21,6 +24,11 @@ public class ReservationConverter {
                 .dateTo(reservationEntity.getDateTo())
                 .status(reservationEntity.getStatus())
                 .build();
+    }
+    public List<Reservation> toReservationDto(List<ReservationEntity> reservationEntities) {
+        List<Reservation> reservations = new ArrayList<>();
+        reservationEntities.forEach(reservationEntity -> reservations.add(toReservationDto(reservationEntity)));
+        return reservations;
     }
 
     public ReservationEntity toReservationEntity(Reservation reservationDto) {

@@ -22,4 +22,8 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
             "AND (:dateTo >= reservation.dateFrom AND :dateTo <= reservation.dateTo)" +
             "OR (:dateFrom >= reservation.dateFrom AND :dateFrom <= reservation.dateTo)")
     Optional<ReservationEntity> findReservationByVehicleIdAndDateBetween(@Param("vehicleId") int vehicleId, @Param("dateFrom") LocalDate dateFrom, @Param("dateTo") LocalDate dateTo);
+
+    @Query("FROM ReservationEntity reservation " +
+            "WHERE reservation.userProfile.id = :userId")
+    List<ReservationEntity> findAllByUserId(@Param("userId") Long userId);
 }
