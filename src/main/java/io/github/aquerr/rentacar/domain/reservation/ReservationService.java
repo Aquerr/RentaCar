@@ -28,7 +28,7 @@ public class ReservationService {
         return reservationConverter.toReservationDto(this.reservationRepository.findById(reservationId).orElse(null));
     }
 
-    public List<Reservation> getMyselfReservation() {
+    public List<Reservation> getMyReservations() {
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
         return reservationConverter.toReservationDto(this.reservationRepository.findAllByUserId(authenticatedUser.getProfileId()));
     }
