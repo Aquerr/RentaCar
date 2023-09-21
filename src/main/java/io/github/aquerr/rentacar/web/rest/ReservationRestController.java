@@ -30,8 +30,8 @@ public class ReservationRestController {
     }
 
     @GetMapping("/my-self")
-    public ResponseEntity<ReservationsResponse> getMyselfReservations() {
-        return ResponseEntity.ok(ReservationsResponse.of(this.reservationService.getMyselfReservation()));
+    public ResponseEntity<ReservationsResponse> getMyReservations() {
+        return ResponseEntity.ok(ReservationsResponse.of(this.reservationService.getMyReservations()));
     }
 
 }
