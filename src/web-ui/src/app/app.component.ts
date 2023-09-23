@@ -15,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   userLogged: UserProfile | null = null;
   isMobile = false;
-sideMenuExpanded = false;
+  sideMenuExpanded = false;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -72,14 +72,17 @@ sideMenuExpanded = false;
   }
 
 
-toggleSideMenu() {
+  toggleSideMenu() {
+    this.sideMenuExpanded = !this.sideMenuExpanded;
+    const navMobile = document.querySelector('.nav-mobile') as any;
+    const navBtn = document.querySelector('.hamburger') as any;
+    if (navBtn && navMobile) {
+      navBtn.classList.toggle('is-active');
+      navMobile.classList.toggle('nav-mobile--active');
+    }
+  }
 
-  this.sideMenuExpanded = !this.sideMenuExpanded;
-  
-  const navMobile = document.querySelector('.nav-mobile') as any;
-  const navBtn = document.querySelector('.hamburger') as any;
-
-  navBtn.classList.toggle('is-active')
-  navMobile.classList.toggle('nav-mobile--active')
-}
+  closeSideMenu() {
+    this.sideMenuExpanded = false;
+  }
 }
