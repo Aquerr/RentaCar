@@ -28,6 +28,7 @@ body {
 
 body {
   font-family: Roboto, serif;
+  //TODO @Bobus123 relative => to powoduje, że wszystkie tooltipy (chmurki po najechaniu na np. ikonę języka z podpwiedzią nie przylegają do elementu)
   position: relative;
 }
 
@@ -67,8 +68,8 @@ h4 {
 }
 
 .p-dialog-content {
-  padding: 30px !important;
-  border-radius: 5px;
+  //padding: 30px !important;
+  //border-radius: 5px;
 }
 
 .p-component:hover {
