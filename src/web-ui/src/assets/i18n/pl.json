@@ -13,7 +13,8 @@
     "reactivation-account": "Reaktywacja konta",
     "admin-panel": "Panel admina",
     "admin-add-vehicle": "Dodaj pojazd",
-    "password-reset": "Odzyskiwanie hasła"
+    "password-reset": "Odzyskiwanie hasła",
+    "new-password": "Nowe hasło"
   },
   "components": {
     "authentication": {
@@ -202,6 +203,26 @@
       "errors": {
         "required": "To pole jest wymagane",
         "min-length": "Minimalna długość wynosi 5 znaków"
+      }
+    },
+    "new-password": {
+      "labels": {
+        "title": "Nowe hasło",
+        "password": "Hasło",
+        "confirm-password": "Potwierdź hasło"
+      },
+      "buttons": {
+        "set": "Ustaw nowe hasło"
+      },
+      "toasts": {
+        "update-success": "Nowe hasło zostało zapisane pomyślnie",
+        "update-error": "Nowe hasło nie zostało zapisane pomyślnie",
+        "token-expired": "Token wygasł. Wygeneruj nowy"
+      },
+      "errors": {
+        "required": "To pole jest wymagnae",
+        "min-length": "Wymagane minimum 5 znaków",
+        "doesnt-match": "Hasła nie pasują do siebie"
       }
     },
     "main": {
