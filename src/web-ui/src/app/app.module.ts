@@ -40,6 +40,9 @@ import {
 import {
   SummaryStepReservationComponent
 } from '../components/reservation/steps/summary-step/summary-step-reservation.component';
+import { AdminSideMenuComponent } from '../components/admin/admin-panel/side-menu/admin-side-menu.component';
+import { AdminAddVehicleComponent } from '../components/admin/admin-panel/add-vehicle/admin-add-vehicle.component';
+import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,10 @@ import {
     AdminPanelComponent,
     VehicleStepReservationComponent,
     ContactStepReservationComponent,
-    SummaryStepReservationComponent
+    SummaryStepReservationComponent,
+    AdminSideMenuComponent,
+    AdminAddVehicleComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

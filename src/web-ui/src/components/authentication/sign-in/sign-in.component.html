@@ -1,55 +1,53 @@
-<div class="wrapper">
-<h4 class="header4" >{{
-  'components.authentication.sign-in.sign-in-header' | translate
-}}</h4>
+<div class='wrapper'>
+  <h4 class='header4'>{{
+    'components.authentication.sign-in.sign-in-header' | translate
+    }}</h4>
 
-<form [formGroup]='form' class='form'>
+  <form [formGroup]='form' class='form'>
 
-  <input class="form_input"
-    pInputText
-    type='text'
-    formControlName='login'
-    placeholder="{{
+    <input class='form_input'
+           pInputText
+           type='text'
+           formControlName='login'
+           placeholder="{{
       'components.authentication.sign-in.login.label' | translate
     }}"
-    minlength='5'
-  />
+           minlength='5'
+    />
 
 
-  <input class="form_input"
-    pInputText
-    type='password'
-    formControlName='password'
-    placeholder="{{
+    <input class='form_input'
+           pInputText
+           type='password'
+           formControlName='password'
+           placeholder="{{
       'components.authentication.sign-in.password.label' | translate
     }}"
-    minlength='5'
-  />
+           minlength='5'
+    />
 
-  <p-checkbox class="checkbox"
-    formControlName='rememberMe'
-    [binary]='true'
-    label="{{
+    <p-checkbox class='checkbox'
+                formControlName='rememberMe'
+                [binary]='true'
+                label="{{
       'components.authentication.sign-in.rememberMe.label' | translate
     }}"
-  ></p-checkbox>
+    ></p-checkbox>
 
-  
-    <button class="btn" (click)='signIn()' [disabled]='!formService.isFormValid()'
+
+    <button class='btn' (click)='signIn()' [disabled]='!formService.isFormValid()'
     >
       {{ "components.authentication.sign-in.buttons.sign-in" | translate }}
     </button>
- 
 
 
+    <button class='btn' routerLink='/sign-up'>
+      {{ "components.authentication.sign-in.buttons.sign-up" | translate }}
+    </button>
 
-  <button class="btn" routerLink='/sign-up'>
-    {{ "components.authentication.sign-in.buttons.sign-up" | translate }}
-  </button>
+    <a routerLink='/password-reset'>
 
-<a routerLink='/reset-password'>
-
-  {{ "components.authentication.sign-in.buttons.reset-password" | translate }}
-</a>
-</form>
+      {{ "components.authentication.sign-in.buttons.password-reset" | translate }}
+    </a>
+  </form>
 </div>

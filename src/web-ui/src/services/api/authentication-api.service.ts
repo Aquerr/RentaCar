@@ -24,6 +24,10 @@ export class AuthenticationApiService {
     return this.http.post<JwtTokenResponse>(`${this.AUTH_URL}/resend-activation-email`, login);
   }
 
+  public resetPassword(login: string) {
+    return this.http.post<void>(`${this.AUTH_URL}/password-reset`, login);
+  }
+
   public getMyself() {
     const url = this.AUTH_URL + '/myself';
     return this.http.get<MyselfResponse>(url);

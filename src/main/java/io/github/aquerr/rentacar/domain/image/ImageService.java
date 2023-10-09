@@ -1,12 +1,12 @@
 package io.github.aquerr.rentacar.domain.image;
 
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
+import io.github.aquerr.rentacar.domain.image.dto.ImageUri;
 import io.github.aquerr.rentacar.domain.image.exception.CouldNotDeleteImageException;
 import io.github.aquerr.rentacar.domain.image.exception.CouldNotSaveImageException;
+import io.github.aquerr.rentacar.domain.image.exception.ImageNotFoundException;
 import io.github.aquerr.rentacar.domain.image.model.ImageKind;
 import io.github.aquerr.rentacar.domain.image.model.ImageKindFolder;
-import io.github.aquerr.rentacar.domain.image.dto.ImageUri;
-import io.github.aquerr.rentacar.domain.image.exception.ImageNotFoundException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

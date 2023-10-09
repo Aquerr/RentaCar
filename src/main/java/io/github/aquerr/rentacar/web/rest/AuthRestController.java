@@ -71,6 +71,13 @@ public class AuthRestController
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/password-reset/init")
+    public ResponseEntity<?> resetPassword(@PathVariable("login") UserCredentials.UsernameOrEmail login)
+    {
+        //TODO
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/invalidate")
     public ResponseEntity<?> invalidate(HttpServletRequest httpServletRequest)
     {

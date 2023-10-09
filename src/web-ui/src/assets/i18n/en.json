@@ -11,7 +11,9 @@
     "activation": "Account activation",
     "account-activated": "Account activated",
     "reactivation-account": "Account reactivation",
-    "admin-panel": "Admin panel"
+    "admin-panel": "Admin panel",
+    "admin-add-vehicle": "Add vehicle",
+    "password-reset": "Reset password"
   },
   "components": {
     "authentication": {
@@ -29,7 +31,7 @@
         "buttons": {
           "sign-in": "Sign in",
           "sign-up": "Sign up",
-          "reset-password": "Don't remember password?"
+          "password-reset": "Don't remember password?"
         }
       }
     },
@@ -185,6 +187,23 @@
         "error": "Activation link has not been send successfully"
       }
     },
+    "password-reset": {
+      "labels": {
+        "title": "Receiving password",
+        "login": "Login"
+      },
+      "buttons": {
+        "resend": "Receive password"
+      },
+      "toasts": {
+        "success": "Receiving password link has been send successfully to email below",
+        "error": "Receiving password link has not been send successfully"
+      },
+      "errors": {
+        "required": "This field is required",
+        "min-length": "Min length equals 5 chars"
+      }
+    },
     "main": {
       "labels": {
         "title": "Test\nspeed on\nYour own skin",
@@ -192,6 +211,54 @@
       },
       "buttons": {
         "reserve": "Reserve"
+      }
+    },
+    "admin-side-menu": {
+      "labels": {
+        "add-vehicle": "Add vehicle"
+      }
+    },
+    "admin-add-vehicle": {
+      "labels": {
+        "photos": "Choose photos",
+        "deletePhoto": "Delete",
+        "brand": "Brand",
+        "model": "Model",
+        "productionYear": "Production year",
+        "seatsAmount": "Seats amount",
+        "basicPrice": "Basic price",
+        "color": "Color",
+        "rimsInch": "Rims inch [\"]",
+        "capacity": "Capacity [cm3]",
+        "type": "Engine type",
+        "power": "Power [KM]",
+        "torque": "Torque [Nm]",
+        "avgFuelConsumption": "Avg fuel consumption [l/100km]",
+        "transmission": "Transmission",
+        "ac": "AC",
+        "frontPDC": "Front PDC",
+        "rearPDC": "Rear PDC",
+        "ledFrontLights": "LED front lights",
+        "xenonFrontLights": "Xenon front lights",
+        "ledRearLights": "LED rear lights",
+        "leatherSeats": "Leather seats",
+        "multifunctionalSteeringWheel": "Multifunctional steering wheel",
+        "cruiseControl": "Cruise control",
+        "category": "Vehicle category",
+        "addVehicle": "Add vehicle"
+      },
+      "dialog": {
+        "header": "Add vehicle",
+        "message": "Are you sure You want to add vehicle?",
+        "acceptLabel": "Yes",
+        "rejectLabel": "No"
+      },
+      "toasts": {
+        "success": "New vehicle has been added",
+        "error": "New vehicle has not been added successfully"
+      },
+      "errors": {
+        "required": "This field is required"
       }
     }
   },

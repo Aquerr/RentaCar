@@ -11,7 +11,9 @@
     "activation": "Aktywacja konta",
     "account-activated": "Konto aktywowane",
     "reactivation-account": "Reaktywacja konta",
-    "admin-panel": "Panel admina"
+    "admin-panel": "Panel admina",
+    "admin-add-vehicle": "Dodaj pojazd",
+    "password-reset": "Odzyskiwanie hasła"
   },
   "components": {
     "authentication": {
@@ -29,7 +31,7 @@
         "buttons": {
           "sign-in": "Zaloguj się",
           "sign-up": "Zarejestruj się",
-          "reset-password": "Nie pamietasz hasła?"
+          "password-reset": "Nie pamietasz hasła?"
         }
       }
     },
@@ -181,8 +183,25 @@
         "resend": "Wyślij ponownie"
       },
       "toasts": {
-        "success": "Link aktywacyjny wysłany na wskazany email",
-        "error": "Próba wysłania linu nie powiodła się"
+        "success": "Link aktywacyjny został wysłany na wskazany email",
+        "error": "Próba wysłania linku nie powiodła się"
+      }
+    },
+    "password-reset": {
+      "labels": {
+        "title": "Odzyskiwanie hasła",
+        "login": "Login"
+      },
+      "buttons": {
+        "resend": "Resetuj hasło"
+      },
+      "toasts": {
+        "success": "Link do odzyskania konta został wysłany na wskazany email",
+        "error": "Próba wysłania linku nie powiodła się"
+      },
+      "errors": {
+        "required": "To pole jest wymagane",
+        "min-length": "Minimalna długość wynosi 5 znaków"
       }
     },
     "main": {
@@ -192,6 +211,54 @@
       },
       "buttons": {
         "reserve": "Rezerwuj"
+      }
+    },
+    "admin-side-menu": {
+      "labels": {
+        "add-vehicle": "Dodaj pojazd"
+      }
+    },
+    "admin-add-vehicle": {
+      "labels": {
+        "photos": "Wybierz zdjęcia",
+        "deletePhoto": "Usuń",
+        "brand": "Marka",
+        "model": "Model",
+        "productionYear": "Rok produkcji",
+        "seatsAmount": "Liczba miejsc",
+        "basicPrice": "Cena bazowa",
+        "color": "Kolor",
+        "rimsInch": "Wielkość felg [\"]",
+        "capacity": "Pojemność skokowa [cm3]",
+        "type": "Typ silnika",
+        "power": "Moc [KM]",
+        "torque": "Moment obrotowy [Nm]",
+        "avgFuelConsumption": "Średnie spalanie [l/100km]",
+        "transmission": "Napęd",
+        "ac": "Klimatyzacja",
+        "frontPDC": "Przednie czujniki parkowania",
+        "rearPDC": "Tylne czujniki parkowania",
+        "ledFrontLights": "Przednie światła LED",
+        "xenonFrontLights": "Przednie światła Xenon",
+        "ledRearLights": "Tylne światła LED",
+        "leatherSeats": "Fotele skórzane",
+        "multifunctionalSteeringWheel": "Kierownica wielofunkcyjna",
+        "cruiseControl": "Tempomat",
+        "category": "Klasa pojazdu",
+        "addVehicle": "Dodaj pojazd"
+      },
+      "dialog": {
+        "header": "Dodaj pojazd",
+        "message": "Czy na pewno chcesz dodać nowy pojazd?",
+        "acceptLabel": "Tak",
+        "rejectLabel": "Nie"
+      },
+      "toasts": {
+        "success": "Nowy pojazd został dodany",
+        "error": "Nie udało dodać się nowego pojazdu"
+      },
+      "errors": {
+        "required": "To pole jest wymagane"
       }
     }
   },

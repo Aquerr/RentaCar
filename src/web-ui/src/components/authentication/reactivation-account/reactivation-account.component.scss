@@ -19,7 +19,7 @@
   top: 350px;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--main-font);
+  color: black;
   background: transparent;
   height: 250px;
   width: 400px;
@@ -31,7 +31,13 @@
 }
 
 .btn {
+  background-color: black;
+  color: white;
   margin: 20px;
+}
+
+.btn:hover {
+  color: var(--gold);
 }
 
 .header4 {

@@ -30,6 +30,13 @@ export class VehicleApiService {
     return this.http.get<VehicleBasicDataResponse>(`${this.URL}/available`, { params: httpParams });
   }
 
+  public saveVehicle(vehicle: VehicleFullData, images: File[]) {
+    const formData = new FormData();
+    images.forEach(image => formData.append('images', image));
+    formData.append('vehicle', new Blob([JSON.stringify(vehicle)], { type: 'application/json' }));
+    return this.http.post<VehicleFullDataResponse>(this.URL, formData);
+  }
+
 }
 
 export interface VehicleFullDataResponse {

@@ -16,33 +16,46 @@
 label {
   color: grey;
   font-size: 12px;
-  margin-top:20px;
+  margin-top: 20px;
   margin-bottom: 5px;
+  text-align: left;
 }
+
 .wrapper {
   position: absolute;
   top: 420px;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--main-font);
+  color: black;
   background: transparent;
   height: 530px;
   width: 400px;
   border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(24, 24, 24, 0.5);
   backdrop-filter: blur(25px);
   text-align: center;
   justify-content: center;
 }
+
 .header4 {
   text-transform: uppercase;
   font-size: 1.5rem;
 }
+
 .btn {
-  margin-left: 0px;
-  margin: 30px;
+  margin-left: 0;
 }
 
 .p-error {
-height: 0vh;
+  height: 0;
+}
+
+.btn {
+  background-color: black;
+  color: white;
+  margin: 30px;
+}
+
+.btn:hover {
+  color: var(--gold);
 }

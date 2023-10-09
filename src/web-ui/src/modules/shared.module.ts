@@ -24,6 +24,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { AppGuard } from '../components/authentication/app.guard';
 import { StepsModule } from 'primeng/steps';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   exports: [
@@ -45,7 +47,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DialogModule,
     CarouselModule,
     StepsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ColorPickerModule,
+    MultiSelectModule
   ],
   providers: [
     MessageService,

@@ -19,8 +19,9 @@ import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/
 import { AdminPanelComponent } from '../components/admin/admin-panel/admin-panel.component';
 import { AppGuard } from '../components/authentication/app.guard';
 import { Auth } from '../components/auth.enum';
+import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
 
-const routes: Routes = [
+const ROUTES: Routes = [
   {
     path: '',
     component: MainComponent,
@@ -37,6 +38,12 @@ const routes: Routes = [
     component: SignUpComponent,
     canActivate: [() => !inject(AppGuard).isAuthenticated()],
     title: 'title.sign-up'
+  },
+  {
+    path: 'password-reset',
+    component: PasswordResetComponent,
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    title: 'title.password-reset'
   },
   {
     path: 'profile-edit',
@@ -87,6 +94,7 @@ const routes: Routes = [
     path: 'admin-panel',
     component: AdminPanelComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated() && inject(AppGuard).hasUserAuthority(Auth.VIEW_ADMIN_PANEL)],
+    loadChildren: () => import('../components/admin/admin-panel/admin-panel-routing.module').then(module => module.AdminPanelRoutingModule),
     title: 'title.admin-panel'
   },
   {
@@ -97,7 +105,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
