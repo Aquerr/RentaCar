@@ -85,4 +85,38 @@ public class VehicleConverter {
 
         return builder.build();
     }
+
+    public VehicleEntity fullDataToEntity(VehicleFullData vehicleFullData) {
+        if (vehicleFullData == null) {
+            return null;
+        }
+
+        return VehicleEntity.builder()
+                .id(vehicleFullData.getId())
+                .brand(vehicleFullData.getBrand())
+                .model(vehicleFullData.getModel())
+                .productionYear(vehicleFullData.getProductionYear())
+                .seatsAmount(vehicleFullData.getSeatsAmount())
+                .color(vehicleFullData.getBody().getColor())
+                .rimsInch(vehicleFullData.getBody().getRimsInch())
+                .capacity(vehicleFullData.getEngine().getCapacity())
+                .engineType(vehicleFullData.getEngine().getType().toString())
+                .power(vehicleFullData.getEngine().getPower())
+                .torque(vehicleFullData.getEngine().getTorque())
+                .avgFuelConsumption(vehicleFullData.getEngine().getAvgFuelConsumption())
+                .transmission(vehicleFullData.getEngine().getTransmission().toString())
+                .ac(vehicleFullData.getEquipment().isAc())
+                .frontPDC(vehicleFullData.getEquipment().isFrontPDC())
+                .rearPDC(vehicleFullData.getEquipment().isRearPDC())
+                .ledFrontLights(vehicleFullData.getEquipment().isLedFrontLights())
+                .xenonFrontLights(vehicleFullData.getEquipment().isXenonFrontLights())
+                .ledRearLights(vehicleFullData.getEquipment().isLedRearLights())
+                .bluetooth(vehicleFullData.getEquipment().isBluetooth())
+                .leatherSeats(vehicleFullData.getEquipment().isLeatherSeats())
+                .multifunctionalSteeringWheel(vehicleFullData.getEquipment().isMultifunctionalSteeringWheel())
+                .cruiseControl(vehicleFullData.getEquipment().isCruiseControl())
+                .basicPrice(vehicleFullData.getBasicPrice())
+                .category(vehicleFullData.getCategory().toString())
+                .build();
+    }
 }

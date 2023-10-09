@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.domain.vehicle.VehicleService;
 import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
+import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleFullData;
 import io.github.aquerr.rentacar.web.rest.response.SearchVehicleBasicDataResponse;
 import io.github.aquerr.rentacar.web.rest.response.VehicleAvailabilityResponse;
 import io.github.aquerr.rentacar.web.rest.response.VehicleFullDataResponse;
@@ -9,11 +10,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/vehicles")
@@ -41,5 +46,10 @@ public class VehicleRestController {
                                                                           @PathVariable("vehicleId") int vehicleId)
     {
         return ResponseEntity.ok(VehicleAvailabilityResponse.of(this.vehicleService.isVehicleAvailable(vehicleId, dateFrom, dateTo)));
+    }
+
+    @PostMapping
+    public ResponseEntity<VehicleFullDataResponse> saveVehicle(@RequestPart(value = "images")List<MultipartFile> images, @RequestPart(value = "vehicle") VehicleFullData vehicle) {
+        return ResponseEntity.ok(VehicleFullDataResponse.of(this.vehicleService.saveVehicleWithImages(vehicle, images)));
     }
 }

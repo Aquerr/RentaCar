@@ -1,5 +1,5 @@
 export interface VehicleFullData {
-  id: number;
+  id?: number;
   brand: string;
   model: string;
   productionYear: Date;

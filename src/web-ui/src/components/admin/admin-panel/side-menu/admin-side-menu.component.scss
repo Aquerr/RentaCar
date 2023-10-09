@@ -1,0 +1,14 @@
+ul {
+  height: 100%;
+}
+
+li {
+  padding: 5px;
+  list-style-type: none;
+  color: white;
+}
+
+li:hover {
+  color: var(--gold);
+  cursor: pointer;
+}

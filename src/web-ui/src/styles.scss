@@ -58,6 +58,79 @@ h4 {
   padding: 10px;
 }
 
+.p-inputtext:enabled:hover {
+  cursor: default !important;
+}
+
+.p-colorpicker-preview {
+  width: 200px !important;
+  border: 1px solid black !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: black !important;
+  background: black !important;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  border-color: black !important;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
+  border-color: black !important;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  border-color: black !important;
+  background: black !important;
+}
+
+.p-multiselect:not(.p-disabled):hover {
+  border-color: black !important;
+}
+
+.p-multiselect:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
+  border-color: black !important;
+}
+
+.p-multiselect {
+  width: 100% !important;
+}
+
+.p-multiselect .p-multiselect-label {
+  padding: 0.5rem 0.5rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
+  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
+}
+
+.p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
+  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
+}
+
+.p-inputtext:enabled:hover {
+  border-color: black !important;
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
+  border-color: black !important;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+  color: white !important;
+  background: #696969 !important;
+}
+
+.p-multiselect.p-multiselect-chip .p-multiselect-token {
+  color: white !important;
+  background: #696969 !important;
+}
+
 .btn:hover {
   background: var(--main-font);
   color: var(--third-color);
@@ -67,13 +140,12 @@ h4 {
   display: none !important;
 }
 
-.p-dialog-content {
-  //padding: 30px !important;
-  //border-radius: 5px;
-}
-
 .p-component:hover {
   cursor: pointer !important;
+}
+
+a:hover {
+  color: var(--gold) !important;
 }
 
 // Media

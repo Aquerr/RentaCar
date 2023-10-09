@@ -73,8 +73,7 @@
   }
 
   .btn:hover {
-    background: var(--main-font);
-    color: var(--third-color);
+    color: var(--gold);
   }
 
   .lang-nav {
@@ -249,4 +248,6 @@
 
 .router-section {
   margin-top: 65px;
+  height: calc(100% - 350px);
+  background-color: white;
 }

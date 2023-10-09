@@ -59,7 +59,8 @@
         <span
           class='title'>{{ 'components.vehicle-details.labels.category' | translate}}</span><span>{{vehicle.category}}</span>
         <span
-          class='title'>{{ 'components.vehicle-details.labels.color' | translate}}</span><span>{{ getTranslation(vehicle.body.color, 'colors') | translate }} </span>
+          class='title'>{{ 'components.vehicle-details.labels.color' | translate}}</span><span> <p-colorPicker
+        [(ngModel)]='vehicle.body.color' [disabled]='true' /> </span>
         <span
           class='title'>{{ 'components.vehicle-details.labels.rims-inch' | translate}}</span><span>{{vehicle.body.rimsInch}}</span>
       </div>
