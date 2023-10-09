@@ -86,3 +86,15 @@ img {
     background-color: black;
   }
 }
+
+// MEDIA
+
+@media (max-width: 1200px) {
+  .top-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .img-container {
+    width: auto;
+  }
+}

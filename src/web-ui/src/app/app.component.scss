@@ -111,13 +111,12 @@
 
 .nav-mobile--active {
   position: absolute;
-  top: -60%;
+  top: -55%;
   left: 0;
   bottom: 0;
   right: 0;
   display: flex;
   justify-content: center;
-  align-items: left;
   flex-direction: column;
   background-color: var(--gold);
   z-index: 10;
@@ -128,7 +127,6 @@
   position: relative;
   display: inline-block;
   margin: 0.5em;
-  padding: 0.5em;
   font-size: 2.3rem;
   color: var(--main-font);
   text-transform: uppercase;
@@ -244,10 +242,25 @@
 
 .hamburger-container {
   display: flex;
+  height: 40px;
 }
 
 .router-section {
   margin-top: 65px;
   height: calc(100% - 350px);
   background-color: white;
+}
+
+
+// MEDIA
+
+@media (max-width: 1200px) {
+  .hamburger {
+    display: flex;
+    height: 65px;
+  }
+  .router-section {
+    margin-top: 0;
+    height: calc(100% - 65px);
+  }
 }

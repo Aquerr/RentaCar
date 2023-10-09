@@ -5,7 +5,6 @@ import { CommonService } from '../../../services/common.service';
 import { ToastType } from '../../../services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserProfile } from '../../../models/user-profile.model';
 
 
 @Component({
@@ -20,14 +19,13 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
   });
   subscription: Subscription = new Subscription();
   token = '';
-  userProfile: UserProfile | null = null;
 
   constructor(private commonService: CommonService,
               private router: Router,
               private apiService: AuthenticationApiService) {}
 
   ngOnInit() {
-    this.getUserByToken();
+    this.isTokenValid();
     this.password2ValueSubscription();
   }
 
@@ -35,18 +33,22 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getUserByToken() {
+  isTokenValid() {
     const url = this.router.routerState.snapshot.url;
     this.token = url.substring(url.indexOf('=') + 1, url.length);
-    this.apiService.getUserByResetToken(this.token).subscribe({
-      next: (userProfile) => {
-        this.userProfile = userProfile;
+    this.apiService.isTokenValid(this.token).subscribe({
+      next: (tokenValid) => {
+        if (!tokenValid) {
+          this.handleTokenInvalidError();
+        }
       },
-      error: () => {
-        this.commonService.goRoute('');
-        this.commonService.showToast('components.new-password.toasts.token-expired', ToastType.ERROR);
-      }
+      error: () => this.handleTokenInvalidError()
     });
+  }
+
+  handleTokenInvalidError() {
+    this.commonService.goRoute('');
+    this.commonService.showToast('components.new-password.toasts.token-expired', ToastType.ERROR);
   }
 
   password2ValueSubscription() {
@@ -65,8 +67,8 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
 
   setNewPassword() {
     this.form.markAllAsTouched();
-    if (this.form.valid && this.userProfile) {
-      this.apiService.setNewPassword(this.userProfile?.id, this.getPassword().value).subscribe({
+    if (this.form.valid) {
+      this.apiService.setNewPassword(this.token, this.getPassword().value).subscribe({
         next: () => {
           this.commonService.goRoute('');
           this.commonService.showToast('components.new-password.toasts.update-success', ToastType.SUCCESS);

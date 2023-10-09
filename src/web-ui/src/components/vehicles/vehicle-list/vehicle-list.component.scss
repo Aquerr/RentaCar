@@ -37,3 +37,13 @@
 .btn:hover {
   color: var(--gold);
 }
+
+// MEDIA
+
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    margin: 20px auto;
+    width: auto;
+  }
+}
