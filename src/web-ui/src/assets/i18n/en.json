@@ -13,7 +13,8 @@
     "reactivation-account": "Account reactivation",
     "admin-panel": "Admin panel",
     "admin-add-vehicle": "Add vehicle",
-    "password-reset": "Reset password"
+    "password-reset": "Reset password",
+    "new-password": "New password"
   },
   "components": {
     "authentication": {
@@ -202,6 +203,26 @@
       "errors": {
         "required": "This field is required",
         "min-length": "Min length equals 5 chars"
+      }
+    },
+    "new-password": {
+      "labels": {
+        "title": "New password",
+        "password": "Password",
+        "confirm-password": "Confirm password"
+      },
+      "buttons": {
+        "set": "Set new password"
+      },
+      "toasts": {
+        "update-success": "New password has been set successfully",
+        "update-error": "New password has not been set successfully",
+        "token-expired": "Token has expired. Generate new one"
+      },
+      "errors": {
+        "required": "This field is required",
+        "min-length": "Min length equals 5 chars",
+        "doesnt-match": "Both passwords don't match"
       }
     },
     "main": {

@@ -20,6 +20,7 @@ import { AdminPanelComponent } from '../components/admin/admin-panel/admin-panel
 import { AppGuard } from '../components/authentication/app.guard';
 import { Auth } from '../components/auth.enum';
 import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
+import { NewPasswordComponent } from '../components/authentication/new-password/new-password.component';
 
 const ROUTES: Routes = [
   {
@@ -44,6 +45,12 @@ const ROUTES: Routes = [
     component: PasswordResetComponent,
     canActivate: [() => !inject(AppGuard).isAuthenticated()],
     title: 'title.password-reset'
+  },
+  {
+    path: 'new-password',
+    component: NewPasswordComponent,
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    title: 'title.new-password'
   },
   {
     path: 'profile-edit',

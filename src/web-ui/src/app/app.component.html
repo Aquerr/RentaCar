@@ -10,6 +10,20 @@
     <a class='nav__link' href='#' (click)='closeSideMenu()'>FAQ</a>
     <a class='nav__link' routerLink='vehicle-list' (click)='closeSideMenu()'>Rezerwuj pojazd</a>
     <a class='nav__link' routerLink='contact' (click)='closeSideMenu()'>Kontakt</a>
+    <a class='nav__link'
+       routerLink='sign-in'
+       (click)='closeSideMenu()'
+       *ngIf='!userLogged'>{{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}</a>
+    <a class='nav__link'
+       routerLink='profile-edit'
+       (click)='closeSideMenu()'
+       *ngIf='userLogged'>Profil</a>
+    <a class='nav__link'
+       routerLink='sign-in'
+       (click)='logout()'
+       *ngIf='userLogged'>{{ "app.top-nav.sign-in-log-out-nav.log-out-label" | translate }}</a>
+    <a class='{{ iconLang }} nav__link' (click)='changeLanguage()'
+       pTooltip="{{ 'app.top-nav.lang-nav.tooltip' | translate }}" tooltipPosition='bottom'></a>
   </nav>
 
 </div>

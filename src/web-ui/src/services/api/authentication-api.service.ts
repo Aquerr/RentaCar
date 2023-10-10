@@ -28,6 +28,14 @@ export class AuthenticationApiService {
     return this.http.post<void>(`${this.AUTH_URL}/password-reset`, login);
   }
 
+  public isTokenValid(token: string) {
+    return this.http.get<boolean>(`${this.AUTH_URL}/reset-password/token/${token}/valid`);
+  }
+
+  public setNewPassword(token: string, newPassword: string) {
+    return this.http.post<void>(`${this.AUTH_URL}/new-password/token/${token}`, newPassword);
+  }
+
   public getMyself() {
     const url = this.AUTH_URL + '/myself';
     return this.http.get<MyselfResponse>(url);

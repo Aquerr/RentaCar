@@ -43,6 +43,7 @@ import {
 import { AdminSideMenuComponent } from '../components/admin/admin-panel/side-menu/admin-side-menu.component';
 import { AdminAddVehicleComponent } from '../components/admin/admin-panel/add-vehicle/admin-add-vehicle.component';
 import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
+import { NewPasswordComponent } from '../components/authentication/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PasswordResetComponent } from '../components/authentication/password-re
     SummaryStepReservationComponent,
     AdminSideMenuComponent,
     AdminAddVehicleComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    NewPasswordComponent
   ],
   imports: [
     BrowserModule,
