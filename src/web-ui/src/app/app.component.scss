@@ -95,9 +95,7 @@
 
 .hamburger {
   position: absolute;
-  top: 3em;
-  left: 1em;
-  transform: translateY(-50%);
+  top: -15px;
   z-index: 500;
 }
 
@@ -135,7 +133,7 @@
 }
 
 .nav__link:hover {
-  color: var(--third-color);
+  color: black !important;
 }
 
 

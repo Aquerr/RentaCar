@@ -97,4 +97,12 @@ img {
   .img-container {
     width: auto;
   }
+  .equipment-container {
+    flex-direction: column;
+    justify-items: left;
+    align-items: center;
+  }
+  .section {
+    width: 50%;
+  }
 }

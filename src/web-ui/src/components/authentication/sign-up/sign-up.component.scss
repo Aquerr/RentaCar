@@ -59,3 +59,11 @@ label {
 .btn:hover {
   color: var(--gold);
 }
+
+// MEDIA
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 100%;
+  }
+}

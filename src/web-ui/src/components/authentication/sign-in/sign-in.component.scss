@@ -69,3 +69,11 @@ a:hover {
 .checkbox {
   margin-top: 20px;
 }
+
+// MEDIA
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 100%;
+  }
+}
