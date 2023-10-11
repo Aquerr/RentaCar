@@ -39,3 +39,18 @@ img {
   width: 100%;
   height: inherit;
 }
+
+// MEDIA
+
+@media (max-width: 1200px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    width: auto;
+  }
+  .text-container {
+    width: auto;
+    padding: 10px;
+  }
+}

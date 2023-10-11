@@ -46,4 +46,9 @@
     margin: 20px auto;
     width: auto;
   }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
 }
