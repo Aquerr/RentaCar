@@ -3,12 +3,16 @@ package io.github.aquerr.rentacar.web.rest;
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
+import io.github.aquerr.rentacar.application.security.RentaCarAuthenticationManager;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
+import io.github.aquerr.rentacar.application.security.dto.AuthResult;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.web.rest.request.ActivationTokenRequest;
+import io.github.aquerr.rentacar.web.rest.request.MfaAuthRequest;
+import io.github.aquerr.rentacar.web.rest.response.AuthResponse;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import io.github.aquerr.rentacar.web.rest.response.MyselfResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,11 +39,19 @@ public class AuthRestController
     private final AuthenticationFacade authenticationFacade;
     private final ProfileService profileService;
     private final UserService userService;
+    private final RentaCarAuthenticationManager rentaCarAuthenticationManager;
 
     @PostMapping
-    public ResponseEntity<JwtTokenResponse> authenticate(@RequestBody UserCredentials userCredentials)
+    public ResponseEntity<AuthResponse> authenticate(@RequestBody UserCredentials userCredentials)
     {
-        return ResponseEntity.ok(JwtTokenResponse.of(authenticationFacade.authenticate(userCredentials)));
+        AuthResult authResult = rentaCarAuthenticationManager.authenticate(userCredentials);
+        return ResponseEntity.ok(AuthResponse.of(authResult));
+    }
+
+    @PostMapping("/mfa")
+    public ResponseEntity<JwtTokenResponse> authenticateMfa(@RequestBody MfaAuthRequest mfaAuthRequest)
+    {
+        return ResponseEntity.ok(JwtTokenResponse.of(rentaCarAuthenticationManager.authenticate(mfaAuthRequest)));
     }
 
     @GetMapping("/myself")

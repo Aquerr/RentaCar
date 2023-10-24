@@ -57,7 +57,7 @@ public final class JwtService {
 
     private final InvalidJwtTokenRepository invalidJwtTokenRepository;
 
-    @Value("${rentacar.security.jwt.issuer}")
+    @Value("${rentacar.security.issuer}")
     private String jwtIssuer;
     @Value("${rentacar.security.jwt.expiration-time}")
     private Duration jwtExpirationTime;

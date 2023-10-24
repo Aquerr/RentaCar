@@ -56,6 +56,7 @@ public class SecurityConfig {
                 requests.requestMatchers("/api/v1/auth/activation").permitAll();
                 requests.requestMatchers("/api/v1/auth/resend-activation-email/{login}").permitAll();
                 requests.requestMatchers("/api/v1/auth/password-reset/init").permitAll();
+                requests.requestMatchers("/api/v1/auth/mfa").permitAll();
                 requests.requestMatchers("/api/**").authenticated();
                 requests.requestMatchers("/static/**").permitAll();
                 requests.requestMatchers("/public/**").permitAll();

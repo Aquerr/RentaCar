@@ -26,6 +26,11 @@ public class UserCredentials
         this.rememberMe = rememberMe;
     }
 
+    public String getLogin()
+    {
+        return login.getValue();
+    }
+
     @Value
     public static class UsernameOrEmail
     {

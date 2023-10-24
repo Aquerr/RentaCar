@@ -17,6 +17,7 @@ public class UserCredentialsConverter
                 .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .email(user.getEmail())
                 .build();
     }
 
@@ -29,6 +30,7 @@ public class UserCredentialsConverter
                 .id(userCredentials.getId())
                 .username(userCredentials.getUsername())
                 .password(userCredentials.getPassword())
+                .email(userCredentials.getEmail())
                 .build();
     }
 }
