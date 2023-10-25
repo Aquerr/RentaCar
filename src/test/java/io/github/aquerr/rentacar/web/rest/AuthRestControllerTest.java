@@ -2,8 +2,9 @@ package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
-import io.github.aquerr.rentacar.application.security.JwtToken;
+import io.github.aquerr.rentacar.application.security.RentaCarAuthenticationManager;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
+import io.github.aquerr.rentacar.application.security.dto.AuthResult;
 import io.github.aquerr.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthRestControllerTest extends BaseRestIntegrationTest
 {
     @MockBean
-    protected AuthenticationFacade authenticationFacade;
+    private AuthenticationFacade authenticationFacade;
+
+    @MockBean
+    private RentaCarAuthenticationManager authenticationManager;
 
     @Autowired
     private AuthRestController authRestController;
@@ -49,9 +53,12 @@ class AuthRestControllerTest extends BaseRestIntegrationTest
     {
         // given
         UserCredentials userCredentials = new UserCredentials(new UserCredentials.UsernameOrEmail("rentac.testar@tst.pl"), "rentacar", false);
-        JwtToken expectedResponse = JwtToken.of("dasiemi23io12iadiomicmaicmaoisme21m39adkacmiozmdoiasm", "admin", Set.of("EDIT_CARS"));
-        given(authenticationFacade.authenticate(userCredentials)).willReturn(expectedResponse);
-
+        AuthResult authResult = AuthResult.builder()
+                .jwt("dasiemi23io12iadiomicmaicmaoisme21m39adkacmiozmdoiasm")
+                .username("admin")
+                .authorities(Set.of("EDIT_CARS"))
+                .build();
+        given(authenticationManager.authenticate(userCredentials)).willReturn(authResult);
 
         // when
         // then
@@ -66,7 +73,7 @@ class AuthRestControllerTest extends BaseRestIntegrationTest
     void shouldReturnRestErrorResponseWhenAuthenticationFacadeThrowsBadCredentialsException() throws Exception
     {
         // given
-        given(authenticationFacade.authenticate(any())).willThrow(BadCredentialsException.class);
+        given(authenticationManager.authenticate(any(UserCredentials.class))).willThrow(BadCredentialsException.class);
         given(messageService.resolveMessage("auth.error.bad-credentials", List.of()))
                 .willReturn("Wrong username or password!");
 
@@ -83,7 +90,7 @@ class AuthRestControllerTest extends BaseRestIntegrationTest
     void shouldReturnRestErrorResponseWhenAuthenticationFacadeThrowsBadCredentialsExceptionAndNoMessageServiceReturnsNullForMessageKey() throws Exception
     {
         // given
-        given(authenticationFacade.authenticate(any())).willThrow(BadCredentialsException.class);
+        given(authenticationManager.authenticate(any(UserCredentials.class))).willThrow(BadCredentialsException.class);
         given(messageService.resolveMessage("auth.error.bad-credentials", List.of())).willReturn(null);
 
         // when
