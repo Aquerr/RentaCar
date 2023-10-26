@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
+  faBars,
   faChair,
   faDharmachakra,
   faFan,
   faGasPump,
   faLightbulb,
   faOilCan,
-  faWrench
+  faWrench,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
@@ -26,7 +28,9 @@ export class FontAwesomeLibraryService {
       faDharmachakra,
       faGasPump,
       faOilCan,
-      faWrench
+      faWrench,
+      faBars,
+      faXmark
     );
   }
 }

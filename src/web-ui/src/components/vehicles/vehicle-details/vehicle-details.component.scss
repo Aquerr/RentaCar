@@ -89,13 +89,17 @@ img {
 
 // MEDIA
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
   .top-container {
     display: flex;
     flex-direction: column;
   }
   .img-container {
     width: auto;
+  }
+  .date-container {
+    padding-top: 10px;
+    flex-direction: column;
   }
   .equipment-container {
     flex-direction: column;

@@ -1,11 +1,10 @@
-<div class='hamburger-container' *ngIf='isMobile'>
-  <button class='hamburger hamburger--spin' type='button' (click)='toggleSideMenu()'>
-    <span class='hamburger-inner'></span>
-  </button>
-
+<div class='hamburger-container' *ngIf='isMobile && !sideMenuExpanded'>
+  <fa-icon icon='bars' (click)='toggleSideMenu()'></fa-icon>
 </div>
 
-<nav class='nav-mobile--active' *ngIf='sideMenuExpanded'>
+<nav class='side-menu-expanded' *ngIf='sideMenuExpanded'>
+  <fa-icon icon='xmark' (click)='toggleSideMenu()' *ngIf='sideMenuExpanded'></fa-icon>
+  <a class='nav__link' routerLink='' (click)='closeSideMenu()'>Strona główna</a>
   <a class='nav__link' href='#' (click)='closeSideMenu()'>Flota</a>
   <a class='nav__link' href='#' (click)='closeSideMenu()'>FAQ</a>
   <a class='nav__link' routerLink='vehicle-list' (click)='closeSideMenu()'>Rezerwuj pojazd</a>
@@ -58,4 +57,4 @@
 </div>
 
 
-<footer></footer>
+<footer [isMobile]='isMobile'></footer>
