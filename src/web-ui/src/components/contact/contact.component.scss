@@ -1,74 +1,79 @@
-.contact {
-  padding: 6em 2em;
-  color: var(--main-font);
-}
-.section-title {
-    font-size: 2rem;
-    margin-top: 90px;
-    margin-bottom: 50px;
-}
-.contact__form {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 30px;
-}
-label {
-  display: block;
-  margin-bottom: 0.5em;
-  font-size: 1rem;
-  text-transform: uppercase;
+.form_input {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px auto;
 }
 
-textarea {
-  max-width: 100%;
-  width: 100%;
-  min-width: 100%;
-}
-input,
-textarea {
-  padding: 1em 2em;
-  margin-bottom: 2em;
-  width: 100%;
-  color: var(--gold);
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
+p-checkbox {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
 }
 
-input,
-textarea:focus {
-  outline: none;
-  border: 1px solid var(--gold);
+.bottom-container {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10px;
 }
 
-.contact__form-box:nth-child(1) {
-  grid-column: 1/4;
-  grid-row: 1/2;
-}
-.contact__form-box:nth-child(2) {
-  grid-column: 4/7;
-  grid-row: 1/2;
-}
-.contact__form-box:nth-child(3) {
-  grid-column: 1/-1;
-  grid-row: 2/3;
-}
-
-.contact__form-btn {
-  grid-column: 1/2;
-  grid-row: 3/4;
-  padding: 1em;
-  border: 1px solid var(--gold);
-  background: transparent;
-  font-weight: bold;
-  color: var(--gold);
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  border-radius: 5px;
-}
-.contact__form-btn:hover,
-.contact__form-btn:focus {
-  outline: none;
-  background-color: var(--gold);
+.wrapper {
+  position: absolute;
+  top: 350px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: black;
+  background: transparent;
+  height: 350px;
+  width: 400px;
+  border-radius: 15px;
+  border: 2px solid rgba(24, 24, 24, 0.5);
+  backdrop-filter: blur(25px);
+  text-align: center;
+  justify-content: center;
+}
+
+.btn {
+  background-color: black;
+  color: white;
+  margin: 10px;
+}
+
+.btn:hover {
+  color: var(--gold);
+}
+
+a {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--second-color);
+}
+
+.header4 {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+.checkbox {
+  margin-top: 20px;
+}
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .wrapper {
+    width: 90%;
+  }
 }

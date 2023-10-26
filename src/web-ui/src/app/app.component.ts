@@ -68,18 +68,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   isMobileView() {
-    this.isMobile = window.innerWidth < 1200;
+    this.isMobile = window.innerWidth < 800;
   }
 
 
   toggleSideMenu() {
     this.sideMenuExpanded = !this.sideMenuExpanded;
-    const navMobile = document.querySelector('.nav-mobile') as any;
-    const navBtn = document.querySelector('.hamburger') as any;
-    if (navBtn && navMobile) {
-      navBtn.classList.toggle('is-active');
-      navMobile.classList.toggle('nav-mobile--active');
-    }
   }
 
   closeSideMenu() {

@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 10px;
 }
 
 .input-container {
@@ -11,14 +12,6 @@
   max-width: 200px;
   display: flex;
   flex-direction: column;
-}
-
-label {
-  color: grey;
-  font-size: 12px;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  text-align: left;
 }
 
 .wrapper {
@@ -62,8 +55,8 @@ label {
 
 // MEDIA
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
   .wrapper {
-    width: 100%;
+    width: 90%;
   }
 }
