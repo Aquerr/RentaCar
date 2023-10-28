@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public final class TestResourceUtils
 {
@@ -25,6 +27,19 @@ public final class TestResourceUtils
                 result.append(line);
             }
             return result.toString();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] loadImage(String path)
+    {
+        try
+        {
+            ClassPathResource classPathResource = new ClassPathResource(path);
+            return classPathResource.getContentAsByteArray();
         }
         catch (IOException e)
         {

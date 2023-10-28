@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -72,9 +73,10 @@ public final class JwtService {
                 .forEach(blackListedJwt -> BLACK_LISTED_JWTS.put(blackListedJwt.getJwt(), blackListedJwt));
     }
 
-    public String createJwt(AuthenticatedUser authenticatedUser, boolean rememberMe) {
+    public String createJwt(String username, boolean rememberMe, Set<String> authorities) {
+        authorities = Set.copyOf(authorities);
         Claims claims = Jwts.claims()
-                .setSubject(authenticatedUser.getUsername())
+                .setSubject(username)
                 .setIssuer(jwtIssuer)
                 .setNotBefore(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plus(jwtExpirationTime)))
@@ -82,10 +84,10 @@ public final class JwtService {
 
         setExpirationTime(claims, rememberMe);
 
-        claims.put("authorities", authenticatedUser.getAuthorities());
+        claims.put("authorities", authorities);
 
         return Jwts.builder()
-                .setSubject(authenticatedUser.getUsername())
+                .setSubject(username)
                 .signWith(KEY)
                 .compressWith(CompressionCodecs.DEFLATE)
                 .setClaims(claims)

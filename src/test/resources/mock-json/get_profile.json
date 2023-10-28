@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "firstName": "test_name",
+  "lastName": "test_last_name",
+  "birthDate": "1999-04-12",
+  "city": "test_city",
+  "street": "test_street",
+  "phoneNumber": "123456789",
+  "email": "test_email",
+  "zipCode": "12345",
+  "iconUrl": "http://iconurl.png"
+}

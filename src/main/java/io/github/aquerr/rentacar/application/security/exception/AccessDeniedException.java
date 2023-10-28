@@ -4,7 +4,7 @@ import io.github.aquerr.rentacar.domain.ApiException;
 import io.github.aquerr.rentacar.domain.ApiExceptionCode;
 import org.springframework.http.HttpStatus;
 
-@ApiException(code = ApiExceptionCode.ACCESS_DENIED, status = HttpStatus.UNAUTHORIZED, messageKey = "error.access-denied")
+@ApiException(code = ApiExceptionCode.ACCESS_DENIED, status = HttpStatus.FORBIDDEN, messageKey = "error.access-denied")
 public class AccessDeniedException extends RuntimeException
 {
 

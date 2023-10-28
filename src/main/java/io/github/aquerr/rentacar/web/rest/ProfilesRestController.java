@@ -2,7 +2,6 @@ package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.RentaCarAuthenticationManager;
-import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.application.security.mfa.MfaType;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
@@ -11,6 +10,7 @@ import io.github.aquerr.rentacar.web.rest.response.MfaActivationResponse;
 import io.github.aquerr.rentacar.web.rest.response.MfaTotpQrDataUriResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,13 +32,12 @@ public class ProfilesRestController
     private final AuthenticationFacade authenticationFacade;
     private final RentaCarAuthenticationManager authenticationManager;
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> saveProfile(@PathVariable("id") long profileId,
+    @PatchMapping(value = "/{profileId}")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<?> saveProfile(@PathVariable("profileId") long profileId,
                                          @RequestPart(value = "image", required = false) MultipartFile image,
                                          @RequestPart(value = "profile") UserProfile userProfile)
     {
-        validateUserAccess(profileId);
-
         userProfile.setId(profileId);
 
         if (image != null)
@@ -53,45 +52,37 @@ public class ProfilesRestController
         return getProfile(profileId);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserProfile> getProfile(@PathVariable("id") long profileId)
+    @GetMapping("/{profileId}")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<UserProfile> getProfile(@PathVariable("profileId") long profileId)
     {
         return ResponseEntity.ok(profileService.getProfileById(profileId));
     }
 
-    @GetMapping("/{id}/settings/mfa/activation")
-    public ResponseEntity<MfaTotpQrDataUriResponse> generateQrCode(@PathVariable("id") long profileId,
+    @GetMapping("/{profileId}/settings/mfa/activation")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<MfaTotpQrDataUriResponse> generateQrCode(@PathVariable("profileId") long profileId,
                                                                    @RequestParam("type") MfaType mfaType)
     {
         //TODO: Handle mfaType...
-
-        validateUserAccess(profileId);
         return ResponseEntity.ok(MfaTotpQrDataUriResponse.of(authenticationManager.generateMfaQrData(authenticationFacade.getCurrentUser())));
     }
 
-    @DeleteMapping("/{id}/settings/mfa")
-    public ResponseEntity<?> deleteMfa(@PathVariable("id") long profileId)
+    @DeleteMapping("/{profileId}/settings/mfa")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<?> deleteMfa(@PathVariable("profileId") long profileId)
     {
-        validateUserAccess(profileId);
         authenticationManager.deleteMfa(authenticationFacade.getCurrentUser());
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{id}/settings/mfa/activation")
-    public ResponseEntity<MfaActivationResponse> activateMfa(@PathVariable("id") long profileId,
+    @PostMapping("/{profileId}/settings/mfa/activation")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<MfaActivationResponse> activateMfa(@PathVariable("profileId") long profileId,
                                                              @RequestBody MfaActivationRequest mfaActivationRequest)
     {
-        validateUserAccess(profileId);
         return ResponseEntity.ok(MfaActivationResponse.of(
                 authenticationManager.activateMfa(authenticationFacade.getCurrentUser(), mfaActivationRequest.getCode()))
         );
-    }
-
-    private void validateUserAccess(long profileId)
-    {
-        if (profileId == authenticationFacade.getCurrentUser().getProfileId())
-        {
-            throw new AccessDeniedException();
-        }
     }
 }
