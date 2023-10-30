@@ -1,7 +1,6 @@
 package io.github.aquerr.rentacar.application.config.security;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -37,15 +36,13 @@ public class SecurityConfig {
     @Configuration
     public static class EnabledSecurityConfiguration {
 
-        @Autowired
-        private Environment environment;
-
         @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http,
+        public SecurityFilterChain securityFilterChain(Environment environment,
+                                                       HttpSecurity http,
                                                        JwtAuthenticationFilter authenticationFilter) throws Exception {
 
             http.authorizeHttpRequests(requests -> {
-                if (this.environment.matchesProfiles("dev")) {
+                if (environment.matchesProfiles("dev")) {
                     requests.requestMatchers(PathRequest.toH2Console()).permitAll();
                 }
                 requests.requestMatchers(HttpMethod.GET, "/api/v1/assets/images/{kind}/{name}").permitAll();
@@ -97,6 +94,7 @@ public class SecurityConfig {
     @ConditionalOnProperty(value = "rentacar.security.enabled", matchIfMissing = true, havingValue = "false")
     @Configuration
     public static class DisabledSecurityConfiguration {
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.cors(Customizer.withDefaults())

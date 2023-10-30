@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -65,9 +66,13 @@ public class RentaCarAuthenticationManager
     private JwtToken createJwtAndSetAuth(AuthResult authResult, boolean rememberMe)
     {
         AuthenticatedUser authenticatedUser = (AuthenticatedUser) authResult.getAuthentication().getPrincipal();
-        return JwtToken.of(jwtService.createJwt(authenticatedUser, rememberMe), authenticatedUser.getUsername(), authenticatedUser.getAuthorities().stream()
+        Set<String> authorities = authenticatedUser.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet());
+
+        return JwtToken.of(jwtService.createJwt(authenticatedUser.getUsername(), rememberMe, authorities),
+                authenticatedUser.getUsername(),
+                authorities);
     }
 
     private AuthResult authenticateByPassword(AuthenticatedUser authenticatedUser, String password)

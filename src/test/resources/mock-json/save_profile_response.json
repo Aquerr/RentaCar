@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "firstName": "this",
+  "lastName": "is",
+  "birthDate": "2000-04-12",
+  "city": "a",
+  "street": "simple",
+  "phoneNumber": "123",
+  "email": "test",
+  "zipCode": "54321",
+  "iconUrl": "http://nowhere.png"
+}

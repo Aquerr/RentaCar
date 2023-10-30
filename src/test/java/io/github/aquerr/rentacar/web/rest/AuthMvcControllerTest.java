@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {AuthRestController.class, RestErrorController.class})
-class AuthRestControllerTest extends BaseRestIntegrationTest
+class AuthMvcControllerTest extends BaseMvcIntegrationTest
 {
     @MockBean
     private AuthenticationFacade authenticationFacade;

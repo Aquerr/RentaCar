@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -22,10 +23,15 @@ public class RestErrorController {
 
     private final AcceptedLanguageLocaleMapper acceptedLanguageLocaleMapper;
     private final MessageService messageService;
-
+    
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<RestErrorResponse> handleException(HttpServletRequest httpServletRequest, RuntimeException exception) {
         log.error(exception.getMessage(), exception);
+
+        exception = convertSpringExceptionToRentaCarIfNeeded(exception);
+
+        if (exception instanceof AccessDeniedException)
+            exception = new io.github.aquerr.rentacar.application.security.exception.AccessDeniedException();
 
         List<Locale> locales = acceptedLanguageLocaleMapper.toLocales(getAcceptedLanguageHeader(httpServletRequest));
         if (exception.getClass().isAnnotationPresent(ApiException.class)) {
@@ -33,6 +39,14 @@ public class RestErrorController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(RestErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), messageService.resolveMessage("error.internal-server-error", locales)));
+    }
+
+    private RuntimeException convertSpringExceptionToRentaCarIfNeeded(RuntimeException exception)
+    {
+        if (exception instanceof AccessDeniedException)
+            return new io.github.aquerr.rentacar.application.security.exception.AccessDeniedException();
+
+        return exception;
     }
 
     private ResponseEntity<RestErrorResponse> convertApiExceptionToRestErrorResponse(RuntimeException exception, List<Locale> locales) {

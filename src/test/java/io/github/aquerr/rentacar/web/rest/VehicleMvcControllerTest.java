@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = VehicleRestController.class)
-class VehicleRestControllerTest extends BaseRestIntegrationTest
+class VehicleMvcControllerTest extends BaseMvcIntegrationTest
 {
     @MockBean
     private VehicleService vehicleService;
