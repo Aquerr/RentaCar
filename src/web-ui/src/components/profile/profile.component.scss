@@ -1,0 +1,25 @@
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.router-link {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  background-image: linear-gradient(to right, var(--gold), var(--main-gold));
+  background-position: 0 100%;
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s,
+  background-position 0s 0.3s;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.router-link:hover {
+  background-position: 100% 100%;
+  background-size: 100% 1px;
+  cursor: pointer;
+}

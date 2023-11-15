@@ -4,7 +4,7 @@
      [pTooltip]="user?.firstName + ' ' + user?.lastName"
      tooltipPosition='left' />
 <div *ngIf='panelVisible' class='container'>
-  <li (click)='navigateToProfileUpdate()'><i class='pi pi-user-edit'></i>Profil</li>
+  <li (click)='navigateToProfile()'><i class='pi pi-user-edit'></i>Profil</li>
   <li (click)='navigateToAdminPanel()' *ngIf="hasUserAuthority('VIEW_ADMIN_PANEL')">
     <fa-icon icon='wrench'></fa-icon>
     Panel admina

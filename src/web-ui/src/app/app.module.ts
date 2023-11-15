@@ -44,6 +44,8 @@ import { AdminSideMenuComponent } from '../components/admin/admin-panel/side-men
 import { AdminAddVehicleComponent } from '../components/admin/admin-panel/add-vehicle/admin-add-vehicle.component';
 import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
 import { NewPasswordComponent } from '../components/authentication/new-password/new-password.component';
+import { ProfileMfaComponent } from '../components/profile/mfa/profile-mfa.component';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { NewPasswordComponent } from '../components/authentication/new-password/
     AdminSideMenuComponent,
     AdminAddVehicleComponent,
     PasswordResetComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    ProfileMfaComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

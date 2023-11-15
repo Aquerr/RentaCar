@@ -2,7 +2,6 @@ import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
-import { ProfileEditComponent } from '../components/profile/edit/profile-edit.component';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
 import { ContactComponent } from '../components/contact/contact.component';
@@ -21,6 +20,7 @@ import { AppGuard } from '../components/authentication/app.guard';
 import { Auth } from '../components/auth.enum';
 import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
 import { NewPasswordComponent } from '../components/authentication/new-password/new-password.component';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 const ROUTES: Routes = [
   {
@@ -53,10 +53,11 @@ const ROUTES: Routes = [
     title: 'title.new-password'
   },
   {
-    path: 'profile-edit',
-    component: ProfileEditComponent,
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated()],
-    title: 'title.profile-edit'
+    loadChildren: () => import('../components/profile/profile-routing.module').then(module => module.ProfileRoutingModule),
+    title: 'title.profile'
   },
   {
     path: 'vehicle-list',
