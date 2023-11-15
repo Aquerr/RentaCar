@@ -62,7 +62,7 @@ public class ProfilesRestController
     @GetMapping("/{profileId}/settings/mfa/activation")
     @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
     public ResponseEntity<MfaTotpQrDataUriResponse> generateQrCode(@PathVariable("profileId") long profileId,
-                                                                   @RequestParam("type") MfaType mfaType)
+                                                                   @RequestParam(value = "type", required = false) MfaType mfaType)
     {
         //TODO: Handle mfaType...
         return ResponseEntity.ok(MfaTotpQrDataUriResponse.of(authenticationManager.generateMfaQrData(authenticationFacade.getCurrentUser())));

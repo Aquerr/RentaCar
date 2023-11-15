@@ -1,0 +1,18 @@
+<form [formGroup]='form' *ngIf='userProfile'>
+
+  <h3>Uwierzytelnienie dwuskładnikowe</h3>
+
+  <div class='input-container'>
+    <label for='activateMfa'>Włącz dwustopniowe uwierzytelnianie</label>
+    <p-checkbox id='activateMfa' formControlName='activateMfa' [binary]='true' />
+  </div>
+  <div class='input-container' *ngIf='qrCode'>
+    <img [src]='qrCode' alt='' />
+  </div>
+
+  <div class='button-container'>
+    <button pButton class='p-button'
+            (click)='save()'>Zapisz
+    </button>
+  </div>
+</form>

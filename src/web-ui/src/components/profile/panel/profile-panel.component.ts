@@ -65,8 +65,8 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
     this.panelVisible = false;
   }
 
-  navigateToProfileUpdate() {
-    this.router.navigate(['profile-edit']).then(() => this.panelVisible = false);
+  navigateToProfile() {
+    this.router.navigate(['profile']).then(() => this.panelVisible = false);
   }
 
   navigateToAdminPanel() {

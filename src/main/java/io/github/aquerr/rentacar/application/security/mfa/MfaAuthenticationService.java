@@ -3,8 +3,8 @@ package io.github.aquerr.rentacar.application.security.mfa;
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService;
 import io.github.aquerr.rentacar.application.security.dto.AuthResult;
-import io.github.aquerr.rentacar.application.security.dto.MfaAuthResult;
 import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
+import io.github.aquerr.rentacar.application.security.dto.MfaAuthResult;
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.application.security.exception.BadMfaAuthenticationException;
 import io.github.aquerr.rentacar.application.security.exception.MfaBadAuthCodeException;
@@ -144,13 +144,17 @@ public class MfaAuthenticationService
 
     private void saveUserTotp(AuthenticatedUser authenticatedUser, String secret)
     {
+        Optional<UserMfaSettings> userMfaSettingsSaved = getUserMfaSettings(authenticatedUser.getId());
         UserMfaSettingsEntity userMfaSettingsEntity = new UserMfaSettingsEntity();
+        userMfaSettingsSaved.ifPresent(userMfaSettings -> userMfaSettingsEntity.setId(userMfaSettings.getId()));
         userMfaSettingsEntity.setCredentialsId(authenticatedUser.getId());
         userMfaSettingsEntity.setVerified(false);
         userMfaSettingsEntity.setMfaType(MfaType.TOTP);
         this.mfaSettingsRepository.save(userMfaSettingsEntity);
 
+        Optional<UserMfaTotpEntity> userMfaTotpEntitySaved = this.mfaTotpEntityRepository.findByCredentialsId(authenticatedUser.getId());
         UserMfaTotpEntity userMfaTotpEntity = new UserMfaTotpEntity();
+        userMfaTotpEntitySaved.ifPresent(userMfaToTp -> userMfaTotpEntity.setId(userMfaToTp.getId()));
         userMfaTotpEntity.setSecret(secret);
         userMfaTotpEntity.setCredentialsId(authenticatedUser.getId());
         this.mfaTotpEntityRepository.save(userMfaTotpEntity);
