@@ -6,13 +6,15 @@ import dev.samstevens.totp.code.HashingAlgorithm;
 import dev.samstevens.totp.qr.ZxingPngQrGenerator;
 import dev.samstevens.totp.recovery.RecoveryCodeGenerator;
 import dev.samstevens.totp.secret.DefaultSecretGenerator;
-import dev.samstevens.totp.time.SystemTimeProvider;
+import dev.samstevens.totp.time.NtpTimeProvider;
 import io.github.aquerr.rentacar.application.security.mfa.MfaCodeGenerator;
 import io.github.aquerr.rentacar.application.security.mfa.MfaCodeVerifier;
 import io.github.aquerr.rentacar.application.security.mfa.MfaRecoveryCodeGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.net.UnknownHostException;
 
 @Configuration(proxyBeanMethods = false)
 public class MfaAuthConfig
@@ -27,9 +29,9 @@ public class MfaAuthConfig
     private String issuer;
 
     @Bean
-    public MfaCodeVerifier mfaCodeVerifier()
+    public MfaCodeVerifier mfaCodeVerifier() throws UnknownHostException
     {
-        return new MfaCodeVerifier(new DefaultCodeVerifier(new DefaultCodeGenerator(HashingAlgorithm.SHA1, totpLength), new SystemTimeProvider()));
+        return new MfaCodeVerifier(new DefaultCodeVerifier(new DefaultCodeGenerator(HashingAlgorithm.SHA1, totpLength), new NtpTimeProvider("pl.pool.ntp.org")));
     }
 
     @Bean

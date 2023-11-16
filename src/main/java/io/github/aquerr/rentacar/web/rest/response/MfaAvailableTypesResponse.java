@@ -2,10 +2,10 @@ package io.github.aquerr.rentacar.web.rest.response;
 
 import lombok.Value;
 
-import java.util.List;
+import java.util.Set;
 
 @Value(staticConstructor = "of")
-public class AvailableMfaResponse
+public class MfaAvailableTypesResponse
 {
-    List<String> availableAuthTypes;
+    Set<String> mfaTypes;
 }

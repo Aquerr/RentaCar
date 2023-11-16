@@ -7,6 +7,7 @@ import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.web.rest.request.MfaActivationRequest;
 import io.github.aquerr.rentacar.web.rest.response.MfaActivationResponse;
+import io.github.aquerr.rentacar.web.rest.response.MfaAvailableTypesResponse;
 import io.github.aquerr.rentacar.web.rest.response.MfaTotpQrDataUriResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -62,10 +63,17 @@ public class ProfilesRestController
     @GetMapping("/{profileId}/settings/mfa/activation")
     @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
     public ResponseEntity<MfaTotpQrDataUriResponse> generateQrCode(@PathVariable("profileId") long profileId,
-                                                                   @RequestParam(value = "type", required = false) MfaType mfaType)
+                                                                   @RequestParam(value = "type") MfaType mfaType)
     {
         //TODO: Handle mfaType...
-        return ResponseEntity.ok(MfaTotpQrDataUriResponse.of(authenticationManager.generateMfaQrData(authenticationFacade.getCurrentUser())));
+        return ResponseEntity.ok(MfaTotpQrDataUriResponse.of(authenticationManager.prepareMfaActivation(authenticationFacade.getCurrentUser(), mfaType)));
+    }
+
+    @GetMapping("/{profileId}/settings/mfa/available-types")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<MfaAvailableTypesResponse> getAvailableMfaTypes(@PathVariable("profileId") long profileId)
+    {
+        return ResponseEntity.ok(MfaAvailableTypesResponse.of(authenticationManager.getAvailableMfaTypes()));
     }
 
     @DeleteMapping("/{profileId}/settings/mfa")

@@ -7,6 +7,7 @@ import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
 import io.github.aquerr.rentacar.application.security.dto.MfaAuthResult;
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.application.security.exception.BadMfaAuthenticationException;
+import io.github.aquerr.rentacar.application.security.exception.MfaAlreadyActivatedException;
 import io.github.aquerr.rentacar.application.security.exception.MfaBadAuthCodeException;
 import io.github.aquerr.rentacar.application.security.exception.MfaChallengeExpiredException;
 import io.github.aquerr.rentacar.application.security.mfa.converter.UserMfaSettingsConverter;
@@ -27,8 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +46,10 @@ public class MfaAuthenticationService
     private final UserMfaSettingsRepository mfaSettingsRepository;
     private final MfaRecoveryCodesRepository mfaRecoveryCodesRepository;
     private final MfaAuthChallengeRepository mfaAuthChallengeRepository;
+
+    private final Map<MfaType, Function<AuthenticatedUser, String>> MFA_HANDLES = Map.of(
+            MfaType.TOTP, this::generateQRCode
+    );
 
     public MfaAuthResult auth(long credentialsId, String code)
     {
@@ -106,7 +113,7 @@ public class MfaAuthenticationService
 
         mfaRecoveryCodesRepository.saveAll(recoveryCodes.stream()
                 .map(recoveryCode -> new MfaRecoveryCodeEntity(null, credentialsId, recoveryCode))
-                .collect(Collectors.toList()));
+                .toList());
 
         return MfaActivationResult.of(recoveryCodes);
     }
@@ -126,20 +133,24 @@ public class MfaAuthenticationService
     @Transactional
     public String generateQRCode(AuthenticatedUser authenticatedUser)
     {
+        UserMfaSettings userMfaSettings = getUserMfaSettings(authenticatedUser.getId()).orElse(null);
+        if (userMfaSettings != null && userMfaSettings.isVerified())
+        {
+            throw new MfaAlreadyActivatedException();
+        }
+
         String userIdentifier = authenticatedUser.getUsername();
         String secret = this.mfaCodeGenerator.generateSecret();
         String qrCodeDataUri = this.mfaCodeGenerator.generateQrCodeDataUri(secret, userIdentifier);
-
-        //TODO: Save secret in DB... and set MFA as not verified/linked.
 
         saveUserTotp(authenticatedUser, secret);
 
         return qrCodeDataUri;
     }
 
-    public List<String> getAvailableAuthTypes()
+    public Set<String> getAvailableAuthTypes()
     {
-        return Arrays.stream(MfaType.values()).map(Enum::name).toList();
+        return Arrays.stream(MfaType.values()).map(Enum::name).collect(Collectors.toSet());
     }
 
     private void saveUserTotp(AuthenticatedUser authenticatedUser, String secret)
@@ -209,5 +220,10 @@ public class MfaAuthenticationService
             throw new MfaBadAuthCodeException();
 
         return AuthResult.authenticated(authenticatedUser);
+    }
+
+    public String prepareMfaActivation(AuthenticatedUser authenticatedUser, MfaType mfaType)
+    {
+        return MFA_HANDLES.get(mfaType).apply(authenticatedUser);
     }
 }
