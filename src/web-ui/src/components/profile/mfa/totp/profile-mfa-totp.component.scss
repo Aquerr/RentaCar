@@ -1,0 +1,17 @@
+.input-container {
+  max-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+label {
+  color: grey;
+  font-size: 12px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}

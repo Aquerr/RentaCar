@@ -7,14 +7,31 @@ form {
   margin-top: 1%;
 }
 
-.input-container {
+.checkbox-container {
   max-width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.input-container {
+  max-width: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  word-break: break-word;
+}
+
 label {
   color: grey;
   font-size: 12px;
+}
+
+profile-mfa-totp {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
