@@ -51,7 +51,7 @@ public class RestErrorController {
 
     private ResponseEntity<RestErrorResponse> convertApiExceptionToRestErrorResponse(RuntimeException exception, List<Locale> locales) {
         ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
-        return ResponseEntity.status(apiException.status())
+         return ResponseEntity.status(apiException.status())
                 .body(RestErrorResponse.of(apiException.code().name(), messageService.resolveMessage(apiException.messageKey(), locales)));
     }
 

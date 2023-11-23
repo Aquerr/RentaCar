@@ -1,7 +1,5 @@
 package io.github.aquerr.rentacar.application.security.mfa;
 
-import dev.samstevens.totp.recovery.RecoveryCodeGenerator;
-
 import java.util.Set;
 
 public class MfaRecoveryCodeGenerator

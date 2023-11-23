@@ -94,6 +94,7 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
     this.apiService.activateMfa(this.userProfile?.id as number, request).subscribe({
       next: (response) => {
         console.log('activate mfa');
+        // TODO: Display recovery codes
       },
       error: () => this.toastService.createToast('', ToastType.ERROR)
     });

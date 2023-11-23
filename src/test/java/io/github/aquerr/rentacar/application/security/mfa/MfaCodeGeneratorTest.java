@@ -34,7 +34,7 @@ class MfaCodeGeneratorTest
     @BeforeEach
     void setUp()
     {
-        this.mfaCodeGenerator = new MfaCodeGenerator(ISSUER, secretGenerator, qrGenerator, mfaRecoveryCodeGenerator);
+        this.mfaCodeGenerator = new MfaCodeGenerator(ISSUER, secretGenerator, qrGenerator, mfaRecoveryCodeGenerator, 6, 30);
     }
 
     @Test
