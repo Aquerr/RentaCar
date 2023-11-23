@@ -64,6 +64,12 @@ public class RentaCarAuthenticationManager
         return createJwtAndSetAuth(authResult, true);
     }
 
+    public UserMfaSettings getUserMfaSettings(AuthenticatedUser authenticatedUser)
+    {
+        return mfaAuthenticationService.getUserMfaSettings(authenticatedUser.getId()).orElse(null);
+    }
+
+
     private JwtToken createJwtAndSetAuth(AuthResult authResult, boolean rememberMe)
     {
         AuthenticatedUser authenticatedUser = (AuthenticatedUser) authResult.getAuthentication().getPrincipal();

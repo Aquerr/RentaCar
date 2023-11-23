@@ -3,11 +3,13 @@ package io.github.aquerr.rentacar.web.rest;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.application.security.RentaCarAuthenticationManager;
 import io.github.aquerr.rentacar.application.security.mfa.MfaType;
+import io.github.aquerr.rentacar.application.security.mfa.dto.UserMfaSettings;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.web.rest.request.MfaActivationRequest;
 import io.github.aquerr.rentacar.web.rest.response.MfaActivationResponse;
 import io.github.aquerr.rentacar.web.rest.response.MfaAvailableTypesResponse;
+import io.github.aquerr.rentacar.web.rest.response.MfaSettingsResponse;
 import io.github.aquerr.rentacar.web.rest.response.MfaTotpQrDataUriResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -92,5 +94,16 @@ public class ProfilesRestController
         return ResponseEntity.ok(MfaActivationResponse.of(
                 authenticationManager.activateMfa(authenticationFacade.getCurrentUser(), mfaActivationRequest.getCode()))
         );
+    }
+
+    @GetMapping("/{profileId}/mfa-settings")
+    @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
+    public ResponseEntity<MfaSettingsResponse> getUserMfaSettings(@PathVariable("profileId") long profileId)
+    {
+        UserMfaSettings userMfaSettings = authenticationManager.getUserMfaSettings(authenticationFacade.getCurrentUser());
+        if (userMfaSettings != null) {
+            return ResponseEntity.ok(MfaSettingsResponse.of(userMfaSettings.getMfaType(), userMfaSettings.isVerified()));
+        }
+        return ResponseEntity.ok(null);
     }
 }

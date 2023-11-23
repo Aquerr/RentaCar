@@ -1,0 +1,15 @@
+<form [formGroup]='form'>
+  <div class='input-container'>
+    <img [src]='qrCode' alt='' />
+  </div>
+  <div class='input-container'>
+    <label>Zeskanuj kod QR w aplikacji i wpisz wygenerowany klucz poniżej</label>
+    <input pInputText
+           type='text'
+           formControlName='code'
+           placeholder='6 cyfrowy kod'
+           onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+           maxlength='6'
+    />
+  </div>
+</form>
