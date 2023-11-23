@@ -1,18 +1,43 @@
-<form [formGroup]='form' *ngIf='userProfile'>
+<ng-container *ngIf='!mfaSettings || mfaSettings && !mfaSettings.active; else activatedMfa'>
+  <form [formGroup]='form' *ngIf='userProfile'>
 
-  <h3>Uwierzytelnienie dwuskładnikowe</h3>
+    <h3>Dwustopniowe uwierzytelnianie</h3>
 
-  <div class='input-container'>
-    <label for='activateMfa'>Włącz dwustopniowe uwierzytelnianie</label>
-    <p-checkbox id='activateMfa' formControlName='activateMfa' [binary]='true' />
-  </div>
-  <div class='input-container' *ngIf='qrCode'>
-    <img [src]='qrCode' alt='' />
-  </div>
+    <div class='checkox-container'>
+      <label for='activateMfa'>Włącz dwustopniowe uwierzytelnianie</label>
+      <p-checkbox id='activateMfa' formControlName='activateMfa' [binary]='true' />
+    </div>
 
-  <div class='button-container'>
-    <button pButton class='p-button'
-            (click)='save()'>Zapisz
-    </button>
-  </div>
-</form>
+    <div class='input-container'>
+      <label for='selectedMfaType'>Wybierz formę uwierzytelniania</label>
+      <p-dropdown id='selectedMfaType'
+                  formControlName='selectedMfaType'
+                  dataKey='value'
+                  placeholder='Wybierz'
+                  class='dropdown-element'
+                  [options]='mfaTypes' />
+    </div>
+
+    <ng-container *ngIf='selectedMfaType === MfaType.TOTP'>
+      <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
+    </ng-container>
+
+    <div class='button-container'>
+      <button pButton class='p-button'
+              (click)='save()' [disabled]='form.invalid'>Zapisz
+      </button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #activatedMfa>
+  <button pButton (click)='deleteMfaConfirmDialog()'>Usuń dwustopniowe uwierzytelnianie</button>
+
+  <p-confirmDialog
+    message='Czy napewno chcesz usunąć dwustopniowe uwierzytelnianie?'
+    header='Potwierdź usunięcie'
+    acceptLabel='Tak'
+    rejectLabel='Nie'
+    icon='pi pi-exclamation-triangle'
+  ></p-confirmDialog>
+</ng-template>

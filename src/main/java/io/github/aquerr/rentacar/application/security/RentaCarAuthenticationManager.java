@@ -6,6 +6,7 @@ import io.github.aquerr.rentacar.application.exception.MfaRequiredException;
 import io.github.aquerr.rentacar.application.security.dto.AuthResult;
 import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
 import io.github.aquerr.rentacar.application.security.mfa.MfaAuthenticationService;
+import io.github.aquerr.rentacar.application.security.mfa.MfaType;
 import io.github.aquerr.rentacar.application.security.mfa.dto.UserMfaSettings;
 import io.github.aquerr.rentacar.web.rest.request.MfaAuthRequest;
 import lombok.AllArgsConstructor;
@@ -63,6 +64,12 @@ public class RentaCarAuthenticationManager
         return createJwtAndSetAuth(authResult, true);
     }
 
+    public UserMfaSettings getUserMfaSettings(AuthenticatedUser authenticatedUser)
+    {
+        return mfaAuthenticationService.getUserMfaSettings(authenticatedUser.getId()).orElse(null);
+    }
+
+
     private JwtToken createJwtAndSetAuth(AuthResult authResult, boolean rememberMe)
     {
         AuthenticatedUser authenticatedUser = (AuthenticatedUser) authResult.getAuthentication().getPrincipal();
@@ -103,13 +110,18 @@ public class RentaCarAuthenticationManager
                 .orElse(false);
     }
 
-    public String generateMfaQrData(AuthenticatedUser authenticatedUser)
+    public String prepareMfaActivation(AuthenticatedUser authenticatedUser, MfaType mfaType)
     {
-        return this.mfaAuthenticationService.generateQRCode(authenticatedUser);
+        return this.mfaAuthenticationService.prepareMfaActivation(authenticatedUser, mfaType);
     }
 
     public void deleteMfa(AuthenticatedUser authenticatedUser)
     {
         this.mfaAuthenticationService.deleteMfaForUser(authenticatedUser.getId());
+    }
+
+    public Set<String> getAvailableMfaTypes()
+    {
+        return this.mfaAuthenticationService.getAvailableAuthTypes();
     }
 }

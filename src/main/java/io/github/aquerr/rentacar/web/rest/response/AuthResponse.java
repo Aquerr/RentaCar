@@ -47,7 +47,7 @@ public class AuthResponse
         else if (status == AuthResult.Status.BAD_CREDENTIALS)
             return HttpStatus.BAD_REQUEST.getReasonPhrase();
         else if (status == AuthResult.Status.REQUIRES_MFA)
-            return HttpStatus.UNAUTHORIZED.getReasonPhrase();
+            return AuthResult.Status.REQUIRES_MFA.name();
         return HttpStatus.BAD_REQUEST.getReasonPhrase();
     }
 }

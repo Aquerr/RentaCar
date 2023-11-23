@@ -35,7 +35,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AccountActivationTokenRequester accountActivationTokenRequester;
     private final RequestLocaleExtractor requestLocaleExtractor;
-    private final MfaAuthenticationService mfaAuthenticationService;
 
     @Transactional
     public void register(UserRegistration userRegistration)
@@ -110,10 +109,5 @@ public class UserService {
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );
-    }
-
-    public List<String> getAvailableMfaAuthenticationTypes()
-    {
-        return this.mfaAuthenticationService.getAvailableAuthTypes();
     }
 }

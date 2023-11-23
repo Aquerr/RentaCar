@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { UserProfile } from '../../models/user-profile.model';
+import { MfaType } from '../../enums/mfa-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +26,21 @@ export class UserProfileApiService {
     return this.http.get<UserProfile>(`${this.URL}/${profileId}`);
   }
 
-  public generateQrCode(profileId: number) {
-    return this.http.get<MfaTotpQrDataUriResponse>(`${this.URL}/${profileId}/settings/mfa/activation`);
+  public generateQrCode(profileId: number, mfaType: MfaType) {
+    const httpParams = new HttpParams().set('type', mfaType);
+    return this.http.get<MfaTotpQrDataUriResponse>(`${this.URL}/${profileId}/settings/mfa/activation`, { params: httpParams });
   }
 
   public activateMfa(profileId: number, request: MfaActivationRequest) {
-    return this.http.post<MfaTotpQrDataUriResponse>(`${this.URL}/${profileId}/settings/mfa/activation`, request);
+    return this.http.post<MfaActivationResponse>(`${this.URL}/${profileId}/settings/mfa/activation`, request);
   }
 
   public deleteMfa(profileId: number) {
     return this.http.delete<void>(`${this.URL}/${profileId}/settings/mfa`);
+  }
+
+  public getUserMfaSettings(profileId: number) {
+    return this.http.get<MfaSettingsResponse>(`${this.URL}/${profileId}/mfa-settings`);
   }
 
 }
@@ -43,10 +49,19 @@ export interface MfaTotpQrDataUriResponse {
   qrDataUri: string;
 }
 
-export interface MfaActivationRequest {
+export class MfaActivationRequest {
   code: string;
+
+  constructor(code: string) {
+    this.code = code;
+  }
 }
 
 export interface MfaActivationResponse {
   recoveryCodes: string[];
+}
+
+export interface MfaSettingsResponse {
+  mfaType: MfaType;
+  active: boolean;
 }

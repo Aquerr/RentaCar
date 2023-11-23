@@ -18,6 +18,8 @@ public class MfaCodeGenerator
     private final SecretGenerator secretGenerator;
     private final QrGenerator qrGenerator;
     private final MfaRecoveryCodeGenerator recoveryCodeGenerator;
+    private final int codeLength;
+    private final int codeTimeSeconds;
 
     public Set<String> generateRecoveryCodes()
     {
@@ -36,8 +38,8 @@ public class MfaCodeGenerator
                 .secret(secret)
                 .issuer(issuer)
                 .algorithm(HashingAlgorithm.SHA1)
-                .digits(6)
-                .period(30)
+                .digits(codeLength)
+                .period(codeTimeSeconds)
                 .build();
         try
         {

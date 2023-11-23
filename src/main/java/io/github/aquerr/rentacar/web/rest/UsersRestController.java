@@ -3,11 +3,9 @@ package io.github.aquerr.rentacar.web.rest;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.domain.user.dto.UserRegistration;
 import io.github.aquerr.rentacar.web.rest.request.UserRegistrationRequest;
-import io.github.aquerr.rentacar.web.rest.response.AvailableMfaResponse;
 import io.github.aquerr.rentacar.web.rest.response.UserRegistrationResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +23,5 @@ public class UsersRestController
     {
         userService.register(new UserRegistration(userRegistrationRequest.getUsername(), userRegistrationRequest.getEmail(), userRegistrationRequest.getPassword()));
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/{id}/mfa-types")
-    public ResponseEntity<AvailableMfaResponse> getAvailableMfaAuthTypes()
-    {
-        return ResponseEntity.ok(AvailableMfaResponse.of(this.userService.getAvailableMfaAuthenticationTypes()));
     }
 }
