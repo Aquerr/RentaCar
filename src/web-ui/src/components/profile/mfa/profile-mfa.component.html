@@ -11,9 +11,11 @@
         <label>Wybierz formę uwierzytelniania</label>
         <div class='mfa-type-container'>
           <ng-container *ngFor='let mfaType of availableMfaTypes'>
-            <button pButton (click)='selectedMfaType = mfaType' [disabled]='!isActivateMfaEnabled()'>{{mfaType}}</button>
+            <button pButton
+                    (click)='selectedMfaType = mfaType'
+                    [disabled]='!isActivateMfaEnabled()'>{{mfaType}}</button>
           </ng-container>
-      </div>
+        </div>
       </div>
       <div class='mfa-container'>
         <ng-container *ngIf="selectedMfaType === 'TOTP'">
@@ -32,6 +34,7 @@
 </ng-container>
 
 <ng-template #activatedMfa>
+  <h5>Wybrane dwustopniowe uwierzytelnienie: {{mfaSettings?.mfaType}}</h5>
   <button pButton (click)='deleteMfaConfirmDialog()'>Usuń dwustopniowe uwierzytelnianie</button>
 
   <p-confirmDialog

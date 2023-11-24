@@ -68,6 +68,7 @@ export interface MfaActivationResponse {
 export interface MfaSettingsResponse {
   mfaType: MfaType;
   active: boolean;
+  activationDate: string;
 }
 
 export interface MfaAvailableTypesResponse {
