@@ -1,27 +1,27 @@
 import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
-import { NotFoundComponent } from '../components/not-found/not-found.component';
-import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
-import { VehicleListComponent } from '../components/vehicles/vehicle-list/vehicle-list.component';
-import { ContactComponent } from '../components/contact/contact.component';
-import { ReservationComponent } from '../components/reservation/reservation.component';
+import { SignInComponent } from './components/authentication/sign-in/sign-in.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SignUpComponent } from './components/authentication/sign-up/sign-up.component';
+import { VehicleListComponent } from './components/vehicles/vehicle-list/vehicle-list.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 import {
   ActivationAccountComponent
-} from '../components/authentication/activation-account/activation-account.component';
-import { AccountActivatedComponent } from '../components/info/account-activated/account-activated.component';
+} from './components/authentication/activation-account/activation-account.component';
+import { AccountActivatedComponent } from './components/info/account-activated/account-activated.component';
 import {
   ReactivationAccountComponent
-} from '../components/authentication/reactivation-account/reactivation-account.component';
-import { MainComponent } from '../components/info/main/main.component';
-import { VehicleDetailsComponent } from '../components/vehicles/vehicle-details/vehicle-details.component';
-import { AdminPanelComponent } from '../components/admin/admin-panel/admin-panel.component';
-import { AppGuard } from '../components/authentication/app.guard';
-import { Auth } from '../components/auth.enum';
-import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
-import { NewPasswordComponent } from '../components/authentication/new-password/new-password.component';
-import { ProfileComponent } from '../components/profile/profile.component';
-import {SignInMfaComponent} from "../components/authentication/sign-in-mfa/sign-in-mfa.component";
+} from './components/authentication/reactivation-account/reactivation-account.component';
+import { MainComponent } from './components/info/main/main.component';
+import { VehicleDetailsComponent } from './components/vehicles/vehicle-details/vehicle-details.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AppGuard } from './components/authentication/app.guard';
+import { Auth } from './components/auth.enum';
+import { PasswordResetComponent } from './components/authentication/password-reset/password-reset.component';
+import { NewPasswordComponent } from './components/authentication/new-password/new-password.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import {SignInMfaComponent} from "./components/authentication/sign-in-mfa/sign-in-mfa.component";
 
 const ROUTES: Routes = [
   {
@@ -63,7 +63,7 @@ const ROUTES: Routes = [
     path: 'profile',
     component: ProfileComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated()],
-    loadChildren: () => import('../components/profile/profile-routing.module').then(module => module.ProfileRoutingModule),
+    loadChildren: () => import('./components/profile/profile-routing.module').then(module => module.ProfileRoutingModule),
     title: 'title.profile'
   },
   {
@@ -109,7 +109,7 @@ const ROUTES: Routes = [
     path: 'admin-panel',
     component: AdminPanelComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated() && inject(AppGuard).hasUserAuthority(Auth.VIEW_ADMIN_PANEL)],
-    loadChildren: () => import('../components/admin/admin-panel/admin-panel-routing.module').then(module => module.AdminPanelRoutingModule),
+    loadChildren: () => import('./components/admin/admin-panel/admin-panel-routing.module').then(module => module.AdminPanelRoutingModule),
     title: 'title.admin-panel'
   },
   {

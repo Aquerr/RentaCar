@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
+import { APP_BASE_URL, APP_V1_URL } from '../../app.consts';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { VehicleBasicData, VehicleFullData } from '../../models/vehicle.model';
 

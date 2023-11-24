@@ -1,9 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserProfile } from '../models/user-profile.model';
-import { LanguageService } from '../services/language.service';
-import { AuthenticationService } from '../services/authentication.service';
-import { FontAwesomeLibraryService } from '../services/font-awesome-library.service';
+import { UserProfile } from './models/user-profile.model';
+import { LanguageService } from './services/language.service';
+import { AuthenticationService } from './services/authentication.service';
+import { FontAwesomeLibraryService } from './services/font-awesome-library.service';
 
 @Component({
   selector: 'app-root',
