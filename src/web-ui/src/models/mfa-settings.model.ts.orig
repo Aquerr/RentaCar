@@ -2,6 +2,10 @@ import { MfaType } from '../enums/mfa-type.enum';
 
 export interface MfaSettings {
   mfaType: MfaType;
+<<<<<<< HEAD
+  active: boolean;
+  activationDate: string;
+=======
   verified: boolean;
-  verifiedDate: string;
+>>>>>>> 89ab68c (Add activation date to UserMfaSettings)
 }

@@ -19,6 +19,7 @@ public class UserMfaSettingsConverter
         userMfaSettings.setCredentialsId(entity.getCredentialsId());
         userMfaSettings.setMfaType(entity.getMfaType());
         userMfaSettings.setVerified(entity.isVerified());
+        userMfaSettings.setVerifiedDate(entity.getVerifiedDate());
         return userMfaSettings;
     }
 }

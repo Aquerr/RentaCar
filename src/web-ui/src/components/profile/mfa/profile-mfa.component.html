@@ -1,4 +1,4 @@
-<ng-container *ngIf='!mfaSettings || mfaSettings && !mfaSettings.active; else activatedMfa'>
+<ng-container *ngIf='!mfaSettings || mfaSettings && !mfaSettings.verified; else activatedMfa'>
   <form [formGroup]='form' *ngIf='userProfile'>
 
     <div class='checkox-container'>
@@ -36,7 +36,7 @@
 <ng-template #activatedMfa>
   <div class='activated-mfa-info-container'>
     <h5>Wybrane dwustopniowe uwierzytelnienie: {{mfaSettings?.mfaType}}</h5>
-    <h5>Data aktywacji: {{mfaSettings?.activationDate}}</h5>
+    <h5>Data aktywacji: {{mfaSettings?.verifiedDate}}</h5>
   </div>
   <button pButton (click)='deleteMfaConfirmDialog()'>Usuń dwustopniowe uwierzytelnianie</button>
 

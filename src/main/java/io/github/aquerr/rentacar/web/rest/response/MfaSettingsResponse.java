@@ -7,5 +7,6 @@ import lombok.Value;
 public class MfaSettingsResponse
 {
     MfaType mfaType;
-    boolean active;
+    boolean verified;
+    String verifiedDate;
 }

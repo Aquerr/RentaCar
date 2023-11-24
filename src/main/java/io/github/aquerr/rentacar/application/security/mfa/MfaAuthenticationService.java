@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -106,6 +105,7 @@ public class MfaAuthenticationService
             throw new AccessDeniedException();
         }
 
+        userMfaSettingsEntity.setVerifiedDate(ZonedDateTime.now());
         userMfaSettingsEntity.setVerified(true);
         mfaSettingsRepository.save(userMfaSettingsEntity);
 
