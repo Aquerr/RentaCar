@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
+import io.github.aquerr.rentacar.application.security.mfa.MfaType;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.Test;
@@ -130,7 +131,7 @@ class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
         // given
         String jwt = jwtService.createJwt(USERNAME, false, Set.of());
         given(rentaCarUserDetailsService.loadUserByUsername(USERNAME)).willReturn(prepareAuthenticatedUser(USER_ID_1, USERNAME, PROFILE_ID_1, Set.of()));
-        given(authenticationManager.generateMfaQrData(any())).willReturn("data:image/png;base64,SGVsbG8sIFdvcmxkIQ==");
+        given(authenticationManager.prepareMfaActivation(any(), any(MfaType.class))).willReturn("data:image/png;base64,SGVsbG8sIFdvcmxkIQ==");
 
         // when
         // then
@@ -147,7 +148,7 @@ class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
         // given
         String jwt = jwtService.createJwt(USERNAME, false, Set.of());
         given(rentaCarUserDetailsService.loadUserByUsername(USERNAME)).willReturn(prepareAuthenticatedUser(USER_ID_1, USERNAME, PROFILE_ID_1, Set.of()));
-        given(authenticationManager.generateMfaQrData(any())).willReturn("data:image/png;base64,SGVsbG8sIFdvcmxkIQ==");
+        given(authenticationManager.prepareMfaActivation(any(), any(MfaType.class))).willReturn("data:image/png;base64,SGVsbG8sIFdvcmxkIQ==");
 
         // when
         // then
@@ -155,7 +156,7 @@ class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
                         .param("type", "TOTP")
                         .header("Authorization", "Bearer " + jwt))
                 .andExpect(status().isForbidden());
-        verify(authenticationManager, never()).generateMfaQrData(any(AuthenticatedUser.class));
+        verify(authenticationManager, never()).prepareMfaActivation(any(AuthenticatedUser.class), any(MfaType.class));
     }
 
     @Test
