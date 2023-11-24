@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.format.DateTimeFormatter;
+
 @AllArgsConstructor
 @RequestMapping("/api/v1/profiles")
 @RestController
@@ -102,7 +104,8 @@ public class ProfilesRestController
     {
         UserMfaSettings userMfaSettings = authenticationManager.getUserMfaSettings(authenticationFacade.getCurrentUser());
         if (userMfaSettings != null) {
-            return ResponseEntity.ok(MfaSettingsResponse.of(userMfaSettings.getMfaType(), userMfaSettings.isVerified()));
+            return ResponseEntity.ok(MfaSettingsResponse.of(userMfaSettings.getMfaType(), userMfaSettings.isVerified(), userMfaSettings.getVerifiedDate()
+                    .toLocalDate().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         }
         return ResponseEntity.ok(null);
     }

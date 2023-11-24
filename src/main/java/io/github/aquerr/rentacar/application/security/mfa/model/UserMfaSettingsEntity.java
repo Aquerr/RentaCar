@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.ZonedDateTime;
+
 @Entity
 @Table(name = "user_mfa_settings")
 @Data
@@ -30,4 +32,7 @@ public class UserMfaSettingsEntity
 
     @Column(name = "verified", unique = false, nullable = false, columnDefinition = "BOOLEAN default 0")
     private boolean verified;
+
+    @Column(name = "verified_date_time", nullable = true)
+    private ZonedDateTime verifiedDate;
 }
