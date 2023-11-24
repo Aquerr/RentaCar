@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserProfile } from '../../models/user-profile.model';
 import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
-import { ActivationRequest, AuthenticationRequest } from '../authentication.service';
+import {ActivationRequest, AuthenticationRequest, MfaAuthenticationRequest} from '../authentication.service';
+import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,19 @@ export class AuthenticationApiService {
   constructor(private http: HttpClient) {}
 
   public signinUser(request: AuthenticationRequest) {
-    return this.http.post<JwtTokenResponse>(this.AUTH_URL, request);
+    return this.http.post<AuthResponse>(this.AUTH_URL, request);
+  }
+
+  signInMfaUser(request: MfaAuthenticationRequest): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.AUTH_URL}/mfa`, request);
   }
 
   public activate(request: ActivationRequest) {
-    return this.http.post<JwtTokenResponse>(`${this.AUTH_URL}/activation`, request);
+    return this.http.post<AuthResponse>(`${this.AUTH_URL}/activation`, request);
   }
 
   public resendActivationEmail(login: string) {
-    return this.http.post<JwtTokenResponse>(`${this.AUTH_URL}/resend-activation-email`, login);
+    return this.http.post<AuthResponse>(`${this.AUTH_URL}/resend-activation-email`, login);
   }
 
   public resetPassword(login: string) {
@@ -47,10 +52,12 @@ export class AuthenticationApiService {
   }
 }
 
-export interface JwtTokenResponse {
+export interface AuthResponse {
   jwt: string;
   username: string;
   authorities: string[];
+  status: string;
+  mfaChallenge: string;
 }
 
 export interface MyselfResponse {

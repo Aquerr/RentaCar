@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { logout, setUser, setUserOnAppInit, signIn } from '../state/auth/auth.action';
+import {logout, setUser, setUserOnAppInit, signIn, signInMfa} from '../state/auth/auth.action';
 import { selectUser } from '../state/auth/auth.selector';
 import { UserProfile } from '../models/user-profile.model';
 import { StorageService } from './storage.service';
@@ -20,6 +20,10 @@ export class AuthenticationService {
 
   signInDispatch(request: AuthenticationRequest) {
     this.store.dispatch(signIn(request));
+  }
+
+  signInMfaDispatch(request: MfaAuthenticationRequest) {
+    this.store.dispatch(signInMfa(request));
   }
 
   saveToken(jwt: string, rememberMe: boolean) {
@@ -81,5 +85,15 @@ export class ActivationRequest {
 
   constructor(token: string) {
     this.token = token;
+  }
+}
+
+export class MfaAuthenticationRequest {
+  code: string;
+  challenge: string;
+
+  constructor(code: string, challenge: string) {
+    this.code = code;
+    this.challenge = challenge;
   }
 }

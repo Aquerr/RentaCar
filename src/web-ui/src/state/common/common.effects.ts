@@ -24,12 +24,12 @@ export class CommonEffects {
   goRoute$ = createEffect(() =>
     this.actions$.pipe(
       ofType(goRoute),
-      tap(({ routingLink: routingLink, param: param }) => {
-          if (param) {
-            this.router.navigate([routingLink, param]);
-          } else {
-            this.router.navigate([routingLink]);
-          }
+      tap(({ routingLink, pathVariables, queryParams }) => {
+        let path: string[] = [routingLink]
+        if (pathVariables) {
+          path.push(...pathVariables);
+        }
+        this.router.navigate(path, {queryParams: queryParams});
         }
       )), { dispatch: false });
 

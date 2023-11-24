@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { AuthenticationRequest } from '../../services/authentication.service';
+import {AuthenticationRequest, MfaAuthenticationRequest} from '../../services/authentication.service';
 import { UserProfile } from '../../models/user-profile.model';
 
 export const signIn = createAction('Sign in', props<AuthenticationRequest>());
+export const signInMfa = createAction('Sign in Mfa', props<MfaAuthenticationRequest>());
 export const saveToken = createAction('Save token', props<{ jwt: string, rememberMe: boolean }>());
 export const getMyself = createAction('Get myself');
 export const setUser = createAction('Set user', props<{ user: UserProfile | null }>());

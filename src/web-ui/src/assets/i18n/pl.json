@@ -2,6 +2,7 @@
   "title": {
     "main": "Wypożyczalnia samochodowa",
     "sign-in": "Zaloguj się",
+    "sign-in-mfa": "Zaloguj się",
     "sign-up": "Zarejestruj się",
     "not-found": "Strona nie znaleziona",
     "profile": "Profil",
@@ -22,6 +23,10 @@
     "authentication": {
       "sign-in": {
         "sign-in-header": "Zaloguj się",
+        "sign-in-mfa-header": "Podaj kod weryfikacji dwu-etapowej",
+        "mfa-code": {
+          "label": "Kod"
+        },
         "login": {
           "label": "Login"
         },

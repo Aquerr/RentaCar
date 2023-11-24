@@ -12,12 +12,17 @@ import {
   setAuthorities,
   setUser,
   setUserOnAppInit,
-  signIn
+  signIn, signInMfa
 } from './auth.action';
 import { ToastService, ToastType } from '../../services/toast.service';
-import { AuthenticationRequest, AuthenticationService } from '../../services/authentication.service';
+import {
+  AuthenticationRequest,
+  AuthenticationService,
+  MfaAuthenticationRequest
+} from '../../services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { goRoute, showToast } from '../common/common.action';
+import {AuthStatus} from "../../enums/auth-status.enum";
 
 @Injectable()
 export class AuthEffects {
@@ -27,19 +32,43 @@ export class AuthEffects {
       ofType(signIn),
       mergeMap((request: AuthenticationRequest) => this.apiService.signinUser(request)
       .pipe(
-        mergeMap((response) => [
-          saveToken({ jwt: response.jwt, rememberMe: request.rememberMe }),
-          getMyself()
-        ]),
+        switchMap((response) => {
+          if (response.status == AuthStatus.REQUIRES_MFA) {
+            return [goRoute({ routingLink: 'sign-in-mfa', pathVariables: [], queryParams: {"challenge": response.mfaChallenge}
+            })];
+          }
+
+          let array = [
+            saveToken({jwt: response.jwt, rememberMe: request.rememberMe}),
+            getMyself()
+          ];
+          return array;
+        }),
         catchError((response: any) => {
             if (response.error.status === 403) {
-              return of(goRoute({ routingLink: 'reactivation-account', param: request.login }));
+              return of(goRoute({ routingLink: 'reactivation-account', pathVariables: [request.login] }));
             } else {
               return of(showToast({ messageKey: 'services.sign-in.error', toastType: ToastType.ERROR }));
             }
           }
         )
       ))
+    ));
+
+  signInMfaUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signInMfa),
+      mergeMap((request: MfaAuthenticationRequest) => this.apiService.signInMfaUser(request)
+        .pipe(
+          mergeMap((response) => [
+              saveToken({jwt: response.jwt, rememberMe: true}),
+              getMyself()]
+          ),
+          catchError((response: any) => {
+              return of(showToast({ messageKey: 'services.sign-in.error', toastType: ToastType.ERROR }));
+            }
+          )
+        ))
     ));
 
   getMySelf$ = createEffect(() =>
