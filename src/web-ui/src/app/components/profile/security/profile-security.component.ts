@@ -24,12 +24,12 @@ export class ProfileSecurityComponent implements OnInit {
     if (this.username.length > 0) {
       this.authenticationApiService.resetPassword(this.username).subscribe(
         {
-          next: () => this.commonService.showToast('', ToastType.SUCCESS),
-          error: () => this.commonService.showToast('', ToastType.ERROR)
+          next: () => this.commonService.showToast('components.profile-security.toasts.passwordChangeSuccess', ToastType.SUCCESS),
+          error: () => this.commonService.showToast('components.profile-security.toasts.passwordChangeError', ToastType.ERROR)
         }
       );
     } else {
-      this.commonService.showToast('', ToastType.WARN);
+      this.commonService.showToast('components.profile-security.toasts.passwordChangeWarn', ToastType.WARN);
     }
   }
 }

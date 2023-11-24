@@ -1,11 +1,11 @@
 <div class='container'>
-  <h3>Bezpieczeństwo</h3>
+  <h3>{{'components.profile-security.titles.main' | translate}}</h3>
 
-  <h4>Zmiana hasła</h4>
+  <h4>{{'components.profile-security.titles.passwordChange' | translate}}</h4>
   <div>
-    <button pButton (click)='changePassword()'>Zmień hasło</button>
+    <button pButton (click)='changePassword()'>{{'components.profile-security.buttons.passwordChange' | translate}}</button>
   </div>
 
-  <h4>Dwustopniowe uwierzytelnianie</h4>
+  <h4>{{'components.profile-security.titles.mfa' | translate}}</h4>
   <profile-mfa></profile-mfa>
 </div>

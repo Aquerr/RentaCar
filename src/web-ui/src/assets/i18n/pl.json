@@ -7,7 +7,7 @@
     "not-found": "Strona nie znaleziona",
     "profile": "Profil",
     "profile-edit": "Edycja profilu",
-    "profile-mfa": "Dwustopniowe uwierzytelnianie",
+    "profile-security": "Bezpieczeństwo",
     "vehicle-list": "Wyszukiwanie pojazdów",
     "vehicle-details": "Szczegóły pojazdu",
     "reservation": "Rezerwacja",
@@ -287,6 +287,21 @@
       },
       "errors": {
         "required": "To pole jest wymagane"
+      }
+    },
+    "profile-security": {
+      "titles": {
+        "main": "Bezpieczeństwo",
+        "passwordChange": "Zmiana hasła",
+        "mfa": "Dwustopniowe uwierzytelnianie"
+      },
+      "buttons": {
+        "passwordChange": "Zmień hasło"
+      },
+      "toasts": {
+        "passwordChangeSuccess": "Na Twój adres email została wysłana procedura resetu hasła",
+        "passwordChangeError": "Nie udało się rozpocząc procedury resetu hasła",
+        "passwordChangeWarn": "Nieoczekiwany błąd"
       }
     }
   },

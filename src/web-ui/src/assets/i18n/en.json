@@ -7,7 +7,7 @@
     "not-found": "Page not found",
     "profile": "Profile",
     "profile-edit": "Profile edit",
-    "profile-mfa": "MFA",
+    "profile-security": "Security",
     "vehicle-list": "Searching vehicles",
     "vehicle-details": "Vehicle details",
     "reservation": "Reservation",
@@ -287,6 +287,21 @@
       },
       "errors": {
         "required": "This field is required"
+      }
+    },
+    "profile-security": {
+      "titles": {
+        "main": "Security",
+        "passwordChange": "Password change",
+        "mfa": "Two step authentication"
+      },
+      "buttons": {
+        "passwordChange": "Change password"
+      },
+      "toasts": {
+        "passwordChangeSuccess": "A password reset procedure has been sent to your email address",
+        "passwordChangeError": "Failed to start the password reset procedure",
+        "passwordChangeWarn": "Unexpected error"
       }
     }
   },
