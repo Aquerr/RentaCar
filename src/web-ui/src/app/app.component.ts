@@ -55,6 +55,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    if (this.isMobile) {
+      this.closeSideMenu();
+    }
     this.authenticationService.logoutDispatch();
   }
 

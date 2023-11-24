@@ -59,3 +59,12 @@ profile-mfa-totp {
   align-items: center;
   justify-content: center;
 }
+
+// MEDIA
+@media (max-width: 800px) {
+
+  .mfa-wrapper {
+    width: 100%;
+  }
+
+}

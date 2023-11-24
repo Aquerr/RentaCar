@@ -1,7 +1,7 @@
 <ng-container *ngIf='!mfaSettings || mfaSettings && !mfaSettings.verified; else activatedMfa'>
   <form [formGroup]='form' *ngIf='userProfile'>
 
-    <div class='checkox-container'>
+    <div class='checkbox-container'>
       <label for='activateMfa'>Włącz dwustopniowe uwierzytelnianie</label>
       <p-checkbox id='activateMfa' formControlName='activateMfa' [binary]='true' />
     </div>
