@@ -23,7 +23,7 @@
     "authentication": {
       "sign-in": {
         "sign-in-header": "Zaloguj się",
-        "sign-in-mfa-header": "Podaj kod weryfikacji dwu-etapowej",
+        "sign-in-mfa-header": "Podaj kod weryfikacji dwuetapowej",
         "mfa-code": {
           "label": "Kod"
         },

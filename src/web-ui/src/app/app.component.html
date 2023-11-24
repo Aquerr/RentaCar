@@ -5,16 +5,19 @@
 <nav class='side-menu-expanded' *ngIf='sideMenuExpanded'>
   <fa-icon icon='xmark' (click)='toggleSideMenu()' *ngIf='sideMenuExpanded'></fa-icon>
   <a class='nav__link' routerLink='' (click)='closeSideMenu()'>Strona główna</a>
-  <a class='nav__link' href='#' (click)='closeSideMenu()'>Flota</a>
-  <a class='nav__link' href='#' (click)='closeSideMenu()'>FAQ</a>
-  <a class='nav__link' routerLink='vehicle-list' (click)='closeSideMenu()'>Rezerwuj pojazd</a>
-  <a class='nav__link' routerLink='contact' (click)='closeSideMenu()'>Kontakt</a>
+  <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>Flota</a>
+  <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>FAQ</a>
+  <a class='nav__link' routerLink='vehicle-list' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>Rezerwuj
+    pojazd</a>
+  <a class='nav__link' routerLink='contact' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>Kontakt</a>
   <a class='nav__link'
      routerLink='sign-in'
+     [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'
      *ngIf='!userLogged'>{{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}</a>
   <a class='nav__link'
-     routerLink='profile'
+     routerLink='profile/edit'
+     [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'
      *ngIf='userLogged'>Profil</a>
   <a class='nav__link'
@@ -29,11 +32,14 @@
   <h2 class='logo' routerLink=''>RentaCar</h2>
   <div class='nav'>
 
-    <a href='#'>Flota</a>
-    <a href='#'>FAQ</a>
-    <a routerLink='contact'>Kontakt</a>
+    <a href='#' [routerLinkActive]="['active-link']">Flota</a>
+    <a href='#' [routerLinkActive]="['active-link']">FAQ</a>
+    <a routerLink='contact' [routerLinkActive]="['active-link']">Kontakt</a>
 
-    <button class='sign-in-log-out-nav btn' *ngIf='!userLogged' routerLink='sign-in'>
+    <button class='sign-in-log-out-nav btn'
+            *ngIf='!userLogged'
+            routerLink='sign-in'
+            [routerLinkActive]="['active-link']">
       {{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}
 
     </button>

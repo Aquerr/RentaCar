@@ -96,10 +96,6 @@
   transition: color 0.3s;
 }
 
-.nav__link:hover {
-  color: black !important;
-}
-
 .router-section {
   margin-top: 65px;
   height: calc(100% - 350px);
@@ -130,8 +126,8 @@
     margin: 0.5em;
   }
   .router-section {
-    margin-top: 60px;
-    height: calc(100% - 60px);
+    padding-top: 30px;
+    height: 100%;
   }
 
   .side-menu-expanded {

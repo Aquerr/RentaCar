@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
+import { APP_BASE_URL, APP_V1_URL } from '../../app.consts';
 import { HttpClient } from '@angular/common/http';
 import { UserRegistrationRequest } from '../../components/authentication/sign-up/sign-up.component';
 

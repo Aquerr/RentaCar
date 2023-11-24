@@ -92,10 +92,9 @@ a:hover {
 @media (max-width: 800px) {
   .footer-mobile {
     bottom: 0;
-    height: 50px;
     color: white;
     background: black;
-    position: fixed;
+    position: absolute;
     width: 100%;
     margin: auto;
     z-index: 1000;

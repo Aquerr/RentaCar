@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserProfile } from '../../models/user-profile.model';
-import { APP_BASE_URL, APP_V1_URL } from '../../app/app.consts';
+import { APP_BASE_URL, APP_V1_URL } from '../../app.consts';
 import {ActivationRequest, AuthenticationRequest, MfaAuthenticationRequest} from '../authentication.service';
 import {Observable} from "rxjs/internal/Observable";
 
