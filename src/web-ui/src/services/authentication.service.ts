@@ -37,6 +37,14 @@ export class AuthenticationService {
     }
   }
 
+  setUsername(username: string) {
+    this.storageService.saveItem('username', username);
+  }
+
+  getUsername() {
+    return this.storageService.getItem('username');
+  }
+
   updateUser(user: UserProfile) {
     return this.store.dispatch(setUser({ user: user }));
   }

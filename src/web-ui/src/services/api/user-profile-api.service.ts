@@ -43,6 +43,10 @@ export class UserProfileApiService {
     return this.http.get<MfaSettingsResponse>(`${this.URL}/${profileId}/mfa-settings`);
   }
 
+  public getAvailableMfaTypes(profileId: number) {
+    return this.http.get<MfaAvailableTypesResponse>(`${this.URL}/${profileId}/settings/mfa/available-types`);
+  }
+
 }
 
 export interface MfaTotpQrDataUriResponse {
@@ -64,4 +68,8 @@ export interface MfaActivationResponse {
 export interface MfaSettingsResponse {
   mfaType: MfaType;
   active: boolean;
+}
+
+export interface MfaAvailableTypesResponse {
+  mfaTypes: string[];
 }

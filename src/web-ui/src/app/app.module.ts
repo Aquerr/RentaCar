@@ -47,6 +47,7 @@ import { NewPasswordComponent } from '../components/authentication/new-password/
 import { ProfileMfaComponent } from '../components/profile/mfa/profile-mfa.component';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { ProfileMfaTotpComponent } from '../components/profile/mfa/totp/profile-mfa-totp.component';
+import { ProfileSecurityComponent } from '../components/profile/security/profile-security.component';
 import {SignInMfaComponent} from "../components/authentication/sign-in-mfa/sign-in-mfa.component";
 
 @NgModule({
@@ -79,7 +80,8 @@ import {SignInMfaComponent} from "../components/authentication/sign-in-mfa/sign-
     ProfileMfaComponent,
     ProfileComponent,
     ProfileMfaTotpComponent,
-    SignInMfaComponent
+    SignInMfaComponent,
+    ProfileSecurityComponent
   ],
   imports: [
     BrowserModule,

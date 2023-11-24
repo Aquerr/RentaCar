@@ -35,3 +35,27 @@ profile-mfa-totp {
   align-items: center;
   justify-content: center;
 }
+
+.mfa-wrapper {
+  display: flex;
+  width: 800px;
+  padding: 20px;
+  border: 1px dotted black;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mfa-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mfa-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

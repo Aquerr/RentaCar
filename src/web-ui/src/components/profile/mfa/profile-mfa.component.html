@@ -1,26 +1,27 @@
 <ng-container *ngIf='!mfaSettings || mfaSettings && !mfaSettings.active; else activatedMfa'>
   <form [formGroup]='form' *ngIf='userProfile'>
 
-    <h3>Dwustopniowe uwierzytelnianie</h3>
-
     <div class='checkox-container'>
       <label for='activateMfa'>Włącz dwustopniowe uwierzytelnianie</label>
       <p-checkbox id='activateMfa' formControlName='activateMfa' [binary]='true' />
     </div>
 
-    <div class='input-container'>
-      <label for='selectedMfaType'>Wybierz formę uwierzytelniania</label>
-      <p-dropdown id='selectedMfaType'
-                  formControlName='selectedMfaType'
-                  dataKey='value'
-                  placeholder='Wybierz'
-                  class='dropdown-element'
-                  [options]='mfaTypes' />
+    <div class='mfa-wrapper'>
+      <div class='mfa-header-container'>
+        <label>Wybierz formę uwierzytelniania</label>
+        <div class='mfa-type-container'>
+          <ng-container *ngFor='let mfaType of availableMfaTypes'>
+            <button pButton (click)='selectedMfaType = mfaType' [disabled]='!isActivateMfaEnabled()'>{{mfaType}}</button>
+          </ng-container>
+      </div>
+      </div>
+      <div class='mfa-container'>
+        <ng-container *ngIf="selectedMfaType === 'TOTP'">
+          <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
+        </ng-container>
+      </div>
     </div>
 
-    <ng-container *ngIf='selectedMfaType === MfaType.TOTP'>
-      <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
-    </ng-container>
 
     <div class='button-container'>
       <button pButton class='p-button'
@@ -39,5 +40,15 @@
     acceptLabel='Tak'
     rejectLabel='Nie'
     icon='pi pi-exclamation-triangle'
+    key='delete-mfa'
   ></p-confirmDialog>
 </ng-template>
+
+
+<p-confirmDialog
+  header='Kody bezpieczeństwa'
+  acceptLabel='Zrozumiano'
+  icon='pi pi-exclamation-triangle'
+  key='recovery-codes'
+  [rejectVisible]='false'
+></p-confirmDialog>

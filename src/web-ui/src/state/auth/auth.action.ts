@@ -12,3 +12,4 @@ export const logout = createAction('Log out');
 export const removeToken = createAction('Remove token');
 export const setAuthorities = createAction('Set authorities', props<{ authorities: string[] }>());
 export const removeAuthorities = createAction('Remove authorities');
+export const setUsername = createAction('Set username', props<{ username: string }>());

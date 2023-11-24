@@ -30,7 +30,7 @@ export class AuthenticationApiService {
   }
 
   public resetPassword(login: string) {
-    return this.http.post<void>(`${this.AUTH_URL}/password-reset`, login);
+    return this.http.post<void>(`${this.AUTH_URL}/password-reset/init`, login);
   }
 
   public isTokenValid(token: string) {
