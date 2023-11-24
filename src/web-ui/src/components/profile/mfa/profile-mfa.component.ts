@@ -34,8 +34,7 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setUser();
-    // this.startActivateMfaSubscription();
-    // this.startSelectedMfaTypeSubscription();
+    this.startActivateMfaSubscription();
   }
 
   ngOnDestroy() {
@@ -62,33 +61,16 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
     });
   }
 
-  // startActivateMfaSubscription() {
-  //   this.subscriptions.add(this.formService.getActivateMfaControl(this.form).valueChanges.subscribe(
-  //     {
-  //       next: (value) => {
-  //         const selectedMfaTypeControl = this.formService.getSelectedMfaTypeControl(this.form);
-  //         if (value) {
-  //           selectedMfaTypeControl.enable();
-  //         } else {
-  //           selectedMfaTypeControl.disable();
-  //           selectedMfaTypeControl.setValue(null);
-  //           this.selectedMfaType = null;
-  //         }
-  //       }
-  //     }));
-  // }
-  //
-  // startSelectedMfaTypeSubscription() {
-  //   this.subscriptions.add(this.formService.getSelectedMfaTypeControl(this.form).valueChanges.subscribe({
-  //     next: (value) => {
-  //       if (value && value === MfaType.TOTP) {
-  //         this.selectedMfaType = MfaType.TOTP;
-  //       } else {
-  //         this.selectedMfaType = null;
-  //       }
-  //     }
-  //   }));
-  // }
+  startActivateMfaSubscription() {
+    this.subscriptions.add(this.formService.getActivateMfaControl(this.form).valueChanges.subscribe(
+      {
+        next: (value) => {
+          if (!value) {
+            this.selectedMfaType = null;
+          }
+        }
+      }));
+  }
 
   getTotpForm() {
     return this.form.get('totp') as FormGroup;
