@@ -100,11 +100,11 @@ h4 {
 }
 
 .dropdown-element {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .dropdown-element > * {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .p-multiselect .p-multiselect-label {
@@ -152,7 +152,26 @@ h4 {
   cursor: pointer !important;
 }
 
+.p-confirm-dialog .p-dialog-content {
+  flex-direction: column !important;
+  text-align: center !important;
+}
+
+.p-dialog .p-dialog-footer {
+  justify-content: center !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
+  padding: 10px !important;
+}
+
 a:hover {
+  color: var(--gold) !important;
+}
+
+.active-link {
   color: var(--gold) !important;
 }
 
