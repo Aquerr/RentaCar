@@ -2,6 +2,7 @@
   "title": {
     "main": "Rent a car",
     "sign-in": "Sign in",
+    "sign-in-mfa": "Sign in",
     "sign-up": "Sign up",
     "not-found": "Page not found",
     "profile": "Profile",
@@ -22,6 +23,10 @@
     "authentication": {
       "sign-in": {
         "sign-in-header": "Sign In",
+        "sign-in-mfa-header": "Type in two-factor auth code",
+        "mfa-code": {
+          "label": "Code"
+        },
         "login": {
           "label": "Login"
         },

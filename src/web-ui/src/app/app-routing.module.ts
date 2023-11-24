@@ -21,6 +21,7 @@ import { Auth } from '../components/auth.enum';
 import { PasswordResetComponent } from '../components/authentication/password-reset/password-reset.component';
 import { NewPasswordComponent } from '../components/authentication/new-password/new-password.component';
 import { ProfileComponent } from '../components/profile/profile.component';
+import {SignInMfaComponent} from "../components/authentication/sign-in-mfa/sign-in-mfa.component";
 
 const ROUTES: Routes = [
   {
@@ -33,6 +34,12 @@ const ROUTES: Routes = [
     component: SignInComponent,
     canActivate: [() => !inject(AppGuard).isAuthenticated()],
     title: 'title.sign-in'
+  },
+  {
+    path: 'sign-in-mfa',
+    component: SignInMfaComponent,
+    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    title: 'title.sign-in-mfa'
   },
   {
     path: 'sign-up',
