@@ -34,7 +34,10 @@
 </ng-container>
 
 <ng-template #activatedMfa>
-  <h5>Wybrane dwustopniowe uwierzytelnienie: {{mfaSettings?.mfaType}}</h5>
+  <div class='activated-mfa-info-container'>
+    <h5>Wybrane dwustopniowe uwierzytelnienie: {{mfaSettings?.mfaType}}</h5>
+    <h5>Data aktywacji: {{mfaSettings?.activationDate}}</h5>
+  </div>
   <button pButton (click)='deleteMfaConfirmDialog()'>Usuń dwustopniowe uwierzytelnianie</button>
 
   <p-confirmDialog
