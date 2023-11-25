@@ -175,6 +175,12 @@ a:hover {
   color: var(--gold) !important;
 }
 
+.btn:disabled, .btn[disabled=disabled] {
+  cursor: not-allowed;
+  background: grey!important;
+}
+
+
 // Media
 
 @media (max-width: 800px) {
