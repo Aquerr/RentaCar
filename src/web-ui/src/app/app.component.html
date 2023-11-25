@@ -4,37 +4,35 @@
 
 <nav class='side-menu-expanded' *ngIf='sideMenuExpanded'>
   <fa-icon icon='xmark' (click)='toggleSideMenu()' *ngIf='sideMenuExpanded'></fa-icon>
-  <a class='nav__link' routerLink='' (click)='closeSideMenu()'>Strona główna</a>
-  <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>Flota</a>
+  <a class='nav__link' routerLink='' (click)='closeSideMenu()'>{{ 'app.labels.mainPage' | translate }}</a>
+  <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>{{ 'app.labels.cars' | translate }}</a>
   <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>FAQ</a>
-  <a class='nav__link' routerLink='vehicle-list' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>Rezerwuj
-    pojazd</a>
-  <a class='nav__link' routerLink='contact' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>Kontakt</a>
+  <a class='nav__link' routerLink='vehicle-list' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>{{ 'app.labels.reserve' | translate }}</a>
+  <a class='nav__link' routerLink='contact' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>{{ 'app.labels.contact' | translate }}</a>
   <a class='nav__link'
      routerLink='sign-in'
      [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'
-     *ngIf='!userLogged'>{{ "app.top-nav.sign-in-log-out-nav.sign-in-label" | translate }}</a>
+     *ngIf='!userLogged'>{{ "app.labels.signIn" | translate }}</a>
   <a class='nav__link'
      routerLink='profile/edit'
      [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'
-     *ngIf='userLogged'>Profil</a>
+     *ngIf='userLogged'>{{ "app.labels.profile" | translate }}</a>
   <a class='nav__link'
-     routerLink='sign-in'
      (click)='logout()'
-     *ngIf='userLogged'>{{ "app.top-nav.sign-in-log-out-nav.log-out-label" | translate }}</a>
+     *ngIf='userLogged'>{{ "app.labels.logout" | translate }}</a>
   <a class='{{ iconLang }} nav__link' (click)='changeLanguage()'
-     pTooltip="{{ 'app.top-nav.lang-nav.tooltip' | translate }}" tooltipPosition='bottom'></a>
+     pTooltip="{{ 'app.labels.changeLanguage' | translate }}" tooltipPosition='bottom'></a>
 </nav>
 
 <div class='header' *ngIf='!isMobile'>
   <h2 class='logo' routerLink=''>RentaCar</h2>
   <div class='nav'>
 
-    <a href='#' [routerLinkActive]="['active-link']">Flota</a>
+    <a href='#' [routerLinkActive]="['active-link']">{{ 'app.labels.cars' | translate }}</a>
     <a href='#' [routerLinkActive]="['active-link']">FAQ</a>
-    <a routerLink='contact' [routerLinkActive]="['active-link']">Kontakt</a>
+    <a routerLink='contact' [routerLinkActive]="['active-link']">{{ 'app.labels.contact' | translate }}</a>
 
     <button class='sign-in-log-out-nav btn'
             *ngIf='!userLogged'
@@ -48,7 +46,7 @@
 
 
     <span class='lang-nav' class='{{ iconLang }}' (click)='changeLanguage()'
-          pTooltip="{{ 'app.top-nav.lang-nav.tooltip' | translate }}" tooltipPosition='bottom'>
+          pTooltip="{{ 'app.labels.changeLanguage' | translate }}" tooltipPosition='bottom'>
     </span>
 
   </div>

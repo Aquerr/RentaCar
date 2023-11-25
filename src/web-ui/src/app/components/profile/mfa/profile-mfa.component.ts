@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { MfaSettings } from '../../../models/mfa-settings.model';
 import { ToastService, ToastType } from '../../../services/toast.service';
 import { ConfirmationService } from 'primeng/api';
-import { CommonService } from '../../../services/common.service';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'profile-mfa',
@@ -28,7 +28,7 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
               private apiService: UserProfileApiService,
               private toastService: ToastService,
               private confirmationService: ConfirmationService,
-              private commonService: CommonService) {
+              private languageService: LanguageService) {
     this.form = this.formService.getForm();
   }
 
@@ -92,8 +92,12 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
   }
 
   openInfoMfaDialog() {
+    const message = this.languageService.getMessage('components.profile-mfa.dialog.mfa-info.message', {
+      type: this.mfaSettings?.mfaType,
+      date: this.mfaSettings?.verifiedDate
+    });
     this.confirmationService.confirm({
-      message: 'Wybrane dwustopniowe uwierzytelnienie: ' + this.mfaSettings?.mfaType + '<br>Data aktywacji: ' + this.mfaSettings?.verifiedDate,
+      message: message,
       key: 'mfa-info'
     });
   }
@@ -114,8 +118,10 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
   }
 
   prepareRecoveryCodeMessage(recoveryCodes: string[]): string {
-    const message = recoveryCodes.join('<br>');
-    return 'Zapisz poniższe kody bezpiczeństwa. Będą potrzebne w przypadku utraty dostępu do dwustopniowej weryfikacji:<br><br>' + message;
+    const codes = recoveryCodes.join('<br>');
+    return this.languageService.getMessage('components.profile-mfa.dialog.recovery-codes.message', {
+      codes: codes
+    });
   }
 
 }

@@ -8,23 +8,21 @@
             <ng-container *ngIf="mfaType === 'TOTP'">
               <fa-icon icon='mobile-screen'></fa-icon>
               <div class='title-info-container'>
-                <div class='title'>Aplikacja uwierzytelniająca do logowania dwuetapowego</div>
-                <div class='info'>Logowanie dwuetapowe (2EL) z użyciem aplikacji uwierzytelniającej. Podczas logowania
-                  należy wpisać kod bezpieczeństwa otrzymany w aplikacji uwierzytelniającej.
+                <div class='title'>{{'components.profile-mfa.totp.title' | translate}}</div>
+                <div class='info'>{{'components.profile-mfa.totp.info' | translate}}
                 </div>
               </div>
             </ng-container>
-            <button class='button'
-                    pButton
+            <button class='btn'
                     (click)='selectedMfaType = mfaType'
-                    *ngIf='!mfaSettings || !mfaSettings.verified; else deleteButton'>Konfiguruj
+                    *ngIf='!mfaSettings || !mfaSettings.verified; else delete'>{{'components.profile-mfa.buttons.configure' | translate}}
             </button>
-            <ng-template #deleteButton>
-              <button class='button' pButton
-                      (click)='openInfoMfaDialog()'>Szczegóły
+            <ng-template #delete>
+              <button class='btn'
+                      (click)='openInfoMfaDialog()'>{{'components.profile-mfa.buttons.details' | translate}}
               </button>
-              <button class='button' pButton
-                      (click)='deleteMfaConfirmDialog()'>Usuń
+              <button class='btn'
+                      (click)='deleteMfaConfirmDialog()'>{{'components.profile-mfa.buttons.delete' | translate}}
               </button>
             </ng-template>
           </div>
@@ -40,24 +38,24 @@
 
 
   <div class='button-container'>
-    <button pButton class='p-button'
-            (click)='save()' [disabled]='form.invalid'>Zapisz
+    <button class='btn'
+            (click)='save()' [disabled]='form.invalid'>{{'components.profile-mfa.buttons.save' | translate}}
     </button>
   </div>
 </form>
 
 <p-confirmDialog
-  message='Czy napewno chcesz usunąć dwustopniowe uwierzytelnianie?'
-  header='Potwierdź usunięcie'
-  acceptLabel='Tak'
-  rejectLabel='Nie'
+  message="{{'components.profile-mfa.dialog.delete.message' | translate}}"
+  header="{{'components.profile-mfa.dialog.delete.header' | translate}}"
+  acceptLabel="{{'components.profile-mfa.dialog.delete.accept' | translate}}"
+  rejectLabel="{{'components.profile-mfa.dialog.delete.reject' | translate}}"
   icon='pi pi-exclamation-triangle'
   key='delete-mfa'
 ></p-confirmDialog>
 
 <p-confirmDialog
-  header='Kody bezpieczeństwa'
-  acceptLabel='Zrozumiano'
+  header="{{'components.profile-mfa.dialog.recovery-codes.header' | translate}}"
+  acceptLabel="{{'components.profile-mfa.dialog.recovery-codes.accept' | translate}}"
   icon='pi pi-exclamation-triangle'
   key='recovery-codes'
   [rejectVisible]='false'

@@ -13,9 +13,9 @@
     </div>
 
     <div class='reserve-container'>
-      <h3>Rezerwuj</h3>
+      <h3>{{ 'components.vehicle-details.reserve.labels.reserve' | translate}}</h3>
       <div class='date-container'>
-        <h3>{{'Dostępność' | uppercase}}</h3>
+        <h3>{{ 'components.vehicle-details.reserve.labels.availability' | translate | uppercase}}</h3>
         <p-calendar id='dateFrom' [(ngModel)]='dateFrom'
                     dateFormat='dd.mm.yy'
                     [minDate]='today'
@@ -33,14 +33,14 @@
       </div>
 
       <div class='reservation-info-container'>
-        <h3>{{'Warunki ogólne' | uppercase}}</h3>
+        <h3>{{ 'components.vehicle-details.reserve.labels.terms' | translate | uppercase}}</h3>
         <ul>
-          <li>Kaucja w wysokości 1500 zł płatna gotówką</li>
-          <li>Limit km na dobę: 300km</li>
+          <li>{{ 'components.vehicle-details.reserve.labels.caution' | translate}}</li>
+          <li>{{ 'components.vehicle-details.reserve.labels.mileageLimit' | translate}}</li>
         </ul>
       </div>
 
-      <h3>Koszt najmu {{totalPrice}} PLN</h3>
+      <h3>{{ 'components.vehicle-details.reserve.labels.price' | translate}}{{totalPrice}} PLN</h3>
       <button class='btn'
               [disabled]='!vehicleAvailable && !user'
               [pTooltip]="!user ? ('components.vehicle-details.buttons.disabled' | translate) : '' || !vehicleAvailable ? ('components.vehicle-details.buttons.notAvailable' | translate) : ''"

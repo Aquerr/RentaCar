@@ -31,9 +31,9 @@ export class LanguageService {
     this.setPrimengLanguage();
   }
 
-  public getMessage(key: string) {
+  public getMessage(key: string, params?: any) {
     let responseMessage = '';
-    this.translateService.get(key).subscribe({
+    this.translateService.get(key, params).subscribe({
       next: (response) => {
         responseMessage = response;
       }

@@ -169,6 +169,16 @@
         "reserve": "Rezerwuj",
         "disabled": "Zaloguj się, żeby zarezerwować pojazd",
         "notAvailable": "Pojazd niedostępny w wybranym terminie"
+      },
+      "reserve": {
+        "labels": {
+          "reserve": "Rezerwuj",
+          "availability": "Dostępność",
+          "terms": "Warunki ogólne",
+          "caution": "Kaucja w wysokości 1500 zł płatna gotówką",
+          "mileageLimit": "Limit km na dobę: 300km",
+          "price": "Koszt najmu "
+        }
       }
     },
     "activation-account": {
@@ -303,17 +313,60 @@
         "passwordChangeError": "Nie udało się rozpocząc procedury resetu hasła",
         "passwordChangeWarn": "Nieoczekiwany błąd"
       }
+    },
+    "profile": {
+      "edit": "Edycja profilu",
+      "security": "Bezpieczeństwo"
+    },
+    "profile-panel": {
+      "profile": "Profil",
+      "admin": "Panel admina",
+      "my-reservations": "Moje rezerwacje",
+      "logout": "Wyloguj się"
+    },
+    "profile-mfa-totp": {
+      "label": "Zeskanuj kod QR w aplikacji i wpisz wygenerowany klucz poniżej",
+      "6digitCode": "6 cyfrowy kod"
+    },
+    "profile-mfa": {
+      "buttons": {
+        "save": "Zapisz",
+        "configure": "Konfiguruj",
+        "details": "Szczegóły",
+        "delete": "Usuń"
+      },
+      "totp": {
+        "title": "Aplikacja uwierzytelniająca do uwierzytelniania dwuetapowego",
+        "info": "Logowanie dwuetapowe (2EL) z użyciem aplikacji uwierzytelniającej. Podczas logowania należy wpisać kod bezpieczeństwa otrzymany w aplikacji uwierzytelniającej."
+      },
+      "dialog": {
+        "delete": {
+          "header": "Potwierdź usunięcie",
+          "message": "Czy napewno chcesz usunąć dwustopniowe uwierzytelnianie?",
+          "accept": "Tak",
+          "reject": "Nie"
+        },
+        "recovery-codes": {
+          "header": "Kody bezpieczeństwa",
+          "accept": "Zrozumiano",
+          "message": "Zapisz poniższe kody bezpiczeństwa. Będą potrzebne w przypadku utraty dostępu do dwustopniowej weryfikacji:<br><br>{{0}}"
+        },
+        "mfa-info": {
+          "message": "Wybrane dwustopniowe uwierzytelnienie {{type}} <br>Data aktywacji: {{date}}"
+        }
+      }
     }
   },
   "app": {
-    "top-nav": {
-      "sign-in-log-out-nav": {
-        "sign-in-label": "Zaloguj się",
-        "log-out-label": "Wyloguj się"
-      },
-      "lang-nav": {
-        "tooltip": "Zmień język"
-      }
+    "labels": {
+      "mainPage": "Strona główna",
+      "cars": "Flota",
+      "contact": "Kontakt",
+      "signIn": "Zaloguj się",
+      "logout": "Wyloguj się",
+      "profile": "Profil",
+      "changeLanguage": "Zmiana języka",
+      "reserve": "Rezerwuj"
     }
   },
   "services": {
