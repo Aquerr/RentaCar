@@ -34,7 +34,6 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setUser();
-    this.startActivateMfaSubscription();
   }
 
   ngOnDestroy() {
@@ -61,17 +60,6 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
     });
   }
 
-  startActivateMfaSubscription() {
-    this.subscriptions.add(this.formService.getActivateMfaControl(this.form).valueChanges.subscribe(
-      {
-        next: (value) => {
-          if (!value) {
-            this.selectedMfaType = null;
-          }
-        }
-      }));
-  }
-
   getTotpForm() {
     return this.form.get('totp') as FormGroup;
   }
@@ -85,7 +73,10 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
           {
             key: 'recovery-codes',
             message: this.prepareRecoveryCodeMessage(response.recoveryCodes),
-            accept: () => this.commonService.goRoute('profile/edit')
+            accept: () => {
+              this.selectedMfaType = null;
+              this.getUserMfaSettings();
+            }
           }
         );
       },
@@ -97,6 +88,13 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       accept: () => this.deleteMfa(),
       key: 'delete-mfa'
+    });
+  }
+
+  openInfoMfaDialog() {
+    this.confirmationService.confirm({
+      message: 'Wybrane dwustopniowe uwierzytelnienie: ' + this.mfaSettings?.mfaType + '<br>Data aktywacji: ' + this.mfaSettings?.verifiedDate,
+      key: 'mfa-info'
     });
   }
 
@@ -120,7 +118,4 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
     return 'Zapisz poniższe kody bezpiczeństwa. Będą potrzebne w przypadku utraty dostępu do dwustopniowej weryfikacji:<br><br>' + message;
   }
 
-  isActivateMfaEnabled(): boolean {
-    return this.formService.getActivateMfaControl(this.form).value === true;
-  }
 }

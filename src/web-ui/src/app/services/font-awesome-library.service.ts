@@ -6,7 +6,7 @@ import {
   faDharmachakra,
   faFan,
   faGasPump,
-  faLightbulb,
+  faLightbulb, faMobileScreen,
   faOilCan,
   faWrench,
   faXmark
@@ -30,7 +30,8 @@ export class FontAwesomeLibraryService {
       faOilCan,
       faWrench,
       faBars,
-      faXmark
+      faXmark,
+      faMobileScreen
     );
   }
 }

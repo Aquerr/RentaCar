@@ -1,60 +1,71 @@
-<ng-container *ngIf='!mfaSettings || mfaSettings && !mfaSettings.verified; else activatedMfa'>
-  <form [formGroup]='form' *ngIf='userProfile'>
+<form [formGroup]='form' *ngIf='userProfile'>
 
-    <div class='checkbox-container'>
-      <label for='activateMfa'>Włącz dwustopniowe uwierzytelnianie</label>
-      <p-checkbox id='activateMfa' formControlName='activateMfa' [binary]='true' />
-    </div>
-
-    <div class='mfa-wrapper'>
-      <div class='mfa-header-container'>
-        <label>Wybierz formę uwierzytelniania</label>
-        <div class='mfa-type-container'>
-          <ng-container *ngFor='let mfaType of availableMfaTypes'>
-            <button pButton
+  <div class='mfa-wrapper'>
+    <div class='mfa-header-container'>
+      <div class='mfa-type-container'>
+        <ng-container *ngFor='let mfaType of availableMfaTypes'>
+          <div class='mfa-info'>
+            <ng-container *ngIf="mfaType === 'TOTP'">
+              <fa-icon icon='mobile-screen'></fa-icon>
+              <div class='title-info-container'>
+                <div class='title'>Aplikacja uwierzytelniająca do logowania dwuetapowego</div>
+                <div class='info'>Logowanie dwuetapowe (2EL) z użyciem aplikacji uwierzytelniającej. Podczas logowania
+                  należy wpisać kod bezpieczeństwa otrzymany w aplikacji uwierzytelniającej.
+                </div>
+              </div>
+            </ng-container>
+            <button class='button'
+                    pButton
                     (click)='selectedMfaType = mfaType'
-                    [disabled]='!isActivateMfaEnabled()'>{{mfaType}}</button>
-          </ng-container>
-        </div>
-      </div>
-      <div class='mfa-container'>
-        <ng-container *ngIf="selectedMfaType === 'TOTP'">
-          <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
+                    *ngIf='!mfaSettings || !mfaSettings.verified; else deleteButton'>Konfiguruj
+            </button>
+            <ng-template #deleteButton>
+              <button class='button' pButton
+                      (click)='openInfoMfaDialog()'>Szczegóły
+              </button>
+              <button class='button' pButton
+                      (click)='deleteMfaConfirmDialog()'>Usuń
+              </button>
+            </ng-template>
+          </div>
         </ng-container>
       </div>
     </div>
-
-
-    <div class='button-container'>
-      <button pButton class='p-button'
-              (click)='save()' [disabled]='form.invalid'>Zapisz
-      </button>
+    <div class='mfa-container'>
+      <ng-container *ngIf="selectedMfaType === 'TOTP'">
+        <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
+      </ng-container>
     </div>
-  </form>
-</ng-container>
-
-<ng-template #activatedMfa>
-  <div class='activated-mfa-info-container'>
-    <h5>Wybrane dwustopniowe uwierzytelnienie: {{mfaSettings?.mfaType}}</h5>
-    <h5>Data aktywacji: {{mfaSettings?.verifiedDate}}</h5>
   </div>
-  <button pButton (click)='deleteMfaConfirmDialog()'>Usuń dwustopniowe uwierzytelnianie</button>
 
-  <p-confirmDialog
-    message='Czy napewno chcesz usunąć dwustopniowe uwierzytelnianie?'
-    header='Potwierdź usunięcie'
-    acceptLabel='Tak'
-    rejectLabel='Nie'
-    icon='pi pi-exclamation-triangle'
-    key='delete-mfa'
-  ></p-confirmDialog>
-</ng-template>
 
+  <div class='button-container'>
+    <button pButton class='p-button'
+            (click)='save()' [disabled]='form.invalid'>Zapisz
+    </button>
+  </div>
+</form>
+
+<p-confirmDialog
+  message='Czy napewno chcesz usunąć dwustopniowe uwierzytelnianie?'
+  header='Potwierdź usunięcie'
+  acceptLabel='Tak'
+  rejectLabel='Nie'
+  icon='pi pi-exclamation-triangle'
+  key='delete-mfa'
+></p-confirmDialog>
 
 <p-confirmDialog
   header='Kody bezpieczeństwa'
   acceptLabel='Zrozumiano'
   icon='pi pi-exclamation-triangle'
   key='recovery-codes'
+  [rejectVisible]='false'
+></p-confirmDialog>
+
+<p-confirmDialog
+  acceptLabel='OK'
+  icon='pi pi-info-circle'
+  key='mfa-info'
   [rejectVisible]='false'
 ></p-confirmDialog>
