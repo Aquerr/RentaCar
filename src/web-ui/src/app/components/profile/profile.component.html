@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='side-nav'>
-    <a class='router-link' routerLink='edit' [routerLinkActive]="['active-link']">Edycja profilu</a>
-    <a class='router-link' routerLink='security' [routerLinkActive]="['active-link']">Bezpieczeństwo</a>
+    <a class='router-link' routerLink='edit' [routerLinkActive]="['active-link']">{{'components.profile.edit' | translate}}</a>
+    <a class='router-link' routerLink='security' [routerLinkActive]="['active-link']">{{'components.profile.security' | translate}}</a>
   </div>
   <div class='router-section'>
     <router-outlet></router-outlet>

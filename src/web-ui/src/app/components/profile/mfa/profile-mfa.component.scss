@@ -84,6 +84,21 @@ profile-mfa-totp {
   font-weight: bold;
 }
 
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-color-icon);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
+  text-align: center;
+  margin: 20px auto;
+}
+
+.btn:hover {
+  color: var(--gold);
+}
+
+
 // MEDIA
 @media (max-width: 800px) {
   .mfa-info {

@@ -169,6 +169,16 @@
         "reserve": "Reserve",
         "disabled": "Sign in, to reserve a vehicle",
         "notAvailable": "Vehicle not available in selected term"
+      },
+      "reserve": {
+        "labels": {
+          "reserve": "Reserve",
+          "availability": "Availability",
+          "terms": "Overall temrs",
+          "caution": "Deposit in the amount of PLN 1,500 payable in cash",
+          "mileageLimit": "Mileage limit per day: 300km",
+          "price": "Rent price "
+        }
       }
     },
     "activation-account": {
@@ -303,17 +313,60 @@
         "passwordChangeError": "Failed to start the password reset procedure",
         "passwordChangeWarn": "Unexpected error"
       }
+    },
+    "profile": {
+      "edit": "Profile edit",
+      "security": "Security"
+    },
+    "profile-panel": {
+      "profile": "Profile",
+      "admin": "Admin panel",
+      "my-reservations": "My reservations",
+      "logout": "Logout"
+    },
+    "profile-mfa-totp": {
+      "label": "Scan the QR code in the app and enter the generated key below",
+      "6digitCode": "6 digit code"
+    },
+    "profile-mfa": {
+      "buttons": {
+        "save": "Save",
+        "configure": "Configure",
+        "details": "Details",
+        "delete": "Delete"
+      },
+      "totp": {
+        "title": "Authentication app for two-step authentication",
+        "info": "Two-step login (2EL) using an authenticator app. When logging in, enter the security code received in the authentication application."
+      },
+      "dialog": {
+        "delete": {
+          "header": "Confirm delete",
+          "message": "Are you sure you want to remove two-step authentication?",
+          "accept": "Yes",
+          "reject": "No"
+        },
+        "recovery-codes": {
+          "header": "Recovery codes",
+          "accept": "Understood",
+          "message": "Save below recovery codes. You will need them in case of lose access to two step authentication app:<br><br>{{codes}}"
+        },
+        "mfa-info": {
+          "message": "Selected two step authentication {{type}} <br>Activation date: {{date}}"
+        }
+      }
     }
   },
   "app": {
-    "top-nav": {
-      "sign-in-log-out-nav": {
-        "sign-in-label": "Sign in",
-        "log-out-label": "Logout"
-      },
-      "lang-nav": {
-        "tooltip": "Change language"
-      }
+    "labels": {
+      "mainPage": "Main page",
+      "cars": "Cars",
+      "contact": "Contact",
+      "signIn": "Sign in",
+      "logout": "Logout",
+      "profile": "Profile",
+      "changeLanguage": "Change language",
+      "reserve": "Reserve"
     }
   },
   "services": {
