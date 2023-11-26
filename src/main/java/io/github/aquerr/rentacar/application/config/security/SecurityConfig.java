@@ -69,6 +69,11 @@ public class SecurityConfig {
                 exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
             })
             .cors(Customizer.withDefaults())
+            .headers(header -> {
+                if (environment.matchesProfiles("dev")) {
+                    header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
+                }
+            })
             .csrf(AbstractHttpConfigurer::disable);
             return http.build();
         }
