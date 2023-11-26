@@ -378,9 +378,15 @@
           "lastName": "Renting lastName"
         }
       },
-      "dialog": {
+      "reserveDialog": {
         "header": "Confirmation",
         "message": "Do you want to confirm reservation?",
+        "acceptLabel": "Yes",
+        "rejectLabel": "No"
+      },
+      "cancelDialog": {
+        "header": "Confirmation",
+        "message": "Do you want to cancel reservation?",
         "acceptLabel": "Yes",
         "rejectLabel": "No"
       },

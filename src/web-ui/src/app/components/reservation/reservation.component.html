@@ -19,7 +19,7 @@
 
   <div class='button-container'>
     <button class='btn'
-            (click)='cancel()'
+            (click)='cancelConfirmDialog()'
             *ngIf='!readOnly'>{{'components.reservation.buttons.cancel' | translate}}</button>
     <button class='btn'
             *ngIf='activeIndex>0'
@@ -34,7 +34,14 @@
   </div>
 </div>
 <p-confirmDialog icon='pi pi-info-circle'
-                 message="{{'components.reservation.dialog.message' | translate}}"
-                 header="{{'components.reservation.dialog.header' | translate}}"
-                 acceptLabel="{{'components.reservation.dialog.acceptLabel' | translate}}"
-                 rejectLabel="{{'components.reservation.dialog.rejectLabel' | translate}}"></p-confirmDialog>
+                 key='reserve'
+                 message="{{'components.reservation.reserveDialog.message' | translate}}"
+                 header="{{'components.reservation.reserveDialog.header' | translate}}"
+                 acceptLabel="{{'components.reservation.reserveDialog.acceptLabel' | translate}}"
+                 rejectLabel="{{'components.reservation.reserveDialog.rejectLabel' | translate}}"></p-confirmDialog>
+<p-confirmDialog icon='pi pi-info-circle'
+                 key='cancel'
+                 message="{{'components.reservation.cancelDialog.message' | translate}}"
+                 header="{{'components.reservation.cancelDialog.header' | translate}}"
+                 acceptLabel="{{'components.reservation.cancelDialog.acceptLabel' | translate}}"
+                 rejectLabel="{{'components.reservation.cancelDialog.rejectLabel' | translate}}"></p-confirmDialog>

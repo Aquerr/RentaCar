@@ -378,9 +378,15 @@
           "lastName": "Nazwisko wynajmującego"
         }
       },
-      "dialog": {
+      "reserveDialog": {
         "header": "Potwierdzenie",
         "message": "Czy na pewno chcesz potwierdzić rezerwację?",
+        "acceptLabel": "Tak",
+        "rejectLabel": "Nie"
+      },
+      "cancelDialog": {
+        "header": "Potwierdzenie",
+        "message": "Czy na pewno chcesz anulować rezerwację?",
         "acceptLabel": "Tak",
         "rejectLabel": "Nie"
       },
