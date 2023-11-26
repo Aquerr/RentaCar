@@ -398,18 +398,18 @@
         "reservationVehicleNotAvailable": "Selected vehicle is not available anymore in selected dates range",
         "reservationCancelled": "Reservation has been cancelled"
       }
-    }
-  },
-  "app": {
-    "labels": {
-      "mainPage": "Main page",
-      "cars": "Cars",
-      "contact": "Contact",
-      "signIn": "Sign in",
-      "logout": "Logout",
-      "profile": "Profile",
-      "changeLanguage": "Change language",
-      "reserve": "Reserve"
+    },
+    "app": {
+      "labels": {
+        "mainPage": "Main page",
+        "cars": "Cars",
+        "contact": "Contact",
+        "signIn": "Sign in",
+        "logout": "Logout",
+        "profile": "Profile",
+        "changeLanguage": "Change language",
+        "reserve": "Reserve"
+      }
     }
   },
   "services": {
