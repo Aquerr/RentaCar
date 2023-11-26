@@ -5,4 +5,20 @@
   gap: 10px;
   justify-content: center;
   align-items: center;
+  padding: 50px;
+}
+
+.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 25%;
+}
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .info-container {
+    width: 100%;
+  }
 }

@@ -13,14 +13,14 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
 
 
     @Query("SELECT reservation.vehicle.id FROM ReservationEntity reservation " +
-            "WHERE (:dateTo >= reservation.dateFrom AND :dateTo <= reservation.dateTo) " +
-            "OR (:dateFrom >= reservation.dateFrom AND :dateFrom <= reservation.dateTo)")
+            "WHERE (:dateTo >= reservation.dateFrom AND :dateTo <= reservation.dateTo AND (reservation.status is null OR reservation.status = 'DRAFT'))" +
+            "OR (:dateFrom >= reservation.dateFrom AND :dateFrom <= reservation.dateTo AND (reservation.status is null OR reservation.status = 'DRAFT'))")
     List<Integer> findAllNotAvailableVehiclesBetweenDates(@Param("dateFrom") LocalDate dateFrom, @Param("dateTo") LocalDate dateTo);
 
     @Query("FROM ReservationEntity reservation " +
             "WHERE reservation.vehicle.id = :vehicleId " +
-            "AND (:dateTo >= reservation.dateFrom AND :dateTo <= reservation.dateTo)" +
-            "OR (:dateFrom >= reservation.dateFrom AND :dateFrom <= reservation.dateTo)")
+            "AND (:dateTo >= reservation.dateFrom AND :dateTo <= reservation.dateTo AND (reservation.status is null OR reservation.status = 'DRAFT'))" +
+            "OR (:dateFrom >= reservation.dateFrom AND :dateFrom <= reservation.dateTo AND (reservation.status is null OR reservation.status = 'DRAFT'))")
     Optional<ReservationEntity> findReservationByVehicleIdAndDateBetween(@Param("vehicleId") int vehicleId, @Param("dateFrom") LocalDate dateFrom, @Param("dateTo") LocalDate dateTo);
 
     @Query("FROM ReservationEntity reservation " +

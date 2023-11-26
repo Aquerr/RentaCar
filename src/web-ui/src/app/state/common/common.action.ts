@@ -8,3 +8,4 @@ export const showToast = createAction('Show toast', props<{
   toastType: ToastType
 }>());
 export const goRoute = createAction('Go route', props<{ routingLink: string, pathVariables?: string[], queryParams?: Params | null }>());
+export const goBack = createAction('Go back');

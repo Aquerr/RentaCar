@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { goRoute, showToast } from './common.action';
+import { goBack, goRoute, showToast } from './common.action';
 import { ToastService } from '../../services/toast.service';
 import { LanguageService } from '../../services/language.service';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class CommonEffects {
@@ -33,11 +34,19 @@ export class CommonEffects {
         }
       )), { dispatch: false });
 
+  goToLastLocation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(goBack),
+      tap(() =>
+        this.location.back()
+      )), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private router: Router,
     private toastService: ToastService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private location: Location
   ) {}
 
   private getMessage(messageKey: string): string {

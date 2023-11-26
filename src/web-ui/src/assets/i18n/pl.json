@@ -17,7 +17,8 @@
     "admin-panel": "Panel admina",
     "admin-add-vehicle": "Dodaj pojazd",
     "password-reset": "Odzyskiwanie hasła",
-    "new-password": "Nowe hasło"
+    "new-password": "Nowe hasło",
+    "reservation-payment-info": "Płatność za rezerwację"
   },
   "components": {
     "authentication": {
@@ -354,6 +355,40 @@
         "mfa-info": {
           "message": "Wybrane dwustopniowe uwierzytelnienie {{type}} <br>Data aktywacji: {{date}}"
         }
+      }
+    },
+    "reservation-payment-info": {
+      "header": "Pojazd zarezerwowany",
+      "firstMessage": "Wybrany przez Ciebie pojazd został pomyślnie zarezerwowany!",
+      "secondMessage": "Na wskazany przez Ciebie adres email wysłaliśmy link do płatności za rezerwację.\nPłatność należy uiścić maksymalnie 24h przed odbiorem pojazdu, w innym wypadku rezerwacja zostanie anulowana."
+    },
+    "reservation": {
+      "buttons": {
+        "back": "Wstecz",
+        "next": "Dalej",
+        "reserve": "Rezerwuj"
+      },
+      "summary-step": {
+        "labels": {
+          "dateFrom": "Data rozpoczęcia",
+          "dateEnd": "Data zakończenia",
+          "totalPrice": "Cena całkowita",
+          "firstName": "Imię wynajmującego",
+          "lastName": "Nazwisko wynajmującego"
+        }
+      },
+      "dialog": {
+        "header": "Potwierdzenie",
+        "message": "Czy na pewno chcesz potwierdzić rezerwację?",
+        "acceptLabel": "Tak",
+        "rejectLabel": "Nie"
+      },
+      "toasts": {
+        "reservationSuccess": "Rezerwacja została zapisana pomyślnie",
+        "reservationError": "Rezerwacja nie została zapisana pomyślnie",
+        "reservationNotFound": "Rezerwacja nie znaleziona",
+        "reservationReadOnly": "Ta rezerwacja została już utworzona. Brak możliwości edycji",
+        "reservationVehicleNotAvailable": "Wybrany pojazd nie jest już dostępny w wybranym zakresie dat"
       }
     }
   },

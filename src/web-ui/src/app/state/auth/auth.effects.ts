@@ -19,7 +19,7 @@ import {
 import { ToastService, ToastType } from '../../services/toast.service';
 import { AuthenticationRequest, AuthenticationService, MfaAuthenticationRequest } from '../../services/authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { goRoute, showToast } from '../common/common.action';
+import { goBack, goRoute, showToast } from '../common/common.action';
 import { AuthStatus } from '../../enums/auth-status.enum';
 
 @Injectable()
@@ -76,7 +76,7 @@ export class AuthEffects {
         mergeMap((response) => [
           setUser({ user: response.userProfile }),
           setAuthorities({ authorities: response.authorities }),
-          goRoute({ routingLink: '' }),
+          goBack(),
           showToast({
             messageKey: 'services.sign-in.success',
             toastType: ToastType.SUCCESS

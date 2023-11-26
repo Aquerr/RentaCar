@@ -7,7 +7,6 @@ import { LanguageService } from '../../../services/language.service';
 import { ReservationApiService } from '../../../services/api/reservation-api.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserProfile } from '../../../models/user-profile.model';
-import { ReservationService } from '../../../services/reservation.service';
 import { DateService } from '../../../services/date.service';
 
 @Component({
@@ -26,7 +25,6 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   constructor(private vehicleApiService: VehicleApiService,
               private reservationApiService: ReservationApiService,
               private authenticationService: AuthenticationService,
-              private reservationService: ReservationService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private languageService: LanguageService,

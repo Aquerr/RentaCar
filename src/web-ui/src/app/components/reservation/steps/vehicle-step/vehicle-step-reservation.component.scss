@@ -18,3 +18,17 @@
   margin: auto;
   gap: 5px;
 }
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .equipment-container {
+    flex-direction: column;
+  }
+}
