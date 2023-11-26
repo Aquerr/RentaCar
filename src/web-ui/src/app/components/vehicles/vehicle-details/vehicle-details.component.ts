@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { ReservationApiService } from '../../../services/api/reservation-api.service';
 import { Reservation, ReservationStatus } from '../../../models/reservation.model.ts';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { ReservationService } from '../../../services/reservation.service';
 import { UserProfile } from '../../../models/user-profile.model';
 
 @Component({
@@ -30,7 +29,6 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
               private apiService: VehicleApiService,
               private reservationApiService: ReservationApiService,
               private authenticationService: AuthenticationService,
-              private reservationService: ReservationService,
               private dateService: DateService) {}
 
   ngOnInit() {
@@ -86,7 +84,6 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     const request = this.prepareReservationRequest();
     this.reservationApiService.createNewReservation(request).subscribe({
       next: (response) => {
-        this.reservationService.updateReservation(response.reservation);
         this.router.navigate(['/reservation', response.reservation.id]);
       }
     });

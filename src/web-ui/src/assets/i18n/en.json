@@ -17,7 +17,8 @@
     "admin-panel": "Admin panel",
     "admin-add-vehicle": "Add vehicle",
     "password-reset": "Reset password",
-    "new-password": "New password"
+    "new-password": "New password",
+    "reservation-payment-info": "Payment for reservation"
   },
   "components": {
     "authentication": {
@@ -354,6 +355,42 @@
         "mfa-info": {
           "message": "Selected two step authentication {{type}} <br>Activation date: {{date}}"
         }
+      }
+    },
+    "reservation-payment-info": {
+      "header": "Vehicle reserved",
+      "firstMessage": "Selected vehicle has been successfully reserved!",
+      "secondMessage": "We have sent a link to pay for the reservation to the email address you provided.\nPayment must be made a maximum of 24 hours before collecting the vehicle, otherwise the reservation will be canceled."
+    },
+    "reservation": {
+      "buttons": {
+        "back": "Back",
+        "next": "Next",
+        "reserve": "Reserve",
+        "cancel": "Cancel"
+      },
+      "summary-step": {
+        "labels": {
+          "dateFrom": "Beginning date",
+          "dateEnd": "Ending date",
+          "totalPrice": "Total price",
+          "firstName": "Renting firstName",
+          "lastName": "Renting lastName"
+        }
+      },
+      "dialog": {
+        "header": "Confirmation",
+        "message": "Do you want to confirm reservation?",
+        "acceptLabel": "Yes",
+        "rejectLabel": "No"
+      },
+      "toasts": {
+        "reservationSuccess": "Reservation has been saved successfully",
+        "reservationError": "Reservation has not been saved successfully",
+        "reservationNotFound": "Reservation not found",
+        "reservationReadOnly": "This reservation has been created. No editing possible",
+        "reservationVehicleNotAvailable": "Selected vehicle is not available anymore in selected dates range",
+        "reservationCancelled": "Reservation has been cancelled"
       }
     }
   },

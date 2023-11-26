@@ -167,6 +167,21 @@ h4 {
   padding: 10px !important;
 }
 
+.p-button {
+  background-color: black !important;
+  border: none !important;
+}
+
+.p-button:hover {
+  color: var(--gold) !important;
+  border: none !important;
+}
+
+.p-steps .p-steps-item.p-highlight .p-steps-number {
+  background: black !important;
+  color: white !important;
+}
+
 a:hover {
   color: var(--gold) !important;
 }
@@ -174,6 +189,12 @@ a:hover {
 .active-link {
   color: var(--gold) !important;
 }
+
+.btn:disabled, .btn[disabled=disabled] {
+  cursor: not-allowed;
+  background: grey !important;
+}
+
 
 // Media
 

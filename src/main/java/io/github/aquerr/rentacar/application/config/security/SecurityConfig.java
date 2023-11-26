@@ -69,6 +69,11 @@ public class SecurityConfig {
                 exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
             })
             .cors(Customizer.withDefaults())
+            .headers(header -> {
+                if (environment.matchesProfiles("dev")) {
+                    header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
+                }
+            })
             .csrf(AbstractHttpConfigurer::disable);
             return http.build();
         }
@@ -81,7 +86,7 @@ public class SecurityConfig {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-            corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(), HttpMethod.HEAD.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PATCH.name()));
+            corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(), HttpMethod.HEAD.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PATCH.name(), HttpMethod.PUT.name()));
             corsConfiguration.setAllowedOrigins(List.of("*"));
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -107,7 +112,7 @@ public class SecurityConfig {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-            corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(), HttpMethod.HEAD.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PATCH.name()));
+            corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(), HttpMethod.HEAD.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PATCH.name(), HttpMethod.PUT.name()));
             corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200"));
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
