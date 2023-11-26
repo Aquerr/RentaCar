@@ -53,7 +53,15 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   reserveConfirmDialog() {
     this.confirmationService.confirm({
+      key: 'reserve',
       accept: () => this.reserve()
+    });
+  }
+
+  cancelConfirmDialog() {
+    this.confirmationService.confirm({
+      key: 'cancel',
+      accept: () => this.cancel()
     });
   }
 

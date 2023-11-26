@@ -378,9 +378,15 @@
           "lastName": "Nazwisko wynajmującego"
         }
       },
-      "dialog": {
+      "reserveDialog": {
         "header": "Potwierdzenie",
         "message": "Czy na pewno chcesz potwierdzić rezerwację?",
+        "acceptLabel": "Tak",
+        "rejectLabel": "Nie"
+      },
+      "cancelDialog": {
+        "header": "Potwierdzenie",
+        "message": "Czy na pewno chcesz anulować rezerwację?",
         "acceptLabel": "Tak",
         "rejectLabel": "Nie"
       },
@@ -392,18 +398,18 @@
         "reservationVehicleNotAvailable": "Wybrany pojazd nie jest już dostępny w wybranym zakresie dat",
         "reservationCancelled": "Rezerwacja została anulowana"
       }
-    }
-  },
-  "app": {
-    "labels": {
-      "mainPage": "Strona główna",
-      "cars": "Flota",
-      "contact": "Kontakt",
-      "signIn": "Zaloguj się",
-      "logout": "Wyloguj się",
-      "profile": "Profil",
-      "changeLanguage": "Zmiana języka",
-      "reserve": "Rezerwuj"
+    },
+    "app": {
+      "labels": {
+        "mainPage": "Strona główna",
+        "cars": "Flota",
+        "contact": "Kontakt",
+        "signIn": "Zaloguj się",
+        "logout": "Wyloguj się",
+        "profile": "Profil",
+        "changeLanguage": "Zmiana języka",
+        "reserve": "Rezerwuj"
+      }
     }
   },
   "services": {
