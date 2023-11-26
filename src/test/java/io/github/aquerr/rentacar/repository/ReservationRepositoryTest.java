@@ -116,7 +116,7 @@ class ReservationRepositoryTest extends BaseDBIntegrationTest
                 .vehicle(vehicle)
                 .dateFrom(LocalDate.of(2023, 4, 7))
                 .dateTo(LocalDate.of(2023, 4, 14))
-                .status(ReservationStatus.DRAFT.getStatus())
+                .status(ReservationStatus.PAYMENT_COMPLETED.getStatus())
                 .build();
 
         reservationRepository.save(reservationEntity);
