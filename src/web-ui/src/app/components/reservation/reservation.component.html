@@ -9,7 +9,7 @@
   </div>
 
   <div *ngIf='activeIndex===1'>
-    <contact-step-reservation></contact-step-reservation>
+    <contact-step-reservation [readOnly]='readOnly'></contact-step-reservation>
   </div>
 
   <div *ngIf='activeIndex===2'>
@@ -18,9 +18,23 @@
 
 
   <div class='button-container'>
-    <button class='btn' [disabled]='activeIndex===0' (click)='goBack()'>Wstecz</button>
-    <button *ngIf='activeIndex<2' class='btn' [disabled]='activeIndex===2' (click)='goNext()'>Dalej</button>
-    <button *ngIf='activeIndex===2' class='btn' (click)='reserveDialog()'>Rezerwuj</button>
+    <button class='btn'
+            (click)='cancel()'
+            *ngIf='!readOnly'>{{'components.reservation.buttons.cancel' | translate}}</button>
+    <button class='btn'
+            *ngIf='activeIndex>0'
+            (click)='goBack()'>{{'components.reservation.buttons.back' | translate}}</button>
+    <button *ngIf='activeIndex<2'
+            class='btn'
+            [disabled]='activeIndex===2'
+            (click)='goNext()'>{{'components.reservation.buttons.next' | translate}}</button>
+    <button *ngIf='activeIndex===2 && !readOnly'
+            class='btn'
+            (click)='reserveConfirmDialog()'>{{'components.reservation.buttons.reserve' | translate}}</button>
   </div>
 </div>
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-confirmDialog icon='pi pi-info-circle'
+                 message="{{'components.reservation.dialog.message' | translate}}"
+                 header="{{'components.reservation.dialog.header' | translate}}"
+                 acceptLabel="{{'components.reservation.dialog.acceptLabel' | translate}}"
+                 rejectLabel="{{'components.reservation.dialog.rejectLabel' | translate}}"></p-confirmDialog>

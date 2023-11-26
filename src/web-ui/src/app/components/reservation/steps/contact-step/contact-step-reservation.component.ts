@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { UserProfile } from '../../../../models/user-profile.model';
@@ -11,6 +11,8 @@ import { ContactStepReservationFormService } from './contact-step-reservation.fo
   styleUrls: ['./contact-step-reservation.component.scss']
 })
 export class ContactStepReservationComponent implements OnInit, OnDestroy {
+  @Input()
+  readOnly = false;
   userProfile: UserProfile | null = null;
   form: FormGroup;
   subscription: Subscription = new Subscription();
@@ -34,6 +36,9 @@ export class ContactStepReservationComponent implements OnInit, OnDestroy {
     this.userProfile = userProfile;
     if (userProfile) {
       this.loadFormData(userProfile);
+      if (this.readOnly) {
+        this.form.disable();
+      }
     }
   }
 

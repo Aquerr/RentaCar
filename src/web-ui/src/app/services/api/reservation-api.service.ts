@@ -16,6 +16,10 @@ export class ReservationApiService {
     return this.http.post<ReservationResponse>(this.URL, request);
   }
 
+  public updateReservation(request: Reservation) {
+    return this.http.put<ReservationResponse>(this.URL, request);
+  }
+
   public getReservation(reservationId: number) {
     return this.http.get<ReservationResponse>(`${this.URL}/${reservationId}`);
   }

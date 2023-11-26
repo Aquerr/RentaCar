@@ -22,6 +22,9 @@ import { PasswordResetComponent } from './components/authentication/password-res
 import { NewPasswordComponent } from './components/authentication/new-password/new-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {SignInMfaComponent} from "./components/authentication/sign-in-mfa/sign-in-mfa.component";
+import {
+  ReservationPaymentInfoComponent
+} from './components/reservation/payment-info/reservation-payment-info.component';
 
 const ROUTES: Routes = [
   {
@@ -86,6 +89,12 @@ const ROUTES: Routes = [
     component: ReservationComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated()],
     title: 'title.reservation'
+  },
+  {
+    path: 'reservation-payment-info',
+    component: ReservationPaymentInfoComponent,
+    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    title: 'title.reservation-payment-info'
   },
   {
     path: 'activation-account',

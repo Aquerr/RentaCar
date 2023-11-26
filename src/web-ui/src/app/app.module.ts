@@ -49,6 +49,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileMfaTotpComponent } from './components/profile/mfa/totp/profile-mfa-totp.component';
 import { ProfileSecurityComponent } from './components/profile/security/profile-security.component';
 import {SignInMfaComponent} from "./components/authentication/sign-in-mfa/sign-in-mfa.component";
+import {
+  ReservationPaymentInfoComponent
+} from './components/reservation/payment-info/reservation-payment-info.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +84,8 @@ import {SignInMfaComponent} from "./components/authentication/sign-in-mfa/sign-i
     ProfileComponent,
     ProfileMfaTotpComponent,
     SignInMfaComponent,
-    ProfileSecurityComponent
+    ProfileSecurityComponent,
+    ReservationPaymentInfoComponent
   ],
   imports: [
     BrowserModule,
