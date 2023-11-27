@@ -14,7 +14,7 @@ img {
   margin-right: 60px;
 }
 
-.date-container {
+.column-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -50,5 +50,12 @@ img {
   }
   img {
     margin: auto;
+  }
+  .column-container {
+    width: 100%;
+  }
+  .info {
+    width: 100%;
+    justify-content: space-between;
   }
 }

@@ -428,7 +428,8 @@
       "labels": {
         "dateFrom": "Data od",
         "dateTo": "Data do",
-        "status": "Status"
+        "status": "Status",
+        "vehicleName": "Nazwa pojazdu"
       },
       "buttons": {
         "details": "Szczegóły",
