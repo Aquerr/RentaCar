@@ -4,6 +4,7 @@ import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.InvalidJwtTokenEntity;
 import io.github.aquerr.rentacar.repository.InvalidJwtTokenRepository;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ClaimsBuilder;
 import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
 import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
@@ -37,10 +39,10 @@ import java.util.concurrent.TimeUnit;
 public final class JwtService {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER = "Bearer ";
-    private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final SecretKey KEY = Jwts.SIG.HS256.key().build();
 
     private static final Map<String, BlackListedJwt> BLACK_LISTED_JWTS = new HashMap<>();
-    private static ScheduledExecutorService BLACK_LISTED_JWTS_CLEARER_EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService BLACK_LISTED_JWTS_CLEARER_EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
 
     static {
         BLACK_LISTED_JWTS_CLEARER_EXECUTOR_SERVICE.scheduleAtFixedRate(JwtService::clearBlacklistedJwts, 1, 1, TimeUnit.HOURS);
@@ -75,31 +77,31 @@ public final class JwtService {
 
     public String createJwt(String username, boolean rememberMe, Set<String> authorities) {
         authorities = Set.copyOf(authorities);
-        Claims claims = Jwts.claims()
-                .setSubject(username)
-                .setIssuer(jwtIssuer)
-                .setNotBefore(Date.from(Instant.now()))
-                .setExpiration(Date.from(Instant.now().plus(jwtExpirationTime)))
-                .setIssuedAt(Date.from(Instant.now()));
+        ClaimsBuilder claimsBuilder = Jwts.claims()
+                .subject(username)
+                .issuer(jwtIssuer)
+                .notBefore(Date.from(Instant.now()))
+                .expiration(Date.from(Instant.now().plus(jwtExpirationTime)))
+                .issuedAt(Date.from(Instant.now()));
 
-        setExpirationTime(claims, rememberMe);
+        setExpirationTime(claimsBuilder, rememberMe);
 
-        claims.put("authorities", authorities);
+        claimsBuilder.add("authorities", authorities);
 
         return Jwts.builder()
-                .setSubject(username)
+                .subject(username)
                 .signWith(KEY)
                 .compressWith(CompressionCodecs.DEFLATE)
-                .setClaims(claims)
+                .claims(claimsBuilder.build())
                 .compact();
     }
 
-    private void setExpirationTime(Claims claims, boolean rememberMe)
+    private void setExpirationTime(ClaimsBuilder claimsBuilder, boolean rememberMe)
     {
         if (rememberMe) {
-            claims.setExpiration(Date.from(Instant.now().plus(jwtLongerExpirationTime)));
+            claimsBuilder.expiration(Date.from(Instant.now().plus(jwtLongerExpirationTime)));
         } else {
-            claims.setExpiration(Date.from(Instant.now().plus(jwtExpirationTime)));
+            claimsBuilder.expiration(Date.from(Instant.now().plus(jwtExpirationTime)));
         }
     }
 
@@ -108,11 +110,11 @@ public final class JwtService {
             throw new IllegalStateException();
 
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(KEY)
+            return Jwts.parser()
+                    .verifyWith(KEY)
                     .requireIssuer(jwtIssuer)
                     .build()
-                    .parseClaimsJws(jwt);
+                    .parseSignedClaims(jwt);
         } catch (Exception exception) {
             log.error(exception.getMessage());
             throw exception;
