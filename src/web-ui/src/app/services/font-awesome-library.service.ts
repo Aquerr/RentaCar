@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
-  faBars,
+  faBars, faCalendar,
   faChair,
   faDharmachakra,
   faFan,
@@ -31,7 +31,8 @@ export class FontAwesomeLibraryService {
       faWrench,
       faBars,
       faXmark,
-      faMobileScreen
+      faMobileScreen,
+      faCalendar
     );
   }
 }

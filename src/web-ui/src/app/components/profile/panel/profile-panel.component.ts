@@ -74,9 +74,7 @@ export class ProfilePanelComponent implements OnChanges, OnDestroy {
   }
 
   navigateToMyReservations() {
-    //TODO @Bobus123 dodanie routingu i przekierowanie do nowego komponentu który bedzie pobieral rezerwacje użytkownika zalogowaneg z rest-a
-    // (REST GOTOWY - klasa ReservationController)
-    // Rozszerzenie klasy reservationApiService o nową metodę
+    this.router.navigate(['my-reservations']).then(() => this.panelVisible = false);
   }
 
   getImage() {

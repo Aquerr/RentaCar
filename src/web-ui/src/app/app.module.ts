@@ -52,6 +52,10 @@ import {SignInMfaComponent} from "./components/authentication/sign-in-mfa/sign-i
 import {
   ReservationPaymentInfoComponent
 } from './components/reservation/payment-info/reservation-payment-info.component';
+import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
+import {
+  MyReservationCardComponent
+} from './components/my-reservations/my-reservation-card/my-reservation-card.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +89,9 @@ import {
     ProfileMfaTotpComponent,
     SignInMfaComponent,
     ProfileSecurityComponent,
-    ReservationPaymentInfoComponent
+    ReservationPaymentInfoComponent,
+    MyReservationsComponent,
+    MyReservationCardComponent
   ],
   imports: [
     BrowserModule,

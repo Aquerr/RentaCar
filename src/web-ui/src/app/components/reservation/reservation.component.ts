@@ -58,24 +58,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
     });
   }
 
-  cancelConfirmDialog() {
-    this.confirmationService.confirm({
-      key: 'cancel',
-      accept: () => this.cancel()
-    });
-  }
-
-  cancel() {
-    this.reservation.status = ReservationStatus.CANCELLED;
-    this.reservationApiService.updateReservation(this.reservation).subscribe({
-      next: () => {
-        this.commonService.showToast('components.reservation.toasts.reservationCancelled', ToastType.SUCCESS);
-        this.commonService.goRoute('');
-      },
-      error: () => this.commonService.showToast('components.reservation.toasts.reservationError', ToastType.ERROR)
-    });
-  }
-
   reserve() {
     this.reservation.status = ReservationStatus.PENDING_PAYMENT;
     this.reservationApiService.updateReservation(this.reservation).subscribe({

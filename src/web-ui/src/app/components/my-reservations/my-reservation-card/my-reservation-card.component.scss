@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.container > *:not(img) {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+img {
+  margin-right: 60px;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.info {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  background: black;
+}
+
+.btn:hover {
+  color: var(--gold);
+}
+
+.button-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

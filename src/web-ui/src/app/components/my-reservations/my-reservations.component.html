@@ -1,0 +1,16 @@
+<div class='container'>
+  <div class='reservations-container' *ngIf='reservations.length > 0; else noReservations'>
+    <ng-container *ngFor='let reservation of reservations'>
+      <my-reservation-card [reservation]='reservation' [dictionary]='dictionary' (cancelEmitter)='cancelConfirmDialog($event)'></my-reservation-card>
+    </ng-container>
+  </div>
+  <ng-template #noReservations><h4>{{'components.my-reservations.labels.noReservations' | translate}}</h4>
+  </ng-template>
+</div>
+
+<p-confirmDialog icon='pi pi-info-circle'
+                 key='cancel'
+                 message="{{'components.my-reservations.cancelDialog.message' | translate}}"
+                 header="{{'components.my-reservations.cancelDialog.header' | translate}}"
+                 acceptLabel="{{'components.my-reservations.cancelDialog.acceptLabel' | translate}}"
+                 rejectLabel="{{'components.my-reservations.cancelDialog.rejectLabel' | translate}}"></p-confirmDialog>

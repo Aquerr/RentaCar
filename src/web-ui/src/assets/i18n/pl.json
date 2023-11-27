@@ -18,7 +18,8 @@
     "admin-add-vehicle": "Dodaj pojazd",
     "password-reset": "Odzyskiwanie hasła",
     "new-password": "Nowe hasło",
-    "reservation-payment-info": "Płatność za rezerwację"
+    "reservation-payment-info": "Płatność za rezerwację",
+    "myReservations": "Moje rezerwacje"
   },
   "components": {
     "authentication": {
@@ -384,19 +385,12 @@
         "acceptLabel": "Tak",
         "rejectLabel": "Nie"
       },
-      "cancelDialog": {
-        "header": "Potwierdzenie",
-        "message": "Czy na pewno chcesz anulować rezerwację?",
-        "acceptLabel": "Tak",
-        "rejectLabel": "Nie"
-      },
       "toasts": {
         "reservationSuccess": "Rezerwacja została zapisana pomyślnie",
         "reservationError": "Rezerwacja nie została zapisana pomyślnie",
         "reservationNotFound": "Rezerwacja nie znaleziona",
         "reservationReadOnly": "Ta rezerwacja została już utworzona. Brak możliwości edycji",
-        "reservationVehicleNotAvailable": "Wybrany pojazd nie jest już dostępny w wybranym zakresie dat",
-        "reservationCancelled": "Rezerwacja została anulowana"
+        "reservationVehicleNotAvailable": "Wybrany pojazd nie jest już dostępny w wybranym zakresie dat"
       }
     },
     "app": {
@@ -408,7 +402,37 @@
         "logout": "Wyloguj się",
         "profile": "Profil",
         "changeLanguage": "Zmiana języka",
-        "reserve": "Rezerwuj"
+        "reserve": "Rezerwuj",
+        "myReservations": "Moje rezerwacje"
+      }
+    },
+    "not-found": {
+      "notFound": "Strona nie znaleziona"
+    },
+    "my-reservations": {
+      "labels": {
+        "noReservations": "Brak rezerwacji"
+      },
+      "cancelDialog": {
+        "header": "Potwierdzenie",
+        "message": "Czy na pewno chcesz anulować rezerwację?",
+        "acceptLabel": "Tak",
+        "rejectLabel": "Nie"
+      },
+      "toasts": {
+        "reservationCancelled": "Rezerwacja została anulowana",
+        "reservationCancelledError": "Rezerwacja nie została anulowana"
+      }
+    },
+    "my-reservation-card": {
+      "labels": {
+        "dateFrom": "Data od",
+        "dateTo": "Data do",
+        "status": "Status"
+      },
+      "buttons": {
+        "details": "Szczegóły",
+        "cancel": "Anuluj"
       }
     }
   },
