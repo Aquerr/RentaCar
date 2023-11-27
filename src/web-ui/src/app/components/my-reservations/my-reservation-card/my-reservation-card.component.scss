@@ -40,3 +40,15 @@ img {
   align-items: flex-end;
   justify-content: flex-end;
 }
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  img {
+    margin: auto;
+  }
+}

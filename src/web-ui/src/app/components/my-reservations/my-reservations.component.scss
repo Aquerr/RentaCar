@@ -23,3 +23,11 @@ my-reservation-card {
 h4 {
   text-align: center;
 }
+
+// MEDIA
+
+@media (max-width: 800px) {
+  my-reservation-card {
+    height: auto;
+  }
+}

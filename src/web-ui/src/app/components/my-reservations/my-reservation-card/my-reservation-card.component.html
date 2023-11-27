@@ -22,7 +22,7 @@
             routerLink='/reservation/{{reservation.id}}'>{{'components.my-reservation-card.buttons.details' | translate}}</button>
     <button class='btn'
             (click)='cancel()'
-            [disabled]="reservation.status === 'CANCELLED'">{{'components.my-reservation-card.buttons.cancel' | translate}}</button>
+            [disabled]="reservation.status === 'CANCELLED' || reservation.status === 'COMPLETED' || reservation.status === 'VEHICLE_DELIVERED'">{{'components.my-reservation-card.buttons.cancel' | translate}}</button>
   </div>
 
 </div>
