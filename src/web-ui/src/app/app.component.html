@@ -10,11 +10,6 @@
      [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'>{{ 'components.app.labels.cars' | translate }}</a>
   <a class='nav__link'
-     routerLink='my-reservations'
-     [routerLinkActive]="['active-link']"
-     (click)='closeSideMenu()'
-     *ngIf='!userLogged'>{{ 'components.app.labels.myReservations' | translate }}</a>
-  <a class='nav__link'
      routerLink='vehicle-list'
      [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'>{{ 'components.app.labels.reserve' | translate }}</a>
@@ -27,6 +22,11 @@
      [routerLinkActive]="['active-link']"
      (click)='closeSideMenu()'
      *ngIf='!userLogged'>{{ "components.app.labels.signIn" | translate }}</a>
+  <a class='nav__link'
+     routerLink='my-reservations'
+     [routerLinkActive]="['active-link']"
+     (click)='closeSideMenu()'
+     *ngIf='userLogged'>{{ 'components.app.labels.myReservations' | translate }}</a>
   <a class='nav__link'
      routerLink='profile/edit'
      [routerLinkActive]="['active-link']"
