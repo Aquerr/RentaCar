@@ -5,10 +5,23 @@
 <nav class='side-menu-expanded' *ngIf='sideMenuExpanded'>
   <fa-icon icon='xmark' (click)='toggleSideMenu()' *ngIf='sideMenuExpanded'></fa-icon>
   <a class='nav__link' routerLink='' (click)='closeSideMenu()'>{{ 'components.app.labels.mainPage' | translate }}</a>
-  <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>{{ 'components.app.labels.cars' | translate }}</a>
-  <a class='nav__link' href='#' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>FAQ</a>
-  <a class='nav__link' routerLink='vehicle-list' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>{{ 'components.app.labels.reserve' | translate }}</a>
-  <a class='nav__link' routerLink='contact' [routerLinkActive]="['active-link']" (click)='closeSideMenu()'>{{ 'components.app.labels.contact' | translate }}</a>
+  <a class='nav__link'
+     href='#'
+     [routerLinkActive]="['active-link']"
+     (click)='closeSideMenu()'>{{ 'components.app.labels.cars' | translate }}</a>
+  <a class='nav__link'
+     routerLink='my-reservations'
+     [routerLinkActive]="['active-link']"
+     (click)='closeSideMenu()'
+     *ngIf='!userLogged'>{{ 'components.app.labels.myReservations' | translate }}</a>
+  <a class='nav__link'
+     routerLink='vehicle-list'
+     [routerLinkActive]="['active-link']"
+     (click)='closeSideMenu()'>{{ 'components.app.labels.reserve' | translate }}</a>
+  <a class='nav__link'
+     routerLink='contact'
+     [routerLinkActive]="['active-link']"
+     (click)='closeSideMenu()'>{{ 'components.app.labels.contact' | translate }}</a>
   <a class='nav__link'
      routerLink='sign-in'
      [routerLinkActive]="['active-link']"

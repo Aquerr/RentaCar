@@ -18,7 +18,8 @@
     "admin-add-vehicle": "Add vehicle",
     "password-reset": "Reset password",
     "new-password": "New password",
-    "reservation-payment-info": "Payment for reservation"
+    "reservation-payment-info": "Payment for reservation",
+    "myReservations": "My reservations"
   },
   "components": {
     "authentication": {
@@ -384,19 +385,12 @@
         "acceptLabel": "Yes",
         "rejectLabel": "No"
       },
-      "cancelDialog": {
-        "header": "Confirmation",
-        "message": "Do you want to cancel reservation?",
-        "acceptLabel": "Yes",
-        "rejectLabel": "No"
-      },
       "toasts": {
         "reservationSuccess": "Reservation has been saved successfully",
         "reservationError": "Reservation has not been saved successfully",
         "reservationNotFound": "Reservation not found",
         "reservationReadOnly": "This reservation has been created. No editing possible",
-        "reservationVehicleNotAvailable": "Selected vehicle is not available anymore in selected dates range",
-        "reservationCancelled": "Reservation has been cancelled"
+        "reservationVehicleNotAvailable": "Selected vehicle is not available anymore in selected dates range"
       }
     },
     "app": {
@@ -408,7 +402,37 @@
         "logout": "Logout",
         "profile": "Profile",
         "changeLanguage": "Change language",
-        "reserve": "Reserve"
+        "reserve": "Reserve",
+        "myReservations": "My reservations"
+      }
+    },
+    "not-found": {
+      "notFound": "Page not found"
+    },
+    "my-reservations": {
+      "labels": {
+        "noReservations": "No reservations"
+      },
+      "cancelDialog": {
+        "header": "Confirmation",
+        "message": "Do you want to cancel reservation?",
+        "acceptLabel": "Yes",
+        "rejectLabel": "No"
+      },
+      "toasts": {
+        "reservationCancelled": "Reservation has been cancelled",
+        "reservationCancelledError": "Reservation has not been cancelled"
+      }
+    },
+    "my-reservation-card": {
+      "labels": {
+        "dateFrom": "Date from",
+        "dateTo": "Date to",
+        "status": "Status"
+      },
+      "buttons": {
+        "details": "Details",
+        "cancel": "Cancel"
       }
     }
   },

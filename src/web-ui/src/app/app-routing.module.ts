@@ -25,6 +25,7 @@ import {SignInMfaComponent} from "./components/authentication/sign-in-mfa/sign-i
 import {
   ReservationPaymentInfoComponent
 } from './components/reservation/payment-info/reservation-payment-info.component';
+import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
 
 const ROUTES: Routes = [
   {
@@ -89,6 +90,12 @@ const ROUTES: Routes = [
     component: ReservationComponent,
     canActivate: [() => inject(AppGuard).isAuthenticated()],
     title: 'title.reservation'
+  },
+  {
+    path: 'my-reservations',
+    component: MyReservationsComponent,
+    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    title: 'title.myReservations'
   },
   {
     path: 'reservation-payment-info',

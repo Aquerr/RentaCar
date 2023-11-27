@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  justify-content: center;
+}
+
+.reservations-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  gap: 10px;
+}
+
+my-reservation-card {
+  width: 100%;
+  height: 150px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+h4 {
+  text-align: center;
+}

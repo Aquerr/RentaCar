@@ -5,6 +5,7 @@ import io.github.aquerr.rentacar.application.exception.ReservationVehicleNotAvai
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
 import io.github.aquerr.rentacar.domain.reservation.converter.ReservationConverter;
+import io.github.aquerr.rentacar.domain.reservation.dto.ProfileReservation;
 import io.github.aquerr.rentacar.domain.reservation.dto.Reservation;
 import io.github.aquerr.rentacar.domain.reservation.model.ReservationEntity;
 import io.github.aquerr.rentacar.domain.reservation.model.ReservationStatus;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -40,15 +42,29 @@ public class ReservationService {
     }
 
     public Reservation getReservation(Long reservationId) {
-        List<Reservation> userReservations = getMyReservations();
+        List<ReservationEntity> userReservations = getMyReservations();
         return userReservations.stream()
+                .map(reservationConverter::toReservationDto)
                 .filter(reservation -> reservationId.equals(reservation.getId()))
                 .findFirst()
                 .orElseThrow(ReservationException::new);
     }
 
-    public List<Reservation> getMyReservations() {
+    public void updateReservationStatus(Long reservationId, ReservationStatus status) {
+        Reservation reservation = getReservation(reservationId);
+        reservation.setStatus(status.getStatus());
+        reservationRepository.save(reservationConverter.toReservationEntity(reservation));
+    }
+
+    public List<ProfileReservation> getProfileReservations() {
+        List<ReservationEntity> myReservations = getMyReservations();
+        return myReservations.stream()
+                .map(reservationConverter::toProfileReservation)
+                .collect(Collectors.toList());
+    }
+
+    private List<ReservationEntity> getMyReservations() {
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
-        return reservationConverter.toReservationDto(this.reservationRepository.findAllByUserId(authenticatedUser.getProfileId()));
+        return this.reservationRepository.findAllByUserId(authenticatedUser.getProfileId());
     }
 }
