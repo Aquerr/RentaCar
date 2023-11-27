@@ -67,9 +67,9 @@
 
 <div class='router-section'>
   <router-outlet></router-outlet>
-  <p-toast key='success' />
-  <p-toast key='warn' />
-  <p-toast key='error' />
+  <p-toast key='success' [position]="isMobile ? 'top-center' : 'top-right'"/>
+  <p-toast key='warn' [position]="isMobile ? 'top-center' : 'top-right'"/>
+  <p-toast key='error' [position]="isMobile ? 'top-center' : 'top-right'"/>
 </div>
 
 
