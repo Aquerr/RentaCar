@@ -2,20 +2,27 @@
 
   <img alt='' [src]='reservation.vehicleIconUrl' />
 
-  <div class='date-container'>
+  <div class='column-container'>
+    <div class='info'>
+      <span>{{'components.my-reservation-card.labels.vehicleName' | translate}}:</span>
+      <span>{{reservation.vehicleName}}</span>
+    </div>
+    <div class='info'>
+      <span>{{'components.my-reservation-card.labels.status' | translate}}:</span>
+      <span>{{getReservationStatusTranslation(reservation.status)}}</span>
+    </div>
+  </div>
+
+  <div class='column-container'>
     <div class='info'>
       <span>{{'components.my-reservation-card.labels.dateTo' | translate}}:</span><span>{{(reservation.dateTo)}}</span>
     </div>
 
     <div class='info'>
-    <span>{{'components.my-reservation-card.labels.dateFrom' | translate}}:</span><span>{{(reservation.dateFrom)}}</span>
+      <span>{{'components.my-reservation-card.labels.dateFrom' | translate}}:</span><span>{{(reservation.dateFrom)}}</span>
     </div>
   </div>
 
-  <div class='info'>
-    <span>{{'components.my-reservation-card.labels.status' | translate}}:</span>
-    <span>{{getReservationStatusTranslation(reservation.status)}}</span>
-  </div>
 
   <div class='button-container'>
     <button class='btn'
