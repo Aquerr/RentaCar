@@ -1,0 +1,11 @@
+<div class='container'>
+  <ng-container *ngIf='reservations.length >0 ;else noReservations'>
+    <div *ngFor='let reservation of reservations'>
+      <reservation-status-update-card [reservation]='reservation'
+                                      [dictionary]='dictionary'
+                                      (changeStatus)='updateVehicleStatus(reservation.id, $event)'></reservation-status-update-card>
+    </div>
+  </ng-container>
+  <ng-template #noReservations>{{'components.reservation-status-update.labels.noReservations' | translate}}
+  </ng-template>
+</div>

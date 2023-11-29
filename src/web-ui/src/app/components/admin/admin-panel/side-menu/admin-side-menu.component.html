@@ -5,4 +5,7 @@
   <a class='router-link'
      routerLink='remove-vehicle'
      *ngIf="hasUserAuthority('REMOVE_VEHICLE')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.remove-vehicle' | translate}}</a>
+  <a class='router-link'
+     routerLink='reservation-update-status'
+     *ngIf="hasUserAuthority('GET_ALL_RESERVATIONS')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.reservation-update-status' | translate}}</a>
 </div>

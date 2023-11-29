@@ -59,6 +59,12 @@ import {
 import {
   AdminRemoveVehicleComponent
 } from './components/admin/admin-panel/remove-vehicle/admin-remove-vehicle.component';
+import {
+  ReservationStatusUpdateComponent
+} from './components/admin/admin-panel/reservation-status-update/reservation-status-update.component';
+import {
+  ReservationStatusUpdateCardComponent
+} from './components/admin/admin-panel/reservation-status-update/card/reservation-status-update-card.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +101,9 @@ import {
     ReservationPaymentInfoComponent,
     MyReservationsComponent,
     MyReservationCardComponent,
-    AdminRemoveVehicleComponent
+    AdminRemoveVehicleComponent,
+    ReservationStatusUpdateComponent,
+    ReservationStatusUpdateCardComponent
   ],
   imports: [
     BrowserModule,

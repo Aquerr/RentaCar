@@ -17,6 +17,7 @@
     "admin-panel": "Panel admina",
     "admin-add-vehicle": "Dodaj pojazd",
     "admin-remove-vehicle": "Usuń pojazd",
+    "reservation-update-status": "Zmiana statusu rezerwacji",
     "password-reset": "Odzyskiwanie hasła",
     "new-password": "Nowe hasło",
     "reservation-payment-info": "Płatność za rezerwację",
@@ -257,7 +258,8 @@
     "admin-side-menu": {
       "labels": {
         "add-vehicle": "Dodaj pojazd",
-        "remove-vehicle": "Usuń pojazd"
+        "remove-vehicle": "Usuń pojazd",
+        "reservation-update-status": "Zmiana statusu rezerwacji"
       }
     },
     "admin-add-vehicle": {
@@ -448,6 +450,24 @@
       "toasts": {
         "removeSuccess": "Pojazd został usunięty",
         "removeError": "Pojazd nie został usunięty"
+      }
+    },
+    "reservation-status-update": {
+      "toasts": {
+        "updateSuccess": "Status rezerwacji został zaktualizowany",
+        "updateError": "Status rezerwacji nie został zaktualizowany"
+      },
+      "labels": {
+        "noReservations": "Brak rezerwacji"
+      }
+    },
+    "reservation-status-update-card": {
+      "labels": {
+        "dateFrom": "Data od:",
+        "dateTo": "Data do:"
+      },
+      "buttons": {
+        "changeStatus": "Zmiana statusu"
       }
     }
   },
