@@ -26,6 +26,7 @@ export class DictionaryService {
         return [
           { label: 'Szkic', value: 'DRAFT' },
           { label: 'Oczekiwanie na płatność', value: 'PENDING_PAYMENT' },
+          { label: 'Płatność ukończona', value: 'PAYMENT_COMPLETED' },
           { label: 'Pojazd dostarczony', value: 'VEHICLE_DELIVERED' },
           { label: 'Ukończona', value: 'COMPLETED' },
           { label: 'Pojazd nie dostępny', value: 'VEHICLE_NOT_AVAILABLE' },
@@ -42,6 +43,7 @@ export class DictionaryService {
         return [
           { label: 'Draft', value: 'DRAFT' },
           { label: 'Pending payment', value: 'PENDING_PAYMENT' },
+          { label: 'Payment completed', value: 'PAYMENT_COMPLETED' },
           { label: 'Vehicle delivered', value: 'VEHICLE_DELIVERED' },
           { label: 'Completed', value: 'COMPLETED' },
           { label: 'Vehicle not available', value: 'VEHICLE_NOT_AVAILABLE' },

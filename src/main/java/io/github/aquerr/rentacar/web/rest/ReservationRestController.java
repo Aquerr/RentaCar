@@ -7,6 +7,7 @@ import io.github.aquerr.rentacar.web.rest.response.ReservationResponse;
 import io.github.aquerr.rentacar.web.rest.response.ReservationsResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +47,12 @@ public class ReservationRestController {
     @GetMapping("/my-self")
     public ResponseEntity<ReservationsResponse> getProfileReservations() {
         return ResponseEntity.ok(ReservationsResponse.of(this.reservationService.getProfileReservations()));
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('GET_ALL_RESERVATIONS')")
+    public ResponseEntity<ReservationsResponse> getAllReservations() {
+        return ResponseEntity.ok(ReservationsResponse.of(this.reservationService.getAllReservations()));
     }
 
 }

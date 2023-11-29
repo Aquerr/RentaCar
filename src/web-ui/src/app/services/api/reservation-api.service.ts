@@ -32,6 +32,10 @@ export class ReservationApiService {
     return this.http.get<ReservationsResponse>(`${this.URL}/my-self`);
   }
 
+  public getAllReservations() {
+    return this.http.get<ReservationsResponse>(this.URL);
+  }
+
 }
 
 export interface ReservationResponse {

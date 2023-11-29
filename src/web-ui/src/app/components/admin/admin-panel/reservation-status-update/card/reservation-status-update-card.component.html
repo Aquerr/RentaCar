@@ -1,0 +1,17 @@
+<div class='container'>
+  <img alt='' [src]='reservation.vehicleIconUrl' />
+  <div class='info'>
+    {{reservation.vehicleName}}
+  </div>
+  <div class='date-container'>
+    <div class='info'>{{'components.reservation-status-update-card.labels.dateFrom' | translate}} {{reservation.dateFrom}}</div>
+    <div class='info'>{{'components.reservation-status-update-card.labels.dateTo' | translate}} {{reservation.dateTo}}</div>
+  </div>
+  <div class='info'>
+    <p-dropdown [(ngModel)]='selectedStatus' [options]='getProperStatuses()' />
+  </div>
+  <button class='btn'
+          (click)='changeStatusEmit()'
+          [disabled]='reservation.status === selectedStatus || isNotAllowedChangeStatuses()'>{{'components.reservation-status-update-card.buttons.changeStatus' | translate}}
+  </button>
+</div>

@@ -63,6 +63,12 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProfileReservation> getAllReservations() {
+        return reservationRepository.findAll().stream()
+                .map(reservationConverter::toProfileReservation)
+                .collect(Collectors.toList());
+    }
+
     private List<ReservationEntity> getMyReservations() {
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
         return this.reservationRepository.findAllByUserId(authenticatedUser.getProfileId());
