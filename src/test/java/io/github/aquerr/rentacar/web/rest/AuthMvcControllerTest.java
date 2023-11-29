@@ -47,7 +47,7 @@ class AuthMvcControllerTest extends BaseMvcIntegrationTest
         AuthResult authResult = AuthResult.builder()
                 .jwt("dasiemi23io12iadiomicmaicmaoisme21m39adkacmiozmdoiasm")
                 .username("admin")
-                .authorities(Set.of("EDIT_CARS"))
+                .authorities(Set.of("ADD_VEHICLE"))
                 .build();
         given(authenticationManager.authenticate(userCredentials)).willReturn(authResult);
 

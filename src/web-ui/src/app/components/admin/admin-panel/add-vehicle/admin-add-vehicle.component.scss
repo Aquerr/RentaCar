@@ -45,6 +45,12 @@ form {
   word-break: break-word;
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 label {
   color: grey;
   font-size: 12px;
@@ -61,4 +67,13 @@ label {
 
 .btn:disabled, .btn[disabled=disabled] {
   background: grey;
+}
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .img-row {
+    display: flex;
+    align-items: center;
+  }
 }

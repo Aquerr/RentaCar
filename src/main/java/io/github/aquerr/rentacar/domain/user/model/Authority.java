@@ -4,7 +4,7 @@ public enum Authority
 {
     VIEW_CAR_LOCATION("VIEW_CAR_LOCATION"),
     VIEW_ADMIN_PANEL("VIEW_ADMIN_PANEL"),
-    EDIT_CARS("EDIT_CARS");
+    ADD_VEHICLE("ADD_VEHICLE");
 
     private final String authority;
 
