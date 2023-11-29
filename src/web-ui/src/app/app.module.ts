@@ -56,6 +56,9 @@ import { MyReservationsComponent } from './components/my-reservations/my-reserva
 import {
   MyReservationCardComponent
 } from './components/my-reservations/my-reservation-card/my-reservation-card.component';
+import {
+  AdminRemoveVehicleComponent
+} from './components/admin/admin-panel/remove-vehicle/admin-remove-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,8 @@ import {
     ProfileSecurityComponent,
     ReservationPaymentInfoComponent,
     MyReservationsComponent,
-    MyReservationCardComponent
+    MyReservationCardComponent,
+    AdminRemoveVehicleComponent
   ],
   imports: [
     BrowserModule,

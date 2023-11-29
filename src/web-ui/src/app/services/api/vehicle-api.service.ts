@@ -29,12 +29,19 @@ export class VehicleApiService {
     .set('dateTo', dateTo);
     return this.http.get<VehicleBasicDataResponse>(`${this.URL}/available`, { params: httpParams });
   }
-
   public saveVehicle(vehicle: VehicleFullData, images: File[]) {
     const formData = new FormData();
     images.forEach(image => formData.append('images', image));
     formData.append('vehicle', new Blob([JSON.stringify(vehicle)], { type: 'application/json' }));
     return this.http.post<VehicleFullDataResponse>(this.URL, formData);
+  }
+
+  public getAllVehicles() {
+    return this.http.get<VehicleBasicDataResponse>(this.URL);
+  }
+
+  public removeVehicle(vehicleId: number) {
+    return this.http.delete<void>(`${this.URL}/${vehicleId}`);
   }
 
 }

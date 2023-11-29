@@ -7,7 +7,7 @@ import {
   faFan,
   faGasPump,
   faLightbulb, faMobileScreen,
-  faOilCan,
+  faOilCan, faTrash,
   faWrench,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
@@ -32,7 +32,8 @@ export class FontAwesomeLibraryService {
       faBars,
       faXmark,
       faMobileScreen,
-      faCalendar
+      faCalendar,
+      faTrash
     );
   }
 }

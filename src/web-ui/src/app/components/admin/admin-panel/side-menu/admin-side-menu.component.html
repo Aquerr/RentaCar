@@ -1,1 +1,8 @@
-  <a class='router-link' routerLink='admin-add-vehicle'>{{'components.admin-side-menu.labels.add-vehicle' | translate}}</a>
+<div class='container'>
+  <a class='router-link'
+     routerLink='add-vehicle'
+     *ngIf="hasUserAuthority('ADD_VEHICLE')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.add-vehicle' | translate}}</a>
+  <a class='router-link'
+     routerLink='remove-vehicle'
+     *ngIf="hasUserAuthority('REMOVE_VEHICLE')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.remove-vehicle' | translate}}</a>
+</div>

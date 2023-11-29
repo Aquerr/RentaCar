@@ -16,6 +16,7 @@
     "reactivation-account": "Reaktywacja konta",
     "admin-panel": "Panel admina",
     "admin-add-vehicle": "Dodaj pojazd",
+    "admin-remove-vehicle": "Usuń pojazd",
     "password-reset": "Odzyskiwanie hasła",
     "new-password": "Nowe hasło",
     "reservation-payment-info": "Płatność za rezerwację",
@@ -255,7 +256,8 @@
     },
     "admin-side-menu": {
       "labels": {
-        "add-vehicle": "Dodaj pojazd"
+        "add-vehicle": "Dodaj pojazd",
+        "remove-vehicle": "Usuń pojazd"
       }
     },
     "admin-add-vehicle": {
@@ -434,6 +436,18 @@
       "buttons": {
         "details": "Szczegóły",
         "cancel": "Anuluj"
+      }
+    },
+    "admin-remove-vehicle": {
+      "dialog": {
+        "header": "Potwierdź usunięcie",
+        "message": "Czy na pewno chcesz usunąć wybrany pojazd?",
+        "accept": "Tak",
+        "reject": "Nie"
+      },
+      "toasts": {
+        "removeSuccess": "Pojazd został usunięty",
+        "removeError": "Pojazd nie został usunięty"
       }
     }
   },

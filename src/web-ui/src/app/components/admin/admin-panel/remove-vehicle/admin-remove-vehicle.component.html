@@ -1,0 +1,25 @@
+<div class='container'>
+  <ng-container *ngIf='vehicles.length >0 ;else noVehicles'>
+    <div class='vehicle-container' *ngFor='let vehicle of vehicles'>
+      <img alt='' [src]='vehicle.photoUrl' />
+      <div class='info'>
+        {{vehicle.brand}} {{vehicle.model}}
+      </div>
+      <div class='info'>
+        {{vehicle.basicPrice}} PLN
+      </div>
+      <fa-icon icon='trash' (click)='removeVehicleDialog(vehicle.id)'></fa-icon>
+    </div>
+  </ng-container>
+  <ng-template #noVehicles>
+    noVehicles
+  </ng-template>
+</div>
+
+<p-confirmDialog
+  message="{{'components.admin-remove-vehicle.dialog.message' | translate}}"
+  header="{{'components.admin-remove-vehicle.dialog.header' | translate}}"
+  acceptLabel="{{'components.admin-remove-vehicle.dialog.accept' | translate}}"
+  rejectLabel="{{'components.admin-remove-vehicle.dialog.reject' | translate}}"
+  icon='pi pi-exclamation-triangle'
+></p-confirmDialog>
