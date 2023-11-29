@@ -62,7 +62,7 @@ public class DummyDataLoader implements CommandLineRunner {
                 .username("test_admin")
                 .email("admin_email@test.com")
                 .password(passwordEncoder.encode("test_admin"))
-                .authorities(Set.of(Authority.ADD_VEHICLE.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority(), Authority.VIEW_ADMIN_PANEL.getAuthority()))
+                .authorities(Set.of(Authority.ADD_VEHICLE.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority(), Authority.VIEW_ADMIN_PANEL.getAuthority(), Authority.REMOVE_VEHICLE.getAuthority()))
                 .activated(true)
                 .locked(false)
                 .build();

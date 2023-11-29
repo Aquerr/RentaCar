@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .router-link {
   display: block;
   color: black;
@@ -17,4 +22,12 @@
   background-position: 100% 100%;
   background-size: 100% 1px;
   cursor: pointer;
+}
+
+// MEDIA
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: row;
+  }
 }

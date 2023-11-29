@@ -5,10 +5,12 @@ import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParam
 import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleFullData;
 import io.github.aquerr.rentacar.web.rest.response.SearchVehicleBasicDataResponse;
 import io.github.aquerr.rentacar.web.rest.response.VehicleAvailabilityResponse;
+import io.github.aquerr.rentacar.web.rest.response.VehicleBasicDataResponse;
 import io.github.aquerr.rentacar.web.rest.response.VehicleFullDataResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +43,11 @@ public class VehicleRestController {
         return ResponseEntity.ok(SearchVehicleBasicDataResponse.of(this.vehicleService.getVehiclesAvailable(AvailableVehiclesSearchParams.of(dateFrom, dateTo, page, size))));
     }
 
+    @GetMapping
+    public ResponseEntity<VehicleBasicDataResponse> getAllVehicles() {
+        return ResponseEntity.ok(VehicleBasicDataResponse.of(this.vehicleService.getAllVehicles()));
+    }
+
     @GetMapping("/{vehicleId}/available")
     public ResponseEntity<VehicleAvailabilityResponse> isVehicleAvailable(@RequestParam("dateFrom") LocalDate dateFrom,
                                                                           @RequestParam("dateTo") LocalDate dateTo,
@@ -53,5 +60,12 @@ public class VehicleRestController {
     @PreAuthorize("hasAuthority('ADD_VEHICLE')")
     public ResponseEntity<VehicleFullDataResponse> saveVehicle(@RequestPart(value = "images")List<MultipartFile> images, @RequestPart(value = "vehicle") VehicleFullData vehicle) {
         return ResponseEntity.ok(VehicleFullDataResponse.of(this.vehicleService.saveVehicleWithImages(vehicle, images)));
+    }
+
+    @DeleteMapping("/{vehicleId}")
+    @PreAuthorize("hasAuthority('REMOVE_VEHICLE')")
+    public ResponseEntity<?> removeVehicle(@PathVariable int vehicleId) {
+        this.vehicleService.removeVehicle(vehicleId);
+        return ResponseEntity.ok().build();
     }
 }

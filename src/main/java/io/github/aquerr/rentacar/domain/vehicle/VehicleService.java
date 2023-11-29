@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,6 +35,12 @@ public class VehicleService {
         return vehicleRepository.findById(vehicleId)
                 .map(this.vehicleConverter::toFullData)
                 .orElse(null);
+    }
+
+    public List<VehicleBasicData> getAllVehicles() {
+        return vehicleRepository.findAll().stream()
+                .map(vehicleConverter::toBasicData)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -64,5 +71,13 @@ public class VehicleService {
         vehicleEntity.setPhotoNames(imageUris.stream().map(imageService::retrieveImageName).toList());
         vehicleRepository.save(vehicleEntity);
         return vehicleConverter.toFullData(vehicleEntity);
+    }
+
+    public void removeVehicle(int vehicleId) {
+        VehicleEntity vehicle = vehicleRepository.findById(vehicleId).orElse(null);
+        if (vehicle != null) {
+            vehicle.getPhotoNames().forEach(photoName -> imageService.deleteImage(ImageKind.VEHICLE, photoName));
+            vehicleRepository.deleteById(vehicleId);
+        }
     }
 }

@@ -16,6 +16,7 @@
     "reactivation-account": "Account reactivation",
     "admin-panel": "Admin panel",
     "admin-add-vehicle": "Add vehicle",
+    "admin-remove-vehicle": "Remove vehicle",
     "password-reset": "Reset password",
     "new-password": "New password",
     "reservation-payment-info": "Payment for reservation",
@@ -255,7 +256,8 @@
     },
     "admin-side-menu": {
       "labels": {
-        "add-vehicle": "Add vehicle"
+        "add-vehicle": "Add vehicle",
+        "remove-vehicle": "Remove vehicle"
       }
     },
     "admin-add-vehicle": {
@@ -434,6 +436,18 @@
       "buttons": {
         "details": "Details",
         "cancel": "Cancel"
+      }
+    },
+    "admin-remove-vehicle": {
+      "dialog": {
+        "header": "Confirm remove",
+        "message": "Are you sure to delete selected vehicle?",
+        "accept": "Yes",
+        "reject": "No"
+      },
+      "toasts": {
+        "removeSuccess": "Vehicle has been removed",
+        "removeError": "Vehicle has not been removed"
       }
     }
   },
