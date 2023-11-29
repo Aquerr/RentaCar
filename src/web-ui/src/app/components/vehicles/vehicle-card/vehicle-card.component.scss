@@ -5,6 +5,7 @@
   padding: 10px;
   border-radius: 5px;
   background-color: white;
+  height: 100%;
 }
 
 .title-row {
@@ -105,4 +106,8 @@ li {
 .button-container {
   display: flex;
   gap: 10px;
+}
+
+img {
+  height: 165px;
 }

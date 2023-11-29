@@ -2,6 +2,6 @@
   "jwt": "dasiemi23io12iadiomicmaicmaoisme21m39adkacmiozmdoiasm",
   "username": "admin",
   "authorities": [
-    "EDIT_CARS"
+    "ADD_VEHICLE"
   ]
 }

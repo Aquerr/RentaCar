@@ -8,6 +8,7 @@ import io.github.aquerr.rentacar.web.rest.response.VehicleAvailabilityResponse;
 import io.github.aquerr.rentacar.web.rest.response.VehicleFullDataResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +50,7 @@ public class VehicleRestController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADD_VEHICLE')")
     public ResponseEntity<VehicleFullDataResponse> saveVehicle(@RequestPart(value = "images")List<MultipartFile> images, @RequestPart(value = "vehicle") VehicleFullData vehicle) {
         return ResponseEntity.ok(VehicleFullDataResponse.of(this.vehicleService.saveVehicleWithImages(vehicle, images)));
     }
