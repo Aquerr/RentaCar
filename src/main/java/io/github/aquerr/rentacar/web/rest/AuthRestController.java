@@ -12,6 +12,7 @@ import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.web.rest.request.ActivationTokenRequest;
 import io.github.aquerr.rentacar.web.rest.request.MfaAuthRequest;
+import io.github.aquerr.rentacar.web.rest.request.PasswordResetRequest;
 import io.github.aquerr.rentacar.web.rest.response.AuthResponse;
 import io.github.aquerr.rentacar.web.rest.response.JwtTokenResponse;
 import io.github.aquerr.rentacar.web.rest.response.MyselfResponse;
@@ -84,9 +85,9 @@ public class AuthRestController
     }
 
     @PostMapping("/password-reset/init")
-    public ResponseEntity<?> resetPassword(@PathVariable("login") UserCredentials.UsernameOrEmail login)
+    public ResponseEntity<?> resetPassword(PasswordResetRequest request)
     {
-        //TODO
+        this.userService.sendPasswordResetEmail(request.getEmail());
         return ResponseEntity.ok().build();
     }
 

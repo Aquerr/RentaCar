@@ -1,4 +1,4 @@
-package io.github.aquerr.rentacar.application.config;
+package io.github.aquerr.rentacar.application.rabbit;
 
 import io.github.aquerr.rentacar.application.exception.MessageSendException;
 import lombok.RequiredArgsConstructor;

@@ -53,19 +53,9 @@ public class ProfileService {
     @Transactional
     public void saveProfile(UserProfile userProfileDto)
     {
-        if (!canCurrentUserEditUserProfile(userProfileDto))
-        {
-            throw new AccessDeniedException();
-        }
-
         UserProfileEntity userProfile = this.profileConverter.toProfile(userProfileDto);
         userProfile.setCredentialsId(this.authenticationFacade.getCurrentUser().getId());
         this.profileRepository.save(userProfile);
-    }
-
-    private boolean canCurrentUserEditUserProfile(UserProfile userProfile)
-    {
-        return this.authenticationFacade.getCurrentUser().getProfileId().equals(userProfile.getId());
     }
 
     @Transactional
