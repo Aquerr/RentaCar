@@ -1,6 +1,7 @@
 package io.github.aquerr.rentacar.application.config;
 
 import io.github.aquerr.rentacar.application.mail.listener.RabbitSendMailListener;
+import io.github.aquerr.rentacar.application.rabbit.RabbitMessageSender;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
