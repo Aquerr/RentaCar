@@ -1,7 +1,8 @@
 package io.github.aquerr.rentacar.domain.activation.listener;
 
-import io.github.aquerr.rentacar.application.mail.MailMessage;
+import io.github.aquerr.rentacar.application.mail.MailMessageProperties;
 import io.github.aquerr.rentacar.application.mail.MailType;
+import io.github.aquerr.rentacar.application.mail.placeholder.CommonPlaceholders;
 import io.github.aquerr.rentacar.application.rabbit.RabbitMessageSender;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.command.AccountActivationTokenRequestCommand;
@@ -28,26 +29,25 @@ public class AccountActivationTokenRequestCommandListener
 
         ActivationTokenEntity activationTokenEntity = accountActivationService.invalidateOldActivationTokensAndGenerateNew(command.getCredentialsId());
 
-        MailMessage mailMessage = MailMessage.builder()
+        MailMessageProperties mailMessageProperties = MailMessageProperties.builder()
                         .to(command.getEmailTo())
-                        .subject("Account Activation")
                         .type(MailType.ACCOUNT_ACTIVATION)
                         .langCode(command.getLangCode())
-                        .properties(Map.of("activation_token", activationTokenEntity.getToken()))
+                        .additionalProperties(Map.of(CommonPlaceholders.TOKEN, activationTokenEntity.getToken()))
                 .build();
-        sendMail(mailMessage);
+        sendMail(mailMessageProperties);
     }
 
-    private void sendMail(MailMessage mailMessage)
+    private void sendMail(MailMessageProperties mailMessageProperties)
     {
         try
         {
-            rabbitMessageSender.send("mail.send", mailMessage);
+            rabbitMessageSender.send("mail.send.request", mailMessageProperties);
         }
         catch (Exception e)
         {
             //TODO: We should retry...
-            log.error("Could not send message {}", mailMessage, e);
+            log.error("Could not send message {}", mailMessageProperties, e);
         }
     }
 }

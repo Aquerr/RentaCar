@@ -12,11 +12,10 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MailMessage
+public class MailMessageProperties
 {
     private String to;
-    private String subject;
     private MailType type;
     private LangCode langCode;
-    private Map<String, String> properties;
+    private Map<String, String> additionalProperties;
 }

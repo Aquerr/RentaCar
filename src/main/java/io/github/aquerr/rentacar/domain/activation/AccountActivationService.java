@@ -72,12 +72,12 @@ public class AccountActivationService
         this.activationTokenRepository.save(activationTokenEntity);
     }
 
-    public void requestActivationToken(Long id, String email, LangCode preferredLangCode)
+    public void requestActivationToken(Long credentialsId, String email, LangCode preferredLangCode)
     {
-        Event event = new AccountActivationTokenRequestCommand(id, email, preferredLangCode);
+        Event event = new AccountActivationTokenRequestCommand(credentialsId, email, preferredLangCode);
         try
         {
-            this.rabbitMessageSender.send("account.activation.request", new AccountActivationTokenRequestCommand(id, email, preferredLangCode));
+            this.rabbitMessageSender.send("account.activation.request", new AccountActivationTokenRequestCommand(credentialsId, email, preferredLangCode));
         }
         catch (MessageSendException e)
         {

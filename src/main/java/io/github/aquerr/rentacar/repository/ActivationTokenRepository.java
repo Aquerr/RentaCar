@@ -17,10 +17,10 @@ public interface ActivationTokenRepository extends JpaRepository<ActivationToken
     List<ActivationTokenEntity> findAllByCredentialsIdIn(List<Long> credentialsIds);
 
     @Modifying
-    @Query("update ActivationTokenEntity activationToken SET activationToken.used = true WHERE activationToken.credentialsId = :credentialsId")
+    @Query("update PasswordResetTokenEntity activationToken SET activationToken.used = true WHERE activationToken.credentialsId = :credentialsId")
     void invalidateOldActivationTokens(@Param("credentialsId") long credentialsId);
 
     @Modifying
-    @Query(value = "DELETE FROM ActivationTokenEntity activationToken WHERE activationToken.expirationDate < :dateTime")
+    @Query(value = "DELETE FROM PasswordResetTokenEntity activationToken WHERE activationToken.expirationDate < :dateTime")
     void deleteAllByExpirationDateTimeBefore(@Param("dateTime")ZonedDateTime beforeDateTime);
 }

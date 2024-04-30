@@ -48,7 +48,7 @@ public class RabbitConfig
     @Bean
     Binding mailSendQueueBinding(Queue sendMailQueue, TopicExchange rentacarExchange)
     {
-        return BindingBuilder.bind(sendMailQueue).to(rentacarExchange).with("mail.send");
+        return BindingBuilder.bind(sendMailQueue).to(rentacarExchange).with("mail.send.request");
     }
 
     @Bean

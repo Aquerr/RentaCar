@@ -1,6 +1,6 @@
 package io.github.aquerr.rentacar.application.mail.listener;
 
-import io.github.aquerr.rentacar.application.mail.MailMessage;
+import io.github.aquerr.rentacar.application.mail.MailMessageProperties;
 import io.github.aquerr.rentacar.application.mail.MailService;
 import io.github.aquerr.rentacar.application.mail.exception.CouldNotSendMailException;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ public class RabbitSendMailListener
 {
     private final MailService mailService;
 
-    public void process(MailMessage message)
+    public void process(MailMessageProperties message)
     {
         try
         {

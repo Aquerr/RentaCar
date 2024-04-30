@@ -12,6 +12,7 @@ import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService
 import io.github.aquerr.rentacar.application.security.SecurityManager;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.user.UserService;
+import io.github.aquerr.rentacar.domain.user.password.PasswordResetService;
 import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.repository.InvalidJwtTokenRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,6 +56,8 @@ public abstract class BaseMvcIntegrationTest
     protected AuthenticationFacade authenticationFacade;
     @MockBean
     protected RentaCarAuthenticationManager authenticationManager;
+    @MockBean
+    protected PasswordResetService passwordResetService;
 
     @Autowired
     private WebApplicationContext webApplicationContext;

@@ -5,5 +5,6 @@ import lombok.Value;
 @Value
 public class PasswordResetRequest
 {
-    String email;
+    String token;
+    String password;
 }

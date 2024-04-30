@@ -30,7 +30,6 @@ public class UserService {
     private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
     private final RequestLocaleExtractor requestLocaleExtractor;
-    private final PasswordResetService passwordResetService;
 
     @Transactional
     public void register(UserRegistration userRegistration)
@@ -58,6 +57,12 @@ public class UserService {
     public UserCredentials findByUsername(String username)
     {
         return userCredentialsConverter.convertToDto(userCredentialsRepository.findByUsername(username));
+    }
+
+    @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+    public UserCredentials findByEmail(String email)
+    {
+        return userCredentialsConverter.convertToDto(userCredentialsRepository.findByEmail(email));
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -105,12 +110,5 @@ public class UserService {
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );
-    }
-
-    public void sendPasswordResetEmail(String email)
-    {
-       findByUsername()
-
-        this.passwordResetService.sendPasswordResetEmail(authenticatedUser);
     }
 }

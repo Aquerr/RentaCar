@@ -10,7 +10,9 @@ import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.domain.user.UserService;
+import io.github.aquerr.rentacar.domain.user.password.PasswordResetService;
 import io.github.aquerr.rentacar.web.rest.request.ActivationTokenRequest;
+import io.github.aquerr.rentacar.web.rest.request.InitPasswordResetRequest;
 import io.github.aquerr.rentacar.web.rest.request.MfaAuthRequest;
 import io.github.aquerr.rentacar.web.rest.request.PasswordResetRequest;
 import io.github.aquerr.rentacar.web.rest.response.AuthResponse;
@@ -40,6 +42,7 @@ public class AuthRestController
     private final AuthenticationFacade authenticationFacade;
     private final ProfileService profileService;
     private final UserService userService;
+    private final PasswordResetService passwordResetService;
     private final RentaCarAuthenticationManager rentaCarAuthenticationManager;
 
     @PostMapping
@@ -85,9 +88,16 @@ public class AuthRestController
     }
 
     @PostMapping("/password-reset/init")
-    public ResponseEntity<?> resetPassword(PasswordResetRequest request)
+    public ResponseEntity<?> initResetPassword(@RequestBody InitPasswordResetRequest request)
     {
-        this.userService.sendPasswordResetEmail(request.getEmail());
+        this.passwordResetService.initPasswordReset(request.email());
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/password-reset")
+    public ResponseEntity<?> resetPassword(@RequestBody PasswordResetRequest request)
+    {
+        this.passwordResetService.changePassword(request.getToken(), request.getPassword());
         return ResponseEntity.ok().build();
     }
 
