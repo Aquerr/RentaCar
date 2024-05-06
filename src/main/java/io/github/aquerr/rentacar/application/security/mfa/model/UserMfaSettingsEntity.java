@@ -26,7 +26,7 @@ public class UserMfaSettingsEntity
     @Column(name = "credentials_id", unique = true, nullable = false)
     private Long credentialsId;
 
-    @Column(name = "mfa_type", unique = false, nullable = false, columnDefinition = "INTEGER")
+    @Column(name = "mfa_type", unique = false, nullable = false)
     @Enumerated(value = EnumType.STRING)
     private MfaType mfaType;
 

@@ -9,6 +9,7 @@ import java.security.SecureRandom;
 public class AccessTokenGenerator
 {
     public static final int ACTIVATION_TOKEN_LENGTH = 64;
+    public static final int PASSWORD_RESET_TOKEN_LENGTH = 64;
 
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 

@@ -1,10 +1,8 @@
 package io.github.aquerr.rentacar.domain.user;
 
 import io.github.aquerr.rentacar.application.lang.RequestLocaleExtractor;
-import io.github.aquerr.rentacar.application.security.mfa.MfaAuthenticationService;
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
-import io.github.aquerr.rentacar.domain.activation.AccountActivationTokenRequester;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.ProfileService;
@@ -22,8 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -33,7 +29,6 @@ public class UserService {
     private final UserCredentialsConverter userCredentialsConverter;
     private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
-    private final AccountActivationTokenRequester accountActivationTokenRequester;
     private final RequestLocaleExtractor requestLocaleExtractor;
 
     @Transactional
@@ -52,7 +47,7 @@ public class UserService {
                 .build();
         userCredentialsEntity = this.userCredentialsRepository.save(userCredentialsEntity);
 
-        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(),
+        accountActivationService.requestActivationToken(userCredentialsEntity.getId(),
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );
@@ -62,6 +57,12 @@ public class UserService {
     public UserCredentials findByUsername(String username)
     {
         return userCredentialsConverter.convertToDto(userCredentialsRepository.findByUsername(username));
+    }
+
+    @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+    public UserCredentials findByEmail(String email)
+    {
+        return userCredentialsConverter.convertToDto(userCredentialsRepository.findByEmail(email));
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -105,7 +106,7 @@ public class UserService {
             throw new AccessDeniedException();
         }
 
-        accountActivationTokenRequester.requestActivationToken(userCredentialsEntity.getId(),
+        accountActivationService.requestActivationToken(userCredentialsEntity.getId(),
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );

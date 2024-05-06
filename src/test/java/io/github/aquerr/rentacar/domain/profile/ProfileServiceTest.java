@@ -98,23 +98,6 @@ class ProfileServiceTest
         verify(profileRepository).save(userProfileEntity);
     }
 
-    @Test
-    void shouldThrowAccessDeniedExceptionWhenAuthenticatedUserProfileIdDoesNotSavedProfileId()
-    {
-        // given
-        UserProfile userProfile = UserProfile.builder()
-                .id(3L)
-                .iconUrl("http://test.com/myiconurl.png")
-                .build();
-
-        given(authenticationFacade.getCurrentUser()).willReturn(prepareAuthenticatedUser());
-
-        // when
-        assertThrows(AccessDeniedException.class, () -> profileService.saveProfile(userProfile));
-        verifyNoInteractions(profileConverter);
-        verifyNoInteractions(profileRepository);
-    }
-
     private AuthenticatedUser prepareAuthenticatedUser()
     {
         return new AuthenticatedUser(

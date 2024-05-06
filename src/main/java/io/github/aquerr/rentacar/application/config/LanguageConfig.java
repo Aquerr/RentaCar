@@ -8,13 +8,25 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import java.util.Locale;
 
 @Configuration
-public class LanguageConfig {
+public class LanguageConfig
+{
     @Bean
-    public MessageSource messageSource() {
+    public MessageSource messageSource()
+    {
         ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
         resourceBundleMessageSource.setBasename("i18n/messages");
         resourceBundleMessageSource.setDefaultEncoding("UTF-8");
-        resourceBundleMessageSource.setDefaultLocale(Locale.US);
+        resourceBundleMessageSource.setDefaultLocale(Locale.ENGLISH);
+        return resourceBundleMessageSource;
+    }
+
+    @Bean
+    public MessageSource mailMessagesMessageSource()
+    {
+        ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
+        resourceBundleMessageSource.setBasename("i18n/mail_messages");
+        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+        resourceBundleMessageSource.setDefaultLocale(Locale.ENGLISH);
         return resourceBundleMessageSource;
     }
 }

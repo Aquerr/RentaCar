@@ -1,6 +1,11 @@
 package io.github.aquerr.rentacar.domain.activation;
 
+import io.github.aquerr.rentacar.application.exception.MessageSendException;
+import io.github.aquerr.rentacar.application.lang.LangCode;
+import io.github.aquerr.rentacar.application.rabbit.Event;
+import io.github.aquerr.rentacar.application.rabbit.RabbitMessageSender;
 import io.github.aquerr.rentacar.application.security.AccessTokenGenerator;
+import io.github.aquerr.rentacar.domain.activation.command.AccountActivationTokenRequestCommand;
 import io.github.aquerr.rentacar.domain.activation.converter.ActivationTokenConverter;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenAlreadyUsedException;
@@ -9,6 +14,7 @@ import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenNotF
 import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -19,11 +25,13 @@ import java.time.ZonedDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AccountActivationService
 {
     private final AccessTokenGenerator accessTokenGenerator;
     private final ActivationTokenRepository activationTokenRepository;
     private final ActivationTokenConverter activationTokenConverter;
+    private final RabbitMessageSender rabbitMessageSender;
 
     @Value("${rentacar.security.account.activation-token.expiration-time}")
     private Duration activationTokenExpirationTime;
@@ -62,5 +70,18 @@ public class AccountActivationService
                 .orElseThrow(ActivationTokenNotFoundException::new);
         activationTokenEntity.setUsed(true);
         this.activationTokenRepository.save(activationTokenEntity);
+    }
+
+    public void requestActivationToken(Long credentialsId, String email, LangCode preferredLangCode)
+    {
+        Event event = new AccountActivationTokenRequestCommand(credentialsId, email, preferredLangCode);
+        try
+        {
+            this.rabbitMessageSender.send("account.activation.request", new AccountActivationTokenRequestCommand(credentialsId, email, preferredLangCode));
+        }
+        catch (MessageSendException e)
+        {
+            log.error("Could not send message: {}", event, e);
+        }
     }
 }
