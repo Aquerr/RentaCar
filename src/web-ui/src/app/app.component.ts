@@ -4,6 +4,7 @@ import { UserProfile } from './models/user-profile.model';
 import { LanguageService } from './services/language.service';
 import { AuthenticationService } from './services/authentication.service';
 import { FontAwesomeLibraryService } from './services/font-awesome-library.service';
+import {Router, TitleStrategy} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,11 @@ export class AppComponent implements OnInit, OnDestroy {
   sideMenuExpanded = false;
 
   constructor(
+    private router: Router,
     private authenticationService: AuthenticationService,
     private languageService: LanguageService,
-    private fontAwesomeLibrary: FontAwesomeLibraryService
+    private fontAwesomeLibrary: FontAwesomeLibraryService,
+    private titleStrategy: TitleStrategy
   ) {
   }
 
@@ -51,7 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iconLang = 'fi fi-us';
       this.languageService.setLanguage('en');
     }
-    window.location.reload();
+    this.titleStrategy.updateTitle(this.router.routerState.snapshot);
   }
 
   logout() {
