@@ -6,6 +6,7 @@
 .button-container {
   display: flex;
   padding: 10px;
+  margin-top: 1rem;
 }
 
 .btn {
@@ -15,4 +16,21 @@
 
 .btn:hover {
   color: var(--gold);
+}
+
+.stepping-container-wrapper {
+  overflow: hidden;
+}
+
+.stepping-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  scroll-behavior: smooth;
+  transition: ease 600ms;
+}
+
+.stepping-container > * {
+  flex-shrink: 0;
+  width: 100%;
 }

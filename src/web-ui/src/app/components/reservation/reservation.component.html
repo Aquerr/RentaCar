@@ -1,19 +1,15 @@
 <div class='container' *ngIf='reservation'>
   <p-steps [model]='steps' [readonly]='false'
            [activeIndex]='activeIndex'
-           (activeIndexChange)='changeStep($event)'>>
+           (activeIndexChange)='changeStep($event)'>
   </p-steps>
 
-  <div *ngIf='activeIndex===0'>
-    <vehicle-step-reservation [vehicleId]='reservation.vehicleId'></vehicle-step-reservation>
-  </div>
-
-  <div *ngIf='activeIndex===1'>
-    <contact-step-reservation [readOnly]='readOnly'></contact-step-reservation>
-  </div>
-
-  <div *ngIf='activeIndex===2'>
-    <summary-step-reservation [reservation]='reservation'></summary-step-reservation>
+  <div class="stepping-container-wrapper">
+    <div #steppingContainer class="stepping-container">
+      <vehicle-step-reservation [vehicleId]='reservation.vehicleId'></vehicle-step-reservation>
+      <contact-step-reservation [readOnly]='readOnly'></contact-step-reservation>
+      <summary-step-reservation [reservation]='reservation'></summary-step-reservation>
+    </div>
   </div>
 
 
