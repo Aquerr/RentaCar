@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Reservation, ReservationStatus } from '../../models/reservation.model.ts';
 import { Subscription } from 'rxjs';
 import { ReservationApiService } from '../../services/api/reservation-api.service';
@@ -14,6 +14,11 @@ import { LanguageService } from '../../services/language.service';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit, OnDestroy {
+  @ViewChild("steppingContainer") steppingContainer!: ElementRef;
+  @ViewChild("contactStepReservationComponent") contactStepReservationComponent!: ElementRef;
+
+  currentSteppingTranslateX = 0;
+
   subscription: Subscription = new Subscription();
   reservation!: Reservation;
   activeIndex: number = 0;
@@ -80,10 +85,19 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   goBack() {
     this.activeIndex = this.activeIndex - 1;
+
+    this.currentSteppingTranslateX += 125;
+    this.steppingContainer.nativeElement.style.transform = `translate(${this.currentSteppingTranslateX}%, 0%)`;
+    // this.steppingContainer.nativeElement.scrollTo({top: 0, left: this.currentSteppingTranslateX, behaviour: 'smooth'});
   }
 
   goNext() {
     this.activeIndex = this.activeIndex + 1;
+
+    this.currentSteppingTranslateX -= 125;
+    // this.contactStepReservationComponent.nativeElement.scrollIntoView({behaviour: 'smooth', block: 'nearest', inline: 'end'});
+    this.steppingContainer.nativeElement.style.transform = `translate(${this.currentSteppingTranslateX}%, 0%)`;
+    // this.steppingContainer.nativeElement.scrollTo({top: 0, left: this.currentSteppingTranslateX, behaviour: 'smooth'});
   }
 
   private prepareSteps() {
