@@ -12,7 +12,7 @@ import { ToastType } from '../../../services/toast.service';
 })
 export class PasswordResetComponent {
   form = new FormBuilder().group({
-    login: new FormControl(null, [Validators.required])
+    email: new FormControl(null, [Validators.required])
   });
 
   constructor(private commonService: CommonService,
@@ -21,7 +21,7 @@ export class PasswordResetComponent {
   resetPassword() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.apiService.resetPassword(this.getLogin().value).subscribe({
+      this.apiService.resetPassword({email: this.getLogin().value}).subscribe({
         next: () => {
           this.commonService.goRoute('');
           this.commonService.showToast('components.password-reset.toasts.success', ToastType.SUCCESS);
@@ -32,7 +32,7 @@ export class PasswordResetComponent {
   }
 
   getLogin() {
-    return this.form.get('login') as AbstractControl;
+    return this.form.get('email') as AbstractControl;
   }
 
   hasFormError(controlName: string, errorName: string) {

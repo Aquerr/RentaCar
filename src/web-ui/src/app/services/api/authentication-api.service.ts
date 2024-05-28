@@ -29,16 +29,16 @@ export class AuthenticationApiService {
     return this.http.post<AuthResponse>(`${this.AUTH_URL}/resend-activation-email`, login);
   }
 
-  public resetPassword(login: string) {
-    return this.http.post<void>(`${this.AUTH_URL}/password-reset/init`, login);
+  public resetPassword(request: InitPasswordResetRequest) {
+    return this.http.post<void>(`${this.AUTH_URL}/password-reset/init`, request);
   }
 
   public isTokenValid(token: string) {
-    return this.http.get<boolean>(`${this.AUTH_URL}/reset-password/token/${token}/valid`);
+    return this.http.get<boolean>(`${this.AUTH_URL}/password-reset/token/${token}/valid`);
   }
 
-  public setNewPassword(token: string, newPassword: string) {
-    return this.http.post<void>(`${this.AUTH_URL}/new-password/token/${token}`, newPassword);
+  public setNewPassword(request: PasswordResetRequest) {
+    return this.http.post<void>(`${this.AUTH_URL}/password-reset`, request);
   }
 
   public getMyself() {
@@ -63,4 +63,13 @@ export interface AuthResponse {
 export interface MyselfResponse {
   userProfile: UserProfile;
   authorities: string[];
+}
+
+export interface InitPasswordResetRequest {
+  email: string
+}
+
+export interface PasswordResetRequest {
+  token: string,
+  password: string
 }
