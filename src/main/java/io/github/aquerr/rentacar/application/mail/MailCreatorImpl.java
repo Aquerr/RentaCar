@@ -42,7 +42,7 @@ public class MailCreatorImpl implements MailCreator
                             placeholderContext.getFrontEndUrl() + "/activation-account?token=" + placeholderContext.getProperty(CommonPlaceholders.TOKEN))),
             MailType.PASSWORD_RESET, Map.of(
                     CommonPlaceholders.REDIRECT_URL, (placeholderContext ->
-                            placeholderContext.getFrontEndUrl() + "/password-reset?token=" + placeholderContext.getProperty(CommonPlaceholders.TOKEN))
+                            placeholderContext.getFrontEndUrl() + "/new-password?token=" + placeholderContext.getProperty(CommonPlaceholders.TOKEN))
             )
     );
 
@@ -58,7 +58,7 @@ public class MailCreatorImpl implements MailCreator
 
             for (Map.Entry<String, PlaceholderValueResolver> entry : MAIL_PLACEHOLDER_POPULATORS.get(message.getType()).entrySet())
             {
-                mailTemplate = mailTemplate.replaceAll(buildPlaceholder(entry.getKey()), entry.getValue().resolve(placeholderContext));
+                mailTemplate = mailTemplate.replace(buildPlaceholder(entry.getKey()), entry.getValue().resolve(placeholderContext));
             }
 
             messageHelper.setText(mailTemplate, true);
