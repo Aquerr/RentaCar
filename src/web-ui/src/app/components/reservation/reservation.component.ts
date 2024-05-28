@@ -15,9 +15,8 @@ import { LanguageService } from '../../services/language.service';
 })
 export class ReservationComponent implements OnInit, OnDestroy {
   @ViewChild("steppingContainer") steppingContainer!: ElementRef;
-  @ViewChild("contactStepReservationComponent") contactStepReservationComponent!: ElementRef;
 
-  currentSteppingTranslateX = 0;
+  steppingContainerTranslateX = 0;
 
   subscription: Subscription = new Subscription();
   reservation!: Reservation;
@@ -81,23 +80,17 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   changeStep(event: number) {
     this.activeIndex = event;
+
+    this.steppingContainerTranslateX = -(this.activeIndex * 100);
+    this.steppingContainer.nativeElement.style.transform = `translate(${this.steppingContainerTranslateX}%, 0%)`;
   }
 
   goBack() {
-    this.activeIndex = this.activeIndex - 1;
-
-    this.currentSteppingTranslateX += 125;
-    this.steppingContainer.nativeElement.style.transform = `translate(${this.currentSteppingTranslateX}%, 0%)`;
-    // this.steppingContainer.nativeElement.scrollTo({top: 0, left: this.currentSteppingTranslateX, behaviour: 'smooth'});
+    this.changeStep(this.activeIndex - 1);
   }
 
   goNext() {
-    this.activeIndex = this.activeIndex + 1;
-
-    this.currentSteppingTranslateX -= 125;
-    // this.contactStepReservationComponent.nativeElement.scrollIntoView({behaviour: 'smooth', block: 'nearest', inline: 'end'});
-    this.steppingContainer.nativeElement.style.transform = `translate(${this.currentSteppingTranslateX}%, 0%)`;
-    // this.steppingContainer.nativeElement.scrollTo({top: 0, left: this.currentSteppingTranslateX, behaviour: 'smooth'});
+    this.changeStep(this.activeIndex + 1);
   }
 
   private prepareSteps() {
