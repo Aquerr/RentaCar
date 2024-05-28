@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -34,6 +35,8 @@ public class AuthIntegrationTest extends BaseIntegrationTest
 
     @Autowired
     private TestRestTemplate testRestTemplate;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void setUp()
@@ -92,6 +95,6 @@ public class AuthIntegrationTest extends BaseIntegrationTest
 
         // then
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
-        assertThat(userCredentialsRepository.findByEmail(EMAIL).getPassword()).isEqualTo("new-password");
+        assertTrue(passwordEncoder.matches("new-password", userCredentialsRepository.findByEmail(EMAIL).getPassword()));
     }
 }
