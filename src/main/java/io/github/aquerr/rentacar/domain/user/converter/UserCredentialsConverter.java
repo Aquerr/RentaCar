@@ -14,7 +14,7 @@ public class UserCredentialsConverter
         }
 
         return UserCredentials.builder()
-                .id(user.getId())
+                .id(user.getUserId())
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
@@ -27,7 +27,7 @@ public class UserCredentialsConverter
         }
 
         return UserCredentialsEntity.builder()
-                .id(userCredentials.getId())
+                .userId(userCredentials.getId())
                 .username(userCredentials.getUsername())
                 .password(userCredentials.getPassword())
                 .email(userCredentials.getEmail())

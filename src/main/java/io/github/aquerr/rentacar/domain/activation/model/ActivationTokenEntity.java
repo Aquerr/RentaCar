@@ -21,8 +21,8 @@ public class ActivationTokenEntity
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "credentials_id", nullable = false)
-    private Long credentialsId;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
     @Column(name = "token", nullable = false, unique = true, length = AccessTokenGenerator.ACTIVATION_TOKEN_LENGTH)
     private String token;

@@ -2,7 +2,6 @@ package io.github.aquerr.rentacar.domain.profile;
 
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
-import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.domain.image.ImageService;
 import io.github.aquerr.rentacar.domain.image.dto.ImageUri;
 import io.github.aquerr.rentacar.domain.image.model.ImageKind;
@@ -20,11 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class ProfileServiceTest
@@ -52,7 +49,7 @@ class ProfileServiceTest
                 .build();
 
         UserProfileEntity userProfileEntity = UserProfileEntity.builder()
-                .id(AUTH_USER_PROFILE_ID)
+                .userId(AUTH_USER_PROFILE_ID)
                 .build();
         given(authenticationFacade.getCurrentUser()).willReturn(prepareAuthenticatedUser());
         given(this.profileConverter.toProfile(UserProfile.builder()
@@ -77,7 +74,7 @@ class ProfileServiceTest
                 .build();
         MultipartFile image = mock(MultipartFile.class);
         UserProfileEntity userProfileEntity = UserProfileEntity.builder()
-                .id(AUTH_USER_PROFILE_ID)
+                .userId(AUTH_USER_PROFILE_ID)
                 .iconName("newImage")
                 .build();
 
@@ -104,7 +101,6 @@ class ProfileServiceTest
                 1L,
                 "test_user",
                 "test_pass",
-                AUTH_USER_PROFILE_ID,
                 "test_ip",
                 Collections.emptySet()
         );

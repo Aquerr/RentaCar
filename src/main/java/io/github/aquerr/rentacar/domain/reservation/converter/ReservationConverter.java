@@ -1,6 +1,5 @@
 package io.github.aquerr.rentacar.domain.reservation.converter;
 
-import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.reservation.ReservationImagePopulator;
 import io.github.aquerr.rentacar.domain.reservation.dto.ProfileReservation;
 import io.github.aquerr.rentacar.domain.reservation.dto.Reservation;
@@ -23,7 +22,7 @@ public class ReservationConverter {
         return Reservation.builder()
                 .id(reservationEntity.getId())
                 .vehicleId(reservationEntity.getVehicle().getId())
-                .userId(reservationEntity.getUserProfile().getId())
+                .userId(reservationEntity.getUserId())
                 .dateFrom(reservationEntity.getDateFrom())
                 .dateTo(reservationEntity.getDateTo())
                 .status(reservationEntity.getStatus())
@@ -40,9 +39,7 @@ public class ReservationConverter {
                 .vehicle(VehicleEntity.builder()
                         .id(reservationDto.getVehicleId())
                         .build())
-                .userProfile(UserProfileEntity.builder()
-                        .id(reservationDto.getUserId())
-                        .build())
+                .userId(reservationDto.getUserId())
                 .dateFrom(reservationDto.getDateFrom())
                 .dateTo(reservationDto.getDateTo())
                 .status(reservationDto.getStatus())

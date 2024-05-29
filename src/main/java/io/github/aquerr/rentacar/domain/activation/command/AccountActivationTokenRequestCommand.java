@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountActivationTokenRequestCommand implements Event
 {
-    private Long credentialsId;
+    private Long userId;
     private String emailTo;
     private LangCode langCode;
 }

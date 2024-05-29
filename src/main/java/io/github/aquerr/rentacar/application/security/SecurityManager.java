@@ -23,7 +23,7 @@ public final class SecurityManager
 
     private boolean isUserProfile(AuthenticatedUser authenticatedUser, long profileId)
     {
-        return authenticatedUser.getProfileId() == profileId;
+        return authenticatedUser.getId() == profileId;
     }
 
     private AuthenticatedUser toAuthenticatedUser(Authentication authentication)

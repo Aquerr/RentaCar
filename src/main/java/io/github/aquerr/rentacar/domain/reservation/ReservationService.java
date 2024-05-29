@@ -71,6 +71,6 @@ public class ReservationService {
 
     private List<ReservationEntity> getMyReservations() {
         AuthenticatedUser authenticatedUser = authenticationFacade.getCurrentUser();
-        return this.reservationRepository.findAllByUserId(authenticatedUser.getProfileId());
+        return this.reservationRepository.findAllByUserId(authenticatedUser.getId());
     }
 }

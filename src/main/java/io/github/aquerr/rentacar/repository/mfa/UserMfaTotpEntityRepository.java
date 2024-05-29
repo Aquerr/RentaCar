@@ -12,10 +12,10 @@ import java.util.Optional;
 @Repository
 public interface UserMfaTotpEntityRepository extends JpaRepository<UserMfaTotpEntity, Long>
 {
-    Optional<UserMfaTotpEntity> findByCredentialsId(Long id);
+    Optional<UserMfaTotpEntity> findByUserId(Long id);
 
 
     @Modifying
-    @Query("DELETE from UserMfaTotpEntity entity WHERE entity.credentialsId = :credentialsId")
-    void deleteByCredentialsId(@Param("credentialsId") long credentialsId);
+    @Query("DELETE from UserMfaTotpEntity entity WHERE entity.userId = :userId")
+    void deleteByUserId(@Param("userId") long userId);
 }

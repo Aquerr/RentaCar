@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
 public class ActivationTokenDto
 {
     private Long id;
-    private Long credentialsId;
+    private Long userId;
     private String token;
     private ZonedDateTime expirationDate;
     private boolean used;

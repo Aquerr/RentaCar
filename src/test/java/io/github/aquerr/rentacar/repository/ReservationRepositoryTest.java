@@ -1,8 +1,8 @@
 package io.github.aquerr.rentacar.repository;
 
-import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.reservation.model.ReservationEntity;
 import io.github.aquerr.rentacar.domain.reservation.model.ReservationStatus;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
 import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,6 @@ class ReservationRepositoryTest extends BaseDBIntegrationTest
     public void setUp()
     {
         prepareUsers();
-        prepareUserProfiles();
         prepareVehicles();
         prepareVehicleReservations();
     }
@@ -35,12 +34,12 @@ class ReservationRepositoryTest extends BaseDBIntegrationTest
     {
         assertThat(reservationRepository.findAll()).hasSize(1);
 
+        UserEntity userEntity = userRepository.findByCredentials_Username(USERNAME);
         VehicleEntity vehicle = vehicleRepository.findByBrandAndModel("TOYOTA", "YARIS").get(0);
-        Long credentialsId = userCredentialsRepository.findByUsername(USERNAME).getId();
-        UserProfileEntity userProfile = profileRepository.findByCredentialsId(credentialsId);
         ReservationEntity reservationEntity = ReservationEntity.builder()
                 .vehicle(vehicle)
-                .userProfile(userProfile)
+                .userId(userEntity.getId())
+                .vehicleId(vehicle.getId())
                 .status(ReservationStatus.PAYMENT_COMPLETED.getStatus())
                 .dateFrom(LocalDate.of(2023, 9, 15))
                 .dateTo(LocalDate.of(2023, 10, 17))
@@ -60,12 +59,12 @@ class ReservationRepositoryTest extends BaseDBIntegrationTest
     @Test
     void shouldDeleteAllReservations()
     {
+        UserEntity userEntity = userRepository.findByCredentials_Username(USERNAME);
         VehicleEntity vehicle = vehicleRepository.findByBrandAndModel("TOYOTA", "YARIS").get(0);
-        Long credentialsId = userCredentialsRepository.findByUsername(USERNAME).getId();
-        UserProfileEntity userProfile = profileRepository.findByCredentialsId(credentialsId);
         ReservationEntity reservationEntity = ReservationEntity.builder()
                 .vehicle(vehicle)
-                .userProfile(userProfile)
+                .userId(userEntity.getId())
+                .vehicleId(vehicle.getId())
                 .status(ReservationStatus.PAYMENT_COMPLETED.getStatus())
                 .dateFrom(LocalDate.of(2023, 9, 15))
                 .dateTo(LocalDate.of(2023, 10, 17))
@@ -107,13 +106,13 @@ class ReservationRepositoryTest extends BaseDBIntegrationTest
 
     private void prepareVehicleReservations()
     {
-        Long credentialsId = userCredentialsRepository.findByUsername(USERNAME).getId();
-        UserProfileEntity userProfile = profileRepository.findByCredentialsId(credentialsId);
+        UserEntity userEntity = userRepository.findByCredentials_Username(USERNAME);
         VehicleEntity vehicle = vehicleRepository.findByBrandAndModel("TOYOTA", "YARIS").get(0);
 
         ReservationEntity reservationEntity = ReservationEntity.builder()
-                .userProfile(userProfile)
+                .userId(userEntity.getId())
                 .vehicle(vehicle)
+                .vehicleId(vehicle.getId())
                 .dateFrom(LocalDate.of(2023, 4, 7))
                 .dateTo(LocalDate.of(2023, 4, 14))
                 .status(ReservationStatus.PAYMENT_COMPLETED.getStatus())

@@ -1,7 +1,7 @@
 package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.domain.user.UserService;
-import io.github.aquerr.rentacar.domain.user.dto.UserRegistration;
+import io.github.aquerr.rentacar.domain.user.dto.UserRegistrationParams;
 import io.github.aquerr.rentacar.web.rest.request.UserRegistrationRequest;
 import io.github.aquerr.rentacar.web.rest.response.UserRegistrationResponse;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class UsersRestController
     @PostMapping("/register")
     public ResponseEntity<UserRegistrationResponse> register(@RequestBody UserRegistrationRequest userRegistrationRequest)
     {
-        userService.register(new UserRegistration(userRegistrationRequest.getUsername(), userRegistrationRequest.getEmail(), userRegistrationRequest.getPassword()));
+        userService.register(new UserRegistrationParams(userRegistrationRequest.getUsername(), userRegistrationRequest.getEmail(), userRegistrationRequest.getPassword()));
         return ResponseEntity.ok().build();
     }
 }

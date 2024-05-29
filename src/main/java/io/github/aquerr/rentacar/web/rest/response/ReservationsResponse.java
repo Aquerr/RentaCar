@@ -1,7 +1,6 @@
 package io.github.aquerr.rentacar.web.rest.response;
 
 import io.github.aquerr.rentacar.domain.reservation.dto.ProfileReservation;
-import io.github.aquerr.rentacar.domain.reservation.dto.Reservation;
 import lombok.Value;
 
 import java.util.List;

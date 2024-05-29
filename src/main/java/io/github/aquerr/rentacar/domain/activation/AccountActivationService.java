@@ -12,7 +12,9 @@ import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenAlre
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenExpiredException;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenNotFoundException;
 import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
+import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,17 +34,18 @@ public class AccountActivationService
     private final ActivationTokenRepository activationTokenRepository;
     private final ActivationTokenConverter activationTokenConverter;
     private final RabbitMessageSender rabbitMessageSender;
+    private final UserCredentialsRepository userCredentialsRepository;
 
     @Value("${rentacar.security.account.activation-token.expiration-time}")
     private Duration activationTokenExpirationTime;
 
     @Transactional
-    public ActivationTokenEntity invalidateOldActivationTokensAndGenerateNew(long credentialsId)
+    public ActivationTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
     {
-        this.activationTokenRepository.invalidateOldActivationTokens(credentialsId);
+        this.activationTokenRepository.invalidateOldActivationTokens(userId);
 
         ActivationTokenEntity activationTokenEntity = new ActivationTokenEntity();
-        activationTokenEntity.setCredentialsId(credentialsId);
+        activationTokenEntity.setUserId(userId);
         activationTokenEntity.setExpirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime));
         activationTokenEntity.setToken(this.accessTokenGenerator.generate());
         activationTokenEntity.setUsed(false);
@@ -59,7 +62,7 @@ public class AccountActivationService
     }
 
     @Transactional
-    public void activateToken(ActivationTokenDto activationTokenDto)
+    public void activate(ActivationTokenDto activationTokenDto)
     {
         if (activationTokenDto.isUsed())
             throw new ActivationTokenAlreadyUsedException();
@@ -70,14 +73,22 @@ public class AccountActivationService
                 .orElseThrow(ActivationTokenNotFoundException::new);
         activationTokenEntity.setUsed(true);
         this.activationTokenRepository.save(activationTokenEntity);
+
+        UserCredentialsEntity credentials = userCredentialsRepository.findById(activationTokenDto.getUserId())
+                .orElse(null);
+        if (credentials != null)
+        {
+            credentials.setActivated(true);
+            userCredentialsRepository.save(credentials);
+        }
     }
 
-    public void requestActivationToken(Long credentialsId, String email, LangCode preferredLangCode)
+    public void requestActivationToken(Long userId, String email, LangCode preferredLangCode)
     {
-        Event event = new AccountActivationTokenRequestCommand(credentialsId, email, preferredLangCode);
+        Event event = new AccountActivationTokenRequestCommand(userId, email, preferredLangCode);
         try
         {
-            this.rabbitMessageSender.send("account.activation.request", new AccountActivationTokenRequestCommand(credentialsId, email, preferredLangCode));
+            this.rabbitMessageSender.send("account.activation.request", new AccountActivationTokenRequestCommand(userId, email, preferredLangCode));
         }
         catch (MessageSendException e)
         {

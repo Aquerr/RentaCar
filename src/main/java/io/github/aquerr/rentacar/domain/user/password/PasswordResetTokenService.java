@@ -31,12 +31,12 @@ public class PasswordResetTokenService
     }
 
     @Transactional
-    public PasswordResetTokenEntity invalidateOldActivationTokensAndGenerateNew(long credentialsId)
+    public PasswordResetTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
     {
-        this.passwordResetTokenRepository.invalidateOldResetTokens(credentialsId);
+        this.passwordResetTokenRepository.invalidateOldResetTokens(userId);
 
         PasswordResetTokenEntity passwordResetTokenEntity = new PasswordResetTokenEntity();
-        passwordResetTokenEntity.setCredentialsId(credentialsId);
+        passwordResetTokenEntity.setUserId(userId);
         passwordResetTokenEntity.setExpirationDate(ZonedDateTime.now().plus(passwordResetTokenExpirationTime));
         passwordResetTokenEntity.setToken(this.accessTokenGenerator.generate());
         passwordResetTokenEntity.setUsed(false);
