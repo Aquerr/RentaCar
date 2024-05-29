@@ -13,6 +13,22 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RentaCar</name>
 	<description>RentaCar</description>
+
+	<developers>
+		<developer>
+			<id>aquerr</id>
+			<roles>
+				<role>Lead Developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>mateo9x</id>
+			<roles>
+				<role>Lead Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
 	<properties>
 		<java.version>21</java.version>
 		<jjwt.version>0.12.3</jjwt.version>
