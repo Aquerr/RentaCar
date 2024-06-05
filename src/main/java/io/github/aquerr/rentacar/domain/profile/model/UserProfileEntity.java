@@ -1,11 +1,12 @@
 package io.github.aquerr.rentacar.domain.profile.model;
 
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,13 +26,8 @@ import java.time.LocalDate;
 public class UserProfileEntity
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_profile_generator")
-    @SequenceGenerator(name = "user_profile_generator", sequenceName = "user_profile_seq", allocationSize = 5)
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
-
-    @Column(name = "credentials_id", unique = true, nullable = false)
-    private Long credentialsId;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Long userId;
 
     @Column(name = "first_name", nullable = true, length = 100)
     private String firstName;
@@ -42,9 +38,13 @@ public class UserProfileEntity
     @Column(name = "phone_number", nullable = true, length = 15)
     private String phoneNumber;
 
-    //TODO: A może zmienić nazwę pola na "contactEmail"?
+    //TODO: Zmiana adresu email nie powinna odbywać się przez zwykłą edycję profilu.
+    // Należy stworzyć do tego dedykowany proces i powiadomić użytkownika o tym, że
+    // zmiana maila wiąże się ze zmianą maila podawanego przy logowaniu.
+    // Pole do usunięcia, chyba że chcemy zostawić tutaj takie pole
+    // jako dodatkowy mail kontaktowy.
     @Column(name = "email", nullable = true)
-    private String email;
+    private String contactEmail; // domyślnie ten sam, który został podany przy rejestracji
 
     @Column(name = "birth_date", nullable = true)
     private LocalDate birthDate;
@@ -60,4 +60,8 @@ public class UserProfileEntity
 
     @Column(name = "icon_name", nullable = true)
     private String iconName;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private UserEntity user;
 }

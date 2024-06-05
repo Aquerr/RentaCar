@@ -14,11 +14,11 @@ public interface ActivationTokenRepository extends JpaRepository<ActivationToken
 {
     Optional<ActivationTokenEntity> findByToken(String token);
 
-    List<ActivationTokenEntity> findAllByCredentialsIdIn(List<Long> credentialsIds);
+    List<ActivationTokenEntity> findAllByUserIdIn(List<Long> userIds);
 
     @Modifying
-    @Query("update PasswordResetTokenEntity activationToken SET activationToken.used = true WHERE activationToken.credentialsId = :credentialsId")
-    void invalidateOldActivationTokens(@Param("credentialsId") long credentialsId);
+    @Query("update PasswordResetTokenEntity activationToken SET activationToken.used = true WHERE activationToken.userId = :userId")
+    void invalidateOldActivationTokens(@Param("userId") long userId);
 
     @Modifying
     @Query(value = "DELETE FROM PasswordResetTokenEntity activationToken WHERE activationToken.expirationDate < :dateTime")

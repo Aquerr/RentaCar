@@ -66,7 +66,7 @@ public class AuthRestController
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        UserProfile userProfile = this.profileService.getProfileById(authenticationFacade.getCurrentUser().getProfileId());
+        UserProfile userProfile = this.profileService.getProfileById(authenticationFacade.getCurrentUser().getId());
         Set<String> authorities = this.authenticationFacade.getCurrentUser().getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());

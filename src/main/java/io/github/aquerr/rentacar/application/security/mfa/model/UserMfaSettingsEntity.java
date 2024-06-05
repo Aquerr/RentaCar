@@ -23,8 +23,8 @@ public class UserMfaSettingsEntity
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "credentials_id", unique = true, nullable = false)
-    private Long credentialsId;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Long userId;
 
     @Column(name = "mfa_type", unique = false, nullable = false)
     @Enumerated(value = EnumType.STRING)

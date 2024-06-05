@@ -16,7 +16,7 @@ public class PasswordResetTokenConverter
 
         return PasswordResetTokenDto.builder()
                 .id(passwordResetTokenEntity.getId())
-                .credentialsId(passwordResetTokenEntity.getCredentialsId())
+                .userId(passwordResetTokenEntity.getUserId())
                 .token(passwordResetTokenEntity.getToken())
                 .used(passwordResetTokenEntity.isUsed())
                 .expirationDate(passwordResetTokenEntity.getExpirationDate())

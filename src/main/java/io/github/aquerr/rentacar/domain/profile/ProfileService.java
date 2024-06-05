@@ -1,11 +1,9 @@
 package io.github.aquerr.rentacar.domain.profile;
 
 import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
-import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.domain.image.ImageService;
 import io.github.aquerr.rentacar.domain.image.model.ImageKind;
 import io.github.aquerr.rentacar.domain.profile.converter.ProfileConverter;
-import io.github.aquerr.rentacar.domain.profile.dto.CreateProfileParameters;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.domain.profile.exception.ProfileNotFoundException;
 import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
@@ -42,19 +40,10 @@ public class ProfileService {
     }
 
     @Transactional
-    public void createNewProfile(CreateProfileParameters createProfileParameters)
-    {
-        this.profileRepository.save(UserProfileEntity.builder()
-                        .credentialsId(createProfileParameters.getCredentialsId())
-                        .email(createProfileParameters.getEmail())
-                .build());
-    }
-
-    @Transactional
     public void saveProfile(UserProfile userProfileDto)
     {
         UserProfileEntity userProfile = this.profileConverter.toProfile(userProfileDto);
-        userProfile.setCredentialsId(this.authenticationFacade.getCurrentUser().getId());
+        userProfile.setUserId(this.authenticationFacade.getCurrentUser().getId());
         this.profileRepository.save(userProfile);
     }
 

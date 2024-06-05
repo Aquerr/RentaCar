@@ -14,11 +14,11 @@ public interface PasswordResetTokenRepository extends JpaRepository<PasswordRese
 {
     Optional<PasswordResetTokenEntity> findByToken(String token);
 
-    List<PasswordResetTokenEntity> findAllByCredentialsIdIn(List<Long> credentialsIds);
+    List<PasswordResetTokenEntity> findAllByUserIdIn(List<Long> userIds);
 
     @Modifying
-    @Query("update PasswordResetTokenEntity token SET token.used = true WHERE token.credentialsId = :credentialsId")
-    void invalidateOldResetTokens(@Param("credentialsId") long credentialsId);
+    @Query("update PasswordResetTokenEntity token SET token.used = true WHERE token.userId = :userId")
+    void invalidateOldResetTokens(@Param("userId") long userId);
 
     @Modifying
     @Query(value = "DELETE FROM PasswordResetTokenEntity token WHERE token.expirationDate < :dateTime")

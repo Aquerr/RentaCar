@@ -16,7 +16,7 @@ public class ActivationTokenConverter
 
         return ActivationTokenDto.builder()
                 .id(activationTokenEntity.getId())
-                .credentialsId(activationTokenEntity.getCredentialsId())
+                .userId(activationTokenEntity.getUserId())
                 .token(activationTokenEntity.getToken())
                 .used(activationTokenEntity.isUsed())
                 .expirationDate(activationTokenEntity.getExpirationDate())

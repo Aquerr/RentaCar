@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 public class PasswordResetTokenDto
 {
     private Long id;
-    private Long credentialsId;
+    private Long userId;
     private String token;
     private ZonedDateTime expirationDate;
     private boolean used;

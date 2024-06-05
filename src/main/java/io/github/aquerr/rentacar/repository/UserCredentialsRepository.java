@@ -18,12 +18,12 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
     UserCredentialsEntity findByUsernameOrEmail(String username, String email);
 
     @Query(nativeQuery = true, value = "SELECT * FROM user_credentials " +
-            "WHERE user_credentials.id IN " +
-            "(SELECT id FROM user_credentials WHERE user_credentials.activated = false AND user_credentials.id NOT IN (SELECT credentials_id FROM account_activation_token WHERE account_activation_token.credentials_id = user_credentials.id) " +
-            "UNION (SELECT credentials_id FROM account_activation_token WHERE account_activation_token.credentials_id = user_credentials.id AND account_activation_token.expiration_date_time < :dateBefore));")
+            "WHERE user_credentials.user_id IN " +
+            "(SELECT user_id FROM user_credentials WHERE user_credentials.activated = false AND user_credentials.user_id NOT IN (SELECT user_id FROM account_activation_token WHERE account_activation_token.user_id = user_credentials.user_id) " +
+            "UNION (SELECT user_id FROM account_activation_token WHERE account_activation_token.user_id = user_credentials.user_id AND account_activation_token.expiration_date_time < :dateBefore));")
     List<UserCredentialsEntity> findAllNotActivatedUserCredentialsBefore(@Param("dateBefore") ZonedDateTime dateBefore);
 
     @Modifying
-    @Query("UPDATE UserCredentialsEntity credentials SET credentials.password = :newPassword WHERE credentials.id = :credentialsId")
-    void updateByCredentialsIdSetPassword(@Param("credentialsId") Long credentialsId, @Param("newPassword") String newPassword);
+    @Query("UPDATE UserCredentialsEntity credentials SET credentials.password = :newPassword WHERE credentials.userId = :userId")
+    void updateByUserIdSetPassword(@Param("userId") Long userId, @Param("newPassword") String newPassword);
 }

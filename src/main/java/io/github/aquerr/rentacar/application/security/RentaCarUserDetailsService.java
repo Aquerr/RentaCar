@@ -2,10 +2,8 @@ package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.exception.UserLockedException;
 import io.github.aquerr.rentacar.application.exception.UserNotActivatedException;
-import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
-import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.repository.ProfileRepository;
-import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
+import io.github.aquerr.rentacar.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,13 +18,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @AllArgsConstructor
 public class RentaCarUserDetailsService implements UserDetailsService
 {
-    private final UserCredentialsRepository userCredentialsRepository;
-    private final ProfileRepository profileRepository;
+    private final UserRepository userRepository;
 
     public AuthenticatedUser loadById(Long id) throws UsernameNotFoundException
     {
-        UserCredentialsEntity userCredentialsEntity = userCredentialsRepository.findById(id).orElse(null);
-        return toAuthenticatedUser(userCredentialsEntity);
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        return toAuthenticatedUser(userEntity);
     }
 
     @Override
@@ -35,42 +32,40 @@ public class RentaCarUserDetailsService implements UserDetailsService
     {
         UserCredentials.UsernameOrEmail usernameOrEmail = new UserCredentials.UsernameOrEmail(username);
 
-        UserCredentialsEntity userCredentialsEntity;
+        UserEntity userEntity;
         if (usernameOrEmail.isEmail())
         {
-            userCredentialsEntity = userCredentialsRepository.findByEmail(usernameOrEmail.getValue());
+            userEntity = userRepository.findByCredentials_Email(usernameOrEmail.getValue());
         }
         else
         {
-            userCredentialsEntity = userCredentialsRepository.findByUsername(usernameOrEmail.getValue());
+            userEntity = userRepository.findByCredentials_Username(usernameOrEmail.getValue());
         }
 
-        return toAuthenticatedUser(userCredentialsEntity);
+        return toAuthenticatedUser(userEntity);
     }
 
-    private AuthenticatedUser toAuthenticatedUser(UserCredentialsEntity userCredentialsEntity)
+    private AuthenticatedUser toAuthenticatedUser(UserEntity userEntity)
     {
-        if (userCredentialsEntity == null)
+        if (userEntity == null)
         {
             throw new UsernameNotFoundException("User does not exist!");
         }
-        if (userCredentialsEntity.isLocked())
+        if (userEntity.getCredentials().isLocked())
         {
             throw new UserLockedException();
         }
-        if (!userCredentialsEntity.isActivated())
+        if (!userEntity.getCredentials().isActivated())
         {
             throw new UserNotActivatedException();
         }
 
-        UserProfileEntity userProfileEntity = profileRepository.findByCredentialsId(userCredentialsEntity.getId());
         HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        return new AuthenticatedUser(userCredentialsEntity.getId(),
-                userCredentialsEntity.getUsername(),
-                userCredentialsEntity.getPassword(),
-                userProfileEntity.getId(),
+        return new AuthenticatedUser(userEntity.getId(),
+                userEntity.getCredentials().getUsername(),
+                userEntity.getCredentials().getPassword(),
                 getClientIp(httpServletRequest),
-                userCredentialsEntity.getAuthorities().stream()
+                userEntity.getAuthorities().stream()
                         .map(SimpleGrantedAuthority::new)
                         .toList());
     }

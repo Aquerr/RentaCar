@@ -74,6 +74,6 @@ public abstract class BaseMvcIntegrationTest
 
     protected AuthenticatedUser prepareAuthenticatedUser(long id, String username, long profileId, Set<? extends GrantedAuthority> authorities)
     {
-        return new AuthenticatedUser(id, username, "test_pass", profileId, "remote_addr", authorities);
+        return new AuthenticatedUser(id, username, "test_pass", "remote_addr", authorities);
     }
 }

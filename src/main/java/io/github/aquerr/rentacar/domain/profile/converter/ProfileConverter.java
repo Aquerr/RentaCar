@@ -18,10 +18,10 @@ public class ProfileConverter {
         }
 
         UserProfile.UserProfileBuilder userProfileBuilder = UserProfile.builder()
-                .id(profile.getId())
+                .id(profile.getUserId())
                 .firstName(profile.getFirstName())
                 .lastName(profile.getLastName())
-                .email(profile.getEmail())
+                .email(profile.getContactEmail())
                 .birthDate(profile.getBirthDate())
                 .city(profile.getCity())
                 .zipCode(profile.getZipCode())
@@ -38,10 +38,10 @@ public class ProfileConverter {
         }
 
         UserProfileEntity.UserProfileEntityBuilder userProfileEntityBuilder = UserProfileEntity.builder()
-                .id(profileDto.getId())
+                .userId(profileDto.getId())
                 .firstName(profileDto.getFirstName())
                 .lastName(profileDto.getLastName())
-                .email(profileDto.getEmail())
+                .contactEmail(profileDto.getEmail())
                 .birthDate(profileDto.getBirthDate())
                 .city(profileDto.getCity())
                 .zipCode(profileDto.getZipCode())

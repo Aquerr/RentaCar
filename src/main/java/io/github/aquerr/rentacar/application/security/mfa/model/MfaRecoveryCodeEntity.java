@@ -24,8 +24,8 @@ public class MfaRecoveryCodeEntity
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "credentials_id", unique = true, nullable = false)
-    private Long credentialsId;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Long user_id;
 
     @Column(name = "recovery_code")
     private String recoveryCode;

@@ -5,14 +5,15 @@ import io.github.aquerr.rentacar.application.security.exception.AccessDeniedExce
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
-import io.github.aquerr.rentacar.domain.profile.ProfileService;
-import io.github.aquerr.rentacar.domain.profile.dto.CreateProfileParameters;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.converter.UserCredentialsConverter;
 import io.github.aquerr.rentacar.domain.user.dto.UserCredentials;
 import io.github.aquerr.rentacar.domain.user.exception.UsernameOrEmailAlreadyUsedException;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.domain.user.dto.UserRegistration;
+import io.github.aquerr.rentacar.domain.user.dto.UserRegistrationParams;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
+import io.github.aquerr.rentacar.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,28 +27,36 @@ public class UserService {
 
     private final AccountActivationService accountActivationService;
     private final UserCredentialsRepository userCredentialsRepository;
+    private final UserRepository userRepository;
     private final UserCredentialsConverter userCredentialsConverter;
-    private final ProfileService profileService;
     private final PasswordEncoder passwordEncoder;
     private final RequestLocaleExtractor requestLocaleExtractor;
 
     @Transactional
-    public void register(UserRegistration userRegistration)
+    public void register(UserRegistrationParams userRegistrationParams)
     {
-        UserCredentialsEntity existingUserCreds = this.userCredentialsRepository.findByUsernameOrEmail(userRegistration.getUsername(), userRegistration.getEmail());
+        UserCredentialsEntity existingUserCreds = this.userCredentialsRepository.findByUsernameOrEmail(userRegistrationParams.getUsername(), userRegistrationParams.getEmail());
         if (existingUserCreds != null)
             throw new UsernameOrEmailAlreadyUsedException();
 
         UserCredentialsEntity userCredentialsEntity = UserCredentialsEntity.builder()
-                .username(userRegistration.getUsername())
-                .email(userRegistration.getEmail())
-                .password(passwordEncoder.encode(userRegistration.getPassword()))
+                .username(userRegistrationParams.getUsername())
+                .email(userRegistrationParams.getEmail())
+                .password(passwordEncoder.encode(userRegistrationParams.getPassword()))
                 .locked(false)
                 .activated(false)
                 .build();
-        userCredentialsEntity = this.userCredentialsRepository.save(userCredentialsEntity);
 
-        accountActivationService.requestActivationToken(userCredentialsEntity.getId(),
+        UserEntity userEntity = UserEntity.builder()
+                .credentials(userCredentialsEntity)
+                .profile(UserProfileEntity.builder()
+                        .contactEmail(userRegistrationParams.getEmail())
+                        .build())
+                .build();
+
+        userEntity = userRepository.save(userEntity);
+
+        accountActivationService.requestActivationToken(userEntity.getId(),
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );
@@ -78,19 +87,7 @@ public class UserService {
     {
         String token = activationTokenParams.getToken();
         ActivationTokenDto activationTokenDto = this.accountActivationService.getActivationToken(token);
-        this.accountActivationService.activateToken(activationTokenDto);
-
-        UserCredentialsEntity credentials = userCredentialsRepository.findById(activationTokenDto.getCredentialsId())
-                .orElse(null);
-        if (credentials != null)
-        {
-            credentials.setActivated(true);
-            userCredentialsRepository.save(credentials);
-            this.profileService.createNewProfile(CreateProfileParameters.builder()
-                    .credentialsId(credentials.getId())
-                    .email(credentials.getEmail())
-                    .build());
-        }
+        this.accountActivationService.activate(activationTokenDto);
     }
 
     public void resendActivationEmail(io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail login)
@@ -106,7 +103,7 @@ public class UserService {
             throw new AccessDeniedException();
         }
 
-        accountActivationService.requestActivationToken(userCredentialsEntity.getId(),
+        accountActivationService.requestActivationToken(userCredentialsEntity.getUserId(),
                 userCredentialsEntity.getEmail(),
                 requestLocaleExtractor.getPreferredLangCode()
         );

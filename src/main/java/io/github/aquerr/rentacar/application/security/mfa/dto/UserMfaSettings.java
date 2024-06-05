@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 public class UserMfaSettings
 {
     private Long id;
-    private Long credentialsId;
+    private Long userId;
     private MfaType mfaType;
     private boolean verified;
     private ZonedDateTime verifiedDate;

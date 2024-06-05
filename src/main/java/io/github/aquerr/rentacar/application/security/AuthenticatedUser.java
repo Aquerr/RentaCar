@@ -13,7 +13,6 @@ public class AuthenticatedUser implements UserDetails
     private final Long id;
     private final String username;
     private final String password;
-    private final Long profileId;
     private final String remoteIpAddress;
     private final Collection<? extends GrantedAuthority> authorities;
 
@@ -26,11 +25,6 @@ public class AuthenticatedUser implements UserDetails
     public Long getId()
     {
         return id;
-    }
-
-    public Long getProfileId()
-    {
-        return profileId;
     }
 
     public String getRemoteIpAddress()

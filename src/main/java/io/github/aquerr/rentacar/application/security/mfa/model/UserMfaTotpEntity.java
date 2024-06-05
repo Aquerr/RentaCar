@@ -18,8 +18,8 @@ public class UserMfaTotpEntity
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "credentialsId", unique = true, nullable = false)
-    private Long credentialsId;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Long userId;
 
     @Column(name = "secret", nullable = false)
     private String secret;

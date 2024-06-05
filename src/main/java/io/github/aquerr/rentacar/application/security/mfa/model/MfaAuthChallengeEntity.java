@@ -17,8 +17,8 @@ public class MfaAuthChallengeEntity
     @Column(name = "challenge", unique = true, nullable = false)
     private String challenge;
 
-    @Column(name = "credentials_id", unique = true, nullable = false)
-    private Long credentialsId;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Long userId;
 
     @Column(name = "expiration_date_time", nullable = false)
     private ZonedDateTime expirationDateTime;

@@ -24,6 +24,6 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
     Optional<ReservationEntity> findReservationByVehicleIdAndDateBetween(@Param("vehicleId") int vehicleId, @Param("dateFrom") LocalDate dateFrom, @Param("dateTo") LocalDate dateTo);
 
     @Query("FROM ReservationEntity reservation " +
-            "WHERE reservation.userProfile.id = :userId")
+            "WHERE reservation.userId = :userId")
     List<ReservationEntity> findAllByUserId(@Param("userId") Long userId);
 }

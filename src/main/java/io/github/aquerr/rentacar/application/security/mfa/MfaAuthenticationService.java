@@ -50,9 +50,9 @@ public class MfaAuthenticationService
             MfaType.TOTP, this::generateQRCode
     );
 
-    public MfaAuthResult auth(long credentialsId, String code)
+    public MfaAuthResult auth(long userId, String code)
     {
-        UserMfaSettingsEntity userMfaSettingsEntity = mfaSettingsRepository.findByCredentialsId(credentialsId)
+        UserMfaSettingsEntity userMfaSettingsEntity = mfaSettingsRepository.findByUserId(userId)
                 .orElse(null);
         if (userMfaSettingsEntity == null || !userMfaSettingsEntity.isVerified())
         {
@@ -68,7 +68,7 @@ public class MfaAuthenticationService
 
     private MfaAuthResult authTotp(UserMfaSettingsEntity userMfaSettingsEntity, String code)
     {
-        UserMfaTotpEntity userMfaTotpEntity = mfaTotpEntityRepository.findByCredentialsId(userMfaSettingsEntity.getCredentialsId())
+        UserMfaTotpEntity userMfaTotpEntity = mfaTotpEntityRepository.findByUserId(userMfaSettingsEntity.getUserId())
                 .orElseThrow();
 
         String secret = userMfaTotpEntity.getSecret();
@@ -78,9 +78,9 @@ public class MfaAuthenticationService
     }
 
     @Transactional
-    public MfaActivationResult activate(long credentialsId, String code)
+    public MfaActivationResult activate(long userId, String code)
     {
-        UserMfaSettingsEntity userMfaSettingsEntity = mfaSettingsRepository.findByCredentialsId(credentialsId)
+        UserMfaSettingsEntity userMfaSettingsEntity = mfaSettingsRepository.findByUserId(userId)
                 .orElse(null);
         if (userMfaSettingsEntity == null || userMfaSettingsEntity.isVerified())
         {
@@ -90,7 +90,7 @@ public class MfaAuthenticationService
         String secret = null;
         if (userMfaSettingsEntity.getMfaType() == MfaType.TOTP)
         {
-            secret = this.mfaTotpEntityRepository.findByCredentialsId(credentialsId)
+            secret = this.mfaTotpEntityRepository.findByUserId(userId)
                     .orElseThrow(() -> new IllegalStateException("Missing MFA settings!"))
                     .getSecret();
         }
@@ -112,22 +112,22 @@ public class MfaAuthenticationService
         Set<String> recoveryCodes = this.mfaCodeGenerator.generateRecoveryCodes();
 
         mfaRecoveryCodesRepository.saveAll(recoveryCodes.stream()
-                .map(recoveryCode -> new MfaRecoveryCodeEntity(null, credentialsId, recoveryCode))
+                .map(recoveryCode -> new MfaRecoveryCodeEntity(null, userId, recoveryCode))
                 .toList());
 
         return MfaActivationResult.of(recoveryCodes);
     }
 
     @Transactional
-    public void deleteMfaForUser(long credentialsId)
+    public void deleteMfaForUser(long userId)
     {
-        UserMfaSettingsEntity entity = this.mfaSettingsRepository.findByCredentialsId(credentialsId).orElseThrow();
+        UserMfaSettingsEntity entity = this.mfaSettingsRepository.findByUserId(userId).orElseThrow();
         if (entity.getMfaType() == MfaType.TOTP)
         {
-            this.mfaTotpEntityRepository.deleteByCredentialsId(credentialsId);
+            this.mfaTotpEntityRepository.deleteByUserId(userId);
         }
 
-        this.mfaSettingsRepository.deleteByCredentialsId(credentialsId);
+        this.mfaSettingsRepository.deleteByUserId(userId);
     }
 
     @Transactional
@@ -158,22 +158,22 @@ public class MfaAuthenticationService
         Optional<UserMfaSettings> userMfaSettingsSaved = getUserMfaSettings(authenticatedUser.getId());
         UserMfaSettingsEntity userMfaSettingsEntity = new UserMfaSettingsEntity();
         userMfaSettingsSaved.ifPresent(userMfaSettings -> userMfaSettingsEntity.setId(userMfaSettings.getId()));
-        userMfaSettingsEntity.setCredentialsId(authenticatedUser.getId());
+        userMfaSettingsEntity.setUserId(authenticatedUser.getId());
         userMfaSettingsEntity.setVerified(false);
         userMfaSettingsEntity.setMfaType(MfaType.TOTP);
         this.mfaSettingsRepository.save(userMfaSettingsEntity);
 
-        Optional<UserMfaTotpEntity> userMfaTotpEntitySaved = this.mfaTotpEntityRepository.findByCredentialsId(authenticatedUser.getId());
+        Optional<UserMfaTotpEntity> userMfaTotpEntitySaved = this.mfaTotpEntityRepository.findByUserId(authenticatedUser.getId());
         UserMfaTotpEntity userMfaTotpEntity = new UserMfaTotpEntity();
         userMfaTotpEntitySaved.ifPresent(userMfaToTp -> userMfaTotpEntity.setId(userMfaToTp.getId()));
         userMfaTotpEntity.setSecret(secret);
-        userMfaTotpEntity.setCredentialsId(authenticatedUser.getId());
+        userMfaTotpEntity.setUserId(authenticatedUser.getId());
         this.mfaTotpEntityRepository.save(userMfaTotpEntity);
     }
 
-    public Optional<UserMfaSettings> getUserMfaSettings(Long credentialsId)
+    public Optional<UserMfaSettings> getUserMfaSettings(Long userId)
     {
-        return mfaSettingsRepository.findByCredentialsId(credentialsId)
+        return mfaSettingsRepository.findByUserId(userId)
                 .map(this.mfaSettingsConverter::convertToDto);
     }
 
@@ -182,7 +182,7 @@ public class MfaAuthenticationService
     {
         String challenge = this.mfaCodeGenerator.generateChallenge();
         MfaAuthChallengeEntity mfaAuthChallengeEntity = new MfaAuthChallengeEntity();
-        mfaAuthChallengeEntity.setCredentialsId(authenticatedUser.getId());
+        mfaAuthChallengeEntity.setUserId(authenticatedUser.getId());
         mfaAuthChallengeEntity.setChallenge(challenge);
         mfaAuthChallengeEntity.setExpirationDateTime(ZonedDateTime.now().plusMinutes(1));
         mfaAuthChallengeRepository.save(mfaAuthChallengeEntity);
@@ -205,8 +205,8 @@ public class MfaAuthenticationService
         if (challengeEntity.getExpirationDateTime().isBefore(ZonedDateTime.now()))
             throw new MfaChallengeExpiredException();
 
-        AuthenticatedUser authenticatedUser = rentaCarUserDetailsService.loadById(challengeEntity.getCredentialsId());
-        UserMfaTotpEntity mfaTotpEntity = mfaTotpEntityRepository.findByCredentialsId(challengeEntity.getCredentialsId()).orElse(null);
+        AuthenticatedUser authenticatedUser = rentaCarUserDetailsService.loadById(challengeEntity.getUserId());
+        UserMfaTotpEntity mfaTotpEntity = mfaTotpEntityRepository.findByUserId(challengeEntity.getUserId()).orElse(null);
         if (mfaTotpEntity == null)
             throw new BadMfaAuthenticationException();
 

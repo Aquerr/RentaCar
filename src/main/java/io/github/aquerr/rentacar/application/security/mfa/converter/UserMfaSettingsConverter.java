@@ -16,7 +16,7 @@ public class UserMfaSettingsConverter
 
         UserMfaSettings userMfaSettings = new UserMfaSettings();
         userMfaSettings.setId(entity.getId());
-        userMfaSettings.setCredentialsId(entity.getCredentialsId());
+        userMfaSettings.setUserId(entity.getUserId());
         userMfaSettings.setMfaType(entity.getMfaType());
         userMfaSettings.setVerified(entity.isVerified());
         userMfaSettings.setVerifiedDate(entity.getVerifiedDate());

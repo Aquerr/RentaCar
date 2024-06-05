@@ -64,7 +64,7 @@ public class PasswordResetService
         if (passwordResetTokenDto.getExpirationDate().isBefore(ZonedDateTime.now()))
             throw new PasswordResetTokenExpiredException();
 
-        this.userCredentialsRepository.updateByCredentialsIdSetPassword(passwordResetTokenDto.getCredentialsId(), passwordEncoder.encode(newPassword));
+        this.userCredentialsRepository.updateByUserIdSetPassword(passwordResetTokenDto.getUserId(), passwordEncoder.encode(newPassword));
         this.passwordResetTokenService.markAsUsed(token);
     }
 }
