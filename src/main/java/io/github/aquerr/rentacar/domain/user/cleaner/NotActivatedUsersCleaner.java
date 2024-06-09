@@ -1,8 +1,6 @@
 package io.github.aquerr.rentacar.domain.user.cleaner;
 
-import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import io.github.aquerr.rentacar.repository.UserRepository;
 import lombok.AllArgsConstructor;

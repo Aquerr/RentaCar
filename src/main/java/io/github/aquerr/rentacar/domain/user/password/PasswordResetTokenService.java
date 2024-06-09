@@ -1,10 +1,9 @@
 package io.github.aquerr.rentacar.domain.user.password;
 
-import io.github.aquerr.rentacar.application.security.AccessTokenGenerator;
+import io.github.aquerr.rentacar.application.security.challengetoken.ChallengeTokenGenerator;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
 import io.github.aquerr.rentacar.domain.user.password.converter.PasswordResetTokenConverter;
 import io.github.aquerr.rentacar.domain.user.password.dto.PasswordResetTokenDto;
-import io.github.aquerr.rentacar.domain.user.password.model.PasswordResetTokenEntity;
-import io.github.aquerr.rentacar.repository.PasswordResetTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PasswordResetTokenService
 {
-    private final AccessTokenGenerator accessTokenGenerator;
+    private final ChallengeTokenGenerator challengeTokenGenerator;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordResetTokenConverter passwordResetTokenConverter;
 
@@ -31,18 +30,20 @@ public class PasswordResetTokenService
     }
 
     @Transactional
-    public PasswordResetTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
+    public ChallengeTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
     {
         this.passwordResetTokenRepository.invalidateOldResetTokens(userId);
 
-        PasswordResetTokenEntity passwordResetTokenEntity = new PasswordResetTokenEntity();
-        passwordResetTokenEntity.setUserId(userId);
-        passwordResetTokenEntity.setExpirationDate(ZonedDateTime.now().plus(passwordResetTokenExpirationTime));
-        passwordResetTokenEntity.setToken(this.accessTokenGenerator.generate());
-        passwordResetTokenEntity.setUsed(false);
-        this.passwordResetTokenRepository.save(passwordResetTokenEntity);
+        ChallengeTokenEntity challengeTokenEntity = ChallengeTokenEntity.builder()
+                        .userId(userId)
+                        .expirationDate(ZonedDateTime.now().plus(passwordResetTokenExpirationTime))
+                        .token(this.challengeTokenGenerator.generate())
+                        .used(false)
+                        .build();
 
-        return passwordResetTokenEntity;
+        this.challengeTokenGenerator.save(challengeTokenEntity);
+
+        return challengeTokenEntity;
     }
 
     @Transactional

@@ -4,7 +4,6 @@ import io.github.aquerr.rentacar.BaseIntegrationTest;
 import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
 import io.github.aquerr.rentacar.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

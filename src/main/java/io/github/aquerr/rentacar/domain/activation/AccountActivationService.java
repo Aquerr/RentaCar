@@ -4,16 +4,17 @@ import io.github.aquerr.rentacar.application.exception.MessageSendException;
 import io.github.aquerr.rentacar.application.lang.LangCode;
 import io.github.aquerr.rentacar.application.rabbit.Event;
 import io.github.aquerr.rentacar.application.rabbit.RabbitMessageSender;
-import io.github.aquerr.rentacar.application.security.AccessTokenGenerator;
+import io.github.aquerr.rentacar.application.security.challengetoken.ChallengeTokenGenerator;
+import io.github.aquerr.rentacar.application.security.challengetoken.dto.ChallengeToken;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
 import io.github.aquerr.rentacar.domain.activation.command.AccountActivationTokenRequestCommand;
-import io.github.aquerr.rentacar.domain.activation.converter.ActivationTokenConverter;
-import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
+import io.github.aquerr.rentacar.application.security.challengetoken.converter.ChallengeTokenConverter;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenAlreadyUsedException;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenExpiredException;
 import io.github.aquerr.rentacar.domain.activation.exception.ActivationTokenNotFoundException;
-import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.repository.ActivationTokenRepository;
+import io.github.aquerr.rentacar.repository.ChallengeTokenRepository;
 import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +31,9 @@ import java.time.ZonedDateTime;
 @Slf4j
 public class AccountActivationService
 {
-    private final AccessTokenGenerator accessTokenGenerator;
-    private final ActivationTokenRepository activationTokenRepository;
-    private final ActivationTokenConverter activationTokenConverter;
+    private final ChallengeTokenGenerator challengeTokenGenerator;
+    private final ChallengeTokenRepository challengeTokenRepository;
+    private final ChallengeTokenConverter challengeTokenConverter;
     private final RabbitMessageSender rabbitMessageSender;
     private final UserCredentialsRepository userCredentialsRepository;
 
@@ -40,41 +41,47 @@ public class AccountActivationService
     private Duration activationTokenExpirationTime;
 
     @Transactional
-    public ActivationTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
+    public ChallengeTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
     {
-        this.activationTokenRepository.invalidateOldActivationTokens(userId);
+        this.challengeTokenRepository.invalidateOldChallengeTokens(userId);
 
-        ActivationTokenEntity activationTokenEntity = new ActivationTokenEntity();
-        activationTokenEntity.setUserId(userId);
-        activationTokenEntity.setExpirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime));
-        activationTokenEntity.setToken(this.accessTokenGenerator.generate());
-        activationTokenEntity.setUsed(false);
-        this.activationTokenRepository.save(activationTokenEntity);
+        ChallengeTokenEntity challengeTokenEntity = ChallengeTokenEntity.builder()
+                .userId(userId)
+                .expirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime))
+                .token(this.challengeTokenGenerator.generate())
+                .used(false)
+                .build();
 
-        return activationTokenEntity;
+        this.challengeTokenRepository.save(challengeTokenEntity);
+
+        return challengeTokenEntity;
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-    public ActivationTokenDto getActivationToken(String token)
+    public ChallengeToken getActivationToken(String token)
     {
-        return this.activationTokenRepository.findByToken(token).map(this.activationTokenConverter::toDto)
+        return this.challengeTokenRepository.findByTokenAndOperationType(token, OperationType.ACTIVATION)
+                .map(this.challengeTokenConverter::toDto)
                 .orElseThrow(ActivationTokenNotFoundException::new);
     }
 
     @Transactional
-    public void activate(ActivationTokenDto activationTokenDto)
+    public void activate(ChallengeToken challengeToken)
     {
-        if (activationTokenDto.isUsed())
+        if (challengeToken.used())
             throw new ActivationTokenAlreadyUsedException();
-        if (activationTokenDto.getExpirationDate().isBefore(ZonedDateTime.now()))
+        if (challengeToken.expirationDate().isBefore(ZonedDateTime.now()))
             throw new ActivationTokenExpiredException();
 
-        ActivationTokenEntity activationTokenEntity = this.activationTokenRepository.findById(activationTokenDto.getId())
-                .orElseThrow(ActivationTokenNotFoundException::new);
-        activationTokenEntity.setUsed(true);
-        this.activationTokenRepository.save(activationTokenEntity);
+        ChallengeTokenEntity challengeTokenEntity = this.challengeTokenRepository.findById(challengeToken.id())
+                .orElseThrow(ActivationTokenNotFoundException::new)
+                .toBuilder()
+                .used(true)
+                .build();
 
-        UserCredentialsEntity credentials = userCredentialsRepository.findById(activationTokenDto.getUserId())
+        this.challengeTokenRepository.save(challengeTokenEntity);
+
+        UserCredentialsEntity credentials = userCredentialsRepository.findById(challengeTokenEntity.userId())
                 .orElse(null);
         if (credentials != null)
         {

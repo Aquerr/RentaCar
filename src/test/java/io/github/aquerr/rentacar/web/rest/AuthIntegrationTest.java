@@ -3,7 +3,6 @@ package io.github.aquerr.rentacar.web.rest;
 import io.github.aquerr.rentacar.BaseIntegrationTest;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
 import io.github.aquerr.rentacar.domain.user.password.model.PasswordResetTokenEntity;
-import io.github.aquerr.rentacar.repository.PasswordResetTokenRepository;
 import io.github.aquerr.rentacar.repository.UserRepository;
 import io.github.aquerr.rentacar.web.rest.request.InitPasswordResetRequest;
 import io.github.aquerr.rentacar.web.rest.request.PasswordResetRequest;

@@ -1,9 +1,9 @@
 package io.github.aquerr.rentacar.domain.user;
 
 import io.github.aquerr.rentacar.application.lang.RequestLocaleExtractor;
+import io.github.aquerr.rentacar.application.security.challengetoken.dto.ChallengeToken;
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
-import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenDto;
 import io.github.aquerr.rentacar.domain.activation.dto.ActivationTokenParams;
 import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.converter.UserCredentialsConverter;
@@ -86,8 +86,8 @@ public class UserService {
     public void activateAccount(ActivationTokenParams activationTokenParams)
     {
         String token = activationTokenParams.getToken();
-        ActivationTokenDto activationTokenDto = this.accountActivationService.getActivationToken(token);
-        this.accountActivationService.activate(activationTokenDto);
+        ChallengeToken challengeToken = this.accountActivationService.getActivationToken(token);
+        this.accountActivationService.activate(challengeToken);
     }
 
     public void resendActivationEmail(io.github.aquerr.rentacar.application.security.UserCredentials.UsernameOrEmail login)
