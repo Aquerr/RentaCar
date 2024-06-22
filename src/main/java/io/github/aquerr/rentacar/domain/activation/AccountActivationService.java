@@ -4,7 +4,7 @@ import io.github.aquerr.rentacar.application.exception.MessageSendException;
 import io.github.aquerr.rentacar.application.lang.LangCode;
 import io.github.aquerr.rentacar.application.rabbit.Event;
 import io.github.aquerr.rentacar.application.rabbit.RabbitMessageSender;
-import io.github.aquerr.rentacar.application.security.challengetoken.ChallengeTokenGenerator;
+import io.github.aquerr.rentacar.application.security.challengetoken.ChallengeTokenService;
 import io.github.aquerr.rentacar.application.security.challengetoken.dto.ChallengeToken;
 import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
 import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
@@ -24,43 +24,33 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AccountActivationService
 {
-    private final ChallengeTokenGenerator challengeTokenGenerator;
     private final ChallengeTokenRepository challengeTokenRepository;
     private final ChallengeTokenConverter challengeTokenConverter;
     private final RabbitMessageSender rabbitMessageSender;
     private final UserCredentialsRepository userCredentialsRepository;
+    private final ChallengeTokenService challengeTokenService;
 
     @Value("${rentacar.security.account.activation-token.expiration-time}")
     private Duration activationTokenExpirationTime;
 
     @Transactional
-    public ChallengeTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
+    public ChallengeToken invalidateOldActivationTokensAndGenerateNew(long userId)
     {
-        this.challengeTokenRepository.invalidateOldChallengeTokens(userId);
-
-        ChallengeTokenEntity challengeTokenEntity = ChallengeTokenEntity.builder()
-                .userId(userId)
-                .expirationDate(ZonedDateTime.now().plus(activationTokenExpirationTime))
-                .token(this.challengeTokenGenerator.generate())
-                .used(false)
-                .build();
-
-        this.challengeTokenRepository.save(challengeTokenEntity);
-
-        return challengeTokenEntity;
+        this.challengeTokenRepository.invalidateOldChallengeTokens(userId, OperationType.ACCOUNT_ACTIVATION);
+        return this.challengeTokenService.generateAndSave(userId, OperationType.ACCOUNT_ACTIVATION, activationTokenExpirationTime);
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
     public ChallengeToken getActivationToken(String token)
     {
-        return this.challengeTokenRepository.findByTokenAndOperationType(token, OperationType.ACTIVATION)
+        return this.challengeTokenRepository.findByTokenAndOperationType(token, OperationType.ACCOUNT_ACTIVATION)
                 .map(this.challengeTokenConverter::toDto)
                 .orElseThrow(ActivationTokenNotFoundException::new);
     }
@@ -70,7 +60,7 @@ public class AccountActivationService
     {
         if (challengeToken.used())
             throw new ActivationTokenAlreadyUsedException();
-        if (challengeToken.expirationDate().isBefore(ZonedDateTime.now()))
+        if (challengeToken.expirationDate().isBefore(OffsetDateTime.now()))
             throw new ActivationTokenExpiredException();
 
         ChallengeTokenEntity challengeTokenEntity = this.challengeTokenRepository.findById(challengeToken.id())
@@ -81,7 +71,7 @@ public class AccountActivationService
 
         this.challengeTokenRepository.save(challengeTokenEntity);
 
-        UserCredentialsEntity credentials = userCredentialsRepository.findById(challengeTokenEntity.userId())
+        UserCredentialsEntity credentials = userCredentialsRepository.findById(challengeTokenEntity.getUserId())
                 .orElse(null);
         if (credentials != null)
         {

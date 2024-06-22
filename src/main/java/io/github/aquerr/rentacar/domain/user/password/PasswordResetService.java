@@ -5,9 +5,9 @@ import io.github.aquerr.rentacar.application.mail.MailMessageProperties;
 import io.github.aquerr.rentacar.application.mail.MailType;
 import io.github.aquerr.rentacar.application.mail.placeholder.CommonPlaceholders;
 import io.github.aquerr.rentacar.application.mail.publisher.RabbitSendMailPublisher;
+import io.github.aquerr.rentacar.application.security.challengetoken.dto.ChallengeToken;
 import io.github.aquerr.rentacar.domain.user.UserService;
 import io.github.aquerr.rentacar.domain.user.dto.UserCredentials;
-import io.github.aquerr.rentacar.domain.user.password.dto.PasswordResetTokenDto;
 import io.github.aquerr.rentacar.domain.user.password.exception.PasswordResetTokenAlreadyUsedException;
 import io.github.aquerr.rentacar.domain.user.password.exception.PasswordResetTokenExpiredException;
 import io.github.aquerr.rentacar.domain.user.password.exception.PasswordResetTokenNotFoundException;
@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Map;
 
 @Component
@@ -42,7 +42,7 @@ public class PasswordResetService
             return;
         }
 
-        String token = this.passwordResetTokenService.invalidateOldActivationTokensAndGenerateNew(userCredentials.getId()).getToken();
+        String token = this.passwordResetTokenService.invalidateOldActivationTokensAndGenerateNew(userCredentials.getId()).token();
 
         MailMessageProperties mailMessageProperties = MailMessageProperties.builder()
                 .to(email)
@@ -57,14 +57,14 @@ public class PasswordResetService
     @Transactional
     public void changePassword(String token, String newPassword)
     {
-        PasswordResetTokenDto passwordResetTokenDto = this.passwordResetTokenService.getResetToken(token)
+        ChallengeToken passwordResetTokenDto = this.passwordResetTokenService.getResetToken(token)
                 .orElseThrow(PasswordResetTokenNotFoundException::new);
-        if (passwordResetTokenDto.isUsed())
+        if (passwordResetTokenDto.used())
             throw new PasswordResetTokenAlreadyUsedException();
-        if (passwordResetTokenDto.getExpirationDate().isBefore(ZonedDateTime.now()))
+        if (passwordResetTokenDto.expirationDate().isBefore(OffsetDateTime.now()))
             throw new PasswordResetTokenExpiredException();
 
-        this.userCredentialsRepository.updateByUserIdSetPassword(passwordResetTokenDto.getUserId(), passwordEncoder.encode(newPassword));
+        this.userCredentialsRepository.updateByUserIdSetPassword(passwordResetTokenDto.userId(), passwordEncoder.encode(newPassword));
         this.passwordResetTokenService.markAsUsed(token);
     }
 }

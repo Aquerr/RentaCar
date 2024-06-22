@@ -1,8 +1,10 @@
 package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.BaseIntegrationTest;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.domain.user.password.model.PasswordResetTokenEntity;
+import io.github.aquerr.rentacar.repository.ChallengeTokenRepository;
 import io.github.aquerr.rentacar.repository.UserRepository;
 import io.github.aquerr.rentacar.web.rest.request.InitPasswordResetRequest;
 import io.github.aquerr.rentacar.web.rest.request.PasswordResetRequest;
@@ -13,7 +15,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +28,7 @@ class AuthIntegrationTest extends BaseIntegrationTest
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private PasswordResetTokenRepository passwordResetTokenRepository;
+    private ChallengeTokenRepository challengeTokenRepository;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -36,7 +38,7 @@ class AuthIntegrationTest extends BaseIntegrationTest
     @BeforeEach
     public void setUp()
     {
-        passwordResetTokenRepository.deleteAll();
+        challengeTokenRepository.deleteAll();
         userRepository.deleteAll();
     }
 
@@ -52,7 +54,7 @@ class AuthIntegrationTest extends BaseIntegrationTest
 
         // then
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
-        assertThat(passwordResetTokenRepository.findAllByUserIdIn(List.of(userEntity.getId()))).hasSize(1);
+        assertThat(challengeTokenRepository.findAllByUserIdIn(List.of(userEntity.getId()))).hasSize(1);
     }
 
     @Test
@@ -61,13 +63,14 @@ class AuthIntegrationTest extends BaseIntegrationTest
         // given
         UserEntity userEntity = givenActivatedUser();
 
-        PasswordResetTokenEntity entity = PasswordResetTokenEntity.builder()
+        ChallengeTokenEntity entity = ChallengeTokenEntity.builder()
                 .userId(userEntity.getId())
+                .operationType(OperationType.PASSWORD_RESET)
                 .used(false)
                 .token(TOKEN)
-                .expirationDate(ZonedDateTime.now().plusHours(1))
+                .expirationDate(OffsetDateTime.now().plusHours(1))
                 .build();
-        passwordResetTokenRepository.save(entity);
+        challengeTokenRepository.save(entity);
 
         // when
 

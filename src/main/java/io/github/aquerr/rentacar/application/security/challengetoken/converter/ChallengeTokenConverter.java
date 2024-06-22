@@ -15,11 +15,11 @@ public class ChallengeTokenConverter
         }
 
         return ChallengeToken.builder()
-                .id(challengeTokenEntity.id())
-                .userId(challengeTokenEntity.userId())
-                .token(challengeTokenEntity.token())
-                .used(challengeTokenEntity.used())
-                .expirationDate(challengeTokenEntity.expirationDate())
+                .id(challengeTokenEntity.getId())
+                .userId(challengeTokenEntity.getUserId())
+                .token(challengeTokenEntity.getToken())
+                .used(challengeTokenEntity.isUsed())
+                .expirationDate(challengeTokenEntity.getExpirationDate())
                 .build();
     }
 }
