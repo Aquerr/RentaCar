@@ -48,67 +48,65 @@ public class DummyDataLoader implements CommandLineRunner {
 
     private void createDummyUsers()
     {
-        UserEntity userEntity1 = UserEntity.builder()
-                .credentials(UserCredentialsEntity.builder()
-                        .username("test_user")
-                        .email("test_email@test.com")
-                        .password(passwordEncoder.encode("test_pass"))
-                        .activated(true)
-                        .locked(false)
-                        .build())
-                .profile(UserProfileEntity.builder()
-                        .firstName("Tester")
-                        .lastName("Testowski")
-                        .phoneNumber("999999999")
-                        .contactEmail("test_email@test.com")
-                        .birthDate(LocalDate.of(1999, 6, 15))
-                        .city("Testów")
-                        .zipCode("15551")
-                        .street("Wymyślna 42")
-                        .iconName("photo.jpg")
-                        .build())
+        UserCredentialsEntity credentials1 = UserCredentialsEntity.builder()
+                .username("test_user")
+                .email("test_email@test.com")
+                .password(passwordEncoder.encode("test_pass"))
+                .activated(true)
+                .locked(false)
                 .build();
+
+        UserProfileEntity profile1 = UserProfileEntity.builder()
+                .firstName("Tester")
+                .lastName("Testowski")
+                .phoneNumber("999999999")
+                .contactEmail("test_email@test.com")
+                .birthDate(LocalDate.of(1999, 6, 15))
+                .city("Testów")
+                .zipCode("15551")
+                .street("Wymyślna 42")
+                .iconName("photo.jpg")
+                .build();
+
+        UserEntity userEntity1 = UserEntity.builder()
+                .credentials(credentials1)
+                .profile(profile1)
+                .build();
+        credentials1.setUser(userEntity1);
+        profile1.setUser(userEntity1);
 
         userEntity1 = userRepository.save(userEntity1);
 
         log.info("Created dummy verified profile: {}", userEntity1);
 
-        UserEntity userEntity2 = UserEntity.builder()
-                .credentials(UserCredentialsEntity.builder()
-                        .username("test_admin")
-                        .email("admin_email@test.com")
-                        .password(passwordEncoder.encode("test_admin"))
-                        .activated(true)
-                        .locked(false)
-                        .build())
-                .authorities(Set.of(Authority.ADD_VEHICLE.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority(), Authority.VIEW_ADMIN_PANEL.getAuthority(), Authority.REMOVE_VEHICLE.getAuthority(), Authority.GET_ALL_RESERVATIONS.getAuthority()))
+        UserCredentialsEntity adminCredentials1 = UserCredentialsEntity.builder()
+                .username("test_admin")
+                .email("admin_email@test.com")
+                .password(passwordEncoder.encode("test_admin"))
+                .activated(true)
+                .locked(false)
                 .build();
 
-        userEntity2 = userRepository.save(userEntity2);
-
-        log.info("Created dummy verified profile: {}", userEntity2);
+        UserProfileEntity adminProfile1 = UserProfileEntity.builder()
+                .firstName("Admin")
+                .lastName("Testowski")
+                .phoneNumber("111222333")
+                .contactEmail("admin_email@test.com")
+                .birthDate(LocalDate.of(1986, 2, 5))
+                .city("Testów")
+                .zipCode("14239")
+                .street("Wymyślna 92")
+                .iconName("photo.jpg")
+                .build();
 
         UserEntity adminUser1 = UserEntity.builder()
-                .credentials(UserCredentialsEntity.builder()
-                        .username("test_admin")
-                        .email("admin_email@test.com")
-                        .password(passwordEncoder.encode("test_admin"))
-                        .activated(true)
-                        .locked(false)
-                        .build())
+                .credentials(adminCredentials1)
                 .authorities(Set.of(Authority.ADD_VEHICLE.getAuthority(), Authority.VIEW_CAR_LOCATION.getAuthority(), Authority.VIEW_ADMIN_PANEL.getAuthority(), Authority.REMOVE_VEHICLE.getAuthority(), Authority.GET_ALL_RESERVATIONS.getAuthority()))
-                .profile(UserProfileEntity.builder()
-                        .firstName("Admin")
-                        .lastName("Testowski")
-                        .phoneNumber("111222333")
-                        .contactEmail("admin_email@test.com")
-                        .birthDate(LocalDate.of(1986, 2, 5))
-                        .city("Testów")
-                        .zipCode("14239")
-                        .street("Wymyślna 92")
-                        .iconName("photo.jpg")
-                        .build())
+                .profile(adminProfile1)
                 .build();
+
+        adminCredentials1.setUser(adminUser1);
+        adminProfile1.setUser(adminUser1);
 
         adminUser1 = userRepository.save(adminUser1);
 
