@@ -1,53 +1,40 @@
 package io.github.aquerr.rentacar.domain.user.password;
 
-import io.github.aquerr.rentacar.application.security.AccessTokenGenerator;
-import io.github.aquerr.rentacar.domain.user.password.converter.PasswordResetTokenConverter;
-import io.github.aquerr.rentacar.domain.user.password.dto.PasswordResetTokenDto;
-import io.github.aquerr.rentacar.domain.user.password.model.PasswordResetTokenEntity;
-import io.github.aquerr.rentacar.repository.PasswordResetTokenRepository;
+import io.github.aquerr.rentacar.application.security.challengetoken.ChallengeTokenService;
+import io.github.aquerr.rentacar.application.security.challengetoken.dto.ChallengeToken;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PasswordResetTokenService
 {
-    private final AccessTokenGenerator accessTokenGenerator;
-    private final PasswordResetTokenRepository passwordResetTokenRepository;
-    private final PasswordResetTokenConverter passwordResetTokenConverter;
+    private final ChallengeTokenService challengeTokenService;
 
     @Value("${rentacar.security.account.password-reset-token.expiration-time}")
     private Duration passwordResetTokenExpirationTime;
 
-    public Optional<PasswordResetTokenDto> getResetToken(String token)
+    public Optional<ChallengeToken> getResetToken(String token)
     {
-        return this.passwordResetTokenRepository.findByToken(token).map(this.passwordResetTokenConverter::toDto);
+        return Optional.ofNullable(this.challengeTokenService.find(token, OperationType.PASSWORD_RESET));
     }
 
     @Transactional
-    public PasswordResetTokenEntity invalidateOldActivationTokensAndGenerateNew(long userId)
+    public ChallengeToken invalidateOldActivationTokensAndGenerateNew(long userId)
     {
-        this.passwordResetTokenRepository.invalidateOldResetTokens(userId);
-
-        PasswordResetTokenEntity passwordResetTokenEntity = new PasswordResetTokenEntity();
-        passwordResetTokenEntity.setUserId(userId);
-        passwordResetTokenEntity.setExpirationDate(ZonedDateTime.now().plus(passwordResetTokenExpirationTime));
-        passwordResetTokenEntity.setToken(this.accessTokenGenerator.generate());
-        passwordResetTokenEntity.setUsed(false);
-        this.passwordResetTokenRepository.save(passwordResetTokenEntity);
-
-        return passwordResetTokenEntity;
+        this.challengeTokenService.invalidateOldChallengeTokens(userId, OperationType.PASSWORD_RESET);
+        return this.challengeTokenService.generateAndSave(userId, OperationType.PASSWORD_RESET, passwordResetTokenExpirationTime);
     }
 
     @Transactional
     public void markAsUsed(String token)
     {
-        this.passwordResetTokenRepository.updateByTokenSetUsedTrue(token);
+        this.challengeTokenService.markAsUsed(token, OperationType.PASSWORD_RESET);
     }
 }

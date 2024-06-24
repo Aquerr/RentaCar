@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -19,9 +20,9 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
 
     @Query(nativeQuery = true, value = "SELECT * FROM user_credentials " +
             "WHERE user_credentials.user_id IN " +
-            "(SELECT user_id FROM user_credentials WHERE user_credentials.activated = false AND user_credentials.user_id NOT IN (SELECT user_id FROM account_activation_token WHERE account_activation_token.user_id = user_credentials.user_id) " +
-            "UNION (SELECT user_id FROM account_activation_token WHERE account_activation_token.user_id = user_credentials.user_id AND account_activation_token.expiration_date_time < :dateBefore));")
-    List<UserCredentialsEntity> findAllNotActivatedUserCredentialsBefore(@Param("dateBefore") ZonedDateTime dateBefore);
+            "(SELECT user_id FROM user_credentials WHERE user_credentials.activated = false AND user_credentials.user_id NOT IN (SELECT user_id FROM challenge_token WHERE challenge_token.user_id = user_credentials.user_id and challenge_token.operation_type = 'ACCOUNT_ACTIVATION') " +
+            "UNION (SELECT user_id FROM challenge_token WHERE challenge_token.user_id = user_credentials.user_id AND challenge_token.operation_type = 'ACCOUNT_ACTIVATION' AND challenge_token.expiration_date_time < :dateBefore));")
+    List<UserCredentialsEntity> findAllNotActivatedUserCredentialsBefore(@Param("dateBefore") OffsetDateTime dateBefore);
 
     @Modifying
     @Query("UPDATE UserCredentialsEntity credentials SET credentials.password = :newPassword WHERE credentials.userId = :userId")

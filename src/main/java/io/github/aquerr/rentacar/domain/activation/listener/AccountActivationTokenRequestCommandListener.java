@@ -4,9 +4,9 @@ import io.github.aquerr.rentacar.application.mail.MailMessageProperties;
 import io.github.aquerr.rentacar.application.mail.MailType;
 import io.github.aquerr.rentacar.application.mail.placeholder.CommonPlaceholders;
 import io.github.aquerr.rentacar.application.rabbit.RabbitMessageSender;
+import io.github.aquerr.rentacar.application.security.challengetoken.dto.ChallengeToken;
 import io.github.aquerr.rentacar.domain.activation.AccountActivationService;
 import io.github.aquerr.rentacar.domain.activation.command.AccountActivationTokenRequestCommand;
-import io.github.aquerr.rentacar.domain.activation.model.ActivationTokenEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -27,13 +27,13 @@ public class AccountActivationTokenRequestCommandListener
     {
         log.info("Processing command: {}", command);
 
-        ActivationTokenEntity activationTokenEntity = accountActivationService.invalidateOldActivationTokensAndGenerateNew(command.getUserId());
+        ChallengeToken activationTokenEntity = accountActivationService.invalidateOldActivationTokensAndGenerateNew(command.getUserId());
 
         MailMessageProperties mailMessageProperties = MailMessageProperties.builder()
                         .to(command.getEmailTo())
                         .type(MailType.ACCOUNT_ACTIVATION)
                         .langCode(command.getLangCode())
-                        .additionalProperties(Map.of(CommonPlaceholders.TOKEN, activationTokenEntity.getToken()))
+                        .additionalProperties(Map.of(CommonPlaceholders.TOKEN, activationTokenEntity.token()))
                 .build();
         sendMail(mailMessageProperties);
     }
