@@ -47,12 +47,16 @@ public class UserService {
                 .activated(false)
                 .build();
 
+        UserProfileEntity profile = UserProfileEntity.builder()
+                .contactEmail(userRegistrationParams.getEmail())
+                .build();
+
         UserEntity userEntity = UserEntity.builder()
                 .credentials(userCredentialsEntity)
-                .profile(UserProfileEntity.builder()
-                        .contactEmail(userRegistrationParams.getEmail())
-                        .build())
+                .profile(profile)
                 .build();
+        userCredentialsEntity.setUser(userEntity);
+        profile.setUser(userEntity);
 
         userEntity = userRepository.save(userEntity);
 
