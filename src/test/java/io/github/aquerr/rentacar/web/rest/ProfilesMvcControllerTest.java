@@ -76,7 +76,7 @@ class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
 
         // when
         // then
-        mockMvc.perform(multipart(HttpMethod.PATCH, "/api/v1/profiles/" + PROFILE_ID_1)
+        mockMvc.perform(multipart(HttpMethod.PUT, "/api/v1/profiles/" + PROFILE_ID_1)
                         .file(new MockMultipartFile("image", TestResourceUtils.loadImage("mock-image/photo.jpg")))
                         .file(new MockMultipartFile("profile", "profile.json", "application/json", TestResourceUtils.loadMockJson("mock-json/save_profile_request.json").getBytes()))
                         .header("Authorization", "Bearer " + jwt))
@@ -97,7 +97,7 @@ class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
 
         // when
         // then
-        mockMvc.perform(multipart(HttpMethod.PATCH, "/api/v1/profiles/" + PROFILE_ID_1)
+        mockMvc.perform(multipart(HttpMethod.PUT, "/api/v1/profiles/" + PROFILE_ID_1)
                         .file(new MockMultipartFile("profile", "profile.json", "application/json", TestResourceUtils.loadMockJson("mock-json/save_profile_request.json").getBytes()))
                         .header("Authorization", "Bearer " + jwt))
                 .andExpect(status().isOk())
@@ -117,7 +117,7 @@ class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
 
         // when
         // then
-        mockMvc.perform(multipart(HttpMethod.PATCH, "/api/v1/profiles/" + 2)
+        mockMvc.perform(multipart(HttpMethod.PUT, "/api/v1/profiles/" + 2)
                         .file(new MockMultipartFile("image", TestResourceUtils.loadImage("mock-image/photo.jpg")))
                         .file(new MockMultipartFile("profile", "profile.json", "application/json", TestResourceUtils.loadMockJson("mock-json/save_profile_request.json").getBytes()))
                         .header("Authorization", "Bearer " + jwt))

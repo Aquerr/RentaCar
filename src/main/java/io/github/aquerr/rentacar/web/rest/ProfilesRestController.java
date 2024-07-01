@@ -16,9 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +37,7 @@ public class ProfilesRestController
     private final AuthenticationFacade authenticationFacade;
     private final RentaCarAuthenticationManager authenticationManager;
 
-    @PatchMapping(value = "/{profileId}")
+    @PutMapping(value = "/{profileId}")
     @PreAuthorize("@securityManager.canEditProfile(authentication, #profileId)")
     public ResponseEntity<?> saveProfile(@PathVariable("profileId") long profileId,
                                          @RequestPart(value = "image", required = false) MultipartFile image,

@@ -19,7 +19,7 @@ export class UserProfileApiService {
       formData.append('image', image);
     }
     formData.append('profile', new Blob([JSON.stringify(user)], { type: 'application/json' }));
-    return this.http.patch<UserProfile>(`${this.URL}/${user.id}`, formData);
+    return this.http.put<UserProfile>(`${this.URL}/${user.id}`, formData);
   }
 
   public getProfile(profileId: number) {
