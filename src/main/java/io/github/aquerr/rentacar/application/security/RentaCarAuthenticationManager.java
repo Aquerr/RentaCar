@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.application.security;
 
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
+import io.github.aquerr.rentacar.application.exception.LoginBlockedException;
 import io.github.aquerr.rentacar.application.exception.MfaRequiredException;
 import io.github.aquerr.rentacar.application.security.dto.AuthResult;
 import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
@@ -25,17 +26,27 @@ public class RentaCarAuthenticationManager
     private final MfaAuthenticationService mfaAuthenticationService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final LoginRestrictionsService loginRestrictionsService;
 
     public MfaActivationResult activateMfa(AuthenticatedUser authenticatedUser, String code)
     {
         return mfaAuthenticationService.activate(authenticatedUser.getId(), code);
     }
 
-    public AuthResult authenticate(UserCredentials userCredentials)
+    public AuthResult authenticate(UserCredentials userCredentials, String ipAddress)
     {
-        AuthenticatedUser authenticatedUser = rentaCarUserDetailsService.loadUserByUsername(userCredentials.getLogin());
+        AuthenticatedUser authenticatedUser = null;
         try
         {
+            if (!loginRestrictionsService.canLoginFromIp(ipAddress))
+                throw new LoginBlockedException();
+
+            authenticatedUser = rentaCarUserDetailsService.loadUserByUsername(userCredentials.getLogin());
+
+            if (!loginRestrictionsService.canLogin(authenticatedUser.getUsername()))
+                throw new LoginBlockedException();
+
+
             AuthResult authResult = authenticateByPassword(authenticatedUser, userCredentials.getPassword());
             JwtToken jwtToken = createJwtAndSetAuth(authResult, userCredentials.isRememberMe());
             return AuthResult.builder()
@@ -52,13 +63,21 @@ public class RentaCarAuthenticationManager
         }
         catch (Exception exception)
         {
-            return AuthResult.badCredentials();
+            if (exception instanceof BadCredentialsException)
+            {
+                if (authenticatedUser != null)
+                {
+                    loginRestrictionsService.incrementFailedLoginForUsername(authenticatedUser.getUsername());
+                }
+                loginRestrictionsService.incrementFailedLoginForIpAddress(ipAddress);
+            }
+            throw exception;
         }
     }
 
-    public JwtToken authenticate(MfaAuthRequest mfaAuthRequest)
+    public JwtToken authenticate(MfaAuthRequest mfaAuthRequest, String ipAddress)
     {
-        AuthResult authResult = mfaAuthenticationService.authenticate(mfaAuthRequest);
+        AuthResult authResult = mfaAuthenticationService.authenticate(mfaAuthRequest, ipAddress);
 
         //TODO: Handle RememberMe
         return createJwtAndSetAuth(authResult, true);

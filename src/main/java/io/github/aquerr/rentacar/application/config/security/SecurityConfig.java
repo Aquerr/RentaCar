@@ -1,6 +1,8 @@
 package io.github.aquerr.rentacar.application.config.security;
 
-import io.github.aquerr.rentacar.application.config.security.jwt.JwtAuthenticationFilter;
+import io.github.aquerr.rentacar.application.config.filter.ApiExceptionFilter;
+import io.github.aquerr.rentacar.application.config.filter.JwtAuthenticationFilter;
+import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.zalando.logbook.servlet.LogbookFilter;
 
 import java.util.List;
 
@@ -39,7 +42,10 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChain(Environment environment,
                                                        HttpSecurity http,
-                                                       JwtAuthenticationFilter authenticationFilter) throws Exception {
+                                                       RentaCarUserDetailsService rentaCarUserDetailsService,
+                                                       JwtAuthenticationFilter jwtAuthenticationFilter,
+                                                       ApiExceptionFilter apiExceptionFilter,
+                                                       LogbookFilter logbookFilter) throws Exception {
 
             http.authorizeHttpRequests(requests -> {
                 if (environment.matchesProfiles("dev")) {
@@ -62,7 +68,10 @@ public class SecurityConfig {
                 requests.requestMatchers("/assets/**").permitAll();
                 requests.requestMatchers("/*").permitAll();
             })
-            .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(apiExceptionFilter, JwtAuthenticationFilter.class)
+            .addFilterBefore(logbookFilter, ApiExceptionFilter.class)
+            .userDetailsService(rentaCarUserDetailsService)
             .formLogin(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
             .exceptionHandling(exceptionHandling -> {

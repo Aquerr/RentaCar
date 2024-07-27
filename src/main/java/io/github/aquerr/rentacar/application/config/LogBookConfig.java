@@ -11,13 +11,14 @@ import org.zalando.logbook.core.QueryFilters;
 import org.zalando.logbook.core.ResponseFilters;
 import org.zalando.logbook.json.JsonBodyFilters;
 import org.zalando.logbook.json.JsonHttpLogFormatter;
+import org.zalando.logbook.servlet.LogbookFilter;
 
 import java.util.Set;
 
 import static java.util.Optional.ofNullable;
 import static org.zalando.logbook.core.HeaderFilters.authorization;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class LogBookConfig {
 
     private static final Set<String> IGNORED_CONTENT_TYPES = Set.of(
@@ -48,5 +49,11 @@ public class LogBookConfig {
                         new DefaultHttpLogWriter()
                 ))
                 .build();
+    }
+
+    @Bean
+    public LogbookFilter logbookFilter(Logbook logbook)
+    {
+        return new LogbookFilter(logbook);
     }
 }

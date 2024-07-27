@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, of, switchMap, tap } from 'rxjs';
+import {catchError, of, switchMap, tap, throwError} from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { AuthenticationApiService } from '../../services/api/authentication-api.service';
 import {
@@ -34,7 +34,10 @@ export class AuthEffects {
           if (response.status == AuthStatus.REQUIRES_MFA) {
             return [goRoute({ routingLink: 'sign-in-mfa', pathVariables: [], queryParams: {"challenge": response.mfaChallenge}
             })];
+          } else if (response.jwt == null) {
+            throw new Error(response.status);
           }
+
           return [
             saveToken({ jwt: response.jwt, rememberMe: request.rememberMe }),
             getMyself(),

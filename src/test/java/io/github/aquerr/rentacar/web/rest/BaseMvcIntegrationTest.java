@@ -2,6 +2,7 @@ package io.github.aquerr.rentacar.web.rest;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.aquerr.rentacar.application.config.LogBookConfig;
 import io.github.aquerr.rentacar.application.config.security.SecurityConfig;
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
 import io.github.aquerr.rentacar.application.lang.AcceptedLanguageLocaleMapper;
@@ -28,7 +29,7 @@ import java.util.Set;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
-@Import(value = {JwtService.class, SecurityManager.class, SecurityConfig.class})
+@Import(value = {JwtService.class, SecurityManager.class, SecurityConfig.class, LogBookConfig.class})
 public abstract class BaseMvcIntegrationTest
 {
     @Autowired

@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.application.security;
 
+import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
 import io.github.aquerr.rentacar.application.exception.UserLockedException;
 import io.github.aquerr.rentacar.application.exception.UserNotActivatedException;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
@@ -42,14 +43,9 @@ public class RentaCarUserDetailsService implements UserDetailsService
             userEntity = userRepository.findByCredentials_Username(usernameOrEmail.getValue());
         }
 
-        return toAuthenticatedUser(userEntity);
-    }
-
-    private AuthenticatedUser toAuthenticatedUser(UserEntity userEntity)
-    {
         if (userEntity == null)
         {
-            throw new UsernameNotFoundException("User does not exist!");
+            throw new BadCredentialsException();
         }
         if (userEntity.getCredentials().isLocked())
         {
@@ -60,6 +56,11 @@ public class RentaCarUserDetailsService implements UserDetailsService
             throw new UserNotActivatedException();
         }
 
+        return toAuthenticatedUser(userEntity);
+    }
+
+    private AuthenticatedUser toAuthenticatedUser(UserEntity userEntity)
+    {
         HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         return new AuthenticatedUser(userEntity.getId(),
                 userEntity.getCredentials().getUsername(),

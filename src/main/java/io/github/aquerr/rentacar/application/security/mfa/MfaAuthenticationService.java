@@ -1,10 +1,10 @@
 package io.github.aquerr.rentacar.application.security.mfa;
 
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
+import io.github.aquerr.rentacar.application.security.LoginRestrictionsService;
 import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService;
 import io.github.aquerr.rentacar.application.security.dto.AuthResult;
 import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
-import io.github.aquerr.rentacar.application.security.dto.MfaAuthResult;
 import io.github.aquerr.rentacar.application.security.exception.AccessDeniedException;
 import io.github.aquerr.rentacar.application.security.exception.BadMfaAuthenticationException;
 import io.github.aquerr.rentacar.application.security.exception.MfaAlreadyActivatedException;
@@ -41,41 +41,15 @@ public class MfaAuthenticationService
     private final MfaCodeVerifier mfaCodeVerifier;
     private final UserMfaSettingsConverter mfaSettingsConverter;
     private final RentaCarUserDetailsService rentaCarUserDetailsService;
+    private final LoginRestrictionsService loginRestrictionsService;
     private final UserMfaTotpEntityRepository mfaTotpEntityRepository;
     private final UserMfaSettingsRepository mfaSettingsRepository;
     private final MfaRecoveryCodesRepository mfaRecoveryCodesRepository;
     private final MfaAuthChallengeRepository mfaAuthChallengeRepository;
 
-    private final Map<MfaType, Function<AuthenticatedUser, String>> MFA_HANDLES = Map.of(
+    private final Map<MfaType, Function<AuthenticatedUser, String>> MFA_HANDLERS = Map.of(
             MfaType.TOTP, this::generateQRCode
     );
-
-    public MfaAuthResult auth(long userId, String code)
-    {
-        UserMfaSettingsEntity userMfaSettingsEntity = mfaSettingsRepository.findByUserId(userId)
-                .orElse(null);
-        if (userMfaSettingsEntity == null || !userMfaSettingsEntity.isVerified())
-        {
-            throw new AccessDeniedException();
-        }
-
-        if (userMfaSettingsEntity.getMfaType() == MfaType.TOTP)
-        {
-            return authTotp(userMfaSettingsEntity, code);
-        }
-        return MfaAuthResult.of(false);
-    }
-
-    private MfaAuthResult authTotp(UserMfaSettingsEntity userMfaSettingsEntity, String code)
-    {
-        UserMfaTotpEntity userMfaTotpEntity = mfaTotpEntityRepository.findByUserId(userMfaSettingsEntity.getUserId())
-                .orElseThrow();
-
-        String secret = userMfaTotpEntity.getSecret();
-
-        //TODO: Add handling for recovery codes...
-        return MfaAuthResult.of(this.mfaCodeVerifier.verify(secret, code));
-    }
 
     @Transactional
     public MfaActivationResult activate(long userId, String code)
@@ -197,33 +171,46 @@ public class MfaAuthenticationService
     }
 
     @Transactional
-    public AuthResult authenticate(MfaAuthRequest mfaAuthRequest)
+    public AuthResult authenticate(MfaAuthRequest mfaAuthRequest, String ipAddress)
     {
-        MfaAuthChallengeEntity challengeEntity = getChallenge(mfaAuthRequest.getChallenge());
-        if (challengeEntity == null)
-            throw new BadMfaAuthenticationException();
-        if (challengeEntity.getExpirationDateTime().isBefore(ZonedDateTime.now()))
-            throw new MfaChallengeExpiredException();
+        AuthenticatedUser authenticatedUser = null;
+        try
+        {
+            MfaAuthChallengeEntity challengeEntity = getChallenge(mfaAuthRequest.getChallenge());
+            if (challengeEntity == null)
+                throw new BadMfaAuthenticationException();
+            if (challengeEntity.getExpirationDateTime().isBefore(ZonedDateTime.now()))
+                throw new MfaChallengeExpiredException();
 
-        AuthenticatedUser authenticatedUser = rentaCarUserDetailsService.loadById(challengeEntity.getUserId());
-        UserMfaTotpEntity mfaTotpEntity = mfaTotpEntityRepository.findByUserId(challengeEntity.getUserId()).orElse(null);
-        if (mfaTotpEntity == null)
-            throw new BadMfaAuthenticationException();
+            authenticatedUser = rentaCarUserDetailsService.loadById(challengeEntity.getUserId());
+            UserMfaTotpEntity mfaTotpEntity = mfaTotpEntityRepository.findByUserId(challengeEntity.getUserId()).orElse(null);
+            if (mfaTotpEntity == null)
+                throw new BadMfaAuthenticationException();
 
-        String secret = mfaTotpEntity.getSecret();
+            String secret = mfaTotpEntity.getSecret();
 
-        //TODO: Handle recovery codes...
-        //TODO: We should firstly check if auth code is recovery code.
+            //TODO: Handle recovery codes...
+            //TODO: We should firstly check if auth code is recovery code.
 
-        String authCode = mfaAuthRequest.getCode();
-        if (!mfaCodeVerifier.verify(secret, authCode))
-            throw new MfaBadAuthCodeException();
+            String authCode = mfaAuthRequest.getCode();
+            if (!mfaCodeVerifier.verify(secret, authCode))
+                throw new MfaBadAuthCodeException();
 
-        return AuthResult.authenticated(authenticatedUser);
+            return AuthResult.authenticated(authenticatedUser);
+        }
+        catch (Exception exception)
+        {
+            if (authenticatedUser != null)
+            {
+                loginRestrictionsService.incrementFailedLoginForUsername(authenticatedUser.getUsername());
+                loginRestrictionsService.incrementFailedLoginForIpAddress(ipAddress);
+            }
+            throw exception;
+        }
     }
 
     public String prepareMfaActivation(AuthenticatedUser authenticatedUser, MfaType mfaType)
     {
-        return MFA_HANDLES.get(mfaType).apply(authenticatedUser);
+        return MFA_HANDLERS.get(mfaType).apply(authenticatedUser);
     }
 }

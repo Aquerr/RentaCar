@@ -46,16 +46,16 @@ public class AuthRestController
     private final RentaCarAuthenticationManager rentaCarAuthenticationManager;
 
     @PostMapping
-    public ResponseEntity<AuthResponse> authenticate(@RequestBody UserCredentials userCredentials)
+    public ResponseEntity<AuthResponse> authenticate(@RequestBody UserCredentials userCredentials, HttpServletRequest request)
     {
-        AuthResult authResult = rentaCarAuthenticationManager.authenticate(userCredentials);
+        AuthResult authResult = rentaCarAuthenticationManager.authenticate(userCredentials, request.getRemoteAddr());
         return ResponseEntity.ok(AuthResponse.of(authResult));
     }
 
     @PostMapping("/mfa")
-    public ResponseEntity<JwtTokenResponse> authenticateMfa(@RequestBody MfaAuthRequest mfaAuthRequest)
+    public ResponseEntity<JwtTokenResponse> authenticateMfa(@RequestBody MfaAuthRequest mfaAuthRequest, HttpServletRequest request)
     {
-        return ResponseEntity.ok(JwtTokenResponse.of(rentaCarAuthenticationManager.authenticate(mfaAuthRequest)));
+        return ResponseEntity.ok(JwtTokenResponse.of(rentaCarAuthenticationManager.authenticate(mfaAuthRequest, request.getRemoteAddr())));
     }
 
     @GetMapping("/myself")

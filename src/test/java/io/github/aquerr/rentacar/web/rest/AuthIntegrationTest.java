@@ -1,6 +1,8 @@
 package io.github.aquerr.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.BaseIntegrationTest;
+import io.github.aquerr.rentacar.application.config.CacheConfig;
+import io.github.aquerr.rentacar.application.security.UserCredentials;
 import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
 import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -34,6 +38,8 @@ class AuthIntegrationTest extends BaseIntegrationTest
     private TestRestTemplate testRestTemplate;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CacheManager cacheManager;
 
     @BeforeEach
     public void setUp()
@@ -80,5 +86,24 @@ class AuthIntegrationTest extends BaseIntegrationTest
         // then
         assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
         assertTrue(passwordEncoder.matches("new-password", userRepository.findByCredentials_Email(EMAIL).getCredentials().getPassword()));
+    }
+
+    @Test
+    void shouldReturnAccountBlockedWhenMultipleFailedLoginAttempts()
+    {
+        // given
+        Cache cache = cacheManager.getCache(CacheConfig.FAILED_LOGIN_ACCOUNTS);
+        cache.put("username", 5);
+
+        givenActivatedUser();
+
+        // when
+        var response = testRestTemplate.postForEntity("/api/v1/auth",
+                new UserCredentials(new UserCredentials.UsernameOrEmail(USERNAME), "wrong_pass", false),
+                RestErrorResponse.class);
+
+        // then
+        assertThat(response.getStatusCode().value()).isEqualTo(403);
+        assertThat(response.getBody().getCode()).isEqualTo("LOGIN_BLOCKED");
     }
 }
