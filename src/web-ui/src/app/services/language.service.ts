@@ -12,6 +12,8 @@ export class LanguageService {
     private translateService: TranslateService,
     private storageService: StorageService
   ) {
+
+    this.setLanguage("en");
   }
 
   loadLanguage() {

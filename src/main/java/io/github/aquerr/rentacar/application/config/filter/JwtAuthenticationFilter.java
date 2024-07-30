@@ -1,5 +1,7 @@
-package io.github.aquerr.rentacar.application.config.security.jwt;
+package io.github.aquerr.rentacar.application.config.filter;
 
+import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
+import io.github.aquerr.rentacar.application.exception.InvalidJwtException;
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService;
 import io.jsonwebtoken.Claims;
@@ -10,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,6 +23,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
+@Order(30)
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter
 {
@@ -49,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         }
         catch (Exception exception)
         {
-            response.sendError(HttpStatus.UNAUTHORIZED.value());
+            throw new InvalidJwtException();
         }
     }
 

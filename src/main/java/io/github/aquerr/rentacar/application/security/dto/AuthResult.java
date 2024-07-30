@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -17,24 +18,24 @@ import java.util.Set;
 @NoArgsConstructor
 public class AuthResult
 {
-    String username;
+    private String username;
 
     @Nullable
-    String mfaChallenge;
+    private String mfaChallenge;
 
     @Nullable
-    String jwt;
+    private String jwt;
 
     @Nullable
-    String qrCodeUri;
+    private String qrCodeUri;
 
     @Nullable
-    Set<String> authorities;
+    private Set<String> authorities = new HashSet<>();
 
     @Nullable
-    Authentication authentication;
+    private Authentication authentication;
 
-    Status status;
+    private Status status;
 
     public static AuthResult authenticated(AuthenticatedUser authenticatedUser)
     {
@@ -59,11 +60,6 @@ public class AuthResult
         return AuthResult.builder()
                 .status(Status.BAD_CREDENTIALS)
                 .build();
-    }
-
-    public boolean isSuccess()
-    {
-        return this.authentication != null;
     }
 
     public enum Status

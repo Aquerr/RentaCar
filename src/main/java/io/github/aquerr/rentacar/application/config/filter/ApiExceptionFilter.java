@@ -1,4 +1,4 @@
-package io.github.aquerr.rentacar.application.config;
+package io.github.aquerr.rentacar.application.config.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.aquerr.rentacar.application.lang.AcceptedLanguageLocaleMapper;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 @AllArgsConstructor
-@Order(1)
+@Order(20)
 @Component
 public class ApiExceptionFilter extends OncePerRequestFilter
 {

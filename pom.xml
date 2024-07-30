@@ -35,7 +35,6 @@
 		<logbook.version>3.6.0</logbook.version>
 		<totp.version>1.7.1</totp.version>
 		<apache-commons-net.version>3.10.0</apache-commons-net.version>
-		<commons-lang.version>3.14.0</commons-lang.version>
 
 		<!-- Front -->
 		<node.version>v18.16.1</node.version>
@@ -69,11 +68,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-docker-compose</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+			<version>${caffeine.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang.version}</version>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 
 		<dependency>

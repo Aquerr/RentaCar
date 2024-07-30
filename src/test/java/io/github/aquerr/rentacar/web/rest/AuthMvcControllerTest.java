@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -49,7 +51,7 @@ class AuthMvcControllerTest extends BaseMvcIntegrationTest
                 .username("admin")
                 .authorities(Set.of("ADD_VEHICLE"))
                 .build();
-        given(authenticationManager.authenticate(userCredentials)).willReturn(authResult);
+        given(authenticationManager.authenticate(eq(userCredentials), anyString())).willReturn(authResult);
 
         // when
         // then
@@ -64,7 +66,7 @@ class AuthMvcControllerTest extends BaseMvcIntegrationTest
     void shouldReturnRestErrorResponseWhenAuthenticationFacadeThrowsBadCredentialsException() throws Exception
     {
         // given
-        given(authenticationManager.authenticate(any(UserCredentials.class))).willThrow(BadCredentialsException.class);
+        given(authenticationManager.authenticate(any(UserCredentials.class), anyString())).willThrow(BadCredentialsException.class);
         given(messageService.resolveMessage("auth.error.bad-credentials", List.of()))
                 .willReturn("Wrong username or password!");
 
@@ -81,7 +83,7 @@ class AuthMvcControllerTest extends BaseMvcIntegrationTest
     void shouldReturnRestErrorResponseWhenAuthenticationFacadeThrowsBadCredentialsExceptionAndNoMessageServiceReturnsNullForMessageKey() throws Exception
     {
         // given
-        given(authenticationManager.authenticate(any(UserCredentials.class))).willThrow(BadCredentialsException.class);
+        given(authenticationManager.authenticate(any(UserCredentials.class), anyString())).willThrow(BadCredentialsException.class);
         given(messageService.resolveMessage("auth.error.bad-credentials", List.of())).willReturn(null);
 
         // when
