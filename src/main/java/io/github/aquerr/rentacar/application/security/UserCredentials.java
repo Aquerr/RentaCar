@@ -3,6 +3,7 @@ package io.github.aquerr.rentacar.application.security;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,7 @@ public class UserCredentials
         @JsonIgnore
         boolean isEmail;
 
+        @JsonCreator
         public UsernameOrEmail(String login)
         {
             this.isEmail = EMAIL_PATTERN.matcher(login).matches();
@@ -50,6 +52,7 @@ public class UserCredentials
             return this.isEmail;
         }
 
+        @JsonValue
         public String getValue()
         {
             return login;

@@ -4,7 +4,7 @@ import io.github.aquerr.rentacar.application.config.filter.ApiExceptionFilter;
 import io.github.aquerr.rentacar.application.config.filter.JwtAuthenticationFilter;
 import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,7 +50,7 @@ public class SecurityConfig {
 
             http.authorizeHttpRequests(requests -> {
                 if (environment.matchesProfiles("dev")) {
-                    requests.requestMatchers(PathRequest.toH2Console()).permitAll();
+                    requests.requestMatchers("/h2-console/**").permitAll();
                 }
                 requests.requestMatchers(HttpMethod.GET, "/api/v1/assets/images/{kind}/{name}").permitAll();
                 requests.requestMatchers("/api/v1/vehicles/**").permitAll();
@@ -77,6 +78,7 @@ public class SecurityConfig {
             .exceptionHandling(exceptionHandling -> {
                 exceptionHandling.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
             })
+            .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .cors(Customizer.withDefaults())
             .headers(header -> {
                 if (environment.matchesProfiles("dev")) {
@@ -96,7 +98,7 @@ public class SecurityConfig {
         public CorsConfigurationSource corsConfigurationSource() {
             CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
             corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(), HttpMethod.HEAD.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PATCH.name(), HttpMethod.PUT.name()));
-            corsConfiguration.setAllowedOrigins(List.of("*"));
+            corsConfiguration.setAllowedOrigins(List.of("*")); //TODO: Add allowed origins to properties file after migration to YAML
 
             UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
             source.registerCorsConfiguration("/**", corsConfiguration);

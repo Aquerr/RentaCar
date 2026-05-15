@@ -1,9 +1,15 @@
 package io.github.aquerr.rentacar.web.rest;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value(staticConstructor = "of")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class RestErrorResponse {
-    String code;
-    String message;
+    private String code;
+    private String message;
 }

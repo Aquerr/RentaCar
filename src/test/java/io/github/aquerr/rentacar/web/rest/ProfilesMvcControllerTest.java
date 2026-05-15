@@ -1,12 +1,14 @@
 package io.github.aquerr.rentacar.web.rest;
 
+import io.github.aquerr.rentacar.application.config.CacheConfig;
 import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
 import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
 import io.github.aquerr.rentacar.application.security.mfa.MfaType;
 import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
 import io.github.aquerr.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {ProfilesRestController.class})
+@Import(CacheConfig.class)
 class ProfilesMvcControllerTest extends BaseMvcIntegrationTest
 {
     private static final long USER_ID_1 = 1;

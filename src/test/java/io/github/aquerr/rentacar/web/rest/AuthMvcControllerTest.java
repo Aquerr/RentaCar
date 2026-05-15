@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.web.rest;
 
+import io.github.aquerr.rentacar.application.config.CacheConfig;
 import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
 import io.github.aquerr.rentacar.application.security.UserCredentials;
 import io.github.aquerr.rentacar.application.security.dto.AuthResult;
@@ -7,7 +8,8 @@ import io.github.aquerr.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {AuthRestController.class, RestErrorController.class})
+@Import(CacheConfig.class)
 class AuthMvcControllerTest extends BaseMvcIntegrationTest
 {
     @Autowired

@@ -38,7 +38,11 @@ public class RestErrorController {
             return convertApiExceptionToRestErrorResponse(exception, locales);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(RestErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), messageService.resolveMessage("error.internal-server-error", locales)));
+                .body(RestErrorResponse.builder()
+                        .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                        .message(messageService.resolveMessage("error.internal-server-error", locales))
+                        .build()
+                );
     }
 
     private RuntimeException convertSpringExceptionToRentaCarIfNeeded(RuntimeException exception)
@@ -52,7 +56,10 @@ public class RestErrorController {
     private ResponseEntity<RestErrorResponse> convertApiExceptionToRestErrorResponse(RuntimeException exception, List<Locale> locales) {
         ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
          return ResponseEntity.status(apiException.status())
-                .body(RestErrorResponse.of(apiException.code().name(), messageService.resolveMessage(apiException.messageKey(), locales)));
+                .body(RestErrorResponse.builder().code(apiException.code().name())
+                        .message(messageService.resolveMessage(apiException.messageKey(), locales))
+                        .build()
+                );
     }
 
     private String getAcceptedLanguageHeader(HttpServletRequest httpServletRequest)

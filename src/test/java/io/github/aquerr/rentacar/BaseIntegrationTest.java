@@ -1,15 +1,16 @@
 package io.github.aquerr.rentacar;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
 import io.github.aquerr.rentacar.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
+import tools.jackson.databind.ObjectMapper;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -17,13 +18,13 @@ import java.time.ZonedDateTime;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
 @ActiveProfiles({"test"})
+@AutoConfigureTestRestTemplate
 public abstract class BaseIntegrationTest
 {
     public static final String USERNAME = "username";
     public static final String EMAIL = "Email";
 
-    protected static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
-            .findAndRegisterModules();
+    protected static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
     protected UserRepository userRepository;

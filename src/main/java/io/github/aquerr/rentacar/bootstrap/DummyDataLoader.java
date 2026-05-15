@@ -7,8 +7,6 @@ import io.github.aquerr.rentacar.domain.user.model.Authority;
 import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
 import io.github.aquerr.rentacar.domain.user.model.UserEntity;
 import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
-import io.github.aquerr.rentacar.repository.ProfileRepository;
-import io.github.aquerr.rentacar.repository.UserCredentialsRepository;
 import io.github.aquerr.rentacar.repository.UserRepository;
 import io.github.aquerr.rentacar.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -119,7 +116,6 @@ public class DummyDataLoader implements CommandLineRunner {
     private void createDummyVehicles()
     {
         VehicleEntity vehicle = VehicleEntity.builder()
-                .id(1)
                 .brand("TOYOTA")
                 .model("YARIS")
                 .productionYear(LocalDate.now())
@@ -148,7 +144,6 @@ public class DummyDataLoader implements CommandLineRunner {
                 .build();
         log.info("Created dummy vehicle: {}", vehicle);
         VehicleEntity vehicle2 = VehicleEntity.builder()
-                .id(2)
                 .brand("TOYOTA")
                 .model("AVENSIS")
                 .productionYear(LocalDate.now())
@@ -177,7 +172,6 @@ public class DummyDataLoader implements CommandLineRunner {
                 .build();
         log.info("Created dummy vehicle: {}", vehicle2);
         VehicleEntity vehicle3 = VehicleEntity.builder()
-                .id(3)
                 .brand("LEXUS")
                 .model("MODEL")
                 .productionYear(LocalDate.now())
@@ -206,7 +200,6 @@ public class DummyDataLoader implements CommandLineRunner {
                 .build();
         log.info("Created dummy vehicle: {}", vehicle3);
         VehicleEntity vehicle4 = VehicleEntity.builder()
-                .id(4)
                 .brand("AUDI")
                 .model("A6")
                 .productionYear(LocalDate.now())
@@ -235,7 +228,6 @@ public class DummyDataLoader implements CommandLineRunner {
                 .build();
         log.info("Created dummy vehicle: {}", vehicle4);
         VehicleEntity vehicle5 = VehicleEntity.builder()
-                .id(5)
                 .brand("AUDI")
                 .model("A4")
                 .productionYear(LocalDate.now())
@@ -264,7 +256,6 @@ public class DummyDataLoader implements CommandLineRunner {
                 .build();
         log.info("Created dummy vehicle: {}", vehicle5);
         VehicleEntity vehicle6 = VehicleEntity.builder()
-                .id(6)
                 .brand("BMW")
                 .model("5")
                 .productionYear(LocalDate.now())
@@ -292,11 +283,6 @@ public class DummyDataLoader implements CommandLineRunner {
                 .photoNames(List.of("car6.webp"))
                 .build();
         log.info("Created dummy vehicle: {}", vehicle6);
-        vehicleRepository.save(vehicle);
-        vehicleRepository.save(vehicle2);
-        vehicleRepository.save(vehicle3);
-        vehicleRepository.save(vehicle4);
-        vehicleRepository.save(vehicle5);
-        vehicleRepository.save(vehicle6);
+        vehicleRepository.saveAllAndFlush(List.of(vehicle, vehicle2, vehicle3, vehicle4, vehicle5, vehicle6, vehicle6));
     }
 }

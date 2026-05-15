@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.web.rest;
 
+import io.github.aquerr.rentacar.application.config.CacheConfig;
 import io.github.aquerr.rentacar.domain.vehicle.VehicleService;
 import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
 import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchResult;
@@ -12,9 +13,10 @@ import io.github.aquerr.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -28,9 +30,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = VehicleRestController.class)
+@Import(CacheConfig.class)
 class VehicleMvcControllerTest extends BaseMvcIntegrationTest
 {
-    @MockBean
+    @MockitoBean
     private VehicleService vehicleService;
 
     @Autowired

@@ -1,7 +1,6 @@
 package io.github.aquerr.rentacar.web.rest;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.aquerr.rentacar.application.config.LogBookConfig;
 import io.github.aquerr.rentacar.application.config.security.SecurityConfig;
 import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
@@ -18,12 +17,13 @@ import io.github.aquerr.rentacar.i18n.MessageService;
 import io.github.aquerr.rentacar.repository.InvalidJwtTokenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.Set;
 
@@ -41,23 +41,23 @@ public abstract class BaseMvcIntegrationTest
     @Autowired
     protected SecurityManager securityManager;
 
-    @MockBean
+    @MockitoBean
     protected InvalidJwtTokenRepository invalidJwtTokenRepository;
-    @MockBean
+    @MockitoBean
     protected MessageService messageService;
-    @MockBean
+    @MockitoBean
     protected ProfileService profileService;
-    @MockBean
+    @MockitoBean
     protected UserService userService;
-    @MockBean
+    @MockitoBean
     protected RentaCarUserDetailsService rentaCarUserDetailsService;
-    @MockBean
+    @MockitoBean
     protected AcceptedLanguageLocaleMapper acceptedLanguageLocaleMapper;
-    @MockBean
+    @MockitoBean
     protected AuthenticationFacade authenticationFacade;
-    @MockBean
+    @MockitoBean
     protected RentaCarAuthenticationManager authenticationManager;
-    @MockBean
+    @MockitoBean
     protected PasswordResetService passwordResetService;
 
     @Autowired
