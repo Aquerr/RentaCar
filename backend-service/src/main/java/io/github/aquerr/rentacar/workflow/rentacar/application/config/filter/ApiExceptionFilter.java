@@ -1,0 +1,60 @@
+package io.github.aquerr.rentacar.workflow.rentacar.application.config.filter;
+
+import io.github.aquerr.rentacar.workflow.rentacar.application.lang.AcceptedLanguageLocaleMapper;
+import io.github.aquerr.rentacar.workflow.rentacar.domain.ApiException;
+import io.github.aquerr.rentacar.workflow.rentacar.i18n.MessageService;
+import io.github.aquerr.rentacar.workflow.rentacar.application.rest.RestErrorResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import tools.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+@AllArgsConstructor
+@Order(20)
+@Component
+public class ApiExceptionFilter extends OncePerRequestFilter
+{
+    private final ObjectMapper objectMapper;
+    private final AcceptedLanguageLocaleMapper acceptedLanguageLocaleMapper;
+    private final MessageService messageService;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException {
+        try
+        {
+            filterChain.doFilter(request, response);
+        }
+        catch (Exception exception)
+        {
+            if (exception.getClass().isAnnotationPresent(ApiException.class))
+            {
+                ApiException apiException = exception.getClass().getAnnotation(ApiException.class);
+
+                List<Locale> locales = acceptedLanguageLocaleMapper.toLocales(getAcceptedLanguageHeader(request));
+                RestErrorResponse restErrorResponse = RestErrorResponse.builder().code(apiException.code().name()).message(messageService.resolveMessage(apiException.messageKey(), locales)).build();
+                response.setStatus(apiException.status().value());
+                response.getWriter().write(objectMapper.writeValueAsString(restErrorResponse));
+            }
+            else
+            {
+                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                response.getWriter().write(exception.getMessage());
+            }
+        }
+    }
+
+    private String getAcceptedLanguageHeader(HttpServletRequest httpServletRequest)
+    {
+        return httpServletRequest.getHeader(HttpHeaders.ACCEPT_LANGUAGE);
+    }
+}

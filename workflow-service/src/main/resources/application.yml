@@ -1,0 +1,30 @@
+# Datasource
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./rentacar_workflow;AUTO_SERVER=TRUE
+    username: rentacar_workflow
+    password: rentacar_workflow
+  security:
+    user:
+      name: rentacar_workflow
+      password: rentacar_workflow
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+
+flowable:
+  async-executor-activate: true
+  process:
+    servlet:
+      path: /process-api
+  rest-api-enabled: true
+  rest:
+    app:
+      admin:
+        user-id: rest-admin
+        password: rest-admin
