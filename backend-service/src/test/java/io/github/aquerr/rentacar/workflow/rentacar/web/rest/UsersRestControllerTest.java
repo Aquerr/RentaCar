@@ -1,10 +1,10 @@
 package io.github.aquerr.rentacar.workflow.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.workflow.rentacar.BaseIntegrationTest;
-import io.github.aquerr.rentacar.workflow.rentacar.application.rest.RestErrorResponse;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.repository.ChallengeTokenRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.repository.UserRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.rest.request.UserRegistrationRequest;
+import io.github.aquerr.rentacar.application.rest.RestErrorResponse;
+import io.github.aquerr.rentacar.application.security.repository.ChallengeTokenRepository;
+import io.github.aquerr.rentacar.domain.user.repository.UserRepository;
+import io.github.aquerr.rentacar.application.security.rest.request.UserRegistrationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

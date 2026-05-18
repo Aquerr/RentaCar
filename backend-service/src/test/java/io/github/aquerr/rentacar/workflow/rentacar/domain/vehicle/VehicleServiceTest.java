@@ -1,12 +1,14 @@
 package io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle;
 
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.converter.VehicleConverter;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.AvailableVehiclesSearchResult;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.VehicleBasicData;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.VehicleFullData;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.reservation.repository.ReservationRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.repository.VehicleRepository;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleService;
+import io.github.aquerr.rentacar.domain.vehicle.converter.VehicleConverter;
+import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
+import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchResult;
+import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleBasicData;
+import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleFullData;
+import io.github.aquerr.rentacar.domain.reservation.repository.ReservationRepository;
+import io.github.aquerr.rentacar.domain.vehicle.repository.VehicleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

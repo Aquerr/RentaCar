@@ -1,11 +1,11 @@
 package io.github.aquerr.rentacar.workflow.rentacar.web.rest;
 
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.CacheConfig;
-import io.github.aquerr.rentacar.workflow.rentacar.application.exception.BadCredentialsException;
-import io.github.aquerr.rentacar.workflow.rentacar.application.rest.RestErrorController;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.UserCredentials;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.dto.AuthResult;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.rest.AuthRestController;
+import io.github.aquerr.rentacar.application.config.CacheConfig;
+import io.github.aquerr.rentacar.application.exception.BadCredentialsException;
+import io.github.aquerr.rentacar.application.rest.RestErrorController;
+import io.github.aquerr.rentacar.application.security.UserCredentials;
+import io.github.aquerr.rentacar.application.security.dto.AuthResult;
+import io.github.aquerr.rentacar.application.security.rest.AuthRestController;
 import io.github.aquerr.rentacar.workflow.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

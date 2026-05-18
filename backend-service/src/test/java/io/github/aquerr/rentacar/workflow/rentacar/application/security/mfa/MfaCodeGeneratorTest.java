@@ -3,6 +3,8 @@ package io.github.aquerr.rentacar.workflow.rentacar.application.security.mfa;
 import dev.samstevens.totp.qr.QrGenerator;
 import dev.samstevens.totp.qr.ZxingPngQrGenerator;
 import dev.samstevens.totp.secret.SecretGenerator;
+import io.github.aquerr.rentacar.application.security.mfa.MfaCodeGenerator;
+import io.github.aquerr.rentacar.application.security.mfa.MfaRecoveryCodeGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

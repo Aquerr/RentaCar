@@ -1,5 +1,6 @@
 package io.github.aquerr.rentacar.workflow.rentacar.i18n;
 
+import io.github.aquerr.rentacar.i18n.MessageService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

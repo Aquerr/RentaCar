@@ -1,15 +1,15 @@
 package io.github.aquerr.rentacar.workflow.rentacar.web.rest;
 
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.CacheConfig;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.VehicleService;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.AvailableVehiclesSearchResult;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.VehicleBasicData;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.dto.VehicleFullData;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.enums.VehicleCategory;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.enums.VehicleEngine;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.enums.VehicleTransmission;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.rest.response.VehicleRestController;
+import io.github.aquerr.rentacar.application.config.CacheConfig;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleService;
+import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchParams;
+import io.github.aquerr.rentacar.domain.vehicle.dto.AvailableVehiclesSearchResult;
+import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleBasicData;
+import io.github.aquerr.rentacar.domain.vehicle.dto.VehicleFullData;
+import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleCategory;
+import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleEngine;
+import io.github.aquerr.rentacar.domain.vehicle.enums.VehicleTransmission;
+import io.github.aquerr.rentacar.domain.vehicle.rest.response.VehicleRestController;
 import io.github.aquerr.rentacar.workflow.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

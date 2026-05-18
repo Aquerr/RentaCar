@@ -1,14 +1,15 @@
 package io.github.aquerr.rentacar.workflow.rentacar.domain.profile;
 
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.AuthenticatedUser;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.AuthenticationFacade;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.image.ImageService;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.image.dto.ImageUri;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.image.model.ImageKind;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.converter.ProfileConverter;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.dto.UserProfile;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.model.UserProfileEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.repository.ProfileRepository;
+import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
+import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
+import io.github.aquerr.rentacar.domain.image.ImageService;
+import io.github.aquerr.rentacar.domain.image.dto.ImageUri;
+import io.github.aquerr.rentacar.domain.image.model.ImageKind;
+import io.github.aquerr.rentacar.domain.profile.ProfileService;
+import io.github.aquerr.rentacar.domain.profile.converter.ProfileConverter;
+import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
+import io.github.aquerr.rentacar.domain.profile.repository.ProfileRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

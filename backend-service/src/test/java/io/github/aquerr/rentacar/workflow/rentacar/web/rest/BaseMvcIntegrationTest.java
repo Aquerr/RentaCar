@@ -1,21 +1,21 @@
 package io.github.aquerr.rentacar.workflow.rentacar.web.rest;
 
 
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.LogBookConfig;
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.security.SecurityConfig;
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.security.jwt.JwtService;
-import io.github.aquerr.rentacar.workflow.rentacar.application.lang.AcceptedLanguageLocaleMapper;
-import io.github.aquerr.rentacar.workflow.rentacar.application.rest.RestErrorController;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.AuthenticatedUser;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.AuthenticationFacade;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.RentaCarAuthenticationManager;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.RentaCarUserDetailsService;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.SecurityManager;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.ProfileService;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.UserService;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.password.PasswordResetService;
-import io.github.aquerr.rentacar.workflow.rentacar.i18n.MessageService;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.repository.InvalidJwtTokenRepository;
+import io.github.aquerr.rentacar.application.config.LogBookConfig;
+import io.github.aquerr.rentacar.application.config.security.SecurityConfig;
+import io.github.aquerr.rentacar.application.config.security.jwt.JwtService;
+import io.github.aquerr.rentacar.application.lang.AcceptedLanguageLocaleMapper;
+import io.github.aquerr.rentacar.application.rest.RestErrorController;
+import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
+import io.github.aquerr.rentacar.application.security.AuthenticationFacade;
+import io.github.aquerr.rentacar.application.security.RentaCarAuthenticationManager;
+import io.github.aquerr.rentacar.application.security.RentaCarUserDetailsService;
+import io.github.aquerr.rentacar.application.security.SecurityManager;
+import io.github.aquerr.rentacar.domain.profile.ProfileService;
+import io.github.aquerr.rentacar.domain.user.UserService;
+import io.github.aquerr.rentacar.domain.user.password.PasswordResetService;
+import io.github.aquerr.rentacar.i18n.MessageService;
+import io.github.aquerr.rentacar.application.security.repository.InvalidJwtTokenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;

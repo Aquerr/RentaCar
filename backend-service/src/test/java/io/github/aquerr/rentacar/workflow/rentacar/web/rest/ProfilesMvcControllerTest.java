@@ -1,11 +1,11 @@
 package io.github.aquerr.rentacar.workflow.rentacar.web.rest;
 
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.CacheConfig;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.AuthenticatedUser;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.dto.MfaActivationResult;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.mfa.MfaType;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.dto.UserProfile;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.rest.ProfilesRestController;
+import io.github.aquerr.rentacar.application.config.CacheConfig;
+import io.github.aquerr.rentacar.application.security.AuthenticatedUser;
+import io.github.aquerr.rentacar.application.security.dto.MfaActivationResult;
+import io.github.aquerr.rentacar.application.security.mfa.MfaType;
+import io.github.aquerr.rentacar.domain.profile.dto.UserProfile;
+import io.github.aquerr.rentacar.domain.profile.rest.ProfilesRestController;
 import io.github.aquerr.rentacar.workflow.rentacar.util.TestResourceUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;

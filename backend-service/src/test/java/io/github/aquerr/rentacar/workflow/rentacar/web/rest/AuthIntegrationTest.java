@@ -1,16 +1,16 @@
 package io.github.aquerr.rentacar.workflow.rentacar.web.rest;
 
 import io.github.aquerr.rentacar.workflow.rentacar.BaseIntegrationTest;
-import io.github.aquerr.rentacar.workflow.rentacar.application.config.CacheConfig;
-import io.github.aquerr.rentacar.workflow.rentacar.application.rest.RestErrorResponse;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.UserCredentials;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.challengetoken.model.OperationType;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.repository.ChallengeTokenRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.repository.UserRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.rest.request.InitPasswordResetRequest;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.rest.request.PasswordResetRequest;
+import io.github.aquerr.rentacar.application.config.CacheConfig;
+import io.github.aquerr.rentacar.application.rest.RestErrorResponse;
+import io.github.aquerr.rentacar.application.security.UserCredentials;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
+import io.github.aquerr.rentacar.application.security.repository.ChallengeTokenRepository;
+import io.github.aquerr.rentacar.domain.user.repository.UserRepository;
+import io.github.aquerr.rentacar.application.security.rest.request.InitPasswordResetRequest;
+import io.github.aquerr.rentacar.application.security.rest.request.PasswordResetRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

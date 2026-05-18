@@ -1,12 +1,13 @@
 package io.github.aquerr.rentacar.workflow.rentacar.domain.user.cleaner;
 
+import io.github.aquerr.rentacar.domain.user.cleaner.NotActivatedUsersCleaner;
 import io.github.aquerr.rentacar.workflow.rentacar.BaseIntegrationTest;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.challengetoken.model.OperationType;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.repository.ChallengeTokenRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.repository.UserRepository;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.ChallengeTokenEntity;
+import io.github.aquerr.rentacar.application.security.challengetoken.model.OperationType;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
+import io.github.aquerr.rentacar.application.security.repository.ChallengeTokenRepository;
+import io.github.aquerr.rentacar.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,13 +1,13 @@
 package io.github.aquerr.rentacar.workflow.rentacar.repository;
 
-import io.github.aquerr.rentacar.workflow.rentacar.application.security.repository.UserCredentialsRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.model.UserProfileEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.repository.ProfileRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.repository.UserRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.VehicleEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.repository.VehicleRepository;
+import io.github.aquerr.rentacar.application.security.repository.UserCredentialsRepository;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
+import io.github.aquerr.rentacar.domain.profile.repository.ProfileRepository;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
+import io.github.aquerr.rentacar.domain.user.repository.UserRepository;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
+import io.github.aquerr.rentacar.domain.vehicle.repository.VehicleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

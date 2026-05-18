@@ -1,9 +1,10 @@
 package io.github.aquerr.rentacar.workflow.rentacar;
 
-import io.github.aquerr.rentacar.workflow.rentacar.domain.profile.model.UserProfileEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserCredentialsEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.repository.UserRepository;
+import io.github.aquerr.rentacar.Application;
+import io.github.aquerr.rentacar.domain.profile.model.UserProfileEntity;
+import io.github.aquerr.rentacar.domain.user.model.UserCredentialsEntity;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
+import io.github.aquerr.rentacar.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;

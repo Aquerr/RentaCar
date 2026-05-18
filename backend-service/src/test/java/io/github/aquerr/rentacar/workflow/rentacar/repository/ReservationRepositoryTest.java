@@ -1,10 +1,10 @@
 package io.github.aquerr.rentacar.workflow.rentacar.repository;
 
-import io.github.aquerr.rentacar.workflow.rentacar.domain.reservation.model.ReservationEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.reservation.model.ReservationStatus;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.reservation.repository.ReservationRepository;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.user.model.UserEntity;
-import io.github.aquerr.rentacar.workflow.rentacar.domain.vehicle.VehicleEntity;
+import io.github.aquerr.rentacar.domain.reservation.model.ReservationEntity;
+import io.github.aquerr.rentacar.domain.reservation.model.ReservationStatus;
+import io.github.aquerr.rentacar.domain.reservation.repository.ReservationRepository;
+import io.github.aquerr.rentacar.domain.user.model.UserEntity;
+import io.github.aquerr.rentacar.domain.vehicle.VehicleEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
