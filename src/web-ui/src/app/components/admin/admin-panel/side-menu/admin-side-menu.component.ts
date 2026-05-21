@@ -3,9 +3,10 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 
 
 @Component({
-  selector: 'admin-side-menu',
-  templateUrl: './admin-side-menu.component.html',
-  styleUrls: ['./admin-side-menu.component.scss']
+    selector: 'admin-side-menu',
+    templateUrl: './admin-side-menu.component.html',
+    styleUrls: ['./admin-side-menu.component.scss'],
+    standalone: false
 })
 export class AdminSideMenuComponent implements OnInit {
   authorities: string[] = [];

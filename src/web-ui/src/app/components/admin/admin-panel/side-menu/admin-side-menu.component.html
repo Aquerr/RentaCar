@@ -1,11 +1,17 @@
 <div class='container'>
-  <a class='router-link'
-     routerLink='add-vehicle'
-     *ngIf="hasUserAuthority('ADD_VEHICLE')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.add-vehicle' | translate}}</a>
-  <a class='router-link'
-     routerLink='remove-vehicle'
-     *ngIf="hasUserAuthority('REMOVE_VEHICLE')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.remove-vehicle' | translate}}</a>
-  <a class='router-link'
-     routerLink='reservation-update-status'
-     *ngIf="hasUserAuthority('GET_ALL_RESERVATIONS')" [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.reservation-update-status' | translate}}</a>
+  @if (hasUserAuthority('ADD_VEHICLE')) {
+    <a class='router-link'
+      routerLink='add-vehicle'
+    [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.add-vehicle' | translate}}</a>
+  }
+  @if (hasUserAuthority('REMOVE_VEHICLE')) {
+    <a class='router-link'
+      routerLink='remove-vehicle'
+    [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.remove-vehicle' | translate}}</a>
+  }
+  @if (hasUserAuthority('GET_ALL_RESERVATIONS')) {
+    <a class='router-link'
+      routerLink='reservation-update-status'
+    [routerLinkActive]="['active-link']">{{'components.admin-side-menu.labels.reservation-update-status' | translate}}</a>
+  }
 </div>

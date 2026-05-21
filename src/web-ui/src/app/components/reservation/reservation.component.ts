@@ -9,9 +9,10 @@ import { ToastType } from '../../services/toast.service';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
-  selector: 'reservation',
-  templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.scss']
+    selector: 'reservation',
+    templateUrl: './reservation.component.html',
+    styleUrls: ['./reservation.component.scss'],
+    standalone: false
 })
 export class ReservationComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();

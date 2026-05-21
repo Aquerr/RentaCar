@@ -8,9 +8,10 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'new-password',
-  templateUrl: './new-password.component.html',
-  styleUrls: ['./new-password.component.scss']
+    selector: 'new-password',
+    templateUrl: './new-password.component.html',
+    styleUrls: ['./new-password.component.scss'],
+    standalone: false
 })
 export class NewPasswordComponent implements OnInit, OnDestroy {
   form = new FormBuilder().group({

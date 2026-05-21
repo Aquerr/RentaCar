@@ -10,9 +10,10 @@ import { LanguageService } from '../../../../services/language.service';
 
 
 @Component({
-  selector: 'add-vehicle',
-  templateUrl: './admin-add-vehicle.component.html',
-  styleUrls: ['./admin-add-vehicle.component.scss']
+    selector: 'add-vehicle',
+    templateUrl: './admin-add-vehicle.component.html',
+    styleUrls: ['./admin-add-vehicle.component.scss'],
+    standalone: false
 })
 export class AdminAddVehicleComponent implements OnInit {
   form: FormGroup;

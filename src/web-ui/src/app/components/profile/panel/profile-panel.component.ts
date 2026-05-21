@@ -15,9 +15,10 @@ import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
-  selector: 'profile-panel',
-  templateUrl: './profile-panel.component.html',
-  styleUrls: ['./profile-panel.component.scss']
+    selector: 'profile-panel',
+    templateUrl: './profile-panel.component.html',
+    styleUrls: ['./profile-panel.component.scss'],
+    standalone: false
 })
 export class ProfilePanelComponent implements OnChanges, OnDestroy {
   iconUrl = '';

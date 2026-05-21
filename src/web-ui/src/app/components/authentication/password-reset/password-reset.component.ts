@@ -6,9 +6,10 @@ import { ToastType } from '../../../services/toast.service';
 
 
 @Component({
-  selector: 'password-reset',
-  templateUrl: './password-reset.component.html',
-  styleUrls: ['./password-reset.component.scss']
+    selector: 'password-reset',
+    templateUrl: './password-reset.component.html',
+    styleUrls: ['./password-reset.component.scss'],
+    standalone: false
 })
 export class PasswordResetComponent {
   form = new FormBuilder().group({

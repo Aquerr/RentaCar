@@ -10,9 +10,10 @@ import { UserProfile } from '../../../models/user-profile.model';
 import { DateService } from '../../../services/date.service';
 
 @Component({
-  selector: 'vehicle-list',
-  templateUrl: './vehicle-list.component.html',
-  styleUrls: ['./vehicle-list.component.scss']
+    selector: 'vehicle-list',
+    templateUrl: './vehicle-list.component.html',
+    styleUrls: ['./vehicle-list.component.scss'],
+    standalone: false
 })
 export class VehicleListComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();

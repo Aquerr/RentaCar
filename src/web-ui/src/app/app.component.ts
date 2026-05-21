@@ -6,9 +6,10 @@ import { AuthenticationService } from './services/authentication.service';
 import { FontAwesomeLibraryService } from './services/font-awesome-library.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
@@ -69,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   isMobileView() {
     this.isMobile = window.innerWidth < 800;
   }

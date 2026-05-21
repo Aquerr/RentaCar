@@ -4,9 +4,10 @@ import { FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
-  selector: 'sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss'],
+    selector: 'sign-in',
+    templateUrl: './sign-in.component.html',
+    styleUrls: ['./sign-in.component.scss'],
+    standalone: false
 })
 export class SignInComponent implements OnInit {
   form!: FormGroup;

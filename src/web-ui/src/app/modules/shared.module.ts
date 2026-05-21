@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HTTP_INTERCEPTORS, provideHttpClient} from '@angular/common/http';
 import { CommonModule, DatePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { MessagesModule } from 'primeng/messages';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AppInterceptor } from '../components/authentication/app.interceptor';
@@ -14,8 +12,6 @@ import { TooltipModule } from 'primeng/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { TitleStrategy } from '@angular/router';
 import { CustomPageTitleStrategy } from '../strategy/custom-page-title.strategy';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from 'primeng/dialog';
@@ -26,23 +22,20 @@ import { StepsModule } from 'primeng/steps';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { MultiSelectModule } from 'primeng/multiselect';
+import {providePrimeNG} from "primeng/config";
+import Aura from '@primeuix/themes/aura';
 
 @NgModule({
   exports: [
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     CommonModule,
     InputTextModule,
     ToastModule,
-    MessagesModule,
     CheckboxModule,
     TooltipModule,
     BrowserModule,
-    CalendarModule,
-    DropdownModule,
     FontAwesomeModule,
     DialogModule,
     CarouselModule,
@@ -52,6 +45,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MultiSelectModule
   ],
   providers: [
+    provideHttpClient(),
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -62,6 +56,11 @@ import { MultiSelectModule } from 'primeng/multiselect';
       provide: TitleStrategy,
       useClass: CustomPageTitleStrategy
     },
+    providePrimeNG({
+      theme: {
+        preset: Aura
+      }
+    }),
     AppGuard,
     DatePipe,
     DialogService,

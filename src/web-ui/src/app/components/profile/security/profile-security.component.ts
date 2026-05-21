@@ -5,9 +5,10 @@ import { AuthenticationApiService } from '../../../services/api/authentication-a
 import { ToastType } from '../../../services/toast.service';
 
 @Component({
-  selector: 'profile-security',
-  templateUrl: './profile-security.component.html',
-  styleUrls: ['./profile-security.component.scss']
+    selector: 'profile-security',
+    templateUrl: './profile-security.component.html',
+    styleUrls: ['./profile-security.component.scss'],
+    standalone: false
 })
 export class ProfileSecurityComponent implements OnInit {
   username: string = '';

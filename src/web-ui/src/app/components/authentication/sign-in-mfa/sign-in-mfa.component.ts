@@ -5,9 +5,10 @@ import {SignInMfaFormService} from "./sign-in-mfa.form.service";
 import {FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-sign-in-mfa',
-  templateUrl: './sign-in-mfa.component.html',
-  styleUrls: ['./sign-in-mfa.component.scss']
+    selector: 'app-sign-in-mfa',
+    templateUrl: './sign-in-mfa.component.html',
+    styleUrls: ['./sign-in-mfa.component.scss'],
+    standalone: false
 })
 export class SignInMfaComponent implements OnInit {
   form!: FormGroup;

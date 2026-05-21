@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { EngineType, VehicleBasicData } from '../../../models/vehicle.model';
 
 @Component({
-  selector: 'vehicle-card',
-  templateUrl: './vehicle-card.component.html',
-  styleUrls: ['./vehicle-card.component.scss']
+    selector: 'vehicle-card',
+    templateUrl: './vehicle-card.component.html',
+    styleUrls: ['./vehicle-card.component.scss'],
+    standalone: false
 })
 export class VehicleCardComponent {
   @Input() vehicle: VehicleBasicData | null = null;
