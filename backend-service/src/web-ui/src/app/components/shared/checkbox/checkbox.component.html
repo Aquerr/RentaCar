@@ -1,0 +1,18 @@
+@if (!controlName()) {
+  <p-checkbox
+    [(ngModel)]='model'
+    [readonly]="isReadonly()"
+    (onChange)="onChange()"
+    [binary]='true'>
+    {{ label() }}
+  </p-checkbox>
+} @else {
+  <app-form-field-container [formGroup]="formGroup()">
+  <p-checkbox
+    [formControlName]="controlName()"
+    [readonly]="isReadonly()"
+    [binary]='true'>
+    {{ label() }}
+  </p-checkbox>
+  </app-form-field-container>
+}

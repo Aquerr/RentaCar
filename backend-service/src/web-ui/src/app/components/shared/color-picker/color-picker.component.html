@@ -1,0 +1,13 @@
+@if (!controlName()) {
+  <p-color-picker
+    [(ngModel)]='model'
+    [disabled]="isReadonly()"
+    (ngModelChange)='onDateChange()'>
+  </p-color-picker>
+} @else {
+  <app-form-field-container [formGroup]="formGroup()">
+    <p-color-picker
+      [formControlName]="controlName()"
+      [disabled]="isReadonly()"></p-color-picker>
+  </app-form-field-container>
+}

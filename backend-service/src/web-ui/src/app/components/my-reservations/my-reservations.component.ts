@@ -5,12 +5,19 @@ import { DictionaryEntry, DictionaryService, DictionaryType } from '../../servic
 import { ToastType } from '../../services/toast.service';
 import { ConfirmationService } from 'primeng/api';
 import { CommonService } from '../../services/common.service';
+import {MyReservationCardComponent} from "./my-reservation-card/my-reservation-card.component";
+import {ConfirmDialog} from "primeng/confirmdialog";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
-    selector: 'my-reservations',
-    templateUrl: './my-reservations.component.html',
-    styleUrls: ['./my-reservations.component.scss'],
-    standalone: false
+  selector: 'my-reservations',
+  templateUrl: './my-reservations.component.html',
+  imports: [
+    MyReservationCardComponent,
+    ConfirmDialog,
+    TranslatePipe
+  ],
+  styleUrls: ['./my-reservations.component.scss']
 })
 export class MyReservationsComponent implements OnInit {
   reservations: ProfileReservation[] = [];

@@ -28,7 +28,7 @@
         <wiremock-spring-boot.version>4.2.1</wiremock-spring-boot.version>
 
         <!-- Front -->
-        <node.version>v18.16.1</node.version>
+        <node.version>v24.16.0</node.version>
     </properties>
     <dependencies>
         <dependency>

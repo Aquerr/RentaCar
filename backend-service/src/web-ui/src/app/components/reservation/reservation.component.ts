@@ -7,12 +7,25 @@ import { ConfirmationService } from 'primeng/api';
 import { CommonService } from '../../services/common.service';
 import { ToastType } from '../../services/toast.service';
 import { LanguageService } from '../../services/language.service';
+import {Steps} from "primeng/steps";
+import {VehicleStepReservationComponent} from "./steps/vehicle-step/vehicle-step-reservation.component";
+import {ContactStepReservationComponent} from "./steps/contact-step/contact-step-reservation.component";
+import {SummaryStepReservationComponent} from "./steps/summary-step/summary-step-reservation.component";
+import {TranslatePipe} from "@ngx-translate/core";
+import {ConfirmDialog} from "primeng/confirmdialog";
 
 @Component({
-    selector: 'reservation',
-    templateUrl: './reservation.component.html',
-    styleUrls: ['./reservation.component.scss'],
-    standalone: false
+  selector: 'reservation',
+  templateUrl: './reservation.component.html',
+  imports: [
+    Steps,
+    VehicleStepReservationComponent,
+    ContactStepReservationComponent,
+    SummaryStepReservationComponent,
+    TranslatePipe,
+    ConfirmDialog
+  ],
+  styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();

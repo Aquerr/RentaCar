@@ -11,45 +11,45 @@
     }
     <a class='nav__link' routerLink='' (click)='closeSideMenu()'>{{ 'components.app.labels.mainPage' | translate }}</a>
     <a class='nav__link'
-      href='#'
-      [routerLinkActive]="['active-link']"
-    (click)='closeSideMenu()'>{{ 'components.app.labels.cars' | translate }}</a>
+       href='#'
+       [routerLinkActive]="['active-link']"
+       (click)='closeSideMenu()'>{{ 'components.app.labels.cars' | translate }}</a>
     <a class='nav__link'
-      routerLink='vehicle-list'
-      [routerLinkActive]="['active-link']"
-    (click)='closeSideMenu()'>{{ 'components.app.labels.reserve' | translate }}</a>
+       routerLink='vehicle-list'
+       [routerLinkActive]="['active-link']"
+       (click)='closeSideMenu()'>{{ 'components.app.labels.reserve' | translate }}</a>
     <a class='nav__link'
-      routerLink='contact'
-      [routerLinkActive]="['active-link']"
-    (click)='closeSideMenu()'>{{ 'components.app.labels.contact' | translate }}</a>
+       routerLink='contact'
+       [routerLinkActive]="['active-link']"
+       (click)='closeSideMenu()'>{{ 'components.app.labels.contact' | translate }}</a>
     @if (!userLogged) {
       <a class='nav__link'
-        routerLink='sign-in'
-        [routerLinkActive]="['active-link']"
-        (click)='closeSideMenu()'
+         routerLink='sign-in'
+         [routerLinkActive]="['active-link']"
+         (click)='closeSideMenu()'
       >{{ "components.app.labels.signIn" | translate }}</a>
     }
     @if (userLogged) {
       <a class='nav__link'
-        routerLink='my-reservations'
-        [routerLinkActive]="['active-link']"
-        (click)='closeSideMenu()'
+         routerLink='my-reservations'
+         [routerLinkActive]="['active-link']"
+         (click)='closeSideMenu()'
       >{{ 'components.app.labels.myReservations' | translate }}</a>
     }
     @if (userLogged) {
       <a class='nav__link'
-        routerLink='profile/edit'
-        [routerLinkActive]="['active-link']"
-        (click)='closeSideMenu()'
+         routerLink='profile/edit'
+         [routerLinkActive]="['active-link']"
+         (click)='closeSideMenu()'
       >{{ "components.app.labels.profile" | translate }}</a>
     }
     @if (userLogged) {
       <a class='nav__link'
-        (click)='logout()'
+         (click)='logout()'
       >{{ "components.app.labels.logout" | translate }}</a>
     }
     <a class='{{ iconLang }} nav__link' (click)='changeLanguage()'
-    pTooltip="{{ 'components.app.labels.changeLanguage' | translate }}" tooltipPosition='bottom'></a>
+       pTooltip="{{ 'components.app.labels.changeLanguage' | translate }}" tooltipPosition='bottom'></a>
   </nav>
 }
 
@@ -62,15 +62,15 @@
       <a routerLink='contact' [routerLinkActive]="['active-link']">{{ 'components.app.labels.contact' | translate }}</a>
       @if (!userLogged) {
         <button class='sign-in-log-out-nav btn'
-          routerLink='sign-in'
-          [routerLinkActive]="['active-link']">{{ "components.app.labels.signIn" | translate }}
+                routerLink='sign-in'
+                [routerLinkActive]="['active-link']">{{ "components.app.labels.signIn" | translate }}
         </button>
       }
       @if (userLogged) {
         <profile-panel class='panel-log' (logoutEmitter)='logout()' [user]='userLogged'></profile-panel>
       }
-      <span class='lang-nav' class='{{ iconLang }}' (click)='changeLanguage()'
-        pTooltip="{{ 'components.app.labels.changeLanguage' | translate }}" tooltipPosition='bottom'>
+      <span class='lang-nav {{ iconLang }}' (click)='changeLanguage()'
+            pTooltip="{{ 'components.app.labels.changeLanguage' | translate }}" tooltipPosition='bottom'>
       </span>
     </div>
   </div>

@@ -2,12 +2,21 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { VehicleApiService } from '../../../../services/api/vehicle-api.service';
 import { VehicleFullData } from '../../../../models/vehicle.model';
+import {TranslatePipe} from "@ngx-translate/core";
+import {DatePipe} from "@angular/common";
+import {Checkbox} from "primeng/checkbox";
+import {FormsModule} from "@angular/forms";
 
 @Component({
-    selector: 'vehicle-step-reservation',
-    templateUrl: './vehicle-step-reservation.component.html',
-    styleUrls: ['./vehicle-step-reservation.component.scss'],
-    standalone: false
+  selector: 'vehicle-step-reservation',
+  templateUrl: './vehicle-step-reservation.component.html',
+  imports: [
+    TranslatePipe,
+    DatePipe,
+    Checkbox,
+    FormsModule
+  ],
+  styleUrls: ['./vehicle-step-reservation.component.scss']
 })
 export class VehicleStepReservationComponent implements OnInit, OnDestroy {
   vehicle: VehicleFullData | null = null;

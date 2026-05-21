@@ -22,7 +22,7 @@ export class LanguageService {
   }
 
   getLanguage() {
-    return this.translateService.currentLang;
+    return this.translateService.getCurrentLang();
   }
 
   setLanguage(lang: string) {

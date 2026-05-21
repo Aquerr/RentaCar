@@ -1,17 +1,23 @@
-import { Component, Input } from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import { EngineType, VehicleBasicData } from '../../../models/vehicle.model';
+import {TranslatePipe} from "@ngx-translate/core";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {UpperCasePipe} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
-    selector: 'vehicle-card',
-    templateUrl: './vehicle-card.component.html',
-    styleUrls: ['./vehicle-card.component.scss'],
-    standalone: false
+  selector: 'vehicle-card',
+  templateUrl: './vehicle-card.component.html',
+  imports: [
+    TranslatePipe,
+    FaIconComponent,
+    UpperCasePipe,
+    RouterLink
+  ],
+  styleUrls: ['./vehicle-card.component.scss']
 })
 export class VehicleCardComponent {
-  @Input() vehicle: VehicleBasicData | null = null;
-  @Input() lang = 'us';
-
-  constructor() {}
-
+  vehicle: InputSignal<VehicleBasicData> = input.required<VehicleBasicData>();
+  lang: InputSignal<string> = input<string>('us');
   protected readonly EngineType = EngineType;
 }

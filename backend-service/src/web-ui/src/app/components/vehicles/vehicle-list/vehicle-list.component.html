@@ -1,31 +1,18 @@
 <div class='wrapper'>
   <div class='date-container'>
-    <p-date-picker [(ngModel)]='dateFrom'
-      dateFormat='dd.mm.yy'
-      [maxDate]='dateTo'
-      [touchUI]='true'
-      [readonlyInput]='true'
-      (ngModelChange)='getVehiclesAvailable()'
-    ></p-date-picker>
-    <p-date-picker [(ngModel)]='dateTo'
-      dateFormat='dd.mm.yy'
-      [minDate]='dateFrom'
-      [touchUI]='true'
-      [readonlyInput]='true'
-      (ngModelChange)='getVehiclesAvailable()'
-    ></p-date-picker>
+    <app-date-picker [model]="dateFrom" [maxDate]="dateTo" (dateChanged)="getVehiclesAvailable()"></app-date-picker>
+    <app-date-picker [model]="dateTo" [minDate]="dateFrom" (dateChanged)="getVehiclesAvailable()"></app-date-picker>
   </div>
   @if (vehicles.length > 0) {
     <div class='container'>
       @for (vehicle of vehicles; track vehicle) {
         <vehicle-card [vehicle]='vehicle'
-        [lang]='lang'></vehicle-card>
+                      [lang]='lang'></vehicle-card>
       }
     </div>
   } @else {
     <div class='no-vehicle'>
-      <h3>{{ 'components.vehicle-list.labels.no-vehicles' | translate}}</h3>
+      <h3>{{ 'components.vehicle-list.labels.no-vehicles' | translate }}</h3>
     </div>
   }
-
 </div>
