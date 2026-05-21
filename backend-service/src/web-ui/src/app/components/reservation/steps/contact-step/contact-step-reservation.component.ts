@@ -6,9 +6,10 @@ import { FormGroup } from '@angular/forms';
 import { ContactStepReservationFormService } from './contact-step-reservation.form.service';
 
 @Component({
-  selector: 'contact-step-reservation',
-  templateUrl: './contact-step-reservation.component.html',
-  styleUrls: ['./contact-step-reservation.component.scss']
+    selector: 'contact-step-reservation',
+    templateUrl: './contact-step-reservation.component.html',
+    styleUrls: ['./contact-step-reservation.component.scss'],
+    standalone: false
 })
 export class ContactStepReservationComponent implements OnInit, OnDestroy {
   @Input()

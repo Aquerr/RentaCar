@@ -11,9 +11,10 @@ import { ConfirmationService } from 'primeng/api';
 import { LanguageService } from '../../../services/language.service';
 
 @Component({
-  selector: 'profile-mfa',
-  templateUrl: './profile-mfa.component.html',
-  styleUrls: ['./profile-mfa.component.scss']
+    selector: 'profile-mfa',
+    templateUrl: './profile-mfa.component.html',
+    styleUrls: ['./profile-mfa.component.scss'],
+    standalone: false
 })
 export class ProfileMfaComponent implements OnInit, OnDestroy {
   userProfile: UserProfile | null = null;

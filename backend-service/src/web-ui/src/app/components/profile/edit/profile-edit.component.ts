@@ -9,9 +9,10 @@ import { LanguageService } from '../../../services/language.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
-  selector: 'profile-edit',
-  templateUrl: './profile-edit.component.html',
-  styleUrls: ['./profile-edit.component.scss']
+    selector: 'profile-edit',
+    templateUrl: './profile-edit.component.html',
+    styleUrls: ['./profile-edit.component.scss'],
+    standalone: false
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
   userProfile: UserProfile | null = null;

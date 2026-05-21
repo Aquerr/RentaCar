@@ -6,13 +6,14 @@ import { ToastType } from '../../../services/toast.service';
 
 
 @Component({
-  selector: 'password-reset',
-  templateUrl: './password-reset.component.html',
-  styleUrls: ['./password-reset.component.scss']
+    selector: 'password-reset',
+    templateUrl: './password-reset.component.html',
+    styleUrls: ['./password-reset.component.scss'],
+    standalone: false
 })
 export class PasswordResetComponent {
   form = new FormBuilder().group({
-    email: new FormControl(null, [Validators.required])
+    login: new FormControl(null, [Validators.required])
   });
 
   constructor(private commonService: CommonService,
@@ -21,7 +22,7 @@ export class PasswordResetComponent {
   resetPassword() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.apiService.resetPassword({email: this.getLogin().value}).subscribe({
+      this.apiService.resetPassword(this.getLogin().value).subscribe({
         next: () => {
           this.commonService.goRoute('');
           this.commonService.showToast('components.password-reset.toasts.success', ToastType.SUCCESS);
@@ -32,7 +33,7 @@ export class PasswordResetComponent {
   }
 
   getLogin() {
-    return this.form.get('email') as AbstractControl;
+    return this.form.get('login') as AbstractControl;
   }
 
   hasFormError(controlName: string, errorName: string) {

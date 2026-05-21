@@ -4,9 +4,10 @@ import { VehicleApiService } from '../../../../services/api/vehicle-api.service'
 import { VehicleFullData } from '../../../../models/vehicle.model';
 
 @Component({
-  selector: 'vehicle-step-reservation',
-  templateUrl: './vehicle-step-reservation.component.html',
-  styleUrls: ['./vehicle-step-reservation.component.scss']
+    selector: 'vehicle-step-reservation',
+    templateUrl: './vehicle-step-reservation.component.html',
+    styleUrls: ['./vehicle-step-reservation.component.scss'],
+    standalone: false
 })
 export class VehicleStepReservationComponent implements OnInit, OnDestroy {
   vehicle: VehicleFullData | null = null;

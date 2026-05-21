@@ -7,9 +7,10 @@ import { LanguageService } from '../../../services/language.service';
 
 
 @Component({
-  selector: 'reactivation-account',
-  templateUrl: './reactivation-account.component.html',
-  styleUrls: ['./reactivation-account.component.scss']
+    selector: 'reactivation-account',
+    templateUrl: './reactivation-account.component.html',
+    styleUrls: ['./reactivation-account.component.scss'],
+    standalone: false
 })
 export class ReactivationAccountComponent implements OnInit {
   form = new FormBuilder().group({

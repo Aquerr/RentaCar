@@ -3,9 +3,10 @@ import { ProfileReservation, ReservationStatus } from '../../../models/reservati
 import { DictionaryEntry } from '../../../services/dictionary.service';
 
 @Component({
-  selector: 'my-reservation-card',
-  templateUrl: './my-reservation-card.component.html',
-  styleUrls: ['./my-reservation-card.component.scss']
+    selector: 'my-reservation-card',
+    templateUrl: './my-reservation-card.component.html',
+    styleUrls: ['./my-reservation-card.component.scss'],
+    standalone: false
 })
 export class MyReservationCardComponent {
   @Input()

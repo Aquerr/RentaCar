@@ -65,6 +65,8 @@ import {
 import {
   ReservationStatusUpdateCardComponent
 } from './components/admin/admin-panel/reservation-status-update/card/reservation-status-update-card.component';
+import {DatePicker} from "primeng/datepicker";
+import {Select} from "primeng/select";
 
 @NgModule({
   declarations: [
@@ -116,7 +118,9 @@ import {
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    EffectsModule.forRoot([AuthEffects, CommonEffects])
+    EffectsModule.forRoot([AuthEffects, CommonEffects]),
+    DatePicker,
+    Select
   ],
   bootstrap: [AppComponent]
 })

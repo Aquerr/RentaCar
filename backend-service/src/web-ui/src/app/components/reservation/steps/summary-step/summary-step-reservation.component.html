@@ -1,17 +1,19 @@
-<div class='container' *ngIf='reservation && vehicle && userProfile'>
-  <div class='info-container'>
-    <span>{{'components.reservation.summary-step.labels.dateFrom' | translate}}:</span><span>{{reservation.dateFrom}}</span>
+@if (reservation && vehicle && userProfile) {
+  <div class='container'>
+    <div class='info-container'>
+      <span>{{'components.reservation.summary-step.labels.dateFrom' | translate}}:</span><span>{{reservation.dateFrom}}</span>
+    </div>
+    <div class='info-container'>
+      <span>{{'components.reservation.summary-step.labels.dateEnd' | translate}}:</span><span>{{reservation.dateTo}}</span>
+    </div>
+    <div class='info-container'>
+      <span>{{'components.reservation.summary-step.labels.totalPrice' | translate}}:</span><span>{{calculatePrice()}} PLN</span>
+    </div>
+    <div class='info-container'>
+      <span>{{'components.reservation.summary-step.labels.firstName' | translate}}:</span><span>{{userProfile.firstName}}</span>
+    </div>
+    <div class='info-container'>
+      <span>{{'components.reservation.summary-step.labels.lastName' | translate}}:</span><span>{{userProfile.lastName}}</span>
+    </div>
   </div>
-  <div class='info-container'>
-    <span>{{'components.reservation.summary-step.labels.dateEnd' | translate}}:</span><span>{{reservation.dateTo}}</span>
-  </div>
-  <div class='info-container'>
-    <span>{{'components.reservation.summary-step.labels.totalPrice' | translate}}:</span><span>{{calculatePrice()}} PLN</span>
-  </div>
-  <div class='info-container'>
-    <span>{{'components.reservation.summary-step.labels.firstName' | translate}}:</span><span>{{userProfile.firstName}}</span>
-  </div>
-  <div class='info-container'>
-    <span>{{'components.reservation.summary-step.labels.lastName' | translate}}:</span><span>{{userProfile.lastName}}</span>
-  </div>
-</div>
+}

@@ -7,9 +7,10 @@ import { ConfirmationService } from 'primeng/api';
 import { CommonService } from '../../services/common.service';
 
 @Component({
-  selector: 'my-reservations',
-  templateUrl: './my-reservations.component.html',
-  styleUrls: ['./my-reservations.component.scss']
+    selector: 'my-reservations',
+    templateUrl: './my-reservations.component.html',
+    styleUrls: ['./my-reservations.component.scss'],
+    standalone: false
 })
 export class MyReservationsComponent implements OnInit {
   reservations: ProfileReservation[] = [];

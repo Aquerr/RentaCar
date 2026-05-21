@@ -10,9 +10,10 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { UserProfile } from '../../../models/user-profile.model';
 
 @Component({
-  selector: 'vehicle-details',
-  templateUrl: './vehicle-details.component.html',
-  styleUrls: ['./vehicle-details.component.scss']
+    selector: 'vehicle-details',
+    templateUrl: './vehicle-details.component.html',
+    styleUrls: ['./vehicle-details.component.scss'],
+    standalone: false
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId: number | null = null;

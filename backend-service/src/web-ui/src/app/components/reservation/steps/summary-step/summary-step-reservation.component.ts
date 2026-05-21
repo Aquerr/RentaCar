@@ -7,9 +7,10 @@ import { UserProfile } from '../../../../models/user-profile.model';
 import { DateService } from '../../../../services/date.service';
 
 @Component({
-  selector: 'summary-step-reservation',
-  templateUrl: './summary-step-reservation.component.html',
-  styleUrls: ['./summary-step-reservation.component.scss']
+    selector: 'summary-step-reservation',
+    templateUrl: './summary-step-reservation.component.html',
+    styleUrls: ['./summary-step-reservation.component.scss'],
+    standalone: false
 })
 export class SummaryStepReservationComponent implements OnInit, OnDestroy {
   userProfile: UserProfile | null = null;

@@ -1,48 +1,48 @@
-<form [formGroup]='form' *ngIf='userProfile'>
-
-  <div class='mfa-wrapper'>
-    <div class='mfa-header-container'>
-      <div class='mfa-type-container'>
-        <ng-container *ngFor='let mfaType of availableMfaTypes'>
-          <div class='mfa-info'>
-            <ng-container *ngIf="mfaType === 'TOTP'">
-              <fa-icon icon='mobile-screen'></fa-icon>
-              <div class='title-info-container'>
-                <div class='title'>{{'components.profile-mfa.totp.title' | translate}}</div>
-                <div class='info'>{{'components.profile-mfa.totp.info' | translate}}
+@if (userProfile) {
+  <form [formGroup]='form'>
+    <div class='mfa-wrapper'>
+      <div class='mfa-header-container'>
+        <div class='mfa-type-container'>
+          @for (mfaType of availableMfaTypes; track mfaType) {
+            <div class='mfa-info'>
+              @if (mfaType === 'TOTP') {
+                <fa-icon icon='mobile-screen'></fa-icon>
+                <div class='title-info-container'>
+                  <div class='title'>{{'components.profile-mfa.totp.title' | translate}}</div>
+                  <div class='info'>{{'components.profile-mfa.totp.info' | translate}}
+                  </div>
                 </div>
-              </div>
-            </ng-container>
-            <button class='btn'
-                    (click)='selectedMfaType = mfaType'
-                    *ngIf='!mfaSettings || !mfaSettings.verified; else delete'>{{'components.profile-mfa.buttons.configure' | translate}}
-            </button>
-            <ng-template #delete>
-              <button class='btn'
-                      (click)='openInfoMfaDialog()'>{{'components.profile-mfa.buttons.details' | translate}}
-              </button>
-              <button class='btn'
-                      (click)='deleteMfaConfirmDialog()'>{{'components.profile-mfa.buttons.delete' | translate}}
-              </button>
-            </ng-template>
-          </div>
-        </ng-container>
+              }
+              @if (!mfaSettings || !mfaSettings.verified) {
+                <button class='btn'
+                  (click)='selectedMfaType = mfaType'
+                  >{{'components.profile-mfa.buttons.configure' | translate}}
+                </button>
+              } @else {
+                <button class='btn'
+                  (click)='openInfoMfaDialog()'>{{'components.profile-mfa.buttons.details' | translate}}
+                </button>
+                <button class='btn'
+                  (click)='deleteMfaConfirmDialog()'>{{'components.profile-mfa.buttons.delete' | translate}}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div class='mfa-container'>
+        @if (selectedMfaType === 'TOTP') {
+          <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
+        }
       </div>
     </div>
-    <div class='mfa-container'>
-      <ng-container *ngIf="selectedMfaType === 'TOTP'">
-        <profile-mfa-totp [userProfileId]='userProfile.id' [form]='getTotpForm()'></profile-mfa-totp>
-      </ng-container>
+    <div class='button-container'>
+      <button class='btn'
+        (click)='save()' [disabled]='form.invalid'>{{'components.profile-mfa.buttons.save' | translate}}
+      </button>
     </div>
-  </div>
-
-
-  <div class='button-container'>
-    <button class='btn'
-            (click)='save()' [disabled]='form.invalid'>{{'components.profile-mfa.buttons.save' | translate}}
-    </button>
-  </div>
-</form>
+  </form>
+}
 
 <p-confirmDialog
   message="{{'components.profile-mfa.dialog.delete.message' | translate}}"
