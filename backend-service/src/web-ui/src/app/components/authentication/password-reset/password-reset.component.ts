@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
 import { AuthenticationApiService } from '../../../services/api/authentication-api.service';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CommonService } from '../../../services/common.service';
 import { ToastType } from '../../../services/toast.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {InputText} from "primeng/inputtext";
 
 
 @Component({
-    selector: 'password-reset',
-    templateUrl: './password-reset.component.html',
-    styleUrls: ['./password-reset.component.scss'],
-    standalone: false
+  selector: 'password-reset',
+  templateUrl: './password-reset.component.html',
+  imports: [
+    TranslatePipe,
+    ReactiveFormsModule,
+    InputText
+  ],
+  styleUrls: ['./password-reset.component.scss']
 })
 export class PasswordResetComponent {
   form = new FormBuilder().group({

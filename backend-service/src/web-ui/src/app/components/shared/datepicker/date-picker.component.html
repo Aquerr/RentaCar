@@ -1,0 +1,19 @@
+@if (!controlName()) {
+  <p-date-picker
+                 [(ngModel)]='model'
+                 dateFormat='dd.mm.yy'
+                 [minDate]='minDate()'
+                 [maxDate]='maxDate()'
+                 [touchUI]='true'
+                 [readonlyInput]='isReadonly()'
+                 (ngModelChange)='onDateChange()'>
+  </p-date-picker>
+} @else {
+  <p-date-picker
+                 [formControlName]="controlName()"
+                 dateFormat='dd.mm.yy'
+                 [minDate]='minDate()'
+                 [maxDate]='maxDate()'
+                 [touchUI]='true'
+                 [readonlyInput]='isReadonly()'></p-date-picker>
+}

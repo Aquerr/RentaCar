@@ -1,0 +1,14 @@
+@if (!controlName()) {
+  <input pInputText
+         [(ngModel)]='model'
+         [type]="type()"
+         (change)="onChange()"
+         [maxLength]="maxLength()"
+         [readonly]="isReadonly()"/>
+} @else {
+  <input pInputText
+         [type]="type()"
+         [formControlName]="controlName()"
+         [maxLength]="maxLength()"
+         [readonly]="isReadonly()"/>
+}

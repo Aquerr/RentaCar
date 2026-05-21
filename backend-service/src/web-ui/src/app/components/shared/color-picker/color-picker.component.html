@@ -1,0 +1,11 @@
+@if (!controlName()) {
+  <p-color-picker
+    [(ngModel)]='model'
+    [disabled]="isReadonly()"
+    (ngModelChange)='onDateChange()'>
+  </p-color-picker>
+} @else {
+  <p-color-picker
+    [formControlName]="controlName()"
+    [disabled]="isReadonly()"></p-color-picker>
+}

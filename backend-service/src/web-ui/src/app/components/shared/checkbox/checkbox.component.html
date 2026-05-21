@@ -1,0 +1,12 @@
+@if (!controlName()) {
+  <p-checkbox
+    [(ngModel)]='model'
+    [readonly]="isReadonly()"
+    (onChange)="onChange()"
+    [binary]='true'/>
+} @else {
+  <p-checkbox
+    [formControlName]="controlName()"
+    [readonly]="isReadonly()"
+    [binary]='true'/>
+}

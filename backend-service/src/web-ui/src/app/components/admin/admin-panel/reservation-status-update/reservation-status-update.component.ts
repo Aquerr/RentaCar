@@ -4,13 +4,18 @@ import { ToastType } from '../../../../services/toast.service';
 import { ReservationApiService } from '../../../../services/api/reservation-api.service';
 import { ProfileReservation, ReservationStatus } from '../../../../models/reservation.model.ts';
 import { DictionaryEntry, DictionaryService, DictionaryType } from '../../../../services/dictionary.service';
+import {ReservationStatusUpdateCardComponent} from "./card/reservation-status-update-card.component";
+import {TranslatePipe} from "@ngx-translate/core";
 
 
 @Component({
-    selector: 'reservation-status-update',
-    templateUrl: './reservation-status-update.component.html',
-    styleUrls: ['./reservation-status-update.component.scss'],
-    standalone: false
+  selector: 'reservation-status-update',
+  templateUrl: './reservation-status-update.component.html',
+  imports: [
+    ReservationStatusUpdateCardComponent,
+    TranslatePipe
+  ],
+  styleUrls: ['./reservation-status-update.component.scss']
 })
 export class ReservationStatusUpdateComponent implements OnInit {
   reservations: ProfileReservation[] = [];

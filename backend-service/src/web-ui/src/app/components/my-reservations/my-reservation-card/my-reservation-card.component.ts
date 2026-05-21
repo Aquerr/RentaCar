@@ -1,12 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProfileReservation, ReservationStatus } from '../../../models/reservation.model.ts';
 import { DictionaryEntry } from '../../../services/dictionary.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {RouterLink} from "@angular/router";
 
 @Component({
-    selector: 'my-reservation-card',
-    templateUrl: './my-reservation-card.component.html',
-    styleUrls: ['./my-reservation-card.component.scss'],
-    standalone: false
+  selector: 'my-reservation-card',
+  templateUrl: './my-reservation-card.component.html',
+  imports: [
+    TranslatePipe,
+    RouterLink
+  ],
+  styleUrls: ['./my-reservation-card.component.scss']
 })
 export class MyReservationCardComponent {
   @Input()

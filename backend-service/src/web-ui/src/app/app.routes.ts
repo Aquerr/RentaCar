@@ -1,5 +1,5 @@
-import { inject, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { Routes } from '@angular/router';
 import { SignInComponent } from './components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SignUpComponent } from './components/authentication/sign-up/sign-up.component';
@@ -27,7 +27,7 @@ import {
 } from './components/reservation/payment-info/reservation-payment-info.component';
 import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
 
-const ROUTES: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: MainComponent,
@@ -134,12 +134,3 @@ const ROUTES: Routes = [
     title: 'title.not-found'
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(ROUTES, {
-    scrollPositionRestoration: 'enabled'
-  })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}
