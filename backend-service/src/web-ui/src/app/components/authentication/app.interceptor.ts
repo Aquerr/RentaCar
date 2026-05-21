@@ -44,7 +44,6 @@ export class AppInterceptor implements HttpInterceptor {
     let acceptedLanguages = JSON.parse(this.storageService.getItem('ACCEPTED_LANGS') || '[]');
     acceptedLanguages = acceptedLanguages.filter((lang: string) => this.userLang !== lang);
     acceptedLanguages.unshift(this.userLang);
-    console.log(acceptedLanguages);
     return acceptedLanguages.join(',');
   }
 }

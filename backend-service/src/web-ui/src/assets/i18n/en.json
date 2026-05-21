@@ -212,7 +212,7 @@
     "password-reset": {
       "labels": {
         "title": "Receiving password",
-        "email": "Email"
+        "login": "Login"
       },
       "buttons": {
         "resend": "Receive password"

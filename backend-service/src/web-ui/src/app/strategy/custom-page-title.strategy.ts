@@ -1,7 +1,7 @@
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class CustomPageTitleStrategy extends TitleStrategy {

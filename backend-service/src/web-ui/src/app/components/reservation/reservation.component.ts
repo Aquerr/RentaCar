@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Reservation, ReservationStatus } from '../../models/reservation.model.ts';
 import { Subscription } from 'rxjs';
 import { ReservationApiService } from '../../services/api/reservation-api.service';
@@ -9,15 +9,12 @@ import { ToastType } from '../../services/toast.service';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
-  selector: 'reservation',
-  templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.scss']
+    selector: 'reservation',
+    templateUrl: './reservation.component.html',
+    styleUrls: ['./reservation.component.scss'],
+    standalone: false
 })
 export class ReservationComponent implements OnInit, OnDestroy {
-  @ViewChild("steppingContainer") steppingContainer!: ElementRef;
-
-  steppingContainerTranslateX = 0;
-
   subscription: Subscription = new Subscription();
   reservation!: Reservation;
   activeIndex: number = 0;
@@ -80,17 +77,14 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   changeStep(event: number) {
     this.activeIndex = event;
-
-    this.steppingContainerTranslateX = -(this.activeIndex * 100);
-    this.steppingContainer.nativeElement.style.transform = `translate(${this.steppingContainerTranslateX}%, 0%)`;
   }
 
   goBack() {
-    this.changeStep(this.activeIndex - 1);
+    this.activeIndex = this.activeIndex - 1;
   }
 
   goNext() {
-    this.changeStep(this.activeIndex + 1);
+    this.activeIndex = this.activeIndex + 1;
   }
 
   private prepareSteps() {

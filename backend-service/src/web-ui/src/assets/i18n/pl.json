@@ -212,7 +212,7 @@
     "password-reset": {
       "labels": {
         "title": "Odzyskiwanie hasła",
-        "email": "Email"
+        "login": "Login"
       },
       "buttons": {
         "resend": "Resetuj hasło"

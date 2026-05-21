@@ -7,9 +7,10 @@ import { DictionaryEntry, DictionaryService, DictionaryType } from '../../../../
 
 
 @Component({
-  selector: 'reservation-status-update',
-  templateUrl: './reservation-status-update.component.html',
-  styleUrls: ['./reservation-status-update.component.scss']
+    selector: 'reservation-status-update',
+    templateUrl: './reservation-status-update.component.html',
+    styleUrls: ['./reservation-status-update.component.scss'],
+    standalone: false
 })
 export class ReservationStatusUpdateComponent implements OnInit {
   reservations: ProfileReservation[] = [];

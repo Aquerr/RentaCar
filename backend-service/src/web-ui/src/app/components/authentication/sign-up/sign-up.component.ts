@@ -7,9 +7,10 @@ import { Subscription } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
 
 @Component({
-  selector: 'sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+    selector: 'sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
+    standalone: false
 })
 export class SignUpComponent implements OnInit, OnDestroy {
   form!: FormGroup;

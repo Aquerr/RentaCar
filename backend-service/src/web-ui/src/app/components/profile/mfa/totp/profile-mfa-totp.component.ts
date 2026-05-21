@@ -4,9 +4,10 @@ import { MfaType } from '../../../../enums/mfa-type.enum';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'profile-mfa-totp',
-  templateUrl: './profile-mfa-totp.component.html',
-  styleUrls: ['./profile-mfa-totp.component.scss']
+    selector: 'profile-mfa-totp',
+    templateUrl: './profile-mfa-totp.component.html',
+    styleUrls: ['./profile-mfa-totp.component.scss'],
+    standalone: false
 })
 export class ProfileMfaTotpComponent implements OnInit {
 

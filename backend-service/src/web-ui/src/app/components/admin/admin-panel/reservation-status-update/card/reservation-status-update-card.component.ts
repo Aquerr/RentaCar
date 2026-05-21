@@ -4,9 +4,10 @@ import { DictionaryEntry } from '../../../../../services/dictionary.service';
 
 
 @Component({
-  selector: 'reservation-status-update-card',
-  templateUrl: './reservation-status-update-card.component.html',
-  styleUrls: ['./reservation-status-update-card.component.scss']
+    selector: 'reservation-status-update-card',
+    templateUrl: './reservation-status-update-card.component.html',
+    styleUrls: ['./reservation-status-update-card.component.scss'],
+    standalone: false
 })
 export class ReservationStatusUpdateCardComponent implements OnInit {
   selectedStatus: ReservationStatus | null = null;

@@ -7,8 +7,9 @@ import { LanguageService } from '../../../services/language.service';
 
 
 @Component({
-  selector: 'activation-account',
-  templateUrl: './activation-account.component.html'
+    selector: 'activation-account',
+    templateUrl: './activation-account.component.html',
+    standalone: false
 })
 export class ActivationAccountComponent implements OnInit {
 

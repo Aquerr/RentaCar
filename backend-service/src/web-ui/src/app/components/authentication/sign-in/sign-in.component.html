@@ -29,10 +29,10 @@
     <p-checkbox class='checkbox'
                 formControlName='rememberMe'
                 [binary]='true'
-                label="{{
-      'components.authentication.sign-in.rememberMe.label' | translate
-    }}"
-    ></p-checkbox>
+                label=""
+    >{{
+        'components.authentication.sign-in.rememberMe.label' | translate
+      }}</p-checkbox>
 
 
     <button class='btn' (click)='signIn()' [disabled]='!formService.isFormValid()'

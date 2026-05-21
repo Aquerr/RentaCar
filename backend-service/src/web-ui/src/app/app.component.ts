@@ -4,12 +4,12 @@ import { UserProfile } from './models/user-profile.model';
 import { LanguageService } from './services/language.service';
 import { AuthenticationService } from './services/authentication.service';
 import { FontAwesomeLibraryService } from './services/font-awesome-library.service';
-import {Router, TitleStrategy} from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
   iconLang = 'fi fi-us';
@@ -19,11 +19,9 @@ export class AppComponent implements OnInit, OnDestroy {
   sideMenuExpanded = false;
 
   constructor(
-    private router: Router,
     private authenticationService: AuthenticationService,
     private languageService: LanguageService,
-    private fontAwesomeLibrary: FontAwesomeLibraryService,
-    private titleStrategy: TitleStrategy
+    private fontAwesomeLibrary: FontAwesomeLibraryService
   ) {
   }
 
@@ -54,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iconLang = 'fi fi-us';
       this.languageService.setLanguage('en');
     }
-    this.titleStrategy.updateTitle(this.router.routerState.snapshot);
+    window.location.reload();
   }
 
   logout() {
@@ -72,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   isMobileView() {
     this.isMobile = window.innerWidth < 800;
   }

@@ -7,9 +7,10 @@ import { ConfirmationService } from 'primeng/api';
 
 
 @Component({
-  selector: 'remove-vehicle',
-  templateUrl: './admin-remove-vehicle.component.html',
-  styleUrls: ['./admin-remove-vehicle.component.scss']
+    selector: 'remove-vehicle',
+    templateUrl: './admin-remove-vehicle.component.html',
+    styleUrls: ['./admin-remove-vehicle.component.scss'],
+    standalone: false
 })
 export class AdminRemoveVehicleComponent implements OnInit {
   vehicles: VehicleBasicData[] = [];
