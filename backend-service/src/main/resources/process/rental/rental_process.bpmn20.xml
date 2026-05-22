@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:flowable="http://flowable.org/bpmn" targetNamespace="http://www.flowable.org/processdef"
+             exporter="Camunda Modeler" exporterVersion="5.47.0">
+  <process id="rental_process" name="rental_process" isExecutable="true">
+    <startEvent id="sid-68a42870-e7e1-4340-bfe0-a7c6d8f6b95d" name="Start event"/>
+    <endEvent id="sid-51a92b17-575f-4352-926c-01d372295741" name="End Event">
+      <incoming>Flow_1vb6xho</incoming>
+    </endEvent>
+    <sequenceFlow id="sid-471463f7-5654-4100-a637-5ea092abb0d7" sourceRef="sid-68a42870-e7e1-4340-bfe0-a7c6d8f6b95d"
+                  targetRef="sid-535e3f42-4376-47b7-b931-cd5dd8b57c5c"/>
+    <sequenceFlow id="sid-df1982df-6b32-4496-a53e-dc7c6cbfb86f" sourceRef="sid-140b4440-eda2-4422-9128-e338c0fc13bf"
+                  targetRef="sid-51a92b17-575f-4352-926c-01d372295741"/>
+    <serviceTask id="sid-140b4440-eda2-4422-9128-e338c0fc13bf" name="Create reservation" camunda:type="external"
+                 camunda:topic="">
+      <extensionElements/>
+      <incoming>Flow_0vsqny9</incoming>
+    </serviceTask>
+    <serviceTask id="sid-535e3f42-4376-47b7-b931-cd5dd8b57c5c" name="Validate customer data" camunda:type="external"
+                 camunda:topic="">
+      <incoming>sid-471463f7-5654-4100-a637-5ea092abb0d7</incoming>
+      <outgoing>Flow_1wy724y</outgoing>
+    </serviceTask>
+    <sequenceFlow id="Flow_1wy724y" sourceRef="sid-535e3f42-4376-47b7-b931-cd5dd8b57c5c"
+                  targetRef="gatewayAfterValidate"/>
+    <exclusiveGateway id="gatewayAfterValidate" name="Is customer valid?" default="Flow_1vb6xho">
+      <incoming>Flow_1wy724y</incoming>
+      <outgoing>Flow_0vsqny9</outgoing>
+      <outgoing>Flow_1vb6xho</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_0vsqny9" sourceRef="gatewayAfterValidate"
+                  targetRef="sid-140b4440-eda2-4422-9128-e338c0fc13bf">
+      <conditionExpression xsi:type="tFormalExpression">${ customerValid == true }</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_1vb6xho" sourceRef="gatewayAfterValidate"
+                  targetRef="sid-51a92b17-575f-4352-926c-01d372295741"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_rental_process">
+    <bpmndi:BPMNPlane id="BPMNPlane_rental_process" bpmnElement="rental_process">
+      <bpmndi:BPMNShape id="shape-5f75fecb-62cd-41b8-9481-7a0232a1d638"
+                        bpmnElement="sid-68a42870-e7e1-4340-bfe0-a7c6d8f6b95d">
+        <omgdc:Bounds x="105" y="205" width="30" height="30"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="92" y="243" width="55" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-06c9aedc-86f5-4f60-851e-dbb1a792b0c3"
+                        bpmnElement="sid-51a92b17-575f-4352-926c-01d372295741">
+        <omgdc:Bounds x="835" y="205" width="30" height="30"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="773" y="213" width="52" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-be2e3fa6-3cf4-4b8d-89b9-665b9650f7c8"
+                        bpmnElement="sid-535e3f42-4376-47b7-b931-cd5dd8b57c5c">
+        <omgdc:Bounds x="220" y="180" width="100" height="80"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1stog45_di" bpmnElement="gatewayAfterValidate" isMarkerVisible="true">
+        <omgdc:Bounds x="385" y="195" width="50" height="50"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="445" y="213" width="89" height="14"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-b6a31597-0d1d-42bc-a082-a986efde410a"
+                        bpmnElement="sid-140b4440-eda2-4422-9128-e338c0fc13bf">
+        <omgdc:Bounds x="580" y="80" width="100" height="80"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-1a21fa0d-71fc-44f8-8de8-9e71747eb987"
+                       bpmnElement="sid-471463f7-5654-4100-a637-5ea092abb0d7">
+        <omgdi:waypoint x="135" y="220"/>
+        <omgdi:waypoint x="220" y="220"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-1642618c-ecf6-4283-b49e-ed43bff8546d"
+                       bpmnElement="sid-df1982df-6b32-4496-a53e-dc7c6cbfb86f">
+        <omgdi:waypoint x="680" y="120"/>
+        <omgdi:waypoint x="850" y="120"/>
+        <omgdi:waypoint x="850" y="205"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wy724y_di" bpmnElement="Flow_1wy724y">
+        <omgdi:waypoint x="320" y="220"/>
+        <omgdi:waypoint x="385" y="220"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vsqny9_di" bpmnElement="Flow_0vsqny9">
+        <omgdi:waypoint x="410" y="195"/>
+        <omgdi:waypoint x="410" y="120"/>
+        <omgdi:waypoint x="580" y="120"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vb6xho_di" bpmnElement="Flow_1vb6xho">
+        <omgdi:waypoint x="410" y="245"/>
+        <omgdi:waypoint x="410" y="330"/>
+        <omgdi:waypoint x="850" y="330"/>
+        <omgdi:waypoint x="850" y="235"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

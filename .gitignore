@@ -32,6 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
+/data
+
 *.db
 .docker-runtime-data
 /logs

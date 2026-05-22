@@ -19,6 +19,8 @@
         <logbook.version>4.0.4</logbook.version>
         <totp.version>1.7.1</totp.version>
         <apache-commons-net.version>3.13.0</apache-commons-net.version>
+        <operaton.spring-boot.version>2.1.0</operaton.spring-boot.version>
+
 
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
 
@@ -70,6 +72,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-flyway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.operaton.bpm.springboot</groupId>
+            <artifactId>operaton-bpm-spring-boot-starter-external-task-client</artifactId>
+            <version>${operaton.spring-boot.version}</version>
         </dependency>
 
         <dependency>

@@ -17,14 +17,15 @@ management:
         include:
           - health
 
-flowable:
-  async-executor-activate: true
-  process:
-    servlet:
-      path: /process-api
-  rest-api-enabled: true
-  rest:
-    app:
-      admin:
-        user-id: rest-admin
-        password: rest-admin
+
+operaton:
+  bpm:
+    admin-user:
+      id: rentacar_admin
+      password: rentacar_admin
+      first-name: rentacar
+      last-name: rentacar
+      email: rentacar_admin@rentacar.pl
+    generic-properties:
+      properties:
+        generalResourceWhitelistPattern: "[a-zA-Z0-9\\-_]+"
