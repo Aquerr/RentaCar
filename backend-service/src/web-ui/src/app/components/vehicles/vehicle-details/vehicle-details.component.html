@@ -44,10 +44,8 @@
             class='title'>{{ 'components.vehicle-details.labels.amount-of-seats' | translate }}</span><span>{{ vehicle.seatsAmount }}</span>
           <span
             class='title'>{{ 'components.vehicle-details.labels.category' | translate }}</span><span>{{ vehicle.category }}</span>
-          <span
-            class='title'>{{ 'components.vehicle-details.labels.color' | translate }}</span><span>
-          <app-color-picker [model]="vehicle.body.color" [isReadonly]="true"></app-color-picker>
-        </span>
+          <app-color-picker [model]="vehicle.body.color" [isReadonly]="true"
+                            [label]="'components.vehicle-details.labels.color' | translate"></app-color-picker>
           <span
             class='title'>{{ 'components.vehicle-details.labels.rims-inch' | translate }}</span><span>{{ vehicle.body.rimsInch }}</span>
         </div>
@@ -67,38 +65,38 @@
         </div>
 
         <div class='section'>
-          <span class='title'>{{ 'components.vehicle-details.labels.ac' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.ac" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.ac" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.ac' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.pdc-front' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.frontPDC" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.frontPDC" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.pdc-front' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.pdc-rear' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.rearPDC" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.rearPDC" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.pdc-rear' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.bluetooth' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.bluetooth" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.bluetooth" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.bluetooth' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.led-front' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.ledFrontLights" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.ledFrontLights" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.led-front' | translate"></app-checkbox>
         </div>
 
         <div class='section'>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.led-rear' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.ledRearLights" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.ledRearLights" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.led-rear' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.xenon-front' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.xenonFrontLights" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.xenonFrontLights" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.xenon-front' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.leather' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.leatherSeats" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.leatherSeats" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.leather' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.multi-steering-wheel' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.multifunctionalSteeringWheel" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.multifunctionalSteeringWheel" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.multi-steering-wheel' | translate"></app-checkbox>
 
-          <span class='title'>{{ 'components.vehicle-details.labels.cruise-control' | translate }}</span>
-          <app-checkbox [model]="vehicle.equipment.cruiseControl" [isReadonly]="true"></app-checkbox>
+          <app-checkbox [model]="vehicle.equipment.cruiseControl" [isReadonly]="true"
+                        [label]="'components.vehicle-details.labels.cruise-control' | translate"></app-checkbox>
         </div>
       </div>
       <div class='description'>
