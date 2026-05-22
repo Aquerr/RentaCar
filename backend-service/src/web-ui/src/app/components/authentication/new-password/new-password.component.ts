@@ -1,15 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationApiService } from '../../../services/api/authentication-api.service';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CommonService } from '../../../services/common.service';
 import { ToastType } from '../../../services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {TranslatePipe} from "@ngx-translate/core";
+import {InputText} from "primeng/inputtext";
 
 
 @Component({
   selector: 'new-password',
   templateUrl: './new-password.component.html',
+  imports: [
+    TranslatePipe,
+    ReactiveFormsModule,
+    InputText
+  ],
   styleUrls: ['./new-password.component.scss']
 })
 export class NewPasswordComponent implements OnInit, OnDestroy {
@@ -25,7 +32,6 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
               private apiService: AuthenticationApiService) {}
 
   ngOnInit() {
-    this.resolveToken();
     this.isTokenValid();
     this.password2ValueSubscription();
   }
@@ -35,19 +41,16 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
   }
 
   isTokenValid() {
-    if (this.token.length <= 0) {
-      this.handleTokenInvalidError();
-    }
-
-    //TODO: Add token expiration date validation?
-    // this.apiService.isTokenValid(this.token).subscribe({
-    //   next: (tokenValid) => {
-    //     if (!tokenValid) {
-    //       this.handleTokenInvalidError();
-    //     }
-    //   },
-    //   error: () => this.handleTokenInvalidError()
-    // });
+    const url = this.router.routerState.snapshot.url;
+    this.token = url.substring(url.indexOf('=') + 1, url.length);
+    this.apiService.isTokenValid(this.token).subscribe({
+      next: (tokenValid) => {
+        if (!tokenValid) {
+          this.handleTokenInvalidError();
+        }
+      },
+      error: () => this.handleTokenInvalidError()
+    });
   }
 
   handleTokenInvalidError() {
@@ -72,7 +75,7 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
   setNewPassword() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.apiService.setNewPassword({token: this.token, password: this.getPassword().value}).subscribe({
+      this.apiService.setNewPassword(this.token, this.getPassword().value).subscribe({
         next: () => {
           this.commonService.goRoute('');
           this.commonService.showToast('components.new-password.toasts.update-success', ToastType.SUCCESS);
@@ -95,7 +98,4 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
     return control?.hasError(errorName) && control?.touched;
   }
 
-  private resolveToken() {
-    this.token = this.router.routerState.snapshot.root.queryParamMap.get('token')! ?? '';
-  }
 }

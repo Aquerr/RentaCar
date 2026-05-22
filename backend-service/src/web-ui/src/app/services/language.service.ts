@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from './storage.service';
-import { PrimeNGConfig } from 'primeng/api';
+import {TranslateService} from "@ngx-translate/core";
+import {PrimeNG} from "primeng/config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
   constructor(
-    private config: PrimeNGConfig,
+    private config: PrimeNG,
     private translateService: TranslateService,
     private storageService: StorageService
   ) {
-
-    this.setLanguage("en");
   }
 
   loadLanguage() {
@@ -24,7 +22,7 @@ export class LanguageService {
   }
 
   getLanguage() {
-    return this.translateService.currentLang;
+    return this.translateService.getCurrentLang();
   }
 
   setLanguage(lang: string) {

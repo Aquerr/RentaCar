@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Reservation, ReservationStatus } from '../../models/reservation.model.ts';
 import { Subscription } from 'rxjs';
 import { ReservationApiService } from '../../services/api/reservation-api.service';
@@ -7,17 +7,27 @@ import { ConfirmationService } from 'primeng/api';
 import { CommonService } from '../../services/common.service';
 import { ToastType } from '../../services/toast.service';
 import { LanguageService } from '../../services/language.service';
+import {Steps} from "primeng/steps";
+import {VehicleStepReservationComponent} from "./steps/vehicle-step/vehicle-step-reservation.component";
+import {ContactStepReservationComponent} from "./steps/contact-step/contact-step-reservation.component";
+import {SummaryStepReservationComponent} from "./steps/summary-step/summary-step-reservation.component";
+import {TranslatePipe} from "@ngx-translate/core";
+import {ConfirmDialog} from "primeng/confirmdialog";
 
 @Component({
   selector: 'reservation',
   templateUrl: './reservation.component.html',
+  imports: [
+    Steps,
+    VehicleStepReservationComponent,
+    ContactStepReservationComponent,
+    SummaryStepReservationComponent,
+    TranslatePipe,
+    ConfirmDialog
+  ],
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit, OnDestroy {
-  @ViewChild("steppingContainer") steppingContainer!: ElementRef;
-
-  steppingContainerTranslateX = 0;
-
   subscription: Subscription = new Subscription();
   reservation!: Reservation;
   activeIndex: number = 0;
@@ -80,17 +90,14 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   changeStep(event: number) {
     this.activeIndex = event;
-
-    this.steppingContainerTranslateX = -(this.activeIndex * 100);
-    this.steppingContainer.nativeElement.style.transform = `translate(${this.steppingContainerTranslateX}%, 0%)`;
   }
 
   goBack() {
-    this.changeStep(this.activeIndex - 1);
+    this.activeIndex = this.activeIndex - 1;
   }
 
   goNext() {
-    this.changeStep(this.activeIndex + 1);
+    this.activeIndex = this.activeIndex + 1;
   }
 
   private prepareSteps() {

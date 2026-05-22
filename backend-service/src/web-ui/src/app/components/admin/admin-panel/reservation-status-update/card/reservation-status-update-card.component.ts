@@ -1,11 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProfileReservation, ReservationStatus } from '../../../../../models/reservation.model.ts';
 import { DictionaryEntry } from '../../../../../services/dictionary.service';
+import {Select} from "primeng/select";
+import {TranslatePipe} from "@ngx-translate/core";
+import {FormsModule} from "@angular/forms";
 
 
 @Component({
   selector: 'reservation-status-update-card',
   templateUrl: './reservation-status-update-card.component.html',
+  imports: [
+    Select,
+    TranslatePipe,
+    FormsModule
+  ],
   styleUrls: ['./reservation-status-update-card.component.scss']
 })
 export class ReservationStatusUpdateCardComponent implements OnInit {

@@ -13,10 +13,18 @@ import { UserProfile } from '../../../models/user-profile.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
+import {Tooltip} from "primeng/tooltip";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'profile-panel',
   templateUrl: './profile-panel.component.html',
+  imports: [
+    Tooltip,
+    FaIconComponent,
+    TranslatePipe
+  ],
   styleUrls: ['./profile-panel.component.scss']
 })
 export class ProfilePanelComponent implements OnChanges, OnDestroy {

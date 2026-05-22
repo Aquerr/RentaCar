@@ -2,12 +2,21 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { UserProfile } from '../../../../models/user-profile.model';
-import { FormGroup } from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ContactStepReservationFormService } from './contact-step-reservation.form.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {InputText} from "primeng/inputtext";
+import {DatePicker} from "primeng/datepicker";
 
 @Component({
   selector: 'contact-step-reservation',
   templateUrl: './contact-step-reservation.component.html',
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    InputText,
+    DatePicker
+  ],
   styleUrls: ['./contact-step-reservation.component.scss']
 })
 export class ContactStepReservationComponent implements OnInit, OnDestroy {
@@ -28,7 +37,7 @@ export class ContactStepReservationComponent implements OnInit, OnDestroy {
 
   getUser() {
     this.subscription = this.authenticationService.getUser().subscribe({
-      next: (userProfile) => this.setUser(userProfile)
+      next: (userProfile) => this.setUser(userProfile as UserProfile)
     });
   }
 

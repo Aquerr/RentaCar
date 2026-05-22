@@ -5,10 +5,14 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { VehicleApiService, VehicleFullDataResponse } from '../../../../services/api/vehicle-api.service';
 import { UserProfile } from '../../../../models/user-profile.model';
 import { DateService } from '../../../../services/date.service';
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'summary-step-reservation',
   templateUrl: './summary-step-reservation.component.html',
+  imports: [
+    TranslatePipe
+  ],
   styleUrls: ['./summary-step-reservation.component.scss']
 })
 export class SummaryStepReservationComponent implements OnInit, OnDestroy {
@@ -28,7 +32,7 @@ export class SummaryStepReservationComponent implements OnInit, OnDestroy {
 
   getUser() {
     this.subscriptions.add(this.authenticationService.getUser().subscribe({
-      next: (userProfile) => this.userProfile = userProfile
+      next: (userProfile) => this.userProfile = userProfile as UserProfile
     }));
   }
 

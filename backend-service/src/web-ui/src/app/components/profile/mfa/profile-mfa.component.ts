@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserProfile } from '../../../models/user-profile.model';
-import { FormGroup } from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ProfileMfaFormService } from './profile-mfa.form.service';
 import { Subscription } from 'rxjs';
 import { MfaActivationRequest, UserProfileApiService } from '../../../services/api/user-profile-api.service';
@@ -9,10 +9,21 @@ import { MfaSettings } from '../../../models/mfa-settings.model';
 import { ToastService, ToastType } from '../../../services/toast.service';
 import { ConfirmationService } from 'primeng/api';
 import { LanguageService } from '../../../services/language.service';
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {TranslatePipe} from "@ngx-translate/core";
+import {ProfileMfaTotpComponent} from "./totp/profile-mfa-totp.component";
+import {ConfirmDialog} from "primeng/confirmdialog";
 
 @Component({
   selector: 'profile-mfa',
   templateUrl: './profile-mfa.component.html',
+  imports: [
+    ReactiveFormsModule,
+    FaIconComponent,
+    TranslatePipe,
+    ProfileMfaTotpComponent,
+    ConfirmDialog
+  ],
   styleUrls: ['./profile-mfa.component.scss']
 })
 export class ProfileMfaComponent implements OnInit, OnDestroy {
@@ -42,7 +53,7 @@ export class ProfileMfaComponent implements OnInit, OnDestroy {
 
   setUser() {
     this.subscriptions.add(this.authenticationService.getUser().subscribe((userProfile) => {
-      this.userProfile = userProfile;
+      this.userProfile = userProfile as UserProfile;
       this.getUserMfaSettings();
       this.getAvailableUserMfaTypes();
     }));

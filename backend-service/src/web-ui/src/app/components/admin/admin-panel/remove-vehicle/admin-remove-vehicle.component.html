@@ -1,19 +1,20 @@
 <div class='container'>
-  <ng-container *ngIf='vehicles.length >0 ;else noVehicles'>
-    <div class='vehicle-container' *ngFor='let vehicle of vehicles'>
-      <img alt='' [src]='vehicle.photoUrl' />
-      <div class='info'>
-        {{vehicle.brand}} {{vehicle.model}}
+  @if (vehicles.length >0 ) {
+    @for (vehicle of vehicles; track vehicle) {
+      <div class='vehicle-container'>
+        <img alt='' [src]='vehicle.photoUrl' />
+        <div class='info'>
+          {{vehicle.brand}} {{vehicle.model}}
+        </div>
+        <div class='info'>
+          {{vehicle.basicPrice}} PLN
+        </div>
+        <fa-icon icon='trash' (click)='removeVehicleDialog(vehicle.id)'></fa-icon>
       </div>
-      <div class='info'>
-        {{vehicle.basicPrice}} PLN
-      </div>
-      <fa-icon icon='trash' (click)='removeVehicleDialog(vehicle.id)'></fa-icon>
-    </div>
-  </ng-container>
-  <ng-template #noVehicles>
+    }
+  } @else {
     noVehicles
-  </ng-template>
+  }
 </div>
 
 <p-confirmDialog

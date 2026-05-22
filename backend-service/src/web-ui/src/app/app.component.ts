@@ -1,14 +1,31 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UserProfile } from './models/user-profile.model';
-import { LanguageService } from './services/language.service';
-import { AuthenticationService } from './services/authentication.service';
-import { FontAwesomeLibraryService } from './services/font-awesome-library.service';
-import {Router, TitleStrategy} from "@angular/router";
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {UserProfile} from './models/user-profile.model';
+import {LanguageService} from './services/language.service';
+import {AuthenticationService} from './services/authentication.service';
+import {FontAwesomeLibraryService} from './services/font-awesome-library.service';
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {TranslatePipe} from "@ngx-translate/core";
+import {Tooltip} from "primeng/tooltip";
+import {ProfilePanelComponent} from "./components/profile/panel/profile-panel.component";
+import {Toast} from "primeng/toast";
+import {FooterComponent} from "./components/footer/footer.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  imports: [
+    FaIconComponent,
+    RouterLinkActive,
+    TranslatePipe,
+    RouterLink,
+    Tooltip,
+    ProfilePanelComponent,
+    RouterOutlet,
+    Toast,
+    FooterComponent
+  ],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -19,11 +36,9 @@ export class AppComponent implements OnInit, OnDestroy {
   sideMenuExpanded = false;
 
   constructor(
-    private router: Router,
     private authenticationService: AuthenticationService,
     private languageService: LanguageService,
-    private fontAwesomeLibrary: FontAwesomeLibraryService,
-    private titleStrategy: TitleStrategy
+    private fontAwesomeLibrary: FontAwesomeLibraryService
   ) {
   }
 
@@ -42,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   startUserSubscription() {
     this.subscription = this.authenticationService.getUser().subscribe((userState) =>
-      this.userLogged = userState
+      this.userLogged = userState as UserProfile
     );
   }
 
@@ -54,7 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.iconLang = 'fi fi-us';
       this.languageService.setLanguage('en');
     }
-    this.titleStrategy.updateTitle(this.router.routerState.snapshot);
+    window.location.reload();
   }
 
   logout() {
@@ -72,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   isMobileView() {
     this.isMobile = window.innerWidth < 800;
   }

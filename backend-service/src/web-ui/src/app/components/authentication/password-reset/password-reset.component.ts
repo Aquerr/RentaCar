@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
 import { AuthenticationApiService } from '../../../services/api/authentication-api.service';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CommonService } from '../../../services/common.service';
 import { ToastType } from '../../../services/toast.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {InputText} from "primeng/inputtext";
 
 
 @Component({
   selector: 'password-reset',
   templateUrl: './password-reset.component.html',
+  imports: [
+    TranslatePipe,
+    ReactiveFormsModule,
+    InputText
+  ],
   styleUrls: ['./password-reset.component.scss']
 })
 export class PasswordResetComponent {
   form = new FormBuilder().group({
-    email: new FormControl(null, [Validators.required])
+    login: new FormControl(null, [Validators.required])
   });
 
   constructor(private commonService: CommonService,
@@ -21,7 +28,7 @@ export class PasswordResetComponent {
   resetPassword() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.apiService.resetPassword({email: this.getLogin().value}).subscribe({
+      this.apiService.resetPassword(this.getLogin().value).subscribe({
         next: () => {
           this.commonService.goRoute('');
           this.commonService.showToast('components.password-reset.toasts.success', ToastType.SUCCESS);
@@ -32,7 +39,7 @@ export class PasswordResetComponent {
   }
 
   getLogin() {
-    return this.form.get('email') as AbstractControl;
+    return this.form.get('login') as AbstractControl;
   }
 
   hasFormError(controlName: string, errorName: string) {

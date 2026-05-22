@@ -1,16 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserProfile } from '../../../models/user-profile.model';
-import { FormGroup } from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ProfileEditFormService } from './profile-edit.form.service';
 import { Subscription } from 'rxjs';
 import { UserProfileApiService } from '../../../services/api/user-profile-api.service';
 import { ToastService, ToastType } from '../../../services/toast.service';
 import { LanguageService } from '../../../services/language.service';
 import { AuthenticationService } from '../../../services/authentication.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {Tooltip} from "primeng/tooltip";
+import {InputText} from "primeng/inputtext";
+import {DatePicker} from "primeng/datepicker";
 
 @Component({
   selector: 'profile-edit',
   templateUrl: './profile-edit.component.html',
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    Tooltip,
+    InputText,
+    DatePicker
+  ],
   styleUrls: ['./profile-edit.component.scss']
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
@@ -39,7 +50,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   setUser() {
     this.subscriptions.add(this.authenticationService.getUser().subscribe((userProfile) => {
-      this.userProfile = userProfile;
+      this.userProfile = userProfile as UserProfile;
       if (userProfile) {
         this.loadFormData(userProfile);
         this.iconUrl = userProfile.iconUrl;

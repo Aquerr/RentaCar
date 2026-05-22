@@ -2,16 +2,22 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { VehicleApiService } from '../../../services/api/vehicle-api.service';
 import { VehicleBasicData } from '../../../models/vehicle.model';
-import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../../services/language.service';
-import { ReservationApiService } from '../../../services/api/reservation-api.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UserProfile } from '../../../models/user-profile.model';
 import { DateService } from '../../../services/date.service';
+import {DatePickerComponent} from "../../shared/datepicker/date-picker.component";
+import {VehicleCardComponent} from "../vehicle-card/vehicle-card.component";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'vehicle-list',
   templateUrl: './vehicle-list.component.html',
+  imports: [
+    DatePickerComponent,
+    VehicleCardComponent,
+    TranslatePipe
+  ],
   styleUrls: ['./vehicle-list.component.scss']
 })
 export class VehicleListComponent implements OnInit, OnDestroy {
@@ -23,10 +29,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   lang = 'us';
 
   constructor(private vehicleApiService: VehicleApiService,
-              private reservationApiService: ReservationApiService,
               private authenticationService: AuthenticationService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
               private languageService: LanguageService,
               private dateService: DateService) {
   }
@@ -55,7 +58,7 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   getUser() {
     this.subscriptions.add(this.authenticationService.getUser().subscribe({
       next: (user) => {
-        this.user = user;
+        this.user = user as UserProfile;
       }
     }));
   }

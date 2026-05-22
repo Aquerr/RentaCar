@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../../../services/authentication.service';
+import {RouterLink, RouterLinkActive} from "@angular/router";
+import {TranslatePipe} from "@ngx-translate/core";
 
 
 @Component({
   selector: 'admin-side-menu',
   templateUrl: './admin-side-menu.component.html',
+  imports: [
+    RouterLinkActive,
+    RouterLink,
+    TranslatePipe
+  ],
   styleUrls: ['./admin-side-menu.component.scss']
 })
 export class AdminSideMenuComponent implements OnInit {

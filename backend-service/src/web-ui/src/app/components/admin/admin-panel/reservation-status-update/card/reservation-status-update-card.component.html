@@ -8,7 +8,7 @@
     <div class='info'>{{'components.reservation-status-update-card.labels.dateTo' | translate}} {{reservation.dateTo}}</div>
   </div>
   <div class='info'>
-    <p-dropdown [(ngModel)]='selectedStatus' [options]='getProperStatuses()' />
+    <p-select [(ngModel)]='selectedStatus' [options]='getProperStatuses()' />
   </div>
   <button class='btn'
           (click)='changeStatusEmit()'
