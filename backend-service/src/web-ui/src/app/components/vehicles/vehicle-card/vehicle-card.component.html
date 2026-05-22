@@ -1,70 +1,69 @@
-  <div class='vehicle-card'>
-    <div class='car-row'>
-      <div class='car-row-column-first'>
-        <img alt='' [src]='vehicle().photoUrl' />
-      </div>
-      <div class='car-name'>
-        <span>{{vehicle().brand | uppercase}} {{vehicle().model | uppercase}}</span>
-      </div>
-      <div class='car-row-column-second'>
-        @if (vehicle().engine.type) {
-          <div class='equipment-element'>
-            <fa-icon icon='oil-can'></fa-icon>
-            @if (vehicle().engine.type === EngineType.GAS) {
-              <span> {{ 'components.vehicle-card.labels.gas' | translate}}</span>
-            }
-            @if (vehicle().engine.type === EngineType.DIESEL) {
-              <span>{{ 'components.vehicle-card.labels.diesel' | translate}}</span>
-            }
-            @if (vehicle().engine.type === EngineType.HYBRID) {
-              <span>{{ 'components.vehicle-card.labels.hybrid' | translate}}</span>
-            }
-            @if (vehicle().engine.type === EngineType.ELECTRIC) {
-              <span>{{ 'components.vehicle-card.labels.electric' | translate}}</span>
-            }
-          </div>
-        }
-        @if (vehicle().engine.avgFuelConsumption) {
-          <div class='equipment-element'>
-            <fa-icon icon='gas-pump'></fa-icon>
-            <span>{{vehicle().engine.avgFuelConsumption}} {{ 'components.vehicle-card.labels.avg-fuel-consumption' | translate}}</span>
-          </div>
-        }
-        @if (vehicle().equipment.ac) {
-          <div class='equipment-element'>
-            <fa-icon icon='fan'></fa-icon>
-            <span>{{ 'components.vehicle-card.labels.ac' | translate}}</span>
-          </div>
-        }
-        @if (vehicle().equipment.ledFrontLights && vehicle().equipment.ledRearLights) {
-          <div class='equipment-element'>
-            <fa-icon icon='lightbulb'></fa-icon>
-            <span>{{ 'components.vehicle-card.labels.full-led' | translate}}</span>
-          </div>
-        }
-        @if (vehicle().equipment.leatherSeats) {
-          <div class='equipment-element'>
-            <fa-icon icon='chair'></fa-icon>
-            <span>{{ 'components.vehicle-card.labels.leather' | translate}}</span>
-          </div>
-        }
-        @if (vehicle().equipment.multifunctionalSteeringWheel) {
-          <div class='equipment-element'>
-            <fa-icon icon='dharmachakra'></fa-icon>
-            <span>{{ 'components.vehicle-card.labels.multi-steering-wheel' | translate}}</span>
-          </div>
-        }
-        <div class='price-container'>
-          <span>{{ 'components.vehicle-card.labels.price' | translate}}</span>
-          <div class='price'>
-            {{vehicle().basicPrice}} PLN
-          </div>
+<div class='vehicle-card'>
+  <div class='car-row'>
+    <div class='car-row-column-first'>
+      <img alt='' [src]='vehicle().photoUrl'/>
+    </div>
+    <div class='car-name'>
+      <span>{{ vehicle().brand | uppercase }} {{ vehicle().model | uppercase }}</span>
+    </div>
+    <div class='car-row-column-second'>
+      @if (vehicle().engine.type) {
+        <div class='equipment-element'>
+          <fa-icon icon='oil-can'></fa-icon>
+          @if (vehicle().engine.type === EngineType.GAS) {
+            <span> {{ 'components.vehicle-card.labels.gas' | translate }}</span>
+          }
+          @if (vehicle().engine.type === EngineType.DIESEL) {
+            <span>{{ 'components.vehicle-card.labels.diesel' | translate }}</span>
+          }
+          @if (vehicle().engine.type === EngineType.HYBRID) {
+            <span>{{ 'components.vehicle-card.labels.hybrid' | translate }}</span>
+          }
+          @if (vehicle().engine.type === EngineType.ELECTRIC) {
+            <span>{{ 'components.vehicle-card.labels.electric' | translate }}</span>
+          }
         </div>
-        <div class='button-container'>
-          <button class='btn'
-            routerLink='/vehicle-details/{{vehicle().id}}'>{{ 'components.vehicle-card.buttons.details' | translate}}
-          </button>
+      }
+      @if (vehicle().engine.avgFuelConsumption) {
+        <div class='equipment-element'>
+          <fa-icon icon='gas-pump'></fa-icon>
+          <span>{{ vehicle().engine.avgFuelConsumption }} {{ 'components.vehicle-card.labels.avg-fuel-consumption' | translate }}</span>
         </div>
+      }
+      @if (vehicle().equipment.ac) {
+        <div class='equipment-element'>
+          <fa-icon icon='fan'></fa-icon>
+          <span>{{ 'components.vehicle-card.labels.ac' | translate }}</span>
+        </div>
+      }
+      @if (vehicle().equipment.ledFrontLights && vehicle().equipment.ledRearLights) {
+        <div class='equipment-element'>
+          <fa-icon icon='lightbulb'></fa-icon>
+          <span>{{ 'components.vehicle-card.labels.full-led' | translate }}</span>
+        </div>
+      }
+      @if (vehicle().equipment.leatherSeats) {
+        <div class='equipment-element'>
+          <fa-icon icon='chair'></fa-icon>
+          <span>{{ 'components.vehicle-card.labels.leather' | translate }}</span>
+        </div>
+      }
+      @if (vehicle().equipment.multifunctionalSteeringWheel) {
+        <div class='equipment-element'>
+          <fa-icon icon='dharmachakra'></fa-icon>
+          <span>{{ 'components.vehicle-card.labels.multi-steering-wheel' | translate }}</span>
+        </div>
+      }
+      <div class='price-container'>
+        <span>{{ 'components.vehicle-card.labels.price' | translate }}</span>
+        <div class='price'>
+          {{ vehicle().basicPrice }} PLN
+        </div>
+      </div>
+      <div class='button-container'>
+        <app-button [label]="'components.vehicle-card.buttons.details' | translate"
+                    routerLink='/vehicle-details/{{vehicle().id}}'></app-button>
       </div>
     </div>
   </div>
+</div>

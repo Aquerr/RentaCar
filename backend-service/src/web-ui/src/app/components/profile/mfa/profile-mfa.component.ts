@@ -13,6 +13,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {TranslatePipe} from "@ngx-translate/core";
 import {ProfileMfaTotpComponent} from "./totp/profile-mfa-totp.component";
 import {ConfirmDialog} from "primeng/confirmdialog";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 @Component({
   selector: 'profile-mfa',
@@ -22,7 +23,8 @@ import {ConfirmDialog} from "primeng/confirmdialog";
     FaIconComponent,
     TranslatePipe,
     ProfileMfaTotpComponent,
-    ConfirmDialog
+    ConfirmDialog,
+    ButtonComponent
   ],
   styleUrls: ['./profile-mfa.component.scss']
 })
