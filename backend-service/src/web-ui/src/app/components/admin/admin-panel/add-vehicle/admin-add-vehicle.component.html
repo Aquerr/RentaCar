@@ -1,9 +1,8 @@
 <form class='form' [formGroup]='form'>
   <div class='img-container'>
     <div class='img-uploader'>
-      <button class='btn'
-              (click)='openFileBrowser()'>{{ 'components.admin-add-vehicle.labels.photos' | translate }}
-      </button>
+      <app-button [label]="'components.admin-add-vehicle.labels.photo' | translate"
+                  (click)='openFileBrowser()'></app-button>
       <input id='file-input' type='file'
              accept='image/jpeg,image/png'
              [multiple]='true'
@@ -15,9 +14,8 @@
         @for (imageFile of imageFiles; track imageFile) {
           <div class='img-row'>
             <img [src]='getImage(imageFile)' alt=''/> {{ imageFile.file.name }}
-            <button class='btn'
-                    (click)='removeFile(imageFile)'>{{ 'components.admin-add-vehicle.labels.deletePhoto' | translate }}
-            </button>
+            <app-button [label]="'components.admin-add-vehicle.labels.deletePhoto' | translate"
+                        (click)='removeFile(imageFile)'></app-button>
           </div>
         }
       </div>

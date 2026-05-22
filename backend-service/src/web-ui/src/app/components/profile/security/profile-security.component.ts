@@ -5,13 +5,15 @@ import { AuthenticationApiService } from '../../../services/api/authentication-a
 import { ToastType } from '../../../services/toast.service';
 import {TranslatePipe} from "@ngx-translate/core";
 import {ProfileMfaComponent} from "../mfa/profile-mfa.component";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 @Component({
   selector: 'profile-security',
   templateUrl: './profile-security.component.html',
   imports: [
     TranslatePipe,
-    ProfileMfaComponent
+    ProfileMfaComponent,
+    ButtonComponent
   ],
   styleUrls: ['./profile-security.component.scss']
 })

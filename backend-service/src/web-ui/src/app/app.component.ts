@@ -11,6 +11,7 @@ import {Tooltip} from "primeng/tooltip";
 import {ProfilePanelComponent} from "./components/profile/panel/profile-panel.component";
 import {Toast} from "primeng/toast";
 import {FooterComponent} from "./components/footer/footer.component";
+import {ButtonComponent} from "./components/shared/button/button.component";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ import {FooterComponent} from "./components/footer/footer.component";
     ProfilePanelComponent,
     RouterOutlet,
     Toast,
-    FooterComponent
+    FooterComponent,
+    ButtonComponent
   ],
   styleUrls: ['./app.component.scss']
 })
