@@ -4,7 +4,8 @@ import {AuthenticationService} from "../../../services/authentication.service";
 import {SignInMfaFormService} from "./sign-in-mfa.form.service";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {TranslatePipe} from "@ngx-translate/core";
-import {InputText} from "primeng/inputtext";
+import {InputComponent} from "../../shared/input/input.component";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 @Component({
   selector: 'app-sign-in-mfa',
@@ -12,7 +13,8 @@ import {InputText} from "primeng/inputtext";
   imports: [
     ReactiveFormsModule,
     TranslatePipe,
-    InputText
+    InputComponent,
+    ButtonComponent
   ],
   styleUrls: ['./sign-in-mfa.component.scss']
 })

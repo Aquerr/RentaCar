@@ -5,9 +5,10 @@
     (ngModelChange)='onDateChange()'>
   </p-color-picker>
 } @else {
-  <app-form-field-container [formGroup]="formGroup()">
+  <app-form-field-container [formGroup]="formGroup()" [label]="label()">
     <p-color-picker
       [formControlName]="controlName()"
       [disabled]="isReadonly()"></p-color-picker>
+    <ng-content></ng-content>
   </app-form-field-container>
 }

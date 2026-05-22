@@ -27,14 +27,6 @@ fa-icon:hover {
   cursor: pointer;
 }
 
-.btn {
-  background-color: black;
-}
-
-.btn:hover {
-  color: var(--gold);
-}
-
 // MEDIA
 
 @media (max-width: 800px) {
@@ -45,9 +37,6 @@ fa-icon:hover {
     gap: 20px;
   }
   img {
-    margin: auto;
-  }
-  .btn {
     margin: auto;
   }
 

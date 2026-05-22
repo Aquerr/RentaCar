@@ -4,7 +4,9 @@ import {AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validato
 import { CommonService } from '../../../services/common.service';
 import { ToastType } from '../../../services/toast.service';
 import {TranslatePipe} from "@ngx-translate/core";
-import {InputText} from "primeng/inputtext";
+import {ButtonComponent} from "../../shared/button/button.component";
+import {InputComponent} from "../../shared/input/input.component";
+import {Message} from "primeng/message";
 
 
 @Component({
@@ -13,7 +15,9 @@ import {InputText} from "primeng/inputtext";
   imports: [
     TranslatePipe,
     ReactiveFormsModule,
-    InputText
+    ButtonComponent,
+    InputComponent,
+    Message
   ],
   styleUrls: ['./password-reset.component.scss']
 })

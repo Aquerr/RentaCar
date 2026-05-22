@@ -1,15 +1,19 @@
 @if (!controlName()) {
-  <p-select
+  <p-multiSelect
             [(ngModel)]='model'
+            [display]="displayType()"
+            [selectionLimit]="selectionLimit()"
             (ngModelChange)='onSelectChange()'
   [readonly]="isReadonly()">
-  </p-select>
+  </p-multiSelect>
 } @else {
   <app-form-field-container [formGroup]="formGroup()" [label]="label()">
-  <p-select
+  <p-multiSelect
             [formControlName]="controlName()"
+            [display]="displayType()"
             [options]="options()"
-            [readonly]="isReadonly()"></p-select>
+            [selectionLimit]="selectionLimit()"
+            [readonly]="isReadonly()"></p-multiSelect>
     <ng-content></ng-content>
   </app-form-field-container>
 }

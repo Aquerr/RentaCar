@@ -17,9 +17,9 @@
         <div class='date-container'>
           <h3>{{ 'components.vehicle-details.reserve.labels.availability' | translate | uppercase }}</h3>
           <app-date-picker [model]="dateFrom" [minDate]="today" [maxDate]="dateTo" [isReadonly]="true"
-                          (dateChanged)="onDateChange()"></app-date-picker>
+                           (dateChanged)="onDateChange()"></app-date-picker>
           <app-date-picker [model]="dateTo" [minDate]="dateFrom" [maxDate]="dateTo" [isReadonly]="true"
-                          (dateChanged)="onDateChange()"></app-date-picker>
+                           (dateChanged)="onDateChange()"></app-date-picker>
         </div>
         <div class='reservation-info-container'>
           <h3>{{ 'components.vehicle-details.reserve.labels.terms' | translate | uppercase }}</h3>
@@ -32,7 +32,7 @@
         <app-button [label]="'components.vehicle-details.buttons.reserve' | translate"
                     [tooltip]="('components.vehicle-details.buttons.disabled' | translate) || !vehicleAvailable ? ('components.vehicle-details.buttons.notAvailable' | translate) : ''"
                     (click)="reserve()"
-                    [isDisabled]="!vehicleAvailable || !user"></app-button>
+                    [disabled]="!vehicleAvailable || !user"></app-button>
       </div>
     </div>
     <div class='bottom-container'>
@@ -65,38 +65,40 @@
           <span
             class='title'>{{ 'components.vehicle-details.labels.engine-transmission' | translate }}</span><span>{{ getTranslation(vehicle.engine.transmission, 'transmission') | translate }}</span>
         </div>
+
         <div class='section'>
-          <span class='title'>{{ 'components.vehicle-details.labels.ac' | translate }}</span><span>
-          <app-checkbox [model]="vehicle.equipment.ac" [isReadonly]="true"></app-checkbox></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.pdc-front' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.frontPDC'
-          [disabled]='true'
-          [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.pdc-rear' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.rearPDC' [disabled]='true'
-          [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.bluetooth' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.bluetooth' [disabled]='true'
-          [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.led-front' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.ledFrontLights' [disabled]='true' [binary]='true'/></span>
+          <span class='title'>{{ 'components.vehicle-details.labels.ac' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.ac" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.pdc-front' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.frontPDC" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.pdc-rear' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.rearPDC" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.bluetooth' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.bluetooth" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.led-front' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.ledFrontLights" [isReadonly]="true"></app-checkbox>
         </div>
+
         <div class='section'>
-          <span class='title'>{{ 'components.vehicle-details.labels.led-rear' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.ledRearLights'
-          [disabled]='true'
-          [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.xenon-front' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.xenonFrontLights' [disabled]='true' [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.leather' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.leatherSeats'
-          [disabled]='true' [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.multi-steering-wheel' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.multifunctionalSteeringWheel'
-          [disabled]='true' [binary]='true'/></span>
-          <span class='title'>{{ 'components.vehicle-details.labels.cruise-control' | translate }}</span><span><p-checkbox
-          [(ngModel)]='vehicle.equipment.cruiseControl'
-          [disabled]='true' [binary]='true'/></span>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.led-rear' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.ledRearLights" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.xenon-front' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.xenonFrontLights" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.leather' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.leatherSeats" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.multi-steering-wheel' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.multifunctionalSteeringWheel" [isReadonly]="true"></app-checkbox>
+
+          <span class='title'>{{ 'components.vehicle-details.labels.cruise-control' | translate }}</span>
+          <app-checkbox [model]="vehicle.equipment.cruiseControl" [isReadonly]="true"></app-checkbox>
         </div>
       </div>
       <div class='description'>

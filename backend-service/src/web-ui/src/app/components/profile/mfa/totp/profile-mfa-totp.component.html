@@ -1,15 +1,7 @@
 <form [formGroup]='form'>
-  <div class='input-container'>
-    <img [src]='qrCode' alt='' />
+  <div>
+    <img [src]='qrCode' alt=''/>
   </div>
-  <div class='input-container'>
-    <label>{{'components.profile-mfa-totp.label' | translate}}</label>
-    <input pInputText
-           type='text'
-           formControlName='code'
-           placeholder="{{'components.profile-mfa-totp.6digitCode' | translate}}"
-           onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-           maxlength='6'
-    />
-  </div>
+  <app-input [placeholder]="'components.profile-mfa-totp.label' | translate" controlName="code" [maxLength]="6">
+  </app-input>
 </form>

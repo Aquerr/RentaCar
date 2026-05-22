@@ -8,11 +8,13 @@ import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { FileUpload } from '../../../../models/file-upload.model';
 import { LanguageService } from '../../../../services/language.service';
 import {TranslatePipe} from "@ngx-translate/core";
-import {DatePicker} from "primeng/datepicker";
-import {ColorPicker} from "primeng/colorpicker";
-import {MultiSelect} from "primeng/multiselect";
-import {Checkbox} from "primeng/checkbox";
 import {ConfirmDialog} from "primeng/confirmdialog";
+import {MultiSelectComponent} from "../../../shared/multi-select/multi-select.component";
+import {InputComponent} from "../../../shared/input/input.component";
+import {CheckboxComponent} from "../../../shared/checkbox/checkbox.component";
+import {ButtonComponent} from "../../../shared/button/button.component";
+import {DatePickerComponent} from "../../../shared/datepicker/date-picker.component";
+import {ColorPickerComponent} from "../../../shared/color-picker/color-picker.component";
 
 
 @Component({
@@ -21,11 +23,13 @@ import {ConfirmDialog} from "primeng/confirmdialog";
   imports: [
     ReactiveFormsModule,
     TranslatePipe,
-    DatePicker,
-    ColorPicker,
-    MultiSelect,
-    Checkbox,
-    ConfirmDialog
+    ConfirmDialog,
+    MultiSelectComponent,
+    InputComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    DatePickerComponent,
+    ColorPickerComponent
   ],
   styleUrls: ['./admin-add-vehicle.component.scss']
 })

@@ -1,18 +1,3 @@
-.form_input {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.input-container {
-  width: 200px;
-  max-width: 200px;
-  display: flex;
-  flex-direction: column;
-}
 
 .wrapper {
   position: absolute;
@@ -33,21 +18,6 @@
 .header4 {
   text-transform: uppercase;
   font-size: 1.5rem;
-}
-
-.btn {
-  margin-left: 0;
-}
-
-
-.btn {
-  background-color: black;
-  color: white;
-  margin: 30px;
-}
-
-.btn:hover {
-  color: var(--gold);
 }
 
 // MEDIA

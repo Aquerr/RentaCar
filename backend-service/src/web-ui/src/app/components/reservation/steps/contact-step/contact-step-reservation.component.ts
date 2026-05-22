@@ -5,8 +5,8 @@ import { UserProfile } from '../../../../models/user-profile.model';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ContactStepReservationFormService } from './contact-step-reservation.form.service';
 import {TranslatePipe} from "@ngx-translate/core";
-import {InputText} from "primeng/inputtext";
-import {DatePicker} from "primeng/datepicker";
+import {InputComponent} from "../../../shared/input/input.component";
+import {DatePickerComponent} from "../../../shared/datepicker/date-picker.component";
 
 @Component({
   selector: 'contact-step-reservation',
@@ -14,8 +14,8 @@ import {DatePicker} from "primeng/datepicker";
   imports: [
     ReactiveFormsModule,
     TranslatePipe,
-    InputText,
-    DatePicker
+    InputComponent,
+    DatePickerComponent
   ],
   styleUrls: ['./contact-step-reservation.component.scss']
 })

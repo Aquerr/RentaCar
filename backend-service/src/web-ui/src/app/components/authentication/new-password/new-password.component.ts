@@ -6,7 +6,9 @@ import { ToastType } from '../../../services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {TranslatePipe} from "@ngx-translate/core";
-import {InputText} from "primeng/inputtext";
+import {InputComponent} from "../../shared/input/input.component";
+import {Message} from "primeng/message";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 
 @Component({
@@ -15,7 +17,9 @@ import {InputText} from "primeng/inputtext";
   imports: [
     TranslatePipe,
     ReactiveFormsModule,
-    InputText
+    InputComponent,
+    Message,
+    ButtonComponent
   ],
   styleUrls: ['./new-password.component.scss']
 })

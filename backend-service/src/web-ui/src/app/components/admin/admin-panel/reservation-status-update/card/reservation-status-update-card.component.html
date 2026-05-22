@@ -8,10 +8,7 @@
     <div class='info'>{{'components.reservation-status-update-card.labels.dateTo' | translate}} {{reservation.dateTo}}</div>
   </div>
   <div class='info'>
-    <p-select [(ngModel)]='selectedStatus' [options]='getProperStatuses()' />
+    <app-select [model]="selectedStatus" [options]="getProperStatuses()"></app-select>
   </div>
-  <button class='btn'
-          (click)='changeStatusEmit()'
-          [disabled]='reservation.status === selectedStatus || isNotAllowedChangeStatuses()'>{{'components.reservation-status-update-card.buttons.changeStatus' | translate}}
-  </button>
+  <app-button [label]="'components.reservation-status-update-card.buttons.changeStatus' | translate" (click)='changeStatusEmit()' [disabled]='reservation.status === selectedStatus || isNotAllowedChangeStatuses()'></app-button>
 </div>

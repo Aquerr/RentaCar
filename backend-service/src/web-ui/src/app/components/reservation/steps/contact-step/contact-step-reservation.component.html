@@ -1,80 +1,60 @@
 @if (userProfile) {
   <form [formGroup]='form'>
-    <div class='input-container'>
-      <label for='firstName'>{{'components.profile-edit.form.label.firstName' | translate}}</label>
-      <input pInputText id='firstName' formControlName='firstName' maxlength='255' />
+    <app-input [label]="'components.profile-edit.form.label.firstName' | translate" controlName="firstName"
+               [maxLength]="255">
       @if (hasFormError('firstName', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='lastName'>{{'components.profile-edit.form.label.lastName' | translate}}</label>
-      <input pInputText id='lastName' formControlName='lastName' maxlength='255' />
+    </app-input>
+
+    <app-input [label]="'components.profile-edit.form.label.lastName' | translate" controlName="lastName"
+               [maxLength]="255">
       @if (hasFormError('lastName', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='email'>{{'components.profile-edit.form.label.email' | translate}}</label>
-      <input pInputText id='email' formControlName='email' />
+    </app-input>
+
+    <app-input [label]="'components.profile-edit.form.label.email' | translate" controlName="email" [maxLength]="255">
       @if (hasFormError('email', 'email')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.email.email' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.email.email' | translate }}
       }
       @if (hasFormError('email', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='birthDate'>{{'components.profile-edit.form.label.birthDate' | translate}}</label>
-      <p-date-picker id='birthDate' formControlName='birthDate' dateFormat='dd.mm.yy' [readonlyInput]='true'></p-date-picker>
+    </app-input>
+
+    <app-date-picker [label]="'components.profile-edit.form.label.birthDate' | translate" controlName="birthDate">
       @if (hasFormError('birthDate', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='city'>{{'components.profile-edit.form.label.city' | translate}}</label>
-      <input pInputText id='city' formControlName='city' maxlength='255' />
+    </app-date-picker>
+
+    <app-input [label]="'components.profile-edit.form.label.city' | translate" controlName="city" [maxLength]="255">
       @if (hasFormError('city', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='zipCode'>{{'components.profile-edit.form.label.zipCode' | translate}}</label>
-      <input pInputText id='zipCode' formControlName='zipCode' mask='00-000' />
+    </app-input>
+
+    <app-input [label]="'components.profile-edit.form.label.zipCode' | translate" controlName="zipCode" mask='00-000'>
       @if (hasFormError('zipCode', 'pattern')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.zipCode.pattern' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.zipCode.pattern' | translate }}
       }
       @if (hasFormError('zipCode', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='street'>{{'components.profile-edit.form.label.street' | translate}}</label>
-      <input pInputText id='street' formControlName='street' maxlength='255' />
+    </app-input>
+
+    <app-input [label]="'components.profile-edit.form.label.street' | translate" controlName="street" [maxLength]="255">
       @if (hasFormError('street', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
-    <div class='input-container'>
-      <label for='phoneNumber'>{{'components.profile-edit.form.label.phoneNumber' | translate}}</label>
-      <input pInputText id='phoneNumber' formControlName='phoneNumber' mask='000 000 000' />
-      @if (hasFormError('phoneNumber', 'pattern')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.phoneNumber.pattern' | translate}}</small>
-      }
+    </app-input>
+
+    <app-input [label]="'components.profile-edit.form.label.phoneNumber' | translate" controlName="phoneNumber"
+               mask='000 000 000'>
       @if (hasFormError('phoneNumber', 'required')) {
-        <small
-        class='p-error'>{{'components.profile-edit.form.errors.required' | translate}}</small>
+        {{ 'components.profile-edit.form.errors.required' | translate }}
       }
-    </div>
+    </app-input>
   </form>
 }

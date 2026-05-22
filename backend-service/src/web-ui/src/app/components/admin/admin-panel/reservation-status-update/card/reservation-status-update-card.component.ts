@@ -1,18 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProfileReservation, ReservationStatus } from '../../../../../models/reservation.model.ts';
 import { DictionaryEntry } from '../../../../../services/dictionary.service';
-import {Select} from "primeng/select";
 import {TranslatePipe} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
+import {SelectComponent} from "../../../../shared/select/select.component";
+import {ButtonComponent} from "../../../../shared/button/button.component";
 
 
 @Component({
   selector: 'reservation-status-update-card',
   templateUrl: './reservation-status-update-card.component.html',
   imports: [
-    Select,
     TranslatePipe,
-    FormsModule
+    FormsModule,
+    SelectComponent,
+    ButtonComponent
   ],
   styleUrls: ['./reservation-status-update-card.component.scss']
 })

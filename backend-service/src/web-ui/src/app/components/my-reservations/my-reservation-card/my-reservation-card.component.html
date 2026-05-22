@@ -1,35 +1,36 @@
 <div class='container'>
 
-  <img alt='' [src]='reservation.vehicleIconUrl' />
+  <img alt='' [src]='reservation.vehicleIconUrl'/>
 
   <div class='column-container'>
     <div class='info'>
-      <span>{{'components.my-reservation-card.labels.vehicleName' | translate}}:</span>
-      <span>{{reservation.vehicleName}}</span>
+      <span>{{ 'components.my-reservation-card.labels.vehicleName' | translate }}:</span>
+      <span>{{ reservation.vehicleName }}</span>
     </div>
     <div class='info'>
-      <span>{{'components.my-reservation-card.labels.status' | translate}}:</span>
-      <span>{{getReservationStatusTranslation(reservation.status)}}</span>
+      <span>{{ 'components.my-reservation-card.labels.status' | translate }}:</span>
+      <span>{{ getReservationStatusTranslation(reservation.status) }}</span>
     </div>
   </div>
 
   <div class='column-container'>
     <div class='info'>
-      <span>{{'components.my-reservation-card.labels.dateTo' | translate}}:</span><span>{{(reservation.dateTo)}}</span>
+      <span>{{ 'components.my-reservation-card.labels.dateTo' | translate }}
+        :</span><span>{{ (reservation.dateTo) }}</span>
     </div>
 
     <div class='info'>
-      <span>{{'components.my-reservation-card.labels.dateFrom' | translate}}:</span><span>{{(reservation.dateFrom)}}</span>
+      <span>{{ 'components.my-reservation-card.labels.dateFrom' | translate }}:</span><span>{{ (reservation.dateFrom) }}</span>
     </div>
   </div>
 
 
   <div class='button-container'>
-    <button class='btn'
-            routerLink='/reservation/{{reservation.id}}'>{{'components.my-reservation-card.buttons.details' | translate}}</button>
-    <button class='btn'
-            (click)='cancel()'
-            [disabled]="reservation.status === 'CANCELLED' || reservation.status === 'COMPLETED' || reservation.status === 'VEHICLE_DELIVERED'">{{'components.my-reservation-card.buttons.cancel' | translate}}</button>
+    <app-button [label]="'components.my-reservation-card.buttons.details' | translate"
+                routerLink='/reservation/{{reservation.id}}'></app-button>
+    <app-button [label]="'components.my-reservation-card.buttons.cancel' | translate"
+                routerLink='/reservation/{{reservation.id}}' (click)='cancel()'
+                [disabled]="reservation.status === 'CANCELLED' || reservation.status === 'COMPLETED' || reservation.status === 'VEHICLE_DELIVERED'"></app-button>
   </div>
 
 </div>

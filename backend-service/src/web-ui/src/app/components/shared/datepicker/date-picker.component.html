@@ -9,7 +9,7 @@
                  (ngModelChange)='onDateChange()'>
   </p-date-picker>
 } @else {
-  <app-form-field-container [formGroup]="formGroup()">
+  <app-form-field-container [formGroup]="formGroup()" [label]="label()">
     <p-date-picker
       [formControlName]="controlName()"
       dateFormat='dd.mm.yy'
@@ -17,5 +17,6 @@
       [maxDate]='maxDate()'
       [touchUI]='true'
       [readonlyInput]='isReadonly()'></p-date-picker>
+    <ng-content></ng-content>
   </app-form-field-container>
 }

@@ -3,13 +3,15 @@ import { ProfileReservation, ReservationStatus } from '../../../models/reservati
 import { DictionaryEntry } from '../../../services/dictionary.service';
 import {TranslatePipe} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 @Component({
   selector: 'my-reservation-card',
   templateUrl: './my-reservation-card.component.html',
   imports: [
     TranslatePipe,
-    RouterLink
+    RouterLink,
+    ButtonComponent
   ],
   styleUrls: ['./my-reservation-card.component.scss']
 })

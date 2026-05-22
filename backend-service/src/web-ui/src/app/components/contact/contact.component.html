@@ -1,21 +1,11 @@
 <div class='wrapper'>
   <h4 class='header4'>Kontakt</h4>
 
-  <form class='form'>
-    <input class='form_input'
-           pInputText
-           type='text'
-           formControlName='topic'
-           placeholder='Temat'
-    />
-    <input class='form_input'
-           pInputText
-           type='email'
-           formControlName='topic'
-           placeholder='Email'
-    />
+  <form class='form' [formGroup]="formGroup">
+    <app-input controlName="topic" placeholder="Temat"></app-input>
+    <app-input type="email" controlName="email" placeholder="Email"></app-input>
+    <app-input  controlName="message" placeholder="Wiadomość"></app-input>
 
-    <button class='btn'>Wyślij
-    </button>
+    <app-button label="Wyślij" (click)="send()"></app-button>
   </form>
 </div>

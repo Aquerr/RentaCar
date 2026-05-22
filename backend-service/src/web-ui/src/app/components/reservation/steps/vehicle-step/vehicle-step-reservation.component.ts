@@ -4,8 +4,8 @@ import { VehicleApiService } from '../../../../services/api/vehicle-api.service'
 import { VehicleFullData } from '../../../../models/vehicle.model';
 import {TranslatePipe} from "@ngx-translate/core";
 import {DatePipe} from "@angular/common";
-import {Checkbox} from "primeng/checkbox";
 import {FormsModule} from "@angular/forms";
+import {CheckboxComponent} from "../../../shared/checkbox/checkbox.component";
 
 @Component({
   selector: 'vehicle-step-reservation',
@@ -13,8 +13,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     TranslatePipe,
     DatePipe,
-    Checkbox,
-    FormsModule
+    FormsModule,
+    CheckboxComponent
   ],
   styleUrls: ['./vehicle-step-reservation.component.scss']
 })

@@ -1,20 +1,22 @@
 @if (!controlName()) {
-  <input pInputText
+  <input id="input" pInputText
          [(ngModel)]='model'
          [type]="type()"
          [placeholder]="placeholder()"
          (change)="onChange()"
          [minLength]="minLength()"
+         [mask]="mask()"
          [maxlength]="maxLength()"
          [readonly]="isReadonly()"/>
 } @else {
-  <app-form-field-container [formGroup]="formGroup()">
-    <input pInputText
+  <app-form-field-container class="input-container" [formGroup]="formGroup()" [label]="label()">
+    <input id="input" class="input" pInputText
            [type]="type()"
            [formControlName]="controlName()"
            [placeholder]="placeholder()"
            [minLength]="minLength()"
            [maxlength]="maxLength()"
+           [mask]="mask()"
            [readonly]="isReadonly()"/>
     <ng-content></ng-content>
   </app-form-field-container>

@@ -37,37 +37,6 @@ form {
   gap: 10px;
 }
 
-.input-container {
-  width: 200px;
-  max-width: 200px;
-  display: flex;
-  flex-direction: column;
-  word-break: break-word;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-label {
-  color: grey;
-  font-size: 12px;
-}
-
-.btn {
-  background-color: black;
-  color: white;
-}
-
-.btn:hover {
-  color: var(--gold);
-}
-
-.btn:disabled, .btn[disabled=disabled] {
-  background: grey;
-}
 
 // MEDIA
 

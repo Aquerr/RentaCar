@@ -12,7 +12,7 @@
 
     <app-checkbox controlName="rememberMe" [label]="'components.authentication.sign-in.rememberMe.label' | translate"></app-checkbox>
 
-    <app-button (click)="signIn()" [isDisabled]='!formService.isFormValid()'
+    <app-button (click)="signIn()" [disabled]='!formService.isFormValid()'
                 [label]="'components.authentication.sign-in.buttons.sign-in' | translate"></app-button>
     <app-button routerLink='/sign-up'
                 [label]="'components.authentication.sign-in.buttons.sign-up' | translate"></app-button>
