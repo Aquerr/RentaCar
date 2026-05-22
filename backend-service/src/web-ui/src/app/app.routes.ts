@@ -1,5 +1,4 @@
-import { inject, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { SignInComponent } from './components/authentication/sign-in/sign-in.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SignUpComponent } from './components/authentication/sign-up/sign-up.component';
@@ -16,7 +15,7 @@ import {
 import { MainComponent } from './components/info/main/main.component';
 import { VehicleDetailsComponent } from './components/vehicles/vehicle-details/vehicle-details.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
-import { AppGuard } from './components/authentication/app.guard';
+import { authenticatedGuard } from './components/authentication/authenticated-guard';
 import { Auth } from './components/auth.enum';
 import { PasswordResetComponent } from './components/authentication/password-reset/password-reset.component';
 import { NewPasswordComponent } from './components/authentication/new-password/new-password.component';
@@ -26,8 +25,10 @@ import {
   ReservationPaymentInfoComponent
 } from './components/reservation/payment-info/reservation-payment-info.component';
 import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
+import {notAuthenticatedGuard} from "./components/authentication/not-authenticated-guard";
+import {hasAuthoritiesGuard} from "./components/authentication/has-authorities.guard";
 
-const ROUTES: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: MainComponent,
@@ -36,37 +37,37 @@ const ROUTES: Routes = [
   {
     path: 'sign-in',
     component: SignInComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.sign-in'
   },
   {
     path: 'sign-in-mfa',
     component: SignInMfaComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.sign-in-mfa'
   },
   {
     path: 'sign-up',
     component: SignUpComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.sign-up'
   },
   {
     path: 'password-reset',
     component: PasswordResetComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.password-reset'
   },
   {
     path: 'new-password',
     component: NewPasswordComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.new-password'
   },
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    canActivate: [authenticatedGuard],
     loadChildren: () => import('./components/profile/profile-routing.module').then(module => module.ProfileRoutingModule),
     title: 'title.profile'
   },
@@ -88,43 +89,43 @@ const ROUTES: Routes = [
   {
     path: 'reservation/:id',
     component: ReservationComponent,
-    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    canActivate: [authenticatedGuard],
     title: 'title.reservation'
   },
   {
     path: 'my-reservations',
     component: MyReservationsComponent,
-    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    canActivate: [authenticatedGuard],
     title: 'title.myReservations'
   },
   {
     path: 'reservation-payment-info',
     component: ReservationPaymentInfoComponent,
-    canActivate: [() => inject(AppGuard).isAuthenticated()],
+    canActivate: [authenticatedGuard],
     title: 'title.reservation-payment-info'
   },
   {
     path: 'activation-account',
     component: ActivationAccountComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.activation'
   },
   {
     path: 'account-activated',
     component: AccountActivatedComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.account-activated'
   },
   {
     path: 'reactivation-account/:id',
     component: ReactivationAccountComponent,
-    canActivate: [() => !inject(AppGuard).isAuthenticated()],
+    canActivate: [notAuthenticatedGuard],
     title: 'title.reactivation-account'
   },
   {
     path: 'admin-panel',
     component: AdminPanelComponent,
-    canActivate: [() => inject(AppGuard).isAuthenticated() && inject(AppGuard).hasUserAuthority(Auth.VIEW_ADMIN_PANEL)],
+    canActivate: [authenticatedGuard,hasAuthoritiesGuard(Auth.VIEW_ADMIN_PANEL)],
     loadChildren: () => import('./components/admin/admin-panel/admin-panel-routing.module').then(module => module.AdminPanelRoutingModule),
     title: 'title.admin-panel'
   },
@@ -134,12 +135,3 @@ const ROUTES: Routes = [
     title: 'title.not-found'
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(ROUTES, {
-    scrollPositionRestoration: 'enabled'
-  })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}

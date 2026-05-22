@@ -2,101 +2,68 @@
   <form [formGroup]='form' class='form_input'>
 
 
-    <h4 class='header4'>{{'components.sign-up.labels.title' | translate}}</h4>
+    <h4 class='header4'>{{ 'components.sign-up.labels.title' | translate }}</h4>
 
     <div class='input-container'>
-      <input
-        pInputText
-        id='userName'
-        type='text'
-        formControlName='username'
-        minlength='5'
-        placeholder="{{
-      'components.sign-up.labels.username' | translate
-    }}"
-        />
-        @if (hasFormError('username', 'required')) {
-          <small
-          class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
-        }
-        @if (hasFormError('username', 'minlength')) {
-          <small
-          class='p-error'>{{'components.sign-up.errors.min-length' | translate}}</small>
-        }
-      </div>
+      <app-input id="userName" controlName="username" [minLength]="5"
+                 [placeholder]="'components.sign-up.labels.username' | translate">
+        <p-message severity="error" size="small" variant="simple">
+          @if (hasFormError('username', 'required')) {
+            {{ 'components.sign-up.errors.required' | translate }}
+          }
+          @if (hasFormError('username', 'minlength')) {
+            {{ 'components.sign-up.errors.min-length' | translate }}
+          }
+        </p-message>
+      </app-input>
+    </div>
 
-      <div class='input-container'>
-        <input
-          pInputText
-          id='email'
-          formControlName='email'
-        placeholder="{{
-        'components.sign-up.labels.email' | translate
-        }}"
-          />
+    <div class='input-container'>
+      <app-input id="email" controlName="email" [minLength]="5"
+                 [placeholder]="'components.sign-up.labels.email' | translate">
+        <p-message severity="error" size="small" variant="simple">
           @if (hasFormError('email', 'required')) {
-            <small
-            class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
+            {{ 'components.sign-up.errors.required' | translate }}
           }
           @if (hasFormError('email', 'email')) {
-            <small
-            class='p-error'>{{'components.sign-up.errors.email' | translate}}</small>
+            {{ 'components.sign-up.errors.email' | translate }}
           }
-        </div>
+        </p-message>
+      </app-input>
+    </div>
 
-        <div class='input-container'>
-          <input
-            pInputText
-            id='password'
-            formControlName='password'
-            type='password'
-            minlength='5'
-        placeholder="{{
-        'components.sign-up.labels.password' | translate
-        }}"
-            />
-            @if (hasFormError('password', 'required')) {
-              <small
-              class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
-            }
-            @if (hasFormError('password', 'minlength')) {
-              <small
-              class='p-error'>{{'components.sign-up.errors.min-length' | translate}}</small>
-            }
-          </div>
+    <div class='input-container'>
+      <app-input id="password" controlName="password" [minLength]="5"
+                 [placeholder]="'components.sign-up.labels.password' | translate">
+        <p-message severity="error" size="small" variant="simple">
+          @if (hasFormError('password', 'required')) {
+            {{ 'components.sign-up.errors.required' | translate }}
+          }
+          @if (hasFormError('password', 'minlength')) {
+            {{ 'components.sign-up.errors.min-length' | translate }}
+          }
+        </p-message>
+      </app-input>
+    </div>
 
-          <div class='input-container'>
-            <input
-              pInputText
-              id='password2'
-              formControlName='password2'
-              type='password'
-              minlength='5'
-        placeholder="{{
-        'components.sign-up.labels.password-confirm' | translate
-        }}"
-              />
-              @if (hasFormError('password2', 'required')) {
-                <small
-                class='p-error'>{{'components.sign-up.errors.required' | translate}}</small>
-              }
-              @if (hasFormError('password2', 'passwordDoesntMatch')) {
-                <small
-                class='p-error'>{{'components.sign-up.errors.password-doesnt-match' | translate}}</small>
-              }
-              @if (hasFormError('password2', 'minlength')) {
-                <small
-                class='p-error'>{{'components.sign-up.errors.min-length' | translate}}</small>
-              }
-            </div>
+    <div class='input-container'>
+      <app-input id="password2" controlName="password2" [minLength]="5"
+                 [placeholder]="'components.sign-up.labels.password-confirm' | translate">
+        <p-message severity="error" size="small" variant="simple">
+          @if (hasFormError('password2', 'required')) {
+            {{ 'components.sign-up.errors.required' | translate }}
+          }
+          @if (hasFormError('password2', 'passwordDoesntMatch')) {
+            {{ 'components.sign-up.errors.password-doesnt-match' | translate }}
+          }
+          {{ 'components.sign-up.errors.min-length' | translate }}
+        </p-message>
+      </app-input>
+    </div>
 
-            <div class='button-container'>
-              <button
-                class='btn'
-                (click)='signUp()'
-                >
-                {{ "components.sign-up.labels.buttons.sign-up" | translate }}
-              </button>
-            </div>
-          </form>
-        </div>
+    <div class='button-container'>
+      <app-button (click)='signUp()' [label]="'components.sign-up.labels.buttons.sign-up' | translate">
+      </app-button>
+    </div>
+  </form>
+</div>

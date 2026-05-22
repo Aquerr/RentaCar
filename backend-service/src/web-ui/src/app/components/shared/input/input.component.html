@@ -1,0 +1,21 @@
+@if (!controlName()) {
+  <input pInputText
+         [(ngModel)]='model'
+         [type]="type()"
+         [placeholder]="placeholder()"
+         (change)="onChange()"
+         [minLength]="minLength()"
+         [maxlength]="maxLength()"
+         [readonly]="isReadonly()"/>
+} @else {
+  <app-form-field-container [formGroup]="formGroup()">
+    <input pInputText
+           [type]="type()"
+           [formControlName]="controlName()"
+           [placeholder]="placeholder()"
+           [minLength]="minLength()"
+           [maxlength]="maxLength()"
+           [readonly]="isReadonly()"/>
+    <ng-content></ng-content>
+  </app-form-field-container>
+}

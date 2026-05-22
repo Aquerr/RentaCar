@@ -3,12 +3,17 @@ import { CommonService } from '../../../services/common.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { AuthenticationApiService } from '../../../services/api/authentication-api.service';
 import { ToastType } from '../../../services/toast.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {ProfileMfaComponent} from "../mfa/profile-mfa.component";
 
 @Component({
-    selector: 'profile-security',
-    templateUrl: './profile-security.component.html',
-    styleUrls: ['./profile-security.component.scss'],
-    standalone: false
+  selector: 'profile-security',
+  templateUrl: './profile-security.component.html',
+  imports: [
+    TranslatePipe,
+    ProfileMfaComponent
+  ],
+  styleUrls: ['./profile-security.component.scss']
 })
 export class ProfileSecurityComponent implements OnInit {
   username: string = '';

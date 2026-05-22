@@ -1,17 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationApiService } from '../../../services/api/authentication-api.service';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CommonService } from '../../../services/common.service';
 import { ToastType } from '../../../services/toast.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {TranslatePipe} from "@ngx-translate/core";
+import {InputText} from "primeng/inputtext";
 
 
 @Component({
-    selector: 'new-password',
-    templateUrl: './new-password.component.html',
-    styleUrls: ['./new-password.component.scss'],
-    standalone: false
+  selector: 'new-password',
+  templateUrl: './new-password.component.html',
+  imports: [
+    TranslatePipe,
+    ReactiveFormsModule,
+    InputText
+  ],
+  styleUrls: ['./new-password.component.scss']
 })
 export class NewPasswordComponent implements OnInit, OnDestroy {
   form = new FormBuilder().group({

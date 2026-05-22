@@ -4,16 +4,30 @@ import { ConfirmationService } from 'primeng/api';
 import { CommonService } from '../../../../services/common.service';
 import { ToastType } from '../../../../services/toast.service';
 import { AdminAddVehicleFormService } from './admin-add-vehicle.form.service';
-import { FormGroup } from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { FileUpload } from '../../../../models/file-upload.model';
 import { LanguageService } from '../../../../services/language.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {DatePicker} from "primeng/datepicker";
+import {ColorPicker} from "primeng/colorpicker";
+import {MultiSelect} from "primeng/multiselect";
+import {Checkbox} from "primeng/checkbox";
+import {ConfirmDialog} from "primeng/confirmdialog";
 
 
 @Component({
-    selector: 'add-vehicle',
-    templateUrl: './admin-add-vehicle.component.html',
-    styleUrls: ['./admin-add-vehicle.component.scss'],
-    standalone: false
+  selector: 'add-vehicle',
+  templateUrl: './admin-add-vehicle.component.html',
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    DatePicker,
+    ColorPicker,
+    MultiSelect,
+    Checkbox,
+    ConfirmDialog
+  ],
+  styleUrls: ['./admin-add-vehicle.component.scss']
 })
 export class AdminAddVehicleComponent implements OnInit {
   form: FormGroup;

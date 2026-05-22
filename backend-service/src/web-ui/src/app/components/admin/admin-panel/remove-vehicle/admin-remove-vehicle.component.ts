@@ -4,13 +4,20 @@ import { VehicleBasicData } from '../../../../models/vehicle.model';
 import { CommonService } from '../../../../services/common.service';
 import { ToastType } from '../../../../services/toast.service';
 import { ConfirmationService } from 'primeng/api';
+import {ConfirmDialog} from "primeng/confirmdialog";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {TranslatePipe} from "@ngx-translate/core";
 
 
 @Component({
-    selector: 'remove-vehicle',
-    templateUrl: './admin-remove-vehicle.component.html',
-    styleUrls: ['./admin-remove-vehicle.component.scss'],
-    standalone: false
+  selector: 'remove-vehicle',
+  templateUrl: './admin-remove-vehicle.component.html',
+  imports: [
+    ConfirmDialog,
+    FaIconComponent,
+    TranslatePipe
+  ],
+  styleUrls: ['./admin-remove-vehicle.component.scss']
 })
 export class AdminRemoveVehicleComponent implements OnInit {
   vehicles: VehicleBasicData[] = [];

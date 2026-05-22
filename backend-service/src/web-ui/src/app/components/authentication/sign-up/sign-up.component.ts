@@ -1,16 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SignUpFormService } from './sign-up.form.service';
-import { FormGroup } from '@angular/forms';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { UserApiService } from '../../../services/api/user-api.service';
 import { ToastType } from '../../../services/toast.service';
 import { Subscription } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
+import {TranslatePipe} from "@ngx-translate/core";
+import {InputComponent} from "../../shared/input/input.component";
+import {ButtonComponent} from "../../shared/button/button.component";
+import {Message} from "primeng/message";
 
 @Component({
-    selector: 'sign-up',
-    templateUrl: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.scss'],
-    standalone: false
+  selector: 'sign-up',
+  templateUrl: './sign-up.component.html',
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    InputComponent,
+    ButtonComponent,
+    Message
+  ],
+  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit, OnDestroy {
   form!: FormGroup;
