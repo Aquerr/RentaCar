@@ -9,8 +9,9 @@ import { LanguageService } from '../../../services/language.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import {TranslatePipe} from "@ngx-translate/core";
 import {Tooltip} from "primeng/tooltip";
-import {InputText} from "primeng/inputtext";
-import {DatePicker} from "primeng/datepicker";
+import {InputComponent} from "../../shared/input/input.component";
+import {DatePickerComponent} from "../../shared/datepicker/date-picker.component";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 @Component({
   selector: 'profile-edit',
@@ -19,8 +20,9 @@ import {DatePicker} from "primeng/datepicker";
     ReactiveFormsModule,
     TranslatePipe,
     Tooltip,
-    InputText,
-    DatePicker
+    InputComponent,
+    DatePickerComponent,
+    ButtonComponent
   ],
   styleUrls: ['./profile-edit.component.scss']
 })

@@ -2,250 +2,174 @@
   <div class='img-container'>
     <div class='img-uploader'>
       <button class='btn'
-        (click)='openFileBrowser()'>{{'components.admin-add-vehicle.labels.photos' | translate}}
+              (click)='openFileBrowser()'>{{ 'components.admin-add-vehicle.labels.photos' | translate }}
       </button>
       <input id='file-input' type='file'
-        accept='image/jpeg,image/png'
-        [multiple]='true'
-        (change)='uploadFile($event)' />
-      </div>
-
-      @if (imageFiles.length > 0) {
-        <div class='image-list-container'>
-          @for (imageFile of imageFiles; track imageFile) {
-            <div class='img-row'>
-              <img [src]='getImage(imageFile)' alt='' /> {{imageFile.file.name}}
-              <button class='btn'
-              (click)='removeFile(imageFile)'>{{'components.admin-add-vehicle.labels.deletePhoto' | translate}}</button>
-            </div>
-          }
-        </div>
-      }
+             accept='image/jpeg,image/png'
+             [multiple]='true'
+             (change)='uploadFile($event)'/>
     </div>
 
-    <div class='input-list-container'>
-      <div class='input-container'>
-        <label for='brand'>{{'components.admin-add-vehicle.labels.brand' | translate}}</label>
-        <input type='text' pInputText id='brand' formControlName='brand' maxlength='255' />
-        @if (hasFormError('brand', 'required')) {
-          <small
-          class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-        }
-      </div>
-      <div class='input-container'>
-        <label for='model'>{{'components.admin-add-vehicle.labels.model' | translate}}</label>
-        <input type='text' pInputText id='model' formControlName='model' maxlength='255' />
-        @if (hasFormError('model', 'required')) {
-          <small
-          class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-        }
-      </div>
-      <div class='input-container'>
-        <label for='productionYear'>{{'components.admin-add-vehicle.labels.productionYear' | translate}}</label>
-        <p-date-picker id='productionYear'
-          formControlName='productionYear'
-          [maxDate]='today'
-          [readonlyInput]='true'
-          [touchUI]='true'
-          dateFormat='yy'
-          view='year' />
-          @if (hasFormError('productionYear', 'required')) {
-            <small
-            class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-          }
-        </div>
-        <div class='input-container'>
-          <label for='seatsAmount'>{{'components.admin-add-vehicle.labels.seatsAmount' | translate}}</label>
-          <input type='text'
-            pInputText
-            id='seatsAmount'
-            formControlName='seatsAmount'
-            min='1'
-            max='10'
-            onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
-            @if (hasFormError('seatsAmount', 'required')) {
-              <small
-              class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-            }
+    @if (imageFiles.length > 0) {
+      <div class='image-list-container'>
+        @for (imageFile of imageFiles; track imageFile) {
+          <div class='img-row'>
+            <img [src]='getImage(imageFile)' alt=''/> {{ imageFile.file.name }}
+            <button class='btn'
+                    (click)='removeFile(imageFile)'>{{ 'components.admin-add-vehicle.labels.deletePhoto' | translate }}
+            </button>
           </div>
-          <div class='input-container'>
-            <label for='basicPrice'>{{'components.admin-add-vehicle.labels.basicPrice' | translate}}</label>
-            <input type='text'
-              pInputText
-              id='basicPrice'
-              formControlName='basicPrice'
-              min='1'
-              max='10000'
-              onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
-              @if (hasFormError('basicPrice', 'required')) {
-                <small
-                class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-              }
-            </div>
-            <div class='input-container'>
-              <label for='color'>{{'components.admin-add-vehicle.labels.color' | translate}}</label>
-              <p-colorPicker id='color' formControlName='color' />
-              @if (hasFormError('color', 'required')) {
-                <small
-                class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-              }
-            </div>
-            <div class='input-container'>
-              <label for='rimsInch'>{{'components.admin-add-vehicle.labels.rimsInch' | translate}}</label>
-              <input type='text'
-                pInputText
-                id='rimsInch'
-                formControlName='rimsInch'
-                max='22'
-                min='14'
-                onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
-                @if (hasFormError('rimsInch', 'required')) {
-                  <small
-                  class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                }
-              </div>
-              <div class='input-container'>
-                <label for='capacity'>{{'components.admin-add-vehicle.labels.capacity' | translate}}</label>
-                <input type='text'
-                  pInputText
-                  id='capacity'
-                  formControlName='capacity'
-                  min='1'
-                  max='10000'
-                  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
-                  @if (hasFormError('capacity', 'required')) {
-                    <small
-                    class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                  }
-                </div>
-                <div class='input-container'>
-                  <label for='type'>{{'components.admin-add-vehicle.labels.type' | translate}}</label>
-                  <p-multiSelect
-                    id='type'
-                    formControlName='type'
-                    [options]='getTypes()'
-                    display='chip'
-                    [selectionLimit]='1' />
-                    @if (hasFormError('type', 'required')) {
-                      <small
-                      class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                    }
-                  </div>
-                  <div class='input-container'>
-                    <label for='power'>{{'components.admin-add-vehicle.labels.power' | translate}}</label>
-                    <input type='text'
-                      pInputText
-                      id='power'
-                      formControlName='power'
-                      min='1'
-                      max='1000'
-                      onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
-                      @if (hasFormError('power', 'required')) {
-                        <small
-                        class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                      }
-                    </div>
-                    <div class='input-container'>
-                      <label for='torque'>{{'components.admin-add-vehicle.labels.torque' | translate}}</label>
-                      <input type='text'
-                        pInputText
-                        id='torque'
-                        formControlName='torque'
-                        min='1'
-                        max='1000'
-                        onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
-                        @if (hasFormError('torque', 'required')) {
-                          <small
-                          class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                        }
-                      </div>
-                      <div class='input-container'>
-                        <label for='avgFuelConsumption'>{{'components.admin-add-vehicle.labels.avgFuelConsumption' | translate}}</label>
-                        <input type='text'
-                          pInputText
-                          id='avgFuelConsumption'
-                          formControlName='avgFuelConsumption'
-                          min='1'
-                          max='50'
-                          onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 188' />
-                          @if (hasFormError('avgFuelConsumption', 'required')) {
-                            <small
-                            class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                          }
-                        </div>
-                        <div class='input-container'>
-                          <label for='transmission'>{{'components.admin-add-vehicle.labels.transmission' | translate}}</label>
-                          <p-multiSelect id='transmission' formControlName='transmission' [options]='getTransmissions()'
-                            display='chip'
-                            [selectionLimit]='1' />
-                            @if (hasFormError('transmission', 'required')) {
-                              <small
-                              class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                            }
-                          </div>
-                          <div class='input-container'>
-                            <label for='category'>{{'components.admin-add-vehicle.labels.category' | translate}}</label>
-                            <p-multiSelect id='category' formControlName='category' [options]='categories'
-                              display='chip'
-                              [selectionLimit]='1' />
-                              @if (hasFormError('category', 'required')) {
-                                <small
-                                class='p-error'>{{'components.admin-add-vehicle.errors.required' | translate}}</small>
-                              }
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='ac'>{{'components.admin-add-vehicle.labels.ac' | translate}}</label>
-                              <p-checkbox id='ac' formControlName='ac' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='frontPDC'>{{'components.admin-add-vehicle.labels.frontPDC' | translate}}</label>
-                              <p-checkbox id='frontPDC' formControlName='frontPDC' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='rearPDC'>{{'components.admin-add-vehicle.labels.rearPDC' | translate}}</label>
-                              <p-checkbox id='rearPDC' formControlName='rearPDC' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='bluetooth'>Bluetooth</label>
-                              <p-checkbox id='bluetooth' formControlName='bluetooth' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='ledFrontLights'>{{'components.admin-add-vehicle.labels.ledFrontLights' | translate}}</label>
-                              <p-checkbox id='ledFrontLights' formControlName='ledFrontLights' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='xenonFrontLights'>{{'components.admin-add-vehicle.labels.xenonFrontLights' | translate}}</label>
-                              <p-checkbox id='xenonFrontLights' formControlName='xenonFrontLights' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='ledRearLights'>{{'components.admin-add-vehicle.labels.ledRearLights' | translate}}</label>
-                              <p-checkbox id='ledRearLights' formControlName='ledRearLights' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='leatherSeats'>{{'components.admin-add-vehicle.labels.leatherSeats' | translate}}</label>
-                              <p-checkbox id='leatherSeats' formControlName='leatherSeats' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='multifunctionalSteeringWheel'>{{'components.admin-add-vehicle.labels.multifunctionalSteeringWheel' | translate}}</label>
-                              <p-checkbox id='multifunctionalSteeringWheel' formControlName='multifunctionalSteeringWheel' [binary]='true' />
-                            </div>
-                            <div class='checkbox-container'>
-                              <label for='cruiseControl'>{{'components.admin-add-vehicle.labels.cruiseControl' | translate}}</label>
-                              <p-checkbox id='cruiseControl' formControlName='cruiseControl' [binary]='true' />
-                            </div>
-                          </div>
+        }
+      </div>
+    }
+  </div>
 
-                          <button class='btn'
-                            (click)='addVehicleConfirmationDialog()'>{{'components.admin-add-vehicle.labels.addVehicle' | translate}}
-                          </button>
+  <div class='input-list-container'>
+    <app-input [label]="'components.admin-add-vehicle.labels.brand' | translate " controlName="brand" [maxLength]="255">
+      @if (hasFormError('brand', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
 
-                        </form>
+    <app-input [label]="'components.admin-add-vehicle.labels.model' | translate " controlName="model" [maxLength]="255">
+      @if (hasFormError('model', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+    <app-date-picker [label]="'components.admin-add-vehicle.labels.productionYear' | translate "
+                     controlName="productionYear" [maxDate]='today'>
+      @if (hasFormError('productionYear', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-date-picker>
 
 
-                        <p-confirmDialog
-                          message="{{'components.admin-add-vehicle.dialog.message' | translate}}"
-                          header="{{'components.admin-add-vehicle.dialog.header' | translate}}"
-                          acceptLabel="{{'components.admin-add-vehicle.dialog.acceptLabel' | translate}}"
-                          rejectLabel="{{'components.admin-add-vehicle.dialog.rejectLabel' | translate}}"
-                          icon='pi pi-exclamation-triangle'
-                        ></p-confirmDialog>
+    <app-input [label]="'components.admin-add-vehicle.labels.seatsAmount' | translate " controlName="seatsAmount"
+               [minLength]="1" [maxLength]="10">
+      @if (hasFormError('seatsAmount', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+
+    <app-input [label]="'components.admin-add-vehicle.labels.basicPrice' | translate " controlName="basicPrice"
+               [minLength]="1">
+      @if (hasFormError('basicPrice', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+
+    <app-color-picker [label]="'components.admin-add-vehicle.labels.color' | translate " controlName="color">
+      @if (hasFormError('color', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-color-picker>
+
+    <app-input [label]="'components.admin-add-vehicle.labels.rimsInch' | translate " controlName="rimsInch"
+               [minLength]="1">
+      @if (hasFormError('rimsInch', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+
+    <app-input [label]="'components.admin-add-vehicle.labels.capacity' | translate " controlName="capacity"
+               [minLength]="1">
+      @if (hasFormError('capacity', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+    <app-multi-select
+      controlName='type'
+      [label]="'components.admin-add-vehicle.labels.type' | translate"
+      [options]='getTypes()'
+      displayType='chip'
+      [selectionLimit]='1'>
+      @if (hasFormError('type', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-multi-select>
+    <app-input [label]="'components.admin-add-vehicle.labels.power' | translate" controlName="power" [minLength]="1"
+               [maxLength]="1000">
+      @if (hasFormError('power', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+    <app-input [label]="'components.admin-add-vehicle.labels.torque' | translate" controlName="torque" [minLength]="1"
+               [maxLength]="1000">
+      @if (hasFormError('torque', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+    <app-input [label]="'components.admin-add-vehicle.labels.avgFuelConsumption' | translate"
+               controlName="avgFuelConsumption" [minLength]="1"
+               [maxLength]="50">
+      @if (hasFormError('avgFuelConsumption', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-input>
+
+    <app-multi-select [options]="getTransmissions()"
+                      [label]="'components.admin-add-vehicle.labels.transmission' | translate"
+                      controlName="transmission" [selectionLimit]="1">
+      @if (hasFormError('transmission', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-multi-select>
+
+
+    <app-multi-select [options]="categories"
+                      [label]="'components.admin-add-vehicle.labels.category' | translate"
+                      controlName="category" [selectionLimit]="1">
+      @if (hasFormError('category', 'required')) {
+        {{ 'components.admin-add-vehicle.errors.required' | translate }}
+      }
+    </app-multi-select>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.ac' | translate" controlName="ac"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.frontPDC' | translate"
+                  controlName="frontPDC"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.rearPDC' | translate"
+                  controlName="rearPDC"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.bluetooth' | translate"
+                  controlName="bluetooth"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.ledFrontLights' | translate"
+                  controlName="ledFrontLights"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.xenonFrontLights' | translate"
+                  controlName="xenonFrontLights"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.ledRearLights' | translate"
+                  controlName="ledRearLights"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.leatherSeats' | translate"
+                  controlName="leatherSeats"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.multifunctionalSteeringWheel' | translate"
+                  controlName="multifunctionalSteeringWheel"></app-checkbox>
+
+    <app-checkbox [label]="'components.admin-add-vehicle.labels.cruiseControl' | translate"
+                  controlName="cruiseControl"></app-checkbox>
+
+    <app-button [label]="'components.admin-add-vehicle.labels.addVehicle' | translate"
+                (click)='addVehicleConfirmationDialog()'></app-button>
+  </div>
+</form>
+
+
+<p-confirmDialog
+  message="{{'components.admin-add-vehicle.dialog.message' | translate}}"
+  header="{{'components.admin-add-vehicle.dialog.header' | translate}}"
+  acceptLabel="{{'components.admin-add-vehicle.dialog.acceptLabel' | translate}}"
+  rejectLabel="{{'components.admin-add-vehicle.dialog.rejectLabel' | translate}}"
+  icon='pi pi-exclamation-triangle'
+></p-confirmDialog>

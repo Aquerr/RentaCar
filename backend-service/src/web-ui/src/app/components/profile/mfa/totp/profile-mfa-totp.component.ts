@@ -3,7 +3,7 @@ import { UserProfileApiService } from '../../../../services/api/user-profile-api
 import { MfaType } from '../../../../enums/mfa-type.enum';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {TranslatePipe} from "@ngx-translate/core";
-import {InputText} from "primeng/inputtext";
+import {InputComponent} from "../../../shared/input/input.component";
 
 @Component({
   selector: 'profile-mfa-totp',
@@ -11,7 +11,7 @@ import {InputText} from "primeng/inputtext";
   imports: [
     ReactiveFormsModule,
     TranslatePipe,
-    InputText
+    InputComponent
   ],
   styleUrls: ['./profile-mfa-totp.component.scss']
 })

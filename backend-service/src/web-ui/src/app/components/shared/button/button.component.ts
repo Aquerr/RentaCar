@@ -15,5 +15,5 @@ import {Tooltip} from "primeng/tooltip";
 export class ButtonComponent {
   public label: InputSignal<string> = input.required<string>();
   public tooltip: InputSignal<string> = input<string>('');
-  public isDisabled: InputSignal<boolean> = input<boolean>(false);
+  public disabled: InputSignal<boolean> = input<boolean>(false);
 }

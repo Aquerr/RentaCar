@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {TranslatePipe} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 
 @Component({
@@ -8,7 +9,8 @@ import {RouterLink} from "@angular/router";
   templateUrl: './main.component.html',
   imports: [
     TranslatePipe,
-    RouterLink
+    RouterLink,
+    ButtonComponent
   ],
   styleUrls: ['./main.component.scss']
 })

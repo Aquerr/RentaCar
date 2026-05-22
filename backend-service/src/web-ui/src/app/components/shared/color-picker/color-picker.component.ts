@@ -2,6 +2,7 @@ import {Component, input, InputSignal, model, ModelSignal, output} from "@angula
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ColorPicker} from "primeng/colorpicker";
 import {FormFieldContainerComponent} from "../form-field-container/form-field-container.component";
+import {FloatLabel} from "primeng/floatlabel";
 
 @Component({
   selector: 'app-color-picker',
@@ -10,7 +11,8 @@ import {FormFieldContainerComponent} from "../form-field-container/form-field-co
     ReactiveFormsModule,
     FormsModule,
     ColorPicker,
-    FormFieldContainerComponent
+    FormFieldContainerComponent,
+    FloatLabel
   ],
   styleUrl: './color-picker.component.scss'
 })

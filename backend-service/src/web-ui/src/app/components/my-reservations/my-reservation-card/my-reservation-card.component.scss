@@ -26,21 +26,6 @@ img {
   display: flex;
   gap: 10px;
 }
-
-.btn {
-  background: black;
-}
-
-.btn:hover {
-  color: var(--gold);
-}
-
-.button-container {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
 // MEDIA
 
 @media (max-width: 800px) {

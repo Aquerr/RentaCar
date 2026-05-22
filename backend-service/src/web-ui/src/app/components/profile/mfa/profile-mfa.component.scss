@@ -7,28 +7,6 @@ form {
   margin-top: 1%;
 }
 
-.checkbox-container {
-  max-width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.input-container {
-  max-width: 200px;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  word-break: break-word;
-}
-
-label {
-  color: grey;
-  font-size: 12px;
-}
-
 profile-mfa-totp {
   display: flex;
   width: 100%;
@@ -82,20 +60,6 @@ profile-mfa-totp {
 
 .title {
   font-weight: bold;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--main-color-icon);
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://puretesla.com/wp-content/uploads/2018/11/img_0623.jpg);
-  text-align: center;
-  margin: 20px auto;
-}
-
-.btn:hover {
-  color: var(--gold);
 }
 
 

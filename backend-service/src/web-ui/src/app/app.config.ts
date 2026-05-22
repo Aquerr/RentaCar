@@ -12,6 +12,8 @@ import {reducers} from "./state/app.reducers";
 import {CustomPageTitleStrategy} from "./strategy/custom-page-title.strategy";
 import {DateService} from "./services/date.service";
 import {DatePipe} from "@angular/common";
+import {providePrimeNG} from "primeng/config";
+import Lara from '@primeuix/themes/lara';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +25,14 @@ export const appConfig: ApplicationConfig = {
     provideNgxMask(),
     provideStore(reducers, { initialState: {auth: {}}}),
     provideEffects(),
+    providePrimeNG({
+      theme: {
+        preset: Lara,
+        options: {
+          darkModeSelector: false
+        }
+      }
+    }),
     DateService,
     DatePipe,
     MessageService,

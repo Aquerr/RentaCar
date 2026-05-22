@@ -2,6 +2,7 @@ import {Component, input, InputSignal, model, ModelSignal, output} from "@angula
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Checkbox} from "primeng/checkbox";
 import {FormFieldContainerComponent} from "../form-field-container/form-field-container.component";
+import {FloatLabel} from "primeng/floatlabel";
 
 @Component({
   selector: 'app-checkbox',
@@ -10,7 +11,8 @@ import {FormFieldContainerComponent} from "../form-field-container/form-field-co
     ReactiveFormsModule,
     FormsModule,
     Checkbox,
-    FormFieldContainerComponent
+    FormFieldContainerComponent,
+    FloatLabel
   ],
   styleUrl: './checkbox.component.scss'
 })

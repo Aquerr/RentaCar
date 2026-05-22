@@ -15,7 +15,6 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {ButtonComponent} from "../../shared/button/button.component";
 import {ColorPickerComponent} from "../../shared/color-picker/color-picker.component";
 import {CheckboxComponent} from "../../shared/checkbox/checkbox.component";
-import {Checkbox} from "primeng/checkbox";
 import {FormsModule} from "@angular/forms";
 import {PrimeTemplate} from "primeng/api";
 
@@ -30,7 +29,6 @@ import {PrimeTemplate} from "primeng/api";
     ButtonComponent,
     ColorPickerComponent,
     CheckboxComponent,
-    Checkbox,
     FormsModule,
     DatePipe,
     PrimeTemplate

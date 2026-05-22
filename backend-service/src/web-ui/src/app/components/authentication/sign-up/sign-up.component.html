@@ -1,10 +1,7 @@
 <div class='wrapper'>
   <form [formGroup]='form' class='form_input'>
-
-
     <h4 class='header4'>{{ 'components.sign-up.labels.title' | translate }}</h4>
 
-    <div class='input-container'>
       <app-input id="userName" controlName="username" [minLength]="5"
                  [placeholder]="'components.sign-up.labels.username' | translate">
         <p-message severity="error" size="small" variant="simple">
@@ -16,9 +13,7 @@
           }
         </p-message>
       </app-input>
-    </div>
 
-    <div class='input-container'>
       <app-input id="email" controlName="email" [minLength]="5"
                  [placeholder]="'components.sign-up.labels.email' | translate">
         <p-message severity="error" size="small" variant="simple">
@@ -30,9 +25,7 @@
           }
         </p-message>
       </app-input>
-    </div>
 
-    <div class='input-container'>
       <app-input id="password" controlName="password" [minLength]="5"
                  [placeholder]="'components.sign-up.labels.password' | translate">
         <p-message severity="error" size="small" variant="simple">
@@ -44,9 +37,7 @@
           }
         </p-message>
       </app-input>
-    </div>
 
-    <div class='input-container'>
       <app-input id="password2" controlName="password2" [minLength]="5"
                  [placeholder]="'components.sign-up.labels.password-confirm' | translate">
         <p-message severity="error" size="small" variant="simple">
@@ -56,10 +47,11 @@
           @if (hasFormError('password2', 'passwordDoesntMatch')) {
             {{ 'components.sign-up.errors.password-doesnt-match' | translate }}
           }
-          {{ 'components.sign-up.errors.min-length' | translate }}
+          @if (hasFormError('password2', 'minlength')) {
+            {{ 'components.sign-up.errors.min-length' | translate }}
+          }
         </p-message>
       </app-input>
-    </div>
 
     <div class='button-container'>
       <app-button (click)='signUp()' [label]="'components.sign-up.labels.buttons.sign-up' | translate">

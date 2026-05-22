@@ -37,10 +37,11 @@ h4 {
 }
 
 .button-container {
-  display: grid;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
+
 
 .btn {
   width: auto;
@@ -58,129 +59,6 @@ h4 {
   padding: 10px;
 }
 
-.p-inputtext:enabled:hover {
-  cursor: default !important;
-}
-
-.p-colorpicker-preview {
-  width: 200px !important;
-  border: 1px solid black !important;
-}
-
-.p-checkbox .p-checkbox-box.p-highlight {
-  border-color: black !important;
-  background: black !important;
-}
-
-.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
-  border-color: black !important;
-}
-
-.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
-  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
-  border-color: black !important;
-}
-
-.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-  border-color: black !important;
-  background: black !important;
-}
-
-.p-multiselect:not(.p-disabled):hover {
-  border-color: black !important;
-}
-
-.p-multiselect:not(.p-disabled).p-focus {
-  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
-  border-color: black !important;
-}
-
-.p-multiselect {
-  width: 100% !important;
-}
-
-.dropdown-element {
-  width: 100% !important;
-}
-
-.dropdown-element > * {
-  width: 100% !important;
-}
-
-.p-multiselect .p-multiselect-label {
-  padding: 0.5rem 0.5rem;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-
-.p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
-  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
-}
-
-.p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
-  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
-}
-
-.p-inputtext:enabled:hover {
-  border-color: black !important;
-}
-
-.p-inputtext:enabled:focus {
-  box-shadow: 0 0 0 0.2rem #2a2b2c !important;
-  border-color: black !important;
-}
-
-.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
-  color: white !important;
-  background: #696969 !important;
-}
-
-.p-multiselect.p-multiselect-chip .p-multiselect-token {
-  color: white !important;
-  background: #696969 !important;
-}
-
-.btn:hover {
-  background: var(--main-font);
-  color: var(--third-color);
-}
-
-.p-dialog .p-dialog-header {
-  display: none !important;
-}
-
-.p-component:hover {
-  cursor: pointer !important;
-}
-
-.p-confirm-dialog .p-dialog-content {
-  flex-direction: column !important;
-  text-align: center !important;
-}
-
-.p-dialog .p-dialog-footer {
-  justify-content: center !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-.p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
-  padding: 10px !important;
-}
-
-.p-button {
-  background-color: black !important;
-  border: none !important;
-}
-
-.p-button:hover {
-  color: var(--gold) !important;
-  border: none !important;
-}
-
-.p-steps .p-steps-item.p-highlight .p-steps-number {
-  background: black !important;
-  color: white !important;
-}
 
 a:hover {
   color: var(--gold) !important;

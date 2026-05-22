@@ -7,12 +7,15 @@
     {{ label() }}
   </p-checkbox>
 } @else {
-  <app-form-field-container [formGroup]="formGroup()">
-  <p-checkbox
-    [formControlName]="controlName()"
-    [readonly]="isReadonly()"
-    [binary]='true'>
-    {{ label() }}
-  </p-checkbox>
-  </app-form-field-container>
+  <div class="label-container">
+    <app-form-field-container [formGroup]="formGroup()">
+      <p-checkbox
+        [formControlName]="controlName()"
+        [readonly]="isReadonly()"
+        [binary]='true'>
+      </p-checkbox>
+      <ng-content></ng-content>
+    </app-form-field-container>
+    <p-float-label>{{ label() }}</p-float-label>
+  </div>
 }

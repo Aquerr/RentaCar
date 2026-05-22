@@ -5,6 +5,8 @@ import {AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, Validato
 import { ToastService, ToastType } from '../../../services/toast.service';
 import { LanguageService } from '../../../services/language.service';
 import {TranslatePipe} from "@ngx-translate/core";
+import {InputComponent} from "../../shared/input/input.component";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 
 @Component({
@@ -12,7 +14,9 @@ import {TranslatePipe} from "@ngx-translate/core";
   templateUrl: './reactivation-account.component.html',
   imports: [
     TranslatePipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent
   ],
   styleUrls: ['./reactivation-account.component.scss']
 })
