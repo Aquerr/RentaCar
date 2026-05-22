@@ -10,7 +10,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <name>rentacar</name>
     <artifactId>backend-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <java.version>25</java.version>
