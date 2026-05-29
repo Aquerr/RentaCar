@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>workflow-service</artifactId>
+    <artifactId>rentacar-workflow-service</artifactId>
 
     <properties>
         <java.version>25</java.version>
