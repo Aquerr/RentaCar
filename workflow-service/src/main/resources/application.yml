@@ -1,3 +1,6 @@
+server:
+  port: 8087
+
 # Datasource
 spring:
   datasource:
@@ -9,7 +12,6 @@ spring:
     user:
       name: rentacar_workflow
       password: rentacar_workflow
-
 management:
   endpoints:
     web:
@@ -17,7 +19,7 @@ management:
         include:
           - health
 
-
+# BPM Engine
 operaton:
   bpm:
     admin-user:

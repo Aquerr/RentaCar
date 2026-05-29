@@ -1,0 +1,48 @@
+services:
+
+  ################# Rentacar services #################
+  rentacar-backend-service:
+    container_name: rentacar-backend-service
+    image: aquerr/rentacar-backend-service
+    restart: on-failure:3
+    networks:
+      - rentacar
+    user: "1001:1001"
+    ports:
+      - "8086:8086/tcp"
+    volumes:
+      - ./rentacar-backend-service/data:/rentacar-backend-service/data
+      - ./rentacar-backend-service/config:/rentacar-backend-service/config
+
+  rentacar-workflow-service:
+    container_name: rentacar-workflow-service
+    image: aquerr/rentacar-workflow-service
+    restart: on-failure:3
+    networks:
+      - rentacar
+    user: "1001:1001"
+    ports:
+      - "8087:8087/tcp"
+    volumes:
+      - ./rentacar-workflow-service/data:/rentacar-workflow-service/data
+      - ./rentacar-workflow-service/config:/rentacar-workflow-service/config
+
+  ################# Dependencies #################
+  rabbitmq:
+    image: rabbitmq:3.12.2-management-alpine
+    container_name: 'rentacar-rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./.docker-runtime-data/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./.docker-runtime-data/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rentacar
+    environment:
+      - RABBITMQ_DEFAULT_USER=rentacar
+      - RABBITMQ_DEFAULT_PASS=rentacar_pass
+
+networks:
+  rentacar:
+    driver: bridge

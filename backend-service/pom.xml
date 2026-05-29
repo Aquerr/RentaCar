@@ -11,7 +11,7 @@
     </parent>
 
     <name>rentacar</name>
-    <artifactId>backend-service</artifactId>
+    <artifactId>rentacar-backend-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
