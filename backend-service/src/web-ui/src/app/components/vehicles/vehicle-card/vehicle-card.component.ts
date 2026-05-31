@@ -4,6 +4,7 @@ import {TranslatePipe} from "@ngx-translate/core";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {UpperCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {ButtonComponent} from "../../shared/button/button.component";
 
 @Component({
   selector: 'vehicle-card',
@@ -12,7 +13,8 @@ import {RouterLink} from "@angular/router";
     TranslatePipe,
     FaIconComponent,
     UpperCasePipe,
-    RouterLink
+    RouterLink,
+    ButtonComponent
   ],
   styleUrls: ['./vehicle-card.component.scss']
 })

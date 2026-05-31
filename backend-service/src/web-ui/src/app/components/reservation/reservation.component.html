@@ -1,46 +1,42 @@
 @if (reservation) {
   <div class='container'>
     <p-steps [model]='steps' [readonly]='false'
-      [activeIndex]='activeIndex'
-      (activeIndexChange)='changeStep($event)'>>
+             [activeIndex]='activeIndex'
+             (activeIndexChange)='changeStep($event)'>>
     </p-steps>
-    @if (activeIndex===0) {
+    @if (activeIndex === 0) {
       <div>
         <vehicle-step-reservation [vehicleId]='reservation.vehicleId'></vehicle-step-reservation>
       </div>
     }
-    @if (activeIndex===1) {
+    @if (activeIndex === 1) {
       <div>
         <contact-step-reservation [readOnly]='readOnly'></contact-step-reservation>
       </div>
     }
-    @if (activeIndex===2) {
+    @if (activeIndex === 2) {
       <div>
         <summary-step-reservation [reservation]='reservation'></summary-step-reservation>
       </div>
     }
     <div class='button-container'>
-      @if (activeIndex>0) {
-        <button class='btn'
-        (click)='goBack()'>{{'components.reservation.buttons.back' | translate}}</button>
+      @if (activeIndex > 0) {
+        <app-button [label]="'components.reservation.buttons.back' | translate" (click)="goBack()"></app-button>
       }
-      @if (activeIndex<2) {
-        <button
-          class='btn'
-          [disabled]='activeIndex===2'
-        (click)='goNext()'>{{'components.reservation.buttons.next' | translate}}</button>
+      @if (activeIndex < 2) {
+        <app-button [label]="'components.reservation.buttons.next' | translate" [disabled]='activeIndex===2'
+                    (click)='goNext()'></app-button>
       }
-      @if (activeIndex===2 && !readOnly) {
-        <button
-          class='btn'
-        (click)='reserveConfirmDialog()'>{{'components.reservation.buttons.reserve' | translate}}</button>
+      @if (activeIndex === 2 && !readOnly) {
+        <app-button [label]="'components.reservation.buttons.reserve' | translate"
+                    (click)="reserveConfirmDialog()"></app-button>
       }
     </div>
   </div>
 }
 <p-confirmDialog icon='pi pi-info-circle'
-  key='reserve'
-  message="{{'components.reservation.reserveDialog.message' | translate}}"
-  header="{{'components.reservation.reserveDialog.header' | translate}}"
-  acceptLabel="{{'components.reservation.reserveDialog.acceptLabel' | translate}}"
-rejectLabel="{{'components.reservation.reserveDialog.rejectLabel' | translate}}"></p-confirmDialog>
+                 key='reserve'
+                 message="{{'components.reservation.reserveDialog.message' | translate}}"
+                 header="{{'components.reservation.reserveDialog.header' | translate}}"
+                 acceptLabel="{{'components.reservation.reserveDialog.acceptLabel' | translate}}"
+                 rejectLabel="{{'components.reservation.reserveDialog.rejectLabel' | translate}}"></p-confirmDialog>

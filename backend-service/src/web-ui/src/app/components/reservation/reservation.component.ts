@@ -13,6 +13,7 @@ import {ContactStepReservationComponent} from "./steps/contact-step/contact-step
 import {SummaryStepReservationComponent} from "./steps/summary-step/summary-step-reservation.component";
 import {TranslatePipe} from "@ngx-translate/core";
 import {ConfirmDialog} from "primeng/confirmdialog";
+import {ButtonComponent} from "../shared/button/button.component";
 
 @Component({
   selector: 'reservation',
@@ -23,7 +24,8 @@ import {ConfirmDialog} from "primeng/confirmdialog";
     ContactStepReservationComponent,
     SummaryStepReservationComponent,
     TranslatePipe,
-    ConfirmDialog
+    ConfirmDialog,
+    ButtonComponent
   ],
   styleUrls: ['./reservation.component.scss']
 })

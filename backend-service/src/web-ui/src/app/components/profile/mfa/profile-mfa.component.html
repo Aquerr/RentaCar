@@ -14,17 +14,13 @@
                 </div>
               }
               @if (!mfaSettings || !mfaSettings.verified) {
-                <button class='btn'
-                  (click)='selectedMfaType = mfaType'
-                  >{{'components.profile-mfa.buttons.configure' | translate}}
-                </button>
+                <app-button [label]="'components.profile-mfa.buttons.configure' | translate"
+                            (click)='selectedMfaType = mfaType'></app-button>
               } @else {
-                <button class='btn'
-                  (click)='openInfoMfaDialog()'>{{'components.profile-mfa.buttons.details' | translate}}
-                </button>
-                <button class='btn'
-                  (click)='deleteMfaConfirmDialog()'>{{'components.profile-mfa.buttons.delete' | translate}}
-                </button>
+                <app-button [label]="'components.profile-mfa.buttons.details' | translate"
+                            (click)='openInfoMfaDialog()'></app-button>
+                <app-button [label]="'components.profile-mfa.buttons.delete' | translate"
+                            (click)='deleteMfaConfirmDialog()'></app-button>
               }
             </div>
           }
@@ -37,9 +33,8 @@
       </div>
     </div>
     <div class='button-container'>
-      <button class='btn'
-        (click)='save()' [disabled]='form.invalid'>{{'components.profile-mfa.buttons.save' | translate}}
-      </button>
+      <app-button [label]="'components.profile-mfa.buttons.save' | translate" (click)='save()'
+                  [disabled]='form.invalid'></app-button>
     </div>
   </form>
 }

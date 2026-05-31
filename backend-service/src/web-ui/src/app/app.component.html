@@ -61,10 +61,8 @@
       <a href='#' [routerLinkActive]="['active-link']">FAQ</a>
       <a routerLink='contact' [routerLinkActive]="['active-link']">{{ 'components.app.labels.contact' | translate }}</a>
       @if (!userLogged) {
-        <button class='sign-in-log-out-nav btn'
-                routerLink='sign-in'
-                [routerLinkActive]="['active-link']">{{ "components.app.labels.signIn" | translate }}
-        </button>
+        <app-button class='sign-in-log-out-nav' routerLink='sign-in' [routerLinkActive]="['active-link']"
+                    [label]="'components.app.labels.signIn' | translate"></app-button>
       }
       @if (userLogged) {
         <profile-panel class='panel-log' (logoutEmitter)='logout()' [user]='userLogged'></profile-panel>
