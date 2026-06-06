@@ -14,7 +14,7 @@ RUN groupadd --gid 1001 rentacar-workflow-service \
 
 WORKDIR /rentacar-workflow-service
 
-COPY ./target/rentacar-workflow-service-*.jar /rentacar_workflow/rentacar-workflow-service.jar
+COPY ./target/rentacar-workflow-service-*.jar /rentacar-workflow-service/rentacar-workflow-service.jar
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

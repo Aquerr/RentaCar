@@ -14,7 +14,7 @@ RUN groupadd --gid 1001 rentacar-backend-service \
 
 WORKDIR /rentacar-backend-service
 
-COPY ./target/rentacar-backend-service-*.jar /rentacar_backend/rentacar-backend-service.jar
+COPY ./target/rentacar-backend-service-*.jar /rentacar-backend-service/rentacar-backend-service.jar
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
