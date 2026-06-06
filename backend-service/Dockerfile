@@ -10,7 +10,7 @@ RUN groupadd --gid 1001 rentacar-backend-service \
     && mkdir /rentacar-backend-service \
     && mkdir /rentacar-backend-service/config \
     && mkdir /rentacar-backend-service/data \
-    && chown rentacar-backend-service:rentacar_backend -R /rentacar-backend-service
+    && chown rentacar-backend-service:rentacar-backend-service -R /rentacar-backend-service
 
 WORKDIR /rentacar-backend-service
 
